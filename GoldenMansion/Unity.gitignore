@@ -70,3 +70,11 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Fonts
+/[Aa]ssets/TextMesh Pro/Fonts/7000.txt
+/[Aa]ssets/TextMesh Pro/Fonts/7000.txt.meta
+/[Aa]ssets/TextMesh Pro/Fonts/AlibabaPuHuiTi-3-65-Medium SDF.asset
+/[Aa]ssets/TextMesh Pro/Fonts/AlibabaPuHuiTi-3-65-Medium SDF.asset.meta
+
+
