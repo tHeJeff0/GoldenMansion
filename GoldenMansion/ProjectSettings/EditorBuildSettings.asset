@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/SnowwolfStudio/SWExcelExporter/Scenes/Main.unity
+    guid: 9b25a2c071c3ed44a9af829112830060
   m_configObjects: {}
