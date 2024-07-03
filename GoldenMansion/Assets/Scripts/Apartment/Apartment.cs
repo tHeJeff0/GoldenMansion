@@ -23,6 +23,12 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     private void Awake()
     {
+        if (this.isUnlock)
+        {
+            this.lockedApartment.SetActive(false);
+            this.unLockedApartment.SetActive(true);
+            ApartmentController.Instance.apartmentPosition.Add(this.transform.position);
+        }
 
         roomKey = 2;//暂时的，后面要改成根据玩家选择输入
         roomName = RoomData.GetItem(roomKey).name;
@@ -105,17 +111,28 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         if (ApartmentController.Instance.isBuildMode==true && this.isUnlock == false)
         {
             this.isUnlock = true;
+            this.roomKey = 1;
             ApartmentController.Instance.isBuildMode = false;
+            ApartmentController.Instance.unLockedApartmentCount += 1;
             Debug.Log("已解锁"+this.roomName);
+            ApartmentController.Instance.apartmentPosition.Add(this.transform.localPosition);
         }
-        
+
     }
 
 
     //private void UnlockRoom()
     //{
-    //    this.isUnlock = true;
-    //    this.isBuildMode = false;
+    //    if (this.isUnlock)
+    //    {
+    //        lockedApartment.SetActive(false);
+    //        unLockedApartment.SetActive(true);
+    //    }
+    //    else if (!this.isUnlock)
+    //    {
+    //        lockedApartment.SetActive(true);
+    //        unLockedApartment.SetActive(false);
+    //    }
     //}
 
 

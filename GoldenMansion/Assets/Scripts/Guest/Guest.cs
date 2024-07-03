@@ -11,6 +11,7 @@ public class Guest : MonoBehaviour
     [SerializeField] GameObject guestCardNameTextPrefab;
     [SerializeField] GameObject guestCardDescTextPrefab;
     [SerializeField] GameObject guestCardBudgetTextPrefab;
+    
     public string guestName { get; set; }
     public string guestDesc { get; set; } 
     public int guestBudget { get; set; }

@@ -11,7 +11,8 @@ public class GuestController : MonoBehaviour
     private static GuestController instance;
     
     public List<int> GuestStorage = new List<int>();
-    [SerializeField] private Guest guestPrefab;
+    public Guest guestDetailPrefab;
+    public Guest guestInApartmentPrefab;
     private int basicGuestCount { get; set; } = 3;
     public static GuestController Instance
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ApartmentController : MonoBehaviour
 {
+    public int unLockedApartmentCount { get; set; } = 0;
+    public List<Vector3> apartmentPosition = new List<Vector3>();
     public bool isBuildMode { get; set; }
     private static ApartmentController instance;
 
@@ -35,6 +37,8 @@ public class ApartmentController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    
 
     
 

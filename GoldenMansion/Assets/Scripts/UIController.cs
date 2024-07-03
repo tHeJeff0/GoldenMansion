@@ -60,4 +60,18 @@ public class UIController : MonoBehaviour
     {
         ApartmentController.Instance.isBuildMode = true;
     }
+
+    public void GuestMoveIn()
+    {
+        for (int i = 0; i < ApartmentController.Instance.unLockedApartmentCount; i++)
+        {
+            Vector3 apartmentPosition = ApartmentController.Instance.apartmentPosition[i];
+            Instantiate(GuestController.Instance.guestInApartmentPrefab, apartmentPosition, transform.rotation);
+        }
+    }
+
+    public void GetApartmentPosition()
+    {
+        
+    }
 }
