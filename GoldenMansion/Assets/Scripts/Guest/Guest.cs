@@ -11,21 +11,22 @@ public class Guest : MonoBehaviour
     [SerializeField] GameObject guestCardNameTextPrefab;
     [SerializeField] GameObject guestCardDescTextPrefab;
     [SerializeField] GameObject guestCardBudgetTextPrefab;
-    private string guestName;
-    private string guestDesc;
-    public static int guestBudget;
+    public string guestName { get; set; }
+    public string guestDesc { get; set; } 
+    public int guestBudget { get; set; }
+    public int key { get; set; }
+
     private TextMeshProUGUI guestNameText;
     private TextMeshProUGUI guestDescText;
     private TextMeshProUGUI guestBudgetText;
-    private int key;
 
 
     private void Awake()
     {
-        key = keyRandom();
+        key = GuestController.Instance.RandomKey();
         guestName = CharacterData.GetItem(key).name;
         guestDesc = CharacterData.GetItem(key).effectDesc;
-        guestBudget = Random.Range(CharacterData.GetItem(key).Budget[0], CharacterData.GetItem(key).Budget[1]);
+        guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
         
         guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
         guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
@@ -43,27 +44,5 @@ public class Guest : MonoBehaviour
 
         GuestController.Instance.GuestStorage.Add(key);
         Debug.Log(GuestController.Instance.GuestStorage[GuestController.Instance.GuestStorage.Count - 1]);
-    }
-
-    int keyRandom()
-    {
-        int randomKey = 0;
-        int keyMin = 1;
-        int keyMax = 1;
-        var characterDataDict = CharacterData.GetDict();
-        foreach (var kvp in characterDataDict)
-        {
-            int key = kvp.Key;
-            if (key > keyMax)
-            {
-                keyMax = key;
-            }
-            if (key < keyMin)
-            {
-                keyMin = key;
-            }
-        }
-        randomKey = Random.Range(keyMin, keyMax);
-        return randomKey;
     }
 }

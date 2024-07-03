@@ -4,10 +4,36 @@ using UnityEngine;
 
 public class ApartmentController : MonoBehaviour
 {
-    [SerializeField] private TextAsset roomMessage;
-    void Awake()
+    public bool isBuildMode { get; set; }
+    private static ApartmentController instance;
+
+    public static ApartmentController Instance
     {
-        GameManager.Instance.TextLoader(roomMessage);
+        get
+        {
+            if (instance != null)
+            {
+                instance = FindObjectOfType<ApartmentController>();
+                if (instance == null)
+                {
+                    GameObject apartmentController = new GameObject("ApartmentController");
+                    instance = apartmentController.AddComponent<ApartmentController>();
+                }
+            }
+            return instance;
+        }
+    }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     

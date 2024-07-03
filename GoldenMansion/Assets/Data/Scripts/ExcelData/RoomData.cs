@@ -3,25 +3,26 @@ using System.Collections.Generic;
 
 namespace ExcelData
 {
-    public class CharacterData : IDataSheet
+    public class RoomData : IDataSheet
     {
         public class Item
         {
-            public int guestID;
+            public int roomID;
             public string name;
-            public int[] budget;
+            public int basicRent;
+            public int unlockCost;
             public int effectID;
             public string effectDesc;
         }
 
-        private static CharacterData s_Instance;
-        private static CharacterData Instance
+        private static RoomData s_Instance;
+        private static RoomData Instance
         {
             get
             {
                 if (s_Instance == null)
                 {
-                    s_Instance = new CharacterData();
+                    s_Instance = new RoomData();
                     s_Instance.Init();
                     DataService.RegisterSheet(s_Instance);
                 }
@@ -48,7 +49,7 @@ namespace ExcelData
 
         private Dictionary<int, Item> m_Items = new Dictionary<int, Item>();
 
-        public string sheetName => "CharacterData";
+        public string sheetName => "RoomData";
 
         private void Init()
         {
@@ -68,9 +69,10 @@ namespace ExcelData
                     int rows = reader.ReadInt32();
 
                     //Get Item indices
-                    int guestIDIndex = sheetHeader.IndexOf("guestID", "int");
+                    int roomIDIndex = sheetHeader.IndexOf("roomID", "int");
                     int nameIndex = sheetHeader.IndexOf("name", "string");
-                    int budgetIndex = sheetHeader.IndexOf("budget", "int[]");
+                    int basicRentIndex = sheetHeader.IndexOf("basicRent", "int");
+                    int unlockCostIndex = sheetHeader.IndexOf("unlockCost", "int");
                     int effectIDIndex = sheetHeader.IndexOf("effectID", "int");
                     int effectDescIndex = sheetHeader.IndexOf("effectDesc", "string");
 
@@ -84,22 +86,21 @@ namespace ExcelData
                         {
                             SheetHeader.Item headerItem = headerItems[j];
 
-                            if (j == guestIDIndex)
+                            if (j == roomIDIndex)
                             {
-                                newItem.guestID = reader.ReadInt32();
+                                newItem.roomID = reader.ReadInt32();
                             }
                             else if (j == nameIndex)
                             {
                                 newItem.name = reader.ReadString();
                             }
-                            else if (j == budgetIndex)
+                            else if (j == basicRentIndex)
                             {
-                                int l_2 = reader.ReadInt32();
-                                newItem.budget = new int[l_2];
-                                for(int i_2 = 0; i_2 < l_2; ++i_2)
-                                {
-                                    newItem.budget[i_2] = reader.ReadInt32();
-                                }
+                                newItem.basicRent = reader.ReadInt32();
+                            }
+                            else if (j == unlockCostIndex)
+                            {
+                                newItem.unlockCost = reader.ReadInt32();
                             }
                             else if (j == effectIDIndex)
                             {
@@ -121,7 +122,7 @@ namespace ExcelData
                                 #endif
                             }
                         }
-                        m_Items.Add(newItem.guestID, newItem);
+                        m_Items.Add(newItem.roomID, newItem);
                     }
                 }
             }
