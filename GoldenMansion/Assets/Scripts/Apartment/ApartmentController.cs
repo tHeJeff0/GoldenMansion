@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ApartmentController : MonoBehaviour
 {
+
     public int unLockedApartmentCount { get; set; } = 0;
-    public List<Vector3> apartmentPosition = new List<Vector3>();
+    public List<GameObject> apartment = new List<GameObject>();
+    public float vaultMoney { get; set; } = 0;
     public bool isBuildMode { get; set; }
     private static ApartmentController instance;
+    private int isPayedRoomCount = 0;
 
     public static ApartmentController Instance
     {
@@ -25,6 +28,24 @@ public class ApartmentController : MonoBehaviour
             return instance;
         }
     }
+
+    public void CheckPayedCount()
+    {
+        for (int i = 0; i < apartment.Count; i++)
+        {
+            if (apartment[i].GetComponent<Apartment>().isPayed)
+            {
+                isPayedRoomCount += 1;
+            }
+        }
+        if (isPayedRoomCount == apartment.Count)
+        {
+            for (int i = 0; i < apartment.Count; i++)
+            {
+                apartment[i].GetComponent<Apartment>().isPayed = false;
+            }
+        }
+    }
     private void Awake()
     {
         if (instance == null)
@@ -38,9 +59,6 @@ public class ApartmentController : MonoBehaviour
         }
     }
 
-    
-
-    
 
 
 }

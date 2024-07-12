@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 642514366}
   - component: {fileID: 642514365}
   m_Layer: 0
-  m_Name: TargetText
+  m_Name: MoneyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4637,6 +4637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747d682d72dd09d47b67effd0f6cb550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vaultMoneyText: {fileID: 642514365}
 --- !u!224 &2055868758
 RectTransform:
   m_ObjectHideFlags: 0

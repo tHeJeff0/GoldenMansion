@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
 
     private static GameManager instance;
+    public int gameDays { get; set; } = 0;
 
     public static GameManager Instance
     {
@@ -49,12 +50,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public float PayRent()
-    {
-        float vaultMoney = 0;
-        return vaultMoney;
     }
 
 }

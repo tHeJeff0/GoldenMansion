@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     private static UIController instance;
+    [SerializeField] private TextMeshProUGUI vaultMoneyText;
 
     public static UIController Instance
     {
@@ -48,7 +50,7 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
     }
 
     public void CloseThisPanel(GameObject thisPanel)
@@ -63,30 +65,31 @@ public class UIController : MonoBehaviour
 
     public void GuestMoveIn()
     {
+        GameManager.Instance.gameDays += 1;
         List<Vector3> temporPosition = new List<Vector3>();
+        List<GameObject> temporApartmentObject = new List<GameObject>();
 
         if (GuestController.Instance.GuestStorage.Count < ApartmentController.Instance.unLockedApartmentCount)
         {
             int removeUnlockedApartmentCount = ApartmentController.Instance.unLockedApartmentCount - GuestController.Instance.GuestStorage.Count;
             for (int i = 0; i < removeUnlockedApartmentCount; i++)
             {
-                int randomRemoveID = Random.Range(0, ApartmentController.Instance.apartmentPosition.Count - 1);               
-                temporPosition.Add(ApartmentController.Instance.apartmentPosition[randomRemoveID]);
-                ApartmentController.Instance.apartmentPosition.RemoveAt(randomRemoveID);
+                int randomRemoveID = Random.Range(0, ApartmentController.Instance.apartment.Count - 1);
+                temporApartmentObject.Add(ApartmentController.Instance.apartment[randomRemoveID]);
+                ApartmentController.Instance.apartment.RemoveAt(randomRemoveID);
             }
         }
         for (int i = 0; i < ApartmentController.Instance.unLockedApartmentCount; i++)
         {
             if (i < GuestController.Instance.GuestStorage.Count)
             {
-                Vector3 apartmentPosition = ApartmentController.Instance.apartmentPosition[i];
-                Instantiate(GuestController.Instance.guestInApartmentPrefab, apartmentPosition, transform.rotation);
-                
+                Instantiate(GuestController.Instance.guestInApartmentPrefab, ApartmentController.Instance.apartment[i].transform);
             }
             
         }
 
-        ApartmentController.Instance.apartmentPosition.AddRange(temporPosition);
+        ApartmentController.Instance.CheckPayedCount();
+        ApartmentController.Instance.apartment.AddRange(temporApartmentObject);
         temporPosition.Clear();
 
     }

@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
+using static UnityEngine.ParticleSystem;
 
 public class Apartment : MonoBehaviour,IPointerClickHandler
 {
@@ -20,6 +21,8 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     public Guest roomGuest { get; set; }
     public int roomGuestLimit { get; set; } = 1;
     public bool isUnlock { get; set; } = false;
+    public bool isPayed { get; set; } = false;
+    public int apartmentDays { get; set; } = 0;
 
     private void Awake()
     {
@@ -27,7 +30,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         {
             this.lockedApartment.SetActive(false);
             this.unLockedApartment.SetActive(true);
-            ApartmentController.Instance.apartmentPosition.Add(this.transform.position);
+            ApartmentController.Instance.apartment.Add(this.gameObject);
         }
 
         roomKey = 2;//暂时的，后面要改成根据玩家选择输入
@@ -57,6 +60,22 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             lockedApartment.SetActive(true);
             unLockedApartment.SetActive(false);
         }
+        if (apartmentDays != GameManager.Instance.gameDays)
+        {
+            try
+            {
+                Guest guestInApartment = gameObject.GetComponentInChildren<Guest>();
+                PayRent(guestInApartment, this);
+                apartmentDays += 1;
+
+            }
+            catch
+            {
+                this.isPayed = true;
+            }
+            
+        }
+
         //switch (roomEffect)
         //{
         //    case 1:
@@ -115,7 +134,16 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             ApartmentController.Instance.isBuildMode = false;
             ApartmentController.Instance.unLockedApartmentCount += 1;
             Debug.Log("已解锁"+this.roomName);
-            ApartmentController.Instance.apartmentPosition.Add(this.transform.localPosition);
+            ApartmentController.Instance.apartment.Add(this.gameObject);
+        }
+
+    }
+
+    public void PayRent(Guest guest,Apartment apartment)
+    {
+        if (guest.guestBudget >= apartment.roomRent)
+        {
+            ApartmentController.Instance.vaultMoney += this.roomRent;
         }
 
     }

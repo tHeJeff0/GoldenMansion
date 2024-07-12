@@ -28,14 +28,22 @@ public class Guest : MonoBehaviour
         guestName = CharacterData.GetItem(key).name;
         guestDesc = CharacterData.GetItem(key).effectDesc;
         guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
-        
-        guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
-        guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
-        guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
 
-        guestNameText.text = guestName;
-        guestDescText.text = guestDesc;
-        guestBudgetText.text = guestBudget.ToString();
+        try
+        {
+            guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
+            guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
+            guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
+
+            guestNameText.text = guestName;
+            guestDescText.text = guestDesc;
+            guestBudgetText.text = guestBudget.ToString();
+        }
+        catch
+        {
+            Debug.Log(this.guestName);
+        }
+        
 
 
     }
