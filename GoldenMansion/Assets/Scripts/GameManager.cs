@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
         
     }
 
-    
+    public float PayRent()
+    {
+        float vaultMoney = 0;
+        return vaultMoney;
+    }
 
 }

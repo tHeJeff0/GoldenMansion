@@ -63,11 +63,32 @@ public class UIController : MonoBehaviour
 
     public void GuestMoveIn()
     {
+        List<Vector3> temporPosition = new List<Vector3>();
+
+        if (GuestController.Instance.GuestStorage.Count < ApartmentController.Instance.unLockedApartmentCount)
+        {
+            int removeUnlockedApartmentCount = ApartmentController.Instance.unLockedApartmentCount - GuestController.Instance.GuestStorage.Count;
+            for (int i = 0; i < removeUnlockedApartmentCount; i++)
+            {
+                int randomRemoveID = Random.Range(0, ApartmentController.Instance.apartmentPosition.Count - 1);               
+                temporPosition.Add(ApartmentController.Instance.apartmentPosition[randomRemoveID]);
+                ApartmentController.Instance.apartmentPosition.RemoveAt(randomRemoveID);
+            }
+        }
         for (int i = 0; i < ApartmentController.Instance.unLockedApartmentCount; i++)
         {
-            Vector3 apartmentPosition = ApartmentController.Instance.apartmentPosition[i];
-            Instantiate(GuestController.Instance.guestInApartmentPrefab, apartmentPosition, transform.rotation);
+            if (i < GuestController.Instance.GuestStorage.Count)
+            {
+                Vector3 apartmentPosition = ApartmentController.Instance.apartmentPosition[i];
+                Instantiate(GuestController.Instance.guestInApartmentPrefab, apartmentPosition, transform.rotation);
+                
+            }
+            
         }
+
+        ApartmentController.Instance.apartmentPosition.AddRange(temporPosition);
+        temporPosition.Clear();
+
     }
 
     public void GetApartmentPosition()
