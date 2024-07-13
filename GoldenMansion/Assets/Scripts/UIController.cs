@@ -1,3 +1,4 @@
+using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,10 @@ public class UIController : MonoBehaviour
 {
     private static UIController instance;
     [SerializeField] private TextMeshProUGUI vaultMoneyText;
+    [SerializeField] private TextMeshProUGUI targetText;
+    [SerializeField] private GameObject chooseCardPanel;
+    [SerializeField] private GameObject roundEndPanel;
+    [SerializeField] private GameObject thisCanvas;
 
     public static UIController Instance
     {
@@ -51,17 +56,15 @@ public class UIController : MonoBehaviour
     void Update()
     {
         vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
+        targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(1).target);
+
+        if (GameManager.Instance.isChooseCardFinish)
+        {
+            Destroy(GameObject.Find("ChooseCardPanel(Clone)"));
+            GameManager.Instance.isChooseCardFinish = false;
+        }
     }
 
-    public void CloseThisPanel(GameObject thisPanel)
-    {
-        thisPanel.SetActive(false);
-    }
-
-    public void StartBuildMode()
-    {
-        ApartmentController.Instance.isBuildMode = true;
-    }
 
     public void GuestMoveIn()
     {
@@ -91,6 +94,16 @@ public class UIController : MonoBehaviour
         ApartmentController.Instance.CheckPayedCount();
         ApartmentController.Instance.apartment.AddRange(temporApartmentObject);
         temporPosition.Clear();
+        
+        if(Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays >= 0)
+        {
+            Instantiate(chooseCardPanel, thisCanvas.transform);
+        }
+        else
+        {
+            Instantiate(roundEndPanel, thisCanvas.transform);
+        }
+        
 
     }
 

@@ -60,7 +60,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             lockedApartment.SetActive(true);
             unLockedApartment.SetActive(false);
         }
-        if (apartmentDays != GameManager.Instance.gameDays)
+        if (apartmentDays - GameManager.Instance.gameDays == -1)
         {
             try
             {
@@ -72,6 +72,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             catch
             {
                 this.isPayed = true;
+                apartmentDays += 1;
             }
             
         }
@@ -131,7 +132,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         {
             this.isUnlock = true;
             this.roomKey = 1;
-            ApartmentController.Instance.isBuildMode = false;
+            //ApartmentController.Instance.isBuildMode = false;
             ApartmentController.Instance.unLockedApartmentCount += 1;
             Debug.Log("ÒÑ½âËø"+this.roomName);
             ApartmentController.Instance.apartment.Add(this.gameObject);

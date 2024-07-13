@@ -50,8 +50,7 @@ public class Guest : MonoBehaviour
 
     public void addToStorage()
     {
-
         GuestController.Instance.GuestStorage.Add(key);
-        Debug.Log(GuestController.Instance.GuestStorage[GuestController.Instance.GuestStorage.Count - 1]);
+        GameManager.Instance.isChooseCardFinish = true;
     }
 }
