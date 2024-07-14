@@ -12,6 +12,7 @@ namespace ExcelData
             public int[] budget;
             public int effectID;
             public string effectDesc;
+            public string portraitRoute;
         }
 
         private static CharacterData s_Instance;
@@ -73,6 +74,7 @@ namespace ExcelData
                     int budgetIndex = sheetHeader.IndexOf("budget", "int[]");
                     int effectIDIndex = sheetHeader.IndexOf("effectID", "int");
                     int effectDescIndex = sheetHeader.IndexOf("effectDesc", "string");
+                    int portraitRouteIndex = sheetHeader.IndexOf("portraitRoute", "string");
 
                     #if UNITY_EDITOR
                     bool promptMismatchColumns = false;
@@ -108,6 +110,10 @@ namespace ExcelData
                             else if (j == effectDescIndex)
                             {
                                 newItem.effectDesc = reader.ReadString();
+                            }
+                            else if (j == portraitRouteIndex)
+                            {
+                                newItem.portraitRoute = reader.ReadString();
                             }
                             else
                             {

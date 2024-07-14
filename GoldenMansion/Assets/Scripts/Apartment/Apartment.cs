@@ -26,12 +26,18 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     private void Awake()
     {
-        if (this.isUnlock)
-        {
-            this.lockedApartment.SetActive(false);
-            this.unLockedApartment.SetActive(true);
-            ApartmentController.Instance.apartment.Add(this.gameObject);
-        }
+        //if (this.transform.parent.name == "Row1")
+        //{
+        //    this.isUnlock = true;
+        //    this.roomKey = 2;
+        //    ApartmentController.Instance.unLockedApartmentCount += 5;
+        //}
+        //if (this.isUnlock)
+        //{
+        //    this.lockedApartment.SetActive(false);
+        //    this.unLockedApartment.SetActive(true);
+        //    ApartmentController.Instance.apartment.Add(this.gameObject);
+        //}
 
         roomKey = 2;//暂时的，后面要改成根据玩家选择输入
         roomName = RoomData.GetItem(roomKey).name;
@@ -44,7 +50,18 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (this.transform.parent.name == "Row1")
+        {
+            this.isUnlock = true;
+            this.roomKey = 2;
+            ApartmentController.Instance.unLockedApartmentCount += 1;
+        }
+        if (this.isUnlock)
+        {
+            this.lockedApartment.SetActive(false);
+            this.unLockedApartment.SetActive(true);
+            ApartmentController.Instance.apartment.Add(this.gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -64,7 +81,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         {
             try
             {
-                Guest guestInApartment = gameObject.GetComponentInChildren<Guest>();
+                GuestInApartment guestInApartment = gameObject.GetComponentInChildren<GuestInApartment>();
                 PayRent(guestInApartment, this);
                 apartmentDays += 1;
 
@@ -132,17 +149,16 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         {
             this.isUnlock = true;
             this.roomKey = 1;
-            //ApartmentController.Instance.isBuildMode = false;
             ApartmentController.Instance.unLockedApartmentCount += 1;
             Debug.Log("已解锁"+this.roomName);
-            ApartmentController.Instance.apartment.Add(this.gameObject);
+            //ApartmentController.Instance.apartment.Add(this.gameObject);
         }
 
     }
 
-    public void PayRent(Guest guest,Apartment apartment)
+    public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
     {
-        if (guest.guestBudget >= apartment.roomRent)
+        if (guestInApartment.guestBudget >= apartment.roomRent)
         {
             ApartmentController.Instance.vaultMoney += this.roomRent;
         }

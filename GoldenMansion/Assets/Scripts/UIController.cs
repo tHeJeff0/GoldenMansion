@@ -72,21 +72,36 @@ public class UIController : MonoBehaviour
         List<Vector3> temporPosition = new List<Vector3>();
         List<GameObject> temporApartmentObject = new List<GameObject>();
 
-        if (GuestController.Instance.GuestStorage.Count < ApartmentController.Instance.unLockedApartmentCount)
+        if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays >= 0)
         {
-            int removeUnlockedApartmentCount = ApartmentController.Instance.unLockedApartmentCount - GuestController.Instance.GuestStorage.Count;
+            Instantiate(chooseCardPanel, thisCanvas.transform);
+            Debug.Log("成功生成选卡panel");
+        }
+        else
+        {
+            Instantiate(roundEndPanel, thisCanvas.transform);
+        }
+
+        if (GuestController.Instance.GuestInApartmentPrefabStorage.Count < ApartmentController.Instance.unLockedApartmentCount)
+        {
+            int removeUnlockedApartmentCount = ApartmentController.Instance.unLockedApartmentCount - GuestController.Instance.GuestInApartmentPrefabStorage.Count;
             for (int i = 0; i < removeUnlockedApartmentCount; i++)
             {
-                int randomRemoveID = Random.Range(0, ApartmentController.Instance.apartment.Count - 1);
+                int randomRemoveID = Random.Range(0, ApartmentController.Instance.apartment.Count);
                 temporApartmentObject.Add(ApartmentController.Instance.apartment[randomRemoveID]);
                 ApartmentController.Instance.apartment.RemoveAt(randomRemoveID);
             }
         }
-        for (int i = 0; i < ApartmentController.Instance.unLockedApartmentCount; i++)
+        for (int i = 0; i < ApartmentController.Instance.apartment.Count; i++)
         {
-            if (i < GuestController.Instance.GuestStorage.Count)
+            if (i < GuestController.Instance.GuestInApartmentPrefabStorage.Count)
             {
-                Instantiate(GuestController.Instance.guestInApartmentPrefab, ApartmentController.Instance.apartment[i].transform);
+                int randomGuest = Random.Range(0, GuestController.Instance.GuestInApartmentPrefabStorage.Count);
+                Debug.Log(randomGuest);
+                //Instantiate(GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest], ApartmentController.Instance.apartment[i].transform);
+                GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest].transform.SetParent(ApartmentController.Instance.apartment[i].transform);
+                GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest].transform.localPosition = Vector3.zero;
+                GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest].SetActive(true);
             }
             
         }
@@ -95,14 +110,7 @@ public class UIController : MonoBehaviour
         ApartmentController.Instance.apartment.AddRange(temporApartmentObject);
         temporPosition.Clear();
         
-        if(Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays >= 0)
-        {
-            Instantiate(chooseCardPanel, thisCanvas.transform);
-        }
-        else
-        {
-            Instantiate(roundEndPanel, thisCanvas.transform);
-        }
+        
         
 
     }

@@ -29,28 +29,24 @@ public class Guest : MonoBehaviour
         guestDesc = CharacterData.GetItem(key).effectDesc;
         guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
 
-        try
-        {
-            guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
-            guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
-            guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
 
-            guestNameText.text = guestName;
-            guestDescText.text = guestDesc;
-            guestBudgetText.text = guestBudget.ToString();
-        }
-        catch
-        {
-            Debug.Log(this.guestName);
-        }
+        guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
+        guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
+        guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
+
+        guestNameText.text = guestName;
+        guestDescText.text = guestDesc;
+        guestBudgetText.text = guestBudget.ToString();
+    }
+        
         
 
 
-    }
 
     public void addToStorage()
     {
         GuestController.Instance.GuestStorage.Add(key);
+        GuestController.Instance.temporKey = this.key;
         GameManager.Instance.isChooseCardFinish = true;
     }
 }

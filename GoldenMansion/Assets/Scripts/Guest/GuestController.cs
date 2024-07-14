@@ -9,10 +9,12 @@ public class GuestController : MonoBehaviour
 {
     
     private static GuestController instance;
-    
+
+    public int temporKey;
     public List<int> GuestStorage = new List<int>();
+    public List<GameObject> GuestInApartmentPrefabStorage = new List<GameObject>();
     public Guest guestDetailPrefab;
-    public Guest guestInApartmentPrefab;
+    public GuestInApartment guestInApartmentPrefab;
     private int basicGuestCount { get; set; } = 3;
     public static GuestController Instance
     {
@@ -72,7 +74,14 @@ public class GuestController : MonoBehaviour
     {
         for (int i = 0; i < generateCount; i++)
         {
-            GuestStorage.Add(RandomKey());
+            temporKey = RandomKey();
+            GuestStorage.Add(temporKey) ;
+            GameObject starterGuest = Instantiate(guestInApartmentPrefab.gameObject);
+            starterGuest.SetActive(false);
+            GuestInApartmentPrefabStorage.Add(starterGuest);
+            //Destroy(temporGuestObject);
         }
     }
+
+    
 }
