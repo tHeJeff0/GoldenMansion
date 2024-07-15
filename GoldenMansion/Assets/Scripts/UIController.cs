@@ -9,12 +9,16 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    
     private static UIController instance;
     [SerializeField] private TextMeshProUGUI vaultMoneyText;
     [SerializeField] private TextMeshProUGUI targetText;
     [SerializeField] private GameObject chooseCardPanel;
     [SerializeField] private GameObject roundEndPanel;
     [SerializeField] private GameObject thisCanvas;
+
+    int guestInApartmentPrefabCount;
+    int unlockedApartmentCount;
 
     public static UIController Instance
     {
@@ -57,66 +61,81 @@ public class UIController : MonoBehaviour
     {
         vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
         targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(1).target);
-
-        if (GameManager.Instance.isChooseCardFinish)
-        {
-            Destroy(GameObject.Find("ChooseCardPanel(Clone)"));
-            GameManager.Instance.isChooseCardFinish = false;
-        }
     }
 
 
     public void GuestMoveIn()
     {
-        GameManager.Instance.gameDays += 1;
-        List<Vector3> temporPosition = new List<Vector3>();
-        List<GameObject> temporApartmentObject = new List<GameObject>();
+        
+        guestInApartmentPrefabCount = GuestController.Instance.GuestInApartmentPrefabStorage.Count;
+        unlockedApartmentCount = ApartmentController.Instance.apartment.Count;
 
-        if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays >= 0)
+        
+        List<int> randomGuestTagList = GenerateRandomGuestTagList();
+        List<int> randomApartmentTagList = GenerateRandomApartmentTagList();
+        
+
+        if (guestInApartmentPrefabCount < unlockedApartmentCount)
+        {
+            
+            Debug.Log(string.Format("调用1，有{0}个房客，{1}个公寓", guestInApartmentPrefabCount, unlockedApartmentCount));
+            for (int i = 0; i < guestInApartmentPrefabCount; i++)
+            {
+                GuestRandomMoveIntoApartment(randomGuestTagList[i], randomApartmentTagList[i]);
+            }
+        }
+        else
+        {
+            Debug.Log(string.Format("调用2，有{0}个房客，{1}个公寓", guestInApartmentPrefabCount,unlockedApartmentCount));
+            for (int i = 0; i < unlockedApartmentCount; i++)
+            {
+                GuestRandomMoveIntoApartment(randomGuestTagList[i], randomApartmentTagList[i]);
+            }
+        }
+
+        GameManager.Instance.gameDays += 1;
+        if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
         {
             Instantiate(chooseCardPanel, thisCanvas.transform);
-            Debug.Log("成功生成选卡panel");
         }
         else
         {
             Instantiate(roundEndPanel, thisCanvas.transform);
         }
 
-        if (GuestController.Instance.GuestInApartmentPrefabStorage.Count < ApartmentController.Instance.unLockedApartmentCount)
-        {
-            int removeUnlockedApartmentCount = ApartmentController.Instance.unLockedApartmentCount - GuestController.Instance.GuestInApartmentPrefabStorage.Count;
-            for (int i = 0; i < removeUnlockedApartmentCount; i++)
-            {
-                int randomRemoveID = Random.Range(0, ApartmentController.Instance.apartment.Count);
-                temporApartmentObject.Add(ApartmentController.Instance.apartment[randomRemoveID]);
-                ApartmentController.Instance.apartment.RemoveAt(randomRemoveID);
-            }
-        }
-        for (int i = 0; i < ApartmentController.Instance.apartment.Count; i++)
-        {
-            if (i < GuestController.Instance.GuestInApartmentPrefabStorage.Count)
-            {
-                int randomGuest = Random.Range(0, GuestController.Instance.GuestInApartmentPrefabStorage.Count);
-                Debug.Log(randomGuest);
-                //Instantiate(GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest], ApartmentController.Instance.apartment[i].transform);
-                GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest].transform.SetParent(ApartmentController.Instance.apartment[i].transform);
-                GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest].transform.localPosition = Vector3.zero;
-                GuestController.Instance.GuestInApartmentPrefabStorage[randomGuest].SetActive(true);
-            }
-            
-        }
-
         ApartmentController.Instance.CheckPayedCount();
-        ApartmentController.Instance.apartment.AddRange(temporApartmentObject);
-        temporPosition.Clear();
-        
-        
-        
 
     }
 
-    public void GetApartmentPosition()
+    List<int> GenerateRandomGuestTagList()
     {
-        
+        HashSet<int> randomGuestHashList = new HashSet<int>();
+        while (randomGuestHashList.Count < guestInApartmentPrefabCount)
+        {
+            int id = Random.Range(0, guestInApartmentPrefabCount);
+            randomGuestHashList.Add(id);
+        }
+        List<int> randomGuestList = new List<int>(randomGuestHashList);
+        return randomGuestList;        
+    }
+
+    List<int> GenerateRandomApartmentTagList()
+    {
+        HashSet<int> randomApartmentHashList = new HashSet<int>();
+        while (randomApartmentHashList.Count < unlockedApartmentCount)
+        {
+            int id = Random.Range(0, unlockedApartmentCount);
+            randomApartmentHashList.Add(id);
+        }
+        List<int> randomApartmentTagList = new List<int>(randomApartmentHashList);
+        return randomApartmentTagList;
+    }
+
+    void GuestRandomMoveIntoApartment(int guestListTag,int apartmentListTag)
+    {
+        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
+        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.SetParent(ApartmentController.Instance.apartment[apartmentListTag].transform);
+        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.localPosition = new Vector3(0, 0, -0.1f);
+        Debug.Log(string.Format("{0}人入住了{1}房间", guestListTag, apartmentListTag));
     }
 }

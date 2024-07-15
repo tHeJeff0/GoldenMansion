@@ -1098,7 +1098,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8475034193990982644}
         m_TargetAssemblyTypeName: RoundEndPanelController, Assembly-CSharp
-        m_MethodName: StartBuildMode
+        m_MethodName: QuitBuildMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -11,7 +11,6 @@ public class GuestController : MonoBehaviour
     private static GuestController instance;
 
     public int temporKey;
-    public List<int> GuestStorage = new List<int>();
     public List<GameObject> GuestInApartmentPrefabStorage = new List<GameObject>();
     public Guest guestDetailPrefab;
     public GuestInApartment guestInApartmentPrefab;
@@ -50,7 +49,7 @@ public class GuestController : MonoBehaviour
 
     public int RandomKey()
     {
-        int randomKey = 0;
+        int randomKey = 1;
         int keyMin = 1;
         int keyMax = 1;
         var characterDataDict = CharacterData.GetDict();
@@ -75,11 +74,10 @@ public class GuestController : MonoBehaviour
         for (int i = 0; i < generateCount; i++)
         {
             temporKey = RandomKey();
-            GuestStorage.Add(temporKey) ;
             GameObject starterGuest = Instantiate(guestInApartmentPrefab.gameObject);
-            starterGuest.SetActive(false);
+            starterGuest.GetComponentInChildren<SpriteRenderer>().enabled = false;
             GuestInApartmentPrefabStorage.Add(starterGuest);
-            //Destroy(temporGuestObject);
+            //Debug.Log(string.Format("{0},{1}",starterGuest.GetComponent<Guest>().guestName, starterGuest.GetComponent<Guest>().transform.parent.name));
         }
     }
 

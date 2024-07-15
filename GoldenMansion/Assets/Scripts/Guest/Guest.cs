@@ -45,7 +45,9 @@ public class Guest : MonoBehaviour
 
     public void addToStorage()
     {
-        GuestController.Instance.GuestStorage.Add(key);
+        GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+        guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
         GuestController.Instance.temporKey = this.key;
         GameManager.Instance.isChooseCardFinish = true;
     }

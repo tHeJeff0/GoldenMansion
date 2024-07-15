@@ -5,7 +5,7 @@ using UnityEngine;
 public class ApartmentController : MonoBehaviour
 {
 
-    public int unLockedApartmentCount { get; set; } = 0;
+    //public int unLockedApartmentCount { get; set; } = 0;
     public List<GameObject> apartment = new List<GameObject>();
     public float vaultMoney { get; set; } = 0;
     public bool isBuildMode { get; set; }
