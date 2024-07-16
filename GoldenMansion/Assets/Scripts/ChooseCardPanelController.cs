@@ -9,6 +9,12 @@ using UnityEngine.UI;
 public class ChooseCardPanelController : MonoBehaviour
 {
     [SerializeField] Button showPanelButton;
+    GameObject chooseGuestSlot;
+    GameObject hideButton;
+    GameObject showButton;
+    GameObject skipButton;
+    GameObject upgradeRentButton;
+
     private Color temporColor;
 
 
@@ -16,6 +22,11 @@ public class ChooseCardPanelController : MonoBehaviour
     void Start()
     {
         temporColor = this.GetComponent<UnityEngine.UI.Image>().color;
+        chooseGuestSlot = GameObject.Find("ChooseGuestSlot");
+        hideButton = GameObject.Find("HideButton");
+        showButton = GameObject.Find("ShowButton");
+        skipButton = GameObject.Find("SkipButton");
+        upgradeRentButton = GameObject.Find("UpgradeRentButton");
     }
 
     // Update is called once per frame
@@ -30,10 +41,10 @@ public class ChooseCardPanelController : MonoBehaviour
 
     public void HideChooseCardPanel()
     {
-        GameObject.Find("ChooseGuestSlot").SetActive(false);
-        GameObject.Find("HideButton").SetActive(false);
-        GameObject.Find("SkipButton").SetActive(false);
-        GameObject.Find("UpgradeRentButton").SetActive(false);
+        chooseGuestSlot.SetActive(false);
+        hideButton.SetActive(false);
+        skipButton.SetActive(false);
+        upgradeRentButton.SetActive(false);
 
         this.GetComponent<UnityEngine.UI.Image>().color = new Color(0f, 0f, 0f, 0f);
         showPanelButton.gameObject.SetActive(true);
@@ -42,7 +53,13 @@ public class ChooseCardPanelController : MonoBehaviour
 
     public void ShowChooseCardPanel()
     {
-       
+        chooseGuestSlot.SetActive(true);
+        hideButton.SetActive(true);
+        skipButton.SetActive(true);
+        upgradeRentButton.SetActive(true);
+
+        this.GetComponent<UnityEngine.UI.Image>().color = temporColor;
+        showPanelButton.gameObject.SetActive(false);
     }
 
     public void SkipChooseCard()
