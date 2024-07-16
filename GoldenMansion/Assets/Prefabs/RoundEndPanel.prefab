@@ -486,12 +486,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8116590896673329726}
   m_Layer: 0
-  m_Name: PayRentGroup
+  m_Name: CommitRentGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8116590896673329726
 Transform:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 7835996344400917242}
   - component: {fileID: 7315276485785239305}
   m_Layer: 5
-  m_Name: PayButtonText
+  m_Name: CommitButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pay
+  m_text: Commit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 678737644335889753}
   - component: {fileID: 2435887314946843946}
   m_Layer: 5
-  m_Name: PayButton
+  m_Name: CommitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -974,7 +974,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 678737644335889753}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8475034193990982644}
+        m_TargetAssemblyTypeName: RoundEndPanelController, Assembly-CSharp
+        m_MethodName: CommitRent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6467666690520462212
 GameObject:
   m_ObjectHideFlags: 0
