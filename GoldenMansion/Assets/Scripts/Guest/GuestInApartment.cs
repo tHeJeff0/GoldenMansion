@@ -11,6 +11,7 @@ public class GuestInApartment : MonoBehaviour
     public string guestName { get; set; }
     public string guestDesc { get; set; }
     public int guestBudget { get; set; }
+    public int guestExtraBudget { get; set; }
     public int guestEffectID { get; set; }
 
 
@@ -36,7 +37,6 @@ public class GuestInApartment : MonoBehaviour
     {
         if (GameManager.Instance.isChooseCardFinish)
         {
-            Debug.Log(this.guestName + "重设了父物件");
             this.transform.SetParent(null);
             this.transform.localPosition = Vector3.zero;
             this.GetComponentInChildren<SpriteRenderer>().enabled = false;

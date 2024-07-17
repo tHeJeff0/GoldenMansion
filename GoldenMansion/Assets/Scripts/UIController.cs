@@ -78,7 +78,6 @@ public class UIController : MonoBehaviour
         if (guestInApartmentPrefabCount < unlockedApartmentCount)
         {
             
-            Debug.Log(string.Format("调用1，有{0}个房客，{1}个公寓", guestInApartmentPrefabCount, unlockedApartmentCount));
             for (int i = 0; i < guestInApartmentPrefabCount; i++)
             {
                 GuestRandomMoveIntoApartment(randomGuestTagList[i], randomApartmentTagList[i]);
@@ -86,7 +85,6 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            Debug.Log(string.Format("调用2，有{0}个房客，{1}个公寓", guestInApartmentPrefabCount,unlockedApartmentCount));
             for (int i = 0; i < unlockedApartmentCount; i++)
             {
                 GuestRandomMoveIntoApartment(randomGuestTagList[i], randomApartmentTagList[i]);
@@ -136,6 +134,5 @@ public class UIController : MonoBehaviour
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.SetParent(ApartmentController.Instance.apartment[apartmentListTag].transform);
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.localPosition = new Vector3(0, 0, -0.1f);
-        Debug.Log(string.Format("{0}人入住了{1}房间", guestListTag, apartmentListTag));
     }
 }

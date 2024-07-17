@@ -11,11 +11,13 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 {
     [SerializeField] GameObject lockedApartment;
     [SerializeField] GameObject unLockedApartment;
+    [SerializeField] GameObject upgradeSelection;
 
 
     public string roomName { get; set; }
     public int roomKey { get; set; }
     public int roomRent { get; set; }
+    public int roomExtraRent { get; set; }
     public int roomEffect { get; set; }
     public int roomUnlockCost { get; set; }
     public Guest roomGuest { get; set; }
@@ -85,30 +87,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     }
 
-    private void EliteRoomEffect()
-    {
-        if (roomGuest.key == 1)
-        {
-            this.roomRent = this.roomGuest.guestBudget;
-        }
-    }
-
-    private void CageRoomEffect()
-    {
-        float randomRate = Random.Range(0, 1);
-        if (randomRate <= 0.5)
-        {
-            this.roomGuestLimit = 2;
-        }
-    }
-
-    private void LuckyRoomEffect()
-    {
-        if (roomGuest.key == 8)
-        {
-            this.roomRent += 100;
-        }
-    }
 
     public void SwitchApartmentPic()
     {
@@ -126,15 +104,24 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             Debug.Log("已解锁"+this.roomName);
             //ApartmentController.Instance.apartment.Add(this.gameObject);
         }
+        if (ApartmentController.Instance.isBuildMode && this.isUnlock)
+        {
+            if (GameObject.FindGameObjectWithTag("UpgradeButton") != null)
+            {
+                GameObject.FindGameObjectWithTag("UpgradeButton").SetActive(false);
+            }
+            upgradeSelection.SetActive(true);
+            Debug.Log("调出升级房屋");
+        }
 
     }
 
     public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
     {
         guestInApartment.GuestEffect();
-        if (guestInApartment.guestBudget >= apartment.roomRent)
+        if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
         {
-            ApartmentController.Instance.vaultMoney += this.roomRent;
+            ApartmentController.Instance.vaultMoney += this.roomRent + roomExtraRent;
         }
 
     }

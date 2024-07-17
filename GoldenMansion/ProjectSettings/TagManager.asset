@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Guest
+  - UpgradeButton
   layers:
   - Default
   - TransparentFX

@@ -59,6 +59,20 @@ public class ApartmentController : MonoBehaviour
         }
     }
 
+    public void ApartmentEffect_IgnoreBudget(GuestInApartment guestInApartment)
+    {
+        Debug.Log("无视预算");
+    }
+
+    public void ApartmentEffect_LiveTwoGuest()
+    {
+        Debug.Log("可住2人");
+    }
+
+    public void ApartmentEffect_IncreaseRent(GuestInApartment guestInApartment)
+    {
+        Debug.Log("增加房租");
+    }
 
 
 }

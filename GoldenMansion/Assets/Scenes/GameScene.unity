@@ -140,10 +140,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994515573}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5299997
@@ -188,10 +184,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -210,10 +202,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874723230}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9200002
@@ -258,10 +246,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -295,10 +279,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1153520683}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9200002
@@ -343,10 +323,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (16)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -360,10 +336,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874723230}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.42
@@ -408,10 +380,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -430,10 +398,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 581553241}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5299997
@@ -478,10 +442,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -495,10 +455,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 581553241}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.26
@@ -543,10 +499,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -560,10 +512,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1153520683}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.26
@@ -607,10 +555,6 @@ PrefabInstance:
     - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_Name
       value: Apartment1 (15)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -823,10 +767,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994515573}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.26
@@ -870,10 +810,6 @@ PrefabInstance:
     - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_Name
       value: Apartment1 (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -979,10 +915,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874723230}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.0299997
@@ -1026,10 +958,6 @@ PrefabInstance:
     - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_Name
       value: Apartment1 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1095,10 +1023,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994515573}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9200002
@@ -1143,10 +1067,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1165,10 +1085,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 581553241}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.0299997
@@ -1213,10 +1129,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1230,10 +1142,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994515573}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.42
@@ -1278,10 +1186,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1295,10 +1199,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1153520683}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.0299997
@@ -1342,10 +1242,6 @@ PrefabInstance:
     - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_Name
       value: Apartment1 (18)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1410,10 +1306,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1153520683}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5299997
@@ -1458,10 +1350,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (17)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1475,10 +1363,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1153520683}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.42
@@ -1523,10 +1407,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (19)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1540,10 +1420,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994515573}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.0299997
@@ -1588,10 +1464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1605,10 +1477,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 581553241}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.42
@@ -1653,10 +1521,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1670,10 +1534,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 581553241}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9200002
@@ -1718,10 +1578,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1756,7 +1612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56665e49260860d49a3045ac7ae84d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GuestStorage: 
+  temporKey: 0
   GuestInApartmentPrefabStorage: []
   guestDetailPrefab: {fileID: 2478041869005666079, guid: 3e73ce3e008ffe74d98bfe1c3f1e7e4b, type: 3}
   guestInApartmentPrefab: {fileID: 5915425962316406885, guid: b68481eb4d6b88b48a8ee46d3a92c95b, type: 3}
@@ -1783,10 +1639,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874723230}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5299997
@@ -1831,10 +1683,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apartment1 (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1853,10 +1701,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874723230}
     m_Modifications:
-    - target: {fileID: 542996636220623683, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5716826381867431767, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.26
@@ -1900,14 +1744,6 @@ PrefabInstance:
     - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
       propertyPath: m_Name
       value: Apartment1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7686716183276405759, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055723525756844148, guid: 8d923b5e6a621f440a46f123dc75e02a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
