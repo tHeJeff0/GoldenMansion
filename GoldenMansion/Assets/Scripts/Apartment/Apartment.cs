@@ -131,6 +131,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
     {
+        guestInApartment.GuestEffect();
         if (guestInApartment.guestBudget >= apartment.roomRent)
         {
             ApartmentController.Instance.vaultMoney += this.roomRent;

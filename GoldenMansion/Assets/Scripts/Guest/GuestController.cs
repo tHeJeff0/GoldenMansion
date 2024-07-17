@@ -69,6 +69,7 @@ public class GuestController : MonoBehaviour
         return randomKey;
     }
 
+    
     void GenerateBasicGuest(int generateCount)
     {
         for (int i = 0; i < generateCount; i++)
@@ -81,5 +82,48 @@ public class GuestController : MonoBehaviour
         }
     }
 
-    
+    public void GuestEffect_ChangeJob()
+    {
+        Debug.Log("改变了职业");
+    }
+
+    public void GuestEffect_IgnoreRoomRentLimit()
+    {
+        Debug.Log("无视房租");
+    }
+
+    public void GuestEffect_PayByNeighbour()
+    {
+        Debug.Log("邻居代付");
+    }
+
+    public void GuestEffect_RateMoveAway()
+    {
+        Debug.Log("离开");
+    }
+
+    public void GuestEffect_RentIncrease()
+    {
+        Debug.Log("房租增加");
+    }
+
+    public void GuestEffect_RandomBudget()
+    {
+        Debug.Log("预算随机");
+    }
+
+    public void GuestEffect_MoveInNextBy()
+    {
+        Debug.Log("必须住入");
+    }
+
+    public void GuestEffect_RentIncreaseByNeighbour()
+    {
+        Debug.Log("根据邻居增加房租");
+    }
+
+    public void GuestEffect_GenerateGuest()
+    {
+        Debug.Log("拉人入伙");
+    }
 }
