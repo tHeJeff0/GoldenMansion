@@ -9,6 +9,7 @@ namespace ExcelData
         {
             public int roomID;
             public string name;
+            public string roomPicRoute;
             public int basicRent;
             public int unlockCost;
             public int effectID;
@@ -71,6 +72,7 @@ namespace ExcelData
                     //Get Item indices
                     int roomIDIndex = sheetHeader.IndexOf("roomID", "int");
                     int nameIndex = sheetHeader.IndexOf("name", "string");
+                    int roomPicRouteIndex = sheetHeader.IndexOf("roomPicRoute", "string");
                     int basicRentIndex = sheetHeader.IndexOf("basicRent", "int");
                     int unlockCostIndex = sheetHeader.IndexOf("unlockCost", "int");
                     int effectIDIndex = sheetHeader.IndexOf("effectID", "int");
@@ -93,6 +95,10 @@ namespace ExcelData
                             else if (j == nameIndex)
                             {
                                 newItem.name = reader.ReadString();
+                            }
+                            else if (j == roomPicRouteIndex)
+                            {
+                                newItem.roomPicRoute = reader.ReadString();
                             }
                             else if (j == basicRentIndex)
                             {

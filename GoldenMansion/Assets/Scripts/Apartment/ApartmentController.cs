@@ -9,6 +9,7 @@ public class ApartmentController : MonoBehaviour
     public List<GameObject> apartment = new List<GameObject>();
     public float vaultMoney { get; set; } = 0;
     public bool isBuildMode { get; set; }
+    public int apartmentUpgradeKey { get; set; }
     private static ApartmentController instance;
     private int isPayedRoomCount = 0;
 
@@ -73,6 +74,5 @@ public class ApartmentController : MonoBehaviour
     {
         Debug.Log("Ôö¼Ó·¿×â");
     }
-
 
 }

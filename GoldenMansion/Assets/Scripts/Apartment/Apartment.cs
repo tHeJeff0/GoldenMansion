@@ -1,7 +1,7 @@
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
@@ -12,9 +12,11 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     [SerializeField] GameObject lockedApartment;
     [SerializeField] GameObject unLockedApartment;
     [SerializeField] GameObject upgradeSelection;
+    [SerializeField] GameObject[] upgradeSelections;
 
 
     public string roomName { get; set; }
+    public string roomPicRoute { get; set; }
     public int roomKey { get; set; }
     public int roomRent { get; set; }
     public int roomExtraRent { get; set; }
@@ -24,6 +26,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     public int roomGuestLimit { get; set; } = 1;
     public bool isUnlock { get; set; } = false;
     public bool isPayed { get; set; } = false;
+    public bool isUpgradeMode { get; set; } = false;
     public int apartmentDays { get; set; } = 0;
 
     private void Awake()
@@ -34,6 +37,8 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         roomRent = RoomData.GetItem(roomKey).basicRent;
         roomEffect = RoomData.GetItem(roomKey).effectID;
         roomUnlockCost = RoomData.GetItem(roomKey).unlockCost;
+        upgradeSelection.SetActive(false);
+        //unLockedApartment.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(RoomData.GetItem(roomKey).roomPicRoute);
 
     }
 
@@ -48,6 +53,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         }
         if (this.isUnlock)
         {
+            Debug.Log("解锁第一行");
             this.lockedApartment.SetActive(false);
             this.unLockedApartment.SetActive(true);
             ApartmentController.Instance.apartment.Add(this.gameObject);
@@ -67,6 +73,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             lockedApartment.SetActive(true);
             unLockedApartment.SetActive(false);
         }
+
         if (apartmentDays - GameManager.Instance.gameDays == -1)
         {
             try
@@ -83,6 +90,35 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
                 apartmentDays += 1;
             }
             
+        }
+
+        if (this.isUpgradeMode)
+        {
+            foreach (var upgradeSelection in upgradeSelections)
+            {
+                if (upgradeSelection.GetComponent<ApartmentUpgrade>().roomKeyIsSend)
+                {
+                    this.roomKey = ApartmentController.Instance.apartmentUpgradeKey;
+                    GetComponentInChildren<ApartmentUpgrade>().roomKeyIsSend = false;
+                    upgradeSelection.SetActive(false);
+                    isUpgradeMode = false;
+                    Debug.Log(string.Format("{0}被升级为了{1}", this.roomName, RoomData.GetItem(roomKey).name));
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.gameObject != this.gameObject && !upgradeSelections.Contains(hit.transform.gameObject))
+                {
+                    isUpgradeMode = false;
+                    upgradeSelection.SetActive(false);
+                }                
+            }
         }
 
     }
@@ -104,17 +140,20 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             Debug.Log("已解锁"+this.roomName);
             //ApartmentController.Instance.apartment.Add(this.gameObject);
         }
-        if (ApartmentController.Instance.isBuildMode && this.isUnlock)
+        else if (ApartmentController.Instance.isBuildMode && this.isUnlock)
         {
             if (GameObject.FindGameObjectWithTag("UpgradeButton") != null)
             {
                 GameObject.FindGameObjectWithTag("UpgradeButton").SetActive(false);
             }
             upgradeSelection.SetActive(true);
+            this.isUpgradeMode = true;
             Debug.Log("调出升级房屋");
         }
 
     }
+
+    
 
     public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
     {
