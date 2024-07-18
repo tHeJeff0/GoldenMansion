@@ -34,8 +34,8 @@ public class ChooseCardPanelController : MonoBehaviour
     {
         if (GameManager.Instance.isChooseCardFinish)
         {
-            Destroy(this.gameObject);
             GameManager.Instance.isChooseCardFinish = false;
+            Destroy(this.gameObject);           
         }
     }
 
@@ -64,6 +64,7 @@ public class ChooseCardPanelController : MonoBehaviour
 
     public void SkipChooseCard()
     {
-        Destroy(this.gameObject);
+        GameManager.Instance.isChooseCardFinish = true;
+        
     }
 }

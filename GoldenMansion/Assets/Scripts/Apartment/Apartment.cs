@@ -24,7 +24,8 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     public int roomUnlockCost { get; set; }
     public Guest roomGuest { get; set; }
     public int roomGuestLimit { get; set; } = 1;
-    public bool isUnlock { get; set; } = false;
+    public int roomGuestExtraLimit { get; set; }
+    public bool isUnlock { get; set; } = true;
     public bool isPayed { get; set; } = false;
     public bool isUpgradeMode { get; set; } = false;
     public int apartmentDays { get; set; } = 0;
@@ -45,19 +46,21 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        if (this.transform.parent.name == "Row1")
-        {
-            this.isUnlock = true;
-            this.roomKey = 1;
-            //ApartmentController.Instance.unLockedApartmentCount += 1;
-        }
-        if (this.isUnlock)
-        {
-            Debug.Log("解锁第一行");
-            this.lockedApartment.SetActive(false);
-            this.unLockedApartment.SetActive(true);
-            ApartmentController.Instance.apartment.Add(this.gameObject);
-        }
+        ApartmentController.Instance.apartment.Add(this.gameObject);
+
+        //if (this.transform.parent.name == "Row1")
+        //{
+        //    this.isUnlock = true;
+        //    this.roomKey = 1;
+        //    //ApartmentController.Instance.unLockedApartmentCount += 1;
+        //}
+        //if (this.isUnlock)
+        //{
+        //    Debug.Log("解锁第一行");
+        //    this.lockedApartment.SetActive(false);
+        //    this.unLockedApartment.SetActive(true);
+        //    
+        //}
     }
 
     // Update is called once per frame
@@ -99,6 +102,11 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
                 if (upgradeSelection.GetComponent<ApartmentUpgrade>().roomKeyIsSend)
                 {
                     this.roomKey = ApartmentController.Instance.apartmentUpgradeKey;
+                    roomName = RoomData.GetItem(roomKey).name;
+                    roomRent = RoomData.GetItem(roomKey).basicRent;
+                    roomEffect = RoomData.GetItem(roomKey).effectID;
+                    ApartmentController.Instance.apartment.Remove(this.gameObject);
+                    ApartmentController.Instance.apartment.Add(this.gameObject);
                     foreach (var selection in upgradeSelections)
                     {
                         selection.GetComponent<ApartmentUpgrade>().roomKeyIsSend = false;
@@ -132,6 +140,24 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     }
 
+    public void ApartmentEffect()
+    {
+        switch (roomKey)
+        {
+            case 2:
+                ApartmentController.Instance.ApartmentEffect_IgnoreBudget(GetComponentInChildren<GuestInApartment>(),this);
+                break;
+            case 3:
+                ApartmentController.Instance.ApartmentEffect_LiveTwoGuest(this);
+                break;
+            case 4:
+                ApartmentController.Instance.ApartmentEffect_IncreaseRent(GetComponentInChildren<GuestInApartment>(),this);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (ApartmentController.Instance.isBuildMode==true && this.isUnlock == false)
@@ -161,11 +187,13 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
     {
         guestInApartment.GuestEffect();
+        apartment.ApartmentEffect();
         if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
         {
-            ApartmentController.Instance.vaultMoney += this.roomRent + roomExtraRent;
+            ApartmentController.Instance.vaultMoney += this.roomRent + this.roomExtraRent;
         }
-
+        Debug.Log(string.Format("{0}入住{1},上交房租{2}", GetComponentInChildren<GuestInApartment>().guestName,this.roomName, this.roomRent + this.roomExtraRent));
+        this.roomExtraRent = 0;
     }
 
 

@@ -61,19 +61,32 @@ public class ApartmentController : MonoBehaviour
     }
 
 
-    public void ApartmentEffect_IgnoreBudget(GuestInApartment guestInApartment)
+    public void ApartmentEffect_IgnoreBudget(GuestInApartment guestInApartment, Apartment apartment)
     {
+        if (guestInApartment.key == 2)
+        {
+            apartment.roomExtraRent = guestInApartment.guestBudget + guestInApartment.guestExtraBudget - apartment.roomRent;
+        }
         Debug.Log("无视预算");
     }
 
-    public void ApartmentEffect_LiveTwoGuest()
+    public void ApartmentEffect_LiveTwoGuest(Apartment apartment)
     {
+        float dice = Random.Range(0, 1);
+        if (dice > 0.5f)
+        {
+            apartment.roomGuestExtraLimit += 1;
+        }
         Debug.Log("可住2人");
     }
 
-    public void ApartmentEffect_IncreaseRent(GuestInApartment guestInApartment)
+    public void ApartmentEffect_IncreaseRent(GuestInApartment guestInApartment, Apartment apartment)
     {
-        Debug.Log("增加房租");
+        if (guestInApartment.key == 8)
+        {
+            apartment.roomRent += 100;
+        }
+        Debug.Log("煤老板入住，增加房租");
     }
 
 }
