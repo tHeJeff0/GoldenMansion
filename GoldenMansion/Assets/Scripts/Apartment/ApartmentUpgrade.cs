@@ -9,11 +9,13 @@ public class ApartmentUpgrade : MonoBehaviour,IPointerClickHandler
 {
     [SerializeField] private int roomKey;
     public bool roomKeyIsSend { get; set; }
+    public int upgradeCost { get; set; }
 
 
     private void Awake()
     {
         this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(RoomData.GetItem(roomKey).roomPicRoute);
+        upgradeCost = RoomData.GetItem(roomKey).unlockCost;
     }
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,17 @@ public class ApartmentUpgrade : MonoBehaviour,IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("点击了" + RoomData.GetItem(roomKey).name);
-        ApartmentController.Instance.apartmentUpgradeKey = this.roomKey;
-        this.roomKeyIsSend = true;
+        if (ApartmentController.Instance.vaultMoney >= this.upgradeCost)
+        {
+            ApartmentController.Instance.vaultMoney -= this.upgradeCost;
+            ApartmentController.Instance.apartmentUpgradeKey = this.roomKey;
+            this.roomKeyIsSend = true;
+        }
+        else
+        {
+            Debug.Log("费用不足");
+        }
+
+        
     }
 }
