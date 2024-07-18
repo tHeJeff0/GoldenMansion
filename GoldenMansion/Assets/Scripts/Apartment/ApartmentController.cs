@@ -60,6 +60,7 @@ public class ApartmentController : MonoBehaviour
         }
     }
 
+
     public void ApartmentEffect_IgnoreBudget(GuestInApartment guestInApartment)
     {
         Debug.Log("Œﬁ ”‘§À„");

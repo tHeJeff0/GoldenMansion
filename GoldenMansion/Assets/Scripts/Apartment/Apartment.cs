@@ -99,8 +99,11 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
                 if (upgradeSelection.GetComponent<ApartmentUpgrade>().roomKeyIsSend)
                 {
                     this.roomKey = ApartmentController.Instance.apartmentUpgradeKey;
-                    GetComponentInChildren<ApartmentUpgrade>().roomKeyIsSend = false;
-                    upgradeSelection.SetActive(false);
+                    foreach (var selection in upgradeSelections)
+                    {
+                        selection.GetComponent<ApartmentUpgrade>().roomKeyIsSend = false;
+                        selection.SetActive(false);                       
+                    }
                     isUpgradeMode = false;
                     Debug.Log(string.Format("{0}被升级为了{1}", this.roomName, RoomData.GetItem(roomKey).name));
                 }
