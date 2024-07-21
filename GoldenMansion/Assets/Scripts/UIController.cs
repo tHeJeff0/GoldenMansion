@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject chooseCardPanel;
     [SerializeField] private GameObject roundEndPanel;
     [SerializeField] private GameObject thisCanvas;
+    [SerializeField] private GameObject progressBar;
 
     int guestInApartmentPrefabCount;
     int unlockedApartmentCount;
@@ -60,7 +61,8 @@ public class UIController : MonoBehaviour
     void Update()
     {
         vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
-        targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(1).target);
+        targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
+        progressBar.GetComponent<Image>().fillAmount = ApartmentController.Instance.vaultMoney / Level.GetItem(GameManager.Instance.levelKey).target;
     }
 
 
@@ -131,8 +133,10 @@ public class UIController : MonoBehaviour
 
     void GuestRandomMoveIntoApartment(int guestListTag,int apartmentListTag)
     {
-        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
+        
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.SetParent(ApartmentController.Instance.apartment[apartmentListTag].transform);
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.localPosition = new Vector3(0, 0, -0.1f);
+        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
+        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<BoxCollider>().enabled = true;
     }
 }

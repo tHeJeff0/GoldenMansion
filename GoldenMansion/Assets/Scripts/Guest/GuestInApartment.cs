@@ -13,7 +13,7 @@ public class GuestInApartment : MonoBehaviour
     public int guestBudget { get; set; }
     public int guestExtraBudget { get; set; }
     public int guestEffectID { get; set; }
-
+    public bool isMoveIn { get; set; } = false;
 
     void Awake()
     {
@@ -21,9 +21,11 @@ public class GuestInApartment : MonoBehaviour
         this.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
         this.guestName = CharacterData.GetItem(key).name;
         this.guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
-        this.guestEffectID = CharacterData.GetItem(key).effectID;
+        //this.guestEffectID = CharacterData.GetItem(key).effectID;
+        this.guestEffectID = 3;
         this.gameObject.SetActive(true);
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        this.GetComponent<BoxCollider>().enabled = false;
 
     }
     // Start is called before the first frame update
@@ -35,11 +37,13 @@ public class GuestInApartment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (GameManager.Instance.isChooseCardFinish)
         {
             this.transform.SetParent(null);
             this.transform.localPosition = Vector3.zero;
             this.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            this.GetComponent<BoxCollider>().enabled = false;
         }
         if (guestDays - GameManager.Instance.gameDays == -1)
         {
@@ -49,7 +53,7 @@ public class GuestInApartment : MonoBehaviour
 
     public void GuestEffect()
     {
-        switch (guestEffectID)
+        switch (this.guestEffectID)
         {
             case 1:
                 GuestController.Instance.GuestEffect_ChangeJob();
@@ -58,7 +62,7 @@ public class GuestInApartment : MonoBehaviour
                 GuestController.Instance.GuestEffect_IgnoreRoomRentLimit();
                 break;
             case 3:
-                GuestController.Instance.GuestEffect_PayByNeighbour();
+                GuestController.Instance.GuestEffect_PayByNeighbour(this);
                 break;
             case 4:
                 GuestController.Instance.GuestEffect_RateMoveAway();
@@ -82,4 +86,13 @@ public class GuestInApartment : MonoBehaviour
                 break;
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(this.transform.position, this.transform.parent.GetComponent<BoxCollider>().size);
+    }
+
+
+    
 }

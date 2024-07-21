@@ -37,15 +37,10 @@ public class ApartmentController : MonoBehaviour
             if (apartment[i].GetComponent<Apartment>().isPayed)
             {
                 isPayedRoomCount += 1;
-            }
-        }
-        if (isPayedRoomCount == apartment.Count)
-        {
-            for (int i = 0; i < apartment.Count; i++)
-            {
                 apartment[i].GetComponent<Apartment>().isPayed = false;
             }
         }
+       
     }
     private void Awake()
     {

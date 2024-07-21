@@ -164,10 +164,8 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         {
             this.isUnlock = true;
             this.roomKey = 1;
-            //ApartmentController.Instance.unLockedApartmentCount += 1;
             ApartmentController.Instance.apartment.Add(this.gameObject);
             Debug.Log("已解锁"+this.roomName);
-            //ApartmentController.Instance.apartment.Add(this.gameObject);
         }
         else if (ApartmentController.Instance.isBuildMode && this.isUnlock)
         {
@@ -186,15 +184,26 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
     {
+        StartCoroutine(WaitGuestMoveIn());
+        Debug.Log("结束等待");
         guestInApartment.GuestEffect();
         apartment.ApartmentEffect();
         if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
         {
             ApartmentController.Instance.vaultMoney += this.roomRent + this.roomExtraRent;
+            Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", GetComponentInChildren<GuestInApartment>().guestName, this.roomName, this.roomRent + this.roomExtraRent, GetComponentInChildren<GuestInApartment>().guestEffectID));
         }
-        Debug.Log(string.Format("{0}入住{1},上交房租{2}", GetComponentInChildren<GuestInApartment>().guestName,this.roomName, this.roomRent + this.roomExtraRent));
+        else
+        {
+            Debug.Log(string.Format("{0}入住{1},但没交房租", GetComponentInChildren<GuestInApartment>().guestName, this.roomName));
+        }
+        
         this.roomExtraRent = 0;
     }
 
-
+    IEnumerator WaitGuestMoveIn()
+    {
+        Debug.Log("开始等待");
+        yield return new WaitUntil(() => GuestController.Instance.isAllGuestMoveIn);
+    }
 }

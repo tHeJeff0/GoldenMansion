@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     private static GameManager instance;
     public int gameDays { get; set; } = 0;
     public bool isChooseCardFinish { get; set; } = false;
