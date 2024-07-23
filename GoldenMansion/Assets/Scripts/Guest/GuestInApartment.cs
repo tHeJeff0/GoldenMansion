@@ -22,7 +22,7 @@ public class GuestInApartment : MonoBehaviour
         this.guestName = CharacterData.GetItem(key).name;
         this.guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
         //this.guestEffectID = CharacterData.GetItem(key).effectID;
-        this.guestEffectID = 3;
+        this.guestEffectID = 1;
         this.gameObject.SetActive(true);
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;

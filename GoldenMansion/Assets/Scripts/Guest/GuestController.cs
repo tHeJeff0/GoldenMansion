@@ -109,8 +109,9 @@ public class GuestController : MonoBehaviour
             if (adjancentGuest[i].CompareTag("Guest") && adjancentGuest[i].transform!=guestInApartment.transform)
             {
                 Debug.Log("有邻居");
-
                 Debug.Log(string.Format("{0}获得了邻居{1}",guestInApartment.transform.position,adjancentGuest[i].transform.position));
+                guestInApartment.guestExtraBudget += adjancentGuest[i].GetComponent<GuestInApartment>().guestBudget;
+
             }
             else
             {

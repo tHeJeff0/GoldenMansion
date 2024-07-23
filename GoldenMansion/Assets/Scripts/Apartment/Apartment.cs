@@ -175,7 +175,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             }
             upgradeSelection.SetActive(true);
             this.isUpgradeMode = true;
-            Debug.Log("调出升级房屋");
         }
 
     }
@@ -185,17 +184,19 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
     {
         StartCoroutine(WaitGuestMoveIn());
-        Debug.Log("结束等待");
         guestInApartment.GuestEffect();
         apartment.ApartmentEffect();
         if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
         {
             ApartmentController.Instance.vaultMoney += this.roomRent + this.roomExtraRent;
+            guestInApartment.guestExtraBudget = 0;
             Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", GetComponentInChildren<GuestInApartment>().guestName, this.roomName, this.roomRent + this.roomExtraRent, GetComponentInChildren<GuestInApartment>().guestEffectID));
         }
         else
         {
             Debug.Log(string.Format("{0}入住{1},但没交房租", GetComponentInChildren<GuestInApartment>().guestName, this.roomName));
+            GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
+            Destroy(guestInApartment);
         }
         
         this.roomExtraRent = 0;
@@ -203,7 +204,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     IEnumerator WaitGuestMoveIn()
     {
-        Debug.Log("开始等待");
         yield return new WaitUntil(() => GuestController.Instance.isAllGuestMoveIn);
     }
 }
