@@ -18,11 +18,12 @@ public class GuestInApartment : MonoBehaviour
     void Awake()
     {
         key = GuestController.Instance.temporKey;
+        this.guestDays = GameManager.Instance.gameDays;
         this.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
         this.guestName = CharacterData.GetItem(key).name;
         this.guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
-        //this.guestEffectID = CharacterData.GetItem(key).effectID;
-        this.guestEffectID = 1;
+        this.guestEffectID = CharacterData.GetItem(key).effectID;
+        //this.guestEffectID = 1;
         this.gameObject.SetActive(true);
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
@@ -56,19 +57,19 @@ public class GuestInApartment : MonoBehaviour
         switch (this.guestEffectID)
         {
             case 1:
-                GuestController.Instance.GuestEffect_ChangeJob();
+                GuestController.Instance.GuestEffect_ChangeJob(this);
                 break;
             case 2:
-                GuestController.Instance.GuestEffect_IgnoreRoomRentLimit();
+                GuestController.Instance.GuestEffect_IgnoreRoomRentLimit(this);
                 break;
             case 3:
                 GuestController.Instance.GuestEffect_PayByNeighbour(this);
                 break;
             case 4:
-                GuestController.Instance.GuestEffect_RateMoveAway();
+                GuestController.Instance.GuestEffect_RateMoveAway(this);
                 break;
             case 5:
-                GuestController.Instance.GuestEffect_RentIncrease();
+                GuestController.Instance.GuestEffect_RentIncrease(this);
                 break;
             case 6:
                 GuestController.Instance.GuestEffect_RandomBudget();

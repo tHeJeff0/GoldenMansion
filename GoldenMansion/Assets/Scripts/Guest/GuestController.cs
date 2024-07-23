@@ -88,13 +88,23 @@ public class GuestController : MonoBehaviour
         }
     }
 
-    public void GuestEffect_ChangeJob()
+    public void GuestEffect_ChangeJob(GuestInApartment guestInApartment)
     {
+        if (guestInApartment.guestDays == 3)
+        {
+            while (guestInApartment.key == 1)
+            {
+                guestInApartment.key = RandomKey();
+            }
+            
+        }
         Debug.Log("改变了职业");
     }
 
-    public void GuestEffect_IgnoreRoomRentLimit()
+    public void GuestEffect_IgnoreRoomRentLimit(GuestInApartment guestInApartment)
     {
+        Apartment apartment = guestInApartment.transform.parent.GetComponent<Apartment>();
+        apartment.roomExtraRent = guestInApartment.guestBudget + guestInApartment.guestExtraBudget - apartment.roomRent;
         Debug.Log("无视房租");
     }
 
@@ -108,8 +118,7 @@ public class GuestController : MonoBehaviour
             Debug.Log(i);
             if (adjancentGuest[i].CompareTag("Guest") && adjancentGuest[i].transform!=guestInApartment.transform)
             {
-                Debug.Log("有邻居");
-                Debug.Log(string.Format("{0}获得了邻居{1}",guestInApartment.transform.position,adjancentGuest[i].transform.position));
+                
                 guestInApartment.guestExtraBudget += adjancentGuest[i].GetComponent<GuestInApartment>().guestBudget;
 
             }
@@ -120,13 +129,22 @@ public class GuestController : MonoBehaviour
         }
     }
 
-    public void GuestEffect_RateMoveAway()
+    public void GuestEffect_RateMoveAway(GuestInApartment guestInApartment)
     {
+        float leaveRate = Random.Range(0, 1);
+        if (leaveRate > 0.8)
+        {
+            GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
+            Destroy(guestInApartment.gameObject);
+        }
         Debug.Log("离开");
     }
 
-    public void GuestEffect_RentIncrease()
+    public void GuestEffect_RentIncrease(GuestInApartment guestInApartment)
     {
+        Apartment apartment = guestInApartment.transform.parent.GetComponent<Apartment>();
+        apartment.roomExtraRent = guestInApartment.guestBudget + guestInApartment.guestExtraBudget - apartment.roomRent;
+        apartment.roomRent += 1;
         Debug.Log("房租增加");
     }
 
@@ -147,6 +165,11 @@ public class GuestController : MonoBehaviour
 
     public void GuestEffect_GenerateGuest()
     {
+        float generateRate = Random.Range(0, 1);
+        if (generateRate >= 0.5)
+        {           
+            GuestInApartmentPrefabStorage.Add(Instantiate(guestInApartmentPrefab.gameObject));
+        }
         Debug.Log("拉人入伙");
     }
 

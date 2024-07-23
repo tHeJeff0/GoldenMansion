@@ -79,7 +79,7 @@ public class ApartmentController : MonoBehaviour
     {
         if (guestInApartment.key == 8)
         {
-            apartment.roomRent += 100;
+            apartment.roomRent += 1;
         }
         Debug.Log("煤老板入住，增加房租");
     }

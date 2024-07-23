@@ -190,13 +190,15 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         {
             ApartmentController.Instance.vaultMoney += this.roomRent + this.roomExtraRent;
             guestInApartment.guestExtraBudget = 0;
+            apartment.roomExtraRent = 0;
             Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", GetComponentInChildren<GuestInApartment>().guestName, this.roomName, this.roomRent + this.roomExtraRent, GetComponentInChildren<GuestInApartment>().guestEffectID));
         }
         else
         {
             Debug.Log(string.Format("{0}入住{1},但没交房租", GetComponentInChildren<GuestInApartment>().guestName, this.roomName));
+            Debug.Log(string.Format("{0}离开了", GetComponentInChildren<GuestInApartment>().guestName));
             GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
-            Destroy(guestInApartment);
+            Destroy(guestInApartment.gameObject);
         }
         
         this.roomExtraRent = 0;
