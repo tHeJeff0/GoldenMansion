@@ -15,7 +15,6 @@ public class GuestController : MonoBehaviour
     public List<GameObject> GuestInApartmentPrefabStorage = new List<GameObject>();
     public Guest guestDetailPrefab;
     public GuestInApartment guestInApartmentPrefab;
-    public bool isAllGuestMoveIn = false;
     private int basicGuestCount { get; set; } = 3;
     public static GuestController Instance
     {
@@ -51,7 +50,7 @@ public class GuestController : MonoBehaviour
 
     private void Update()
     {
-        CheckGuestMoveIn(GuestInApartmentPrefabStorage);
+        
     }
 
     public int RandomKey()
@@ -189,23 +188,6 @@ public class GuestController : MonoBehaviour
 
         }
         return adjancentGuest;
-    }
-
-    public void CheckGuestMoveIn(List<GameObject> guestInApartmentStorage)
-    {
-        List<bool> moveInStatus = new List<bool>();
-        foreach (var item in guestInApartmentStorage)
-        {
-            moveInStatus.Add(item.GetComponent<GuestInApartment>().isMoveIn);            
-        }
-        if (moveInStatus.Contains(false))
-        {
-            isAllGuestMoveIn = false;
-        }
-        else
-        {
-            isAllGuestMoveIn = true;
-        }
     }
 
 }

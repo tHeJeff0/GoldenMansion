@@ -33,7 +33,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     public int roomGuestLimit { get; set; } = 1;
     public int roomGuestExtraLimit { get; set; }
     public bool isUnlock { get; set; } = true;
-    public bool isPayed { get; set; } = false;
     public bool isUpgradeMode { get; set; } = false;
     public int apartmentDays { get; set; } = 0;
 
@@ -87,23 +86,23 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             unLockedApartment.SetActive(false);
         }
 
-        if (apartmentDays - GameManager.Instance.gameDays == -1)
-        {
-            try
-            {
-                GuestInApartment guestInApartment = gameObject.GetComponentInChildren<GuestInApartment>();
-                PayRent(guestInApartment, this);
-                this.isPayed = true;
-                apartmentDays += 1;
+        //if (apartmentDays - GameManager.Instance.gameDays == -1)
+        //{
+        //    try
+        //    {
+        //        GuestInApartment guestInApartment = gameObject.GetComponentInChildren<GuestInApartment>();
+        //        ApartmentController.Instance.PayRent(guestInApartment, this);
+        //        this.isPayed = true;
+        //        apartmentDays += 1;
 
-            }
-            catch
-            {
-                this.isPayed = true;
-                apartmentDays += 1;
-            }
+        //    }
+        //    catch
+        //    {
+        //        this.isPayed = true;
+        //        apartmentDays += 1;
+        //    }
             
-        }
+        //}
 
         if (this.isUpgradeMode)
         {
@@ -191,42 +190,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     
 
-    public void PayRent(GuestInApartment guestInApartment,Apartment apartment)
-    {
-        StartCoroutine(WaitGuestMoveIn());
-        guestInApartment.GuestEffect();
-        apartment.ApartmentEffect();
-        if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
-        {
-            coin.SetActive(true);
-            coinText = coin.GetComponentInChildren<TextMeshProUGUI>();
-            coinSprite = coin.GetComponentInChildren<SpriteRenderer>().sprite;
-            coinText.text = (apartment.roomRent + apartment.roomExtraRent).ToString();
-            coin.transform.DOMoveY(10, 10).OnComplete(() =>
-            {
-                coin.SetActive(false);
-                ApartmentController.Instance.vaultMoney += this.roomRent + this.roomExtraRent;
-                guestInApartment.guestExtraBudget = 0;
-                apartment.roomExtraRent = 0;
-                Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", GetComponentInChildren<GuestInApartment>().guestName, this.roomName, this.roomRent + this.roomExtraRent, GetComponentInChildren<GuestInApartment>().guestEffectID));
-            });
-            
-            
-        }
-        else
-        {
-            Debug.Log(string.Format("{0}入住{1},但没交房租", GetComponentInChildren<GuestInApartment>().guestName, this.roomName));
-            Debug.Log(string.Format("{0}离开了", GetComponentInChildren<GuestInApartment>().guestName));
-            GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
-            Destroy(guestInApartment.gameObject);
-        }
-        
-        this.roomExtraRent = 0;
-    }
+    
 
-    IEnumerator WaitGuestMoveIn()
-    {
-        yield return new WaitUntil(() => GuestController.Instance.isAllGuestMoveIn);
-    }
 
 }

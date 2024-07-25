@@ -38,15 +38,16 @@ public class UIEventSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventQueueManager.Instance.RegisterEvent(UIController.Instance.GuestMoveIn);
-        EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.CheckPayedCount);
-        EventQueueManager.Instance.RegisterEvent(UIController.Instance.InstantiateMenu);
-        EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.Print);
+        
     }
 
     public void Execute()
     {
-       EventQueueManager.Instance.ExecuteEvents();
+        EventQueueManager.Instance.RegisterEvent(UIController.Instance.GuestMoveIn);
+        EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.GuestPayRent);
+        EventQueueManager.Instance.RegisterEvent(UIController.Instance.InstantiateMenu);
+
+        EventQueueManager.Instance.ExecuteEvents();
     }
 
     // Update is called once per frame

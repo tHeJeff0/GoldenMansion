@@ -11,7 +11,6 @@ public class ApartmentController : MonoBehaviour
     public bool isBuildMode { get; set; }
     public int apartmentUpgradeKey { get; set; }
     private static ApartmentController instance;
-    private int isPayedRoomCount = 0;
 
     public static ApartmentController Instance
     {
@@ -30,18 +29,26 @@ public class ApartmentController : MonoBehaviour
         }
     }
 
-    public void CheckPayedCount()
+    public void GuestPayRent()
     {
         for (int i = 0; i < apartment.Count; i++)
         {
-            if (apartment[i].GetComponent<Apartment>().isPayed)
+            GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
+            Apartment thisApartment = apartment[i].GetComponent<Apartment>();
+            try
             {
-                isPayedRoomCount += 1;
-                apartment[i].GetComponent<Apartment>().isPayed = false;
+                PayRent(guestInApartment, thisApartment);
+                thisApartment.apartmentDays += 1;
             }
-        }
+            catch
+            {
+                thisApartment.apartmentDays += 1;
+            }
+
+        } 
        
     }
+
     private void Awake()
     {
         if (instance == null)
@@ -84,9 +91,27 @@ public class ApartmentController : MonoBehaviour
         Debug.Log("煤老板入住，增加房租");
     }
 
-    public void Print()
+
+    public void PayRent(GuestInApartment guestInApartment, Apartment apartment)
     {
-        Debug.Log("触发了2");
+        guestInApartment.GuestEffect();
+        apartment.ApartmentEffect();
+        if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
+        {
+            
+            vaultMoney += apartment.roomRent + apartment.roomExtraRent;
+            guestInApartment.guestExtraBudget = 0;
+            apartment.roomExtraRent = 0;
+            Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", GetComponentInChildren<GuestInApartment>().guestName, apartment.roomName, apartment.roomRent + apartment.roomExtraRent, GetComponentInChildren<GuestInApartment>().guestEffectID));
+
+        }
+        else
+        {
+            Debug.Log(string.Format("{0}入住{1},但没交房租", GetComponentInChildren<GuestInApartment>().guestName, apartment.roomName));
+            Debug.Log(string.Format("{0}离开了", GetComponentInChildren<GuestInApartment>().guestName));
+            GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
+            Destroy(guestInApartment.gameObject);
+        }
     }
 
 }
