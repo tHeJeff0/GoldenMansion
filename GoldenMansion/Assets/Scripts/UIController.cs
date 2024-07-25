@@ -68,7 +68,10 @@ public class UIController : MonoBehaviour
 
     public void GuestMoveIn()
     {
-        
+        foreach (var item in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            Debug.Log("guestmovein¶Áµ½µÄ±í"+item.GetComponent<GuestInApartment>().key);
+        }
         guestInApartmentPrefabCount = GuestController.Instance.GuestInApartmentPrefabStorage.Count;
         unlockedApartmentCount = ApartmentController.Instance.apartment.Count;
 

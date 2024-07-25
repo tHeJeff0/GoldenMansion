@@ -114,7 +114,6 @@ public class GuestController : MonoBehaviour
 
         for (int i = 0; i < adjancentGuest.Count; i++)
         {
-            Debug.Log(i);
             if (adjancentGuest[i].CompareTag("Guest") && adjancentGuest[i].transform!=guestInApartment.transform)
             {
                 

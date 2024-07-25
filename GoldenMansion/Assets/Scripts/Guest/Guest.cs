@@ -46,11 +46,15 @@ public class Guest : MonoBehaviour
 
     public void addToStorage()
     {
+        GuestController.Instance.temporKey = this.key;
         GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
         guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
-        GuestController.Instance.temporKey = this.key;
+        GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);      
         GameManager.Instance.isChooseCardFinish = true;
+        foreach (var item in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            Debug.Log(item.GetComponent<GuestInApartment>().key);
+        }
     }
 
     
