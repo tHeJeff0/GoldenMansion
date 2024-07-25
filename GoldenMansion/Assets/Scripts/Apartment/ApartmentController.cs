@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,7 +98,7 @@ public class ApartmentController : MonoBehaviour
         guestInApartment.GuestEffect();
         apartment.ApartmentEffect();
         if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
-        {           
+        {
             vaultMoney += apartment.roomRent + apartment.roomExtraRent;
             guestInApartment.guestExtraBudget = 0;
             apartment.roomExtraRent = 0;
@@ -113,4 +114,24 @@ public class ApartmentController : MonoBehaviour
         }
     }
 
+    public void PlusGameDays()
+    {
+        GameManager.Instance.gameDays += 1;
+    }
+
+    public IEnumerator PlayReceiveCoinAnim()
+    {
+        for (int i = 0; i < apartment.Count; i++)
+        {
+            GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
+            Apartment thisApartment = apartment[i].GetComponent<Apartment>();
+            if (guestInApartment != null)
+            {
+                thisApartment.coin.SetActive(true);
+                yield return thisApartment.coin.transform.DOPunchPosition(new Vector3(0, 1, 1), 2).WaitForCompletion();
+            }
+        }
+        yield return null;
+
+    }
 }

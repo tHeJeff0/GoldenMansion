@@ -15,11 +15,12 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     [SerializeField] GameObject lockedApartment;
     [SerializeField] GameObject unLockedApartment;
     [SerializeField] GameObject upgradeSelection;
-    [SerializeField] GameObject coin;
     [SerializeField] GameObject[] upgradeSelections;
 
-    private TextMeshProUGUI coinText;
+    public TextMeshProUGUI coinText;
     private Sprite coinSprite;
+
+    public GameObject coin;
 
 
     public string roomName { get; set; }
