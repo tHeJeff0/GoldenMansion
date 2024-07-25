@@ -1,11 +1,11 @@
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GuestInApartment : MonoBehaviour
 {
-    
     public int key { get; set; }
     public int guestDays { get; set; }
     public string guestName { get; set; }
@@ -88,11 +88,11 @@ public class GuestInApartment : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(this.transform.position, this.transform.parent.GetComponent<BoxCollider>().size);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.black;
+    //    Gizmos.DrawWireCube(this.transform.position, this.transform.parent.GetComponent<BoxCollider>().size);
+    //}
 
 
     

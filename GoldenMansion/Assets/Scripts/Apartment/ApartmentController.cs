@@ -84,4 +84,9 @@ public class ApartmentController : MonoBehaviour
         Debug.Log("煤老板入住，增加房租");
     }
 
+    public void Print()
+    {
+        Debug.Log("触发了2");
+    }
+
 }

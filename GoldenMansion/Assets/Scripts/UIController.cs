@@ -92,18 +92,7 @@ public class UIController : MonoBehaviour
                 GuestRandomMoveIntoApartment(randomGuestTagList[i], randomApartmentTagList[i]);
             }
         }
-
         GameManager.Instance.gameDays += 1;
-        if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
-        {
-            Instantiate(chooseCardPanel, thisCanvas.transform);
-        }
-        else
-        {
-            Instantiate(roundEndPanel, thisCanvas.transform);
-        }
-
-        ApartmentController.Instance.CheckPayedCount();
 
     }
 
@@ -139,4 +128,17 @@ public class UIController : MonoBehaviour
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<BoxCollider>().enabled = true;
     }
+
+    public void InstantiateMenu()
+    {
+        if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
+        {
+            Instantiate(chooseCardPanel, thisCanvas.transform);
+        }
+        else
+        {
+            Instantiate(roundEndPanel, thisCanvas.transform);
+        }
+    }
+
 }

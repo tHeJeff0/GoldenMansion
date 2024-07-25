@@ -1,18 +1,25 @@
+using DG.Tweening;
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
 using static UnityEngine.ParticleSystem;
+using UnityEngine.UI;
 
 public class Apartment : MonoBehaviour,IPointerClickHandler
 {
     [SerializeField] GameObject lockedApartment;
     [SerializeField] GameObject unLockedApartment;
     [SerializeField] GameObject upgradeSelection;
+    [SerializeField] GameObject coin;
     [SerializeField] GameObject[] upgradeSelections;
+
+    private TextMeshProUGUI coinText;
+    private Sprite coinSprite;
 
 
     public string roomName { get; set; }
@@ -39,6 +46,9 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         roomEffect = RoomData.GetItem(roomKey).effectID;
         roomUnlockCost = RoomData.GetItem(roomKey).unlockCost;
         upgradeSelection.SetActive(false);
+
+        
+
         //unLockedApartment.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(RoomData.GetItem(roomKey).roomPicRoute);
 
     }
@@ -188,10 +198,20 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         apartment.ApartmentEffect();
         if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
         {
-            ApartmentController.Instance.vaultMoney += this.roomRent + this.roomExtraRent;
-            guestInApartment.guestExtraBudget = 0;
-            apartment.roomExtraRent = 0;
-            Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", GetComponentInChildren<GuestInApartment>().guestName, this.roomName, this.roomRent + this.roomExtraRent, GetComponentInChildren<GuestInApartment>().guestEffectID));
+            coin.SetActive(true);
+            coinText = coin.GetComponentInChildren<TextMeshProUGUI>();
+            coinSprite = coin.GetComponentInChildren<SpriteRenderer>().sprite;
+            coinText.text = (apartment.roomRent + apartment.roomExtraRent).ToString();
+            coin.transform.DOMoveY(10, 10).OnComplete(() =>
+            {
+                coin.SetActive(false);
+                ApartmentController.Instance.vaultMoney += this.roomRent + this.roomExtraRent;
+                guestInApartment.guestExtraBudget = 0;
+                apartment.roomExtraRent = 0;
+                Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", GetComponentInChildren<GuestInApartment>().guestName, this.roomName, this.roomRent + this.roomExtraRent, GetComponentInChildren<GuestInApartment>().guestEffectID));
+            });
+            
+            
         }
         else
         {
@@ -208,4 +228,5 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     {
         yield return new WaitUntil(() => GuestController.Instance.isAllGuestMoveIn);
     }
+
 }
