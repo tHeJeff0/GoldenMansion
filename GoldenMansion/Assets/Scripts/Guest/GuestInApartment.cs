@@ -38,13 +38,10 @@ public class GuestInApartment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (GameManager.Instance.isChooseCardFinish)
+
+        if (GameManager.Instance.isChooseCardFinish||GameManager.Instance.isRoundEnd)
         {
-            this.transform.SetParent(null);
-            this.transform.localPosition = Vector3.zero;
-            this.GetComponentInChildren<SpriteRenderer>().enabled = false;
-            this.GetComponent<BoxCollider>().enabled = false;
+            Reset();
         }
         if (guestDays - GameManager.Instance.gameDays == -1)
         {
@@ -88,6 +85,13 @@ public class GuestInApartment : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        this.transform.SetParent(null);
+        this.transform.localPosition = Vector3.zero;
+        this.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        this.GetComponent<BoxCollider>().enabled = false;
+    }
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.black;
@@ -95,5 +99,5 @@ public class GuestInApartment : MonoBehaviour
     //}
 
 
-    
+
 }

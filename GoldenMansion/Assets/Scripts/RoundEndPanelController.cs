@@ -56,6 +56,7 @@ public class RoundEndPanelController : MonoBehaviour
 
     public void GoToNextLevel()
     {
+        GameManager.Instance.isRoundEnd = false;
         Destroy(this.gameObject);
         GameManager.Instance.levelKey += 1;
     }

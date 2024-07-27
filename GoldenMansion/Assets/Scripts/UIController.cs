@@ -139,13 +139,15 @@ public class UIController : MonoBehaviour
     }
     public IEnumerator InstantiateMenu()
     {
-        yield return StartCoroutine(ApartmentController.Instance.PlayReceiveCoinAnim());
+        yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
+        //yield return StartCoroutine(ApartmentController.Instance.PlayReceiveCoinAnim());
         if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
         {
             Instantiate(chooseCardPanel, thisCanvas.transform);
         }
         else
         {
+            GameManager.Instance.isRoundEnd = true;
             Instantiate(roundEndPanel, thisCanvas.transform);
         }
     }

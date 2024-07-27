@@ -17,9 +17,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     [SerializeField] GameObject upgradeSelection;
     [SerializeField] GameObject[] upgradeSelections;
 
-    public TextMeshProUGUI coinText;
-    private Sprite coinSprite;
-
     public GameObject coin;
 
 
@@ -76,6 +73,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
+        
         if (this.isUnlock)
         {
             lockedApartment.SetActive(false);
@@ -189,7 +187,26 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     }
 
-    
+    public IEnumerator PlayGenerateCoinAnim()
+    {
+        if (this.GetComponentInChildren<GuestInApartment>() != null)
+        {
+            this.coin.SetActive(true);
+            this.coin.GetComponentInChildren<TextMeshPro>().text = (this.roomRent + this.roomExtraRent).ToString();
+            this.coin.transform.localPosition = new Vector3(0, 0, 0);
+            yield return this.coin.transform.DOLocalMoveY(1, 0.3f).WaitForCompletion();
+            ApartmentController.Instance.coinGeneratedCount += 1;
+        }
+        
+    }
+
+    public IEnumerator PlayMoveCoinAnim()
+    {
+        yield return new WaitUntil(() => ApartmentController.Instance.guestCount == ApartmentController.Instance.coinGeneratedCount);
+        yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.4f).WaitForCompletion();
+        ApartmentController.Instance.coinMovedCount += 1;
+        this.coin.SetActive(false);
+    }
 
     
 

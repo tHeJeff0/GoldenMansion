@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ApartmentController : MonoBehaviour
@@ -11,6 +12,11 @@ public class ApartmentController : MonoBehaviour
     public float vaultMoney { get; set; } = 0;
     public bool isBuildMode { get; set; }
     public int apartmentUpgradeKey { get; set; }
+
+    public int coinGeneratedCount;
+    public int coinMovedCount;
+    public int guestCount;
+    public bool startPlayAnim;
     private static ApartmentController instance;
 
     public static ApartmentController Instance
@@ -32,21 +38,51 @@ public class ApartmentController : MonoBehaviour
 
     public void GuestPayRent()
     {
+        List<Apartment> apartmentWithGuest = new List<Apartment>();
+        List<Apartment> apartmentNoGuest = new List<Apartment>();
         for (int i = 0; i < apartment.Count; i++)
         {
             GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
             Apartment thisApartment = apartment[i].GetComponent<Apartment>();
             if (guestInApartment != null)
             {
-                PayRent(guestInApartment, thisApartment);
-                thisApartment.apartmentDays += 1;
+                apartmentWithGuest.Add(thisApartment);
+                guestCount += 1;
             }
             else
             {
-                thisApartment.apartmentDays += 1;
+                apartmentNoGuest.Add(thisApartment);
             }
+        }
 
-        } 
+        foreach (var apartment in apartmentWithGuest)
+        {
+            GuestInApartment guestInApartment = apartment.GetComponentInChildren<GuestInApartment>();
+            PayRent(guestInApartment, apartment);
+            StartCoroutine(apartment.PlayGenerateCoinAnim());
+            StartCoroutine(apartment.PlayMoveCoinAnim());
+            apartment.apartmentDays += 1;
+        }
+
+        foreach (var apartment in apartmentNoGuest)
+        {
+            apartment.apartmentDays += 1;
+        }
+        //for (int i = 0; i < apartment.Count; i++)
+        //{
+        //    GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
+        //    Apartment thisApartment = apartment[i].GetComponent<Apartment>();
+        //    if (guestInApartment != null)
+        //    {
+        //        PayRent(guestInApartment, thisApartment);
+        //        thisApartment.apartmentDays += 1;
+        //    }
+        //    else
+        //    {
+        //        thisApartment.apartmentDays += 1;
+        //    }
+
+        //} 
        
     }
 
@@ -121,6 +157,7 @@ public class ApartmentController : MonoBehaviour
 
     public IEnumerator PlayReceiveCoinAnim()
     {
+        yield return new WaitForSecondsRealtime(1.0f);
         for (int i = 0; i < apartment.Count; i++)
         {
             GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
@@ -128,7 +165,12 @@ public class ApartmentController : MonoBehaviour
             if (guestInApartment != null)
             {
                 thisApartment.coin.SetActive(true);
-                yield return thisApartment.coin.transform.DOPunchPosition(new Vector3(0, 1, 1), 2).WaitForCompletion();
+                thisApartment.coin.GetComponentInChildren<TextMeshPro>().text = (thisApartment.roomRent + thisApartment.roomExtraRent).ToString();
+                thisApartment.coin.transform.localPosition = new Vector3(0, 0, 0);
+                yield return thisApartment.coin.transform.DOLocalMoveY(1, 0.3f).WaitForCompletion();
+                yield return thisApartment.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.4f).WaitForCompletion();
+                thisApartment.coin.SetActive(false);
+
             }
         }
         yield return null;

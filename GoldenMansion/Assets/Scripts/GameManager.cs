@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public int gameDays { get; set; } = 0;
     public bool isChooseCardFinish { get; set; } = false;
+    public bool isRoundEnd { get; set; } = false;
     public int levelKey { get; set; } = 1;
 
     public static GameManager Instance
