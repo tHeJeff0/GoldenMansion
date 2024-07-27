@@ -23,7 +23,6 @@ public class GuestInApartment : MonoBehaviour
         this.guestName = CharacterData.GetItem(key).name;
         this.guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
         this.guestEffectID = CharacterData.GetItem(key).effectID;
-        //this.guestEffectID = 1;
         this.gameObject.SetActive(true);
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
@@ -42,10 +41,6 @@ public class GuestInApartment : MonoBehaviour
         if (GameManager.Instance.isChooseCardFinish||GameManager.Instance.isRoundEnd)
         {
             Reset();
-        }
-        if (guestDays - GameManager.Instance.gameDays == -1)
-        {
-            guestDays += 1;
         }
     }
 

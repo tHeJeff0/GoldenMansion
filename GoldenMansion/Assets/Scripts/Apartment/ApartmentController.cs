@@ -143,8 +143,10 @@ public class ApartmentController : MonoBehaviour
         }
         else
         {
+            guestCount -= 1;
             Debug.Log(string.Format("{0}入住{1},但没交房租", guestInApartment.guestName, apartment.roomName));
             Debug.Log(string.Format("{0}离开了", guestInApartment.guestName));
+            guestInApartment.transform.SetParent(null);           
             GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
             Destroy(guestInApartment.gameObject);
         }
@@ -155,25 +157,5 @@ public class ApartmentController : MonoBehaviour
         GameManager.Instance.gameDays += 1;
     }
 
-    public IEnumerator PlayReceiveCoinAnim()
-    {
-        yield return new WaitForSecondsRealtime(1.0f);
-        for (int i = 0; i < apartment.Count; i++)
-        {
-            GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
-            Apartment thisApartment = apartment[i].GetComponent<Apartment>();
-            if (guestInApartment != null)
-            {
-                thisApartment.coin.SetActive(true);
-                thisApartment.coin.GetComponentInChildren<TextMeshPro>().text = (thisApartment.roomRent + thisApartment.roomExtraRent).ToString();
-                thisApartment.coin.transform.localPosition = new Vector3(0, 0, 0);
-                yield return thisApartment.coin.transform.DOLocalMoveY(1, 0.3f).WaitForCompletion();
-                yield return thisApartment.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.4f).WaitForCompletion();
-                thisApartment.coin.SetActive(false);
-
-            }
-        }
-        yield return null;
-
-    }
+    
 }

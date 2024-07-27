@@ -89,12 +89,16 @@ public class GuestController : MonoBehaviour
 
     public void GuestEffect_ChangeJob(GuestInApartment guestInApartment)
     {
-        if (guestInApartment.guestDays == 3)
+        if (GameManager.Instance.gameDays - guestInApartment.guestDays == 3)
         {
+            GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
             while (guestInApartment.key == 1)
             {
-                guestInApartment.key = RandomKey();
+                temporKey = RandomKey();
+                guestInApartment.key = temporKey;
             }
+            GuestInApartmentPrefabStorage.Add(Instantiate(guestInApartmentPrefab.gameObject));
+            
             
         }
         Debug.Log("改变了职业");
