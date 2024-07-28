@@ -892,6 +892,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apartment: []
+  coinGeneratedCount: 0
+  coinMovedCount: 0
+  guestCount: 0
+  startPlayAnim: 0
 --- !u!4 &1029364604
 Transform:
   m_ObjectHideFlags: 0
@@ -1616,7 +1620,6 @@ MonoBehaviour:
   GuestInApartmentPrefabStorage: []
   guestDetailPrefab: {fileID: 2478041869005666079, guid: 3e73ce3e008ffe74d98bfe1c3f1e7e4b, type: 3}
   guestInApartmentPrefab: {fileID: 5915425962316406885, guid: b68481eb4d6b88b48a8ee46d3a92c95b, type: 3}
-  isAllGuestMoveIn: 0
 --- !u!4 &2104039182
 Transform:
   m_ObjectHideFlags: 0
