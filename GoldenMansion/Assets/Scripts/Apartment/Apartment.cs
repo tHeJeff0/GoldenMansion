@@ -194,7 +194,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             this.coin.SetActive(true);
             this.coin.GetComponentInChildren<TextMeshPro>().text = (this.roomRent + this.roomExtraRent).ToString();
             this.coin.transform.localPosition = new Vector3(0, 0, 0);
-            yield return this.coin.transform.DOLocalMoveY(1, 0.4f).WaitForCompletion();
+            yield return this.coin.transform.DOLocalMoveY(1, 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinGeneratedCount += 1;
         }
         
@@ -205,7 +205,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         if (this.GetComponentInChildren<GuestInApartment>() != null)
         {
             yield return new WaitUntil(() => ApartmentController.Instance.guestCount == ApartmentController.Instance.coinGeneratedCount);
-            yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.4f).WaitForCompletion();
+            yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinMovedCount += 1;
             this.coin.SetActive(false);
         }

@@ -71,7 +71,7 @@ public class GuestController : MonoBehaviour
                 keyMin = key;
             }
         }
-        randomKey = Random.Range(keyMin, keyMax);
+        randomKey = Random.Range(keyMin, keyMax + 1);
         return randomKey;
     }
 
@@ -133,11 +133,12 @@ public class GuestController : MonoBehaviour
 
     public void GuestEffect_RateMoveAway(GuestInApartment guestInApartment)
     {
-        float leaveRate = Random.Range(0, 1);
-        if (leaveRate > 0.8)
+        float leaveRate = Random.Range(0, 10);
+        if (leaveRate > 8)
         {
             GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
             Destroy(guestInApartment.gameObject);
+            Debug.Log("码农离开了");
         }
         Debug.Log("离开");
     }
@@ -167,9 +168,11 @@ public class GuestController : MonoBehaviour
 
     public void GuestEffect_GenerateGuest()
     {
-        float generateRate = Random.Range(0, 1);
-        if (generateRate >= 0.5)
-        {           
+        float generateRate = Random.Range(0, 10);
+        Debug.Log(generateRate);
+        if (generateRate >= 5)
+        {
+            temporKey = 1;
             GuestInApartmentPrefabStorage.Add(Instantiate(guestInApartmentPrefab.gameObject));
         }
         Debug.Log("拉人入伙");
@@ -179,8 +182,6 @@ public class GuestController : MonoBehaviour
     {
         List<GameObject> adjancentGuest = new List<GameObject>();
         Vector3 boxSize = guestInApartment.transform.parent.GetComponent<BoxCollider>().size;
-        Debug.Log(boxSize);
-        Debug.Log("位置是"+guestInApartment.transform.position+"大小是:"+guestInApartment.transform.lossyScale);
         Collider[] colliders = Physics.OverlapBox(guestInApartment.transform.position, boxSize, Quaternion.identity);
         foreach (var collider in colliders)
         {

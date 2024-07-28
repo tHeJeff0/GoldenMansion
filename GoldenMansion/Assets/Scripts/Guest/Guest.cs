@@ -51,10 +51,7 @@ public class Guest : MonoBehaviour
         guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
         GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);      
         GameManager.Instance.isChooseCardFinish = true;
-        foreach (var item in GuestController.Instance.GuestInApartmentPrefabStorage)
-        {
-            Debug.Log(item.GetComponent<GuestInApartment>().key);
-        }
+       
     }
 
     

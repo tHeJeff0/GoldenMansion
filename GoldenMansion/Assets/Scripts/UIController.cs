@@ -68,10 +68,7 @@ public class UIController : MonoBehaviour
 
     public void GuestMoveIn()
     {
-        foreach (var item in GuestController.Instance.GuestInApartmentPrefabStorage)
-        {
-            Debug.Log("guestmovein¶Áµ½µÄ±í"+item.GetComponent<GuestInApartment>().key);
-        }
+        
         guestInApartmentPrefabCount = GuestController.Instance.GuestInApartmentPrefabStorage.Count;
         unlockedApartmentCount = ApartmentController.Instance.apartment.Count;
 
@@ -140,7 +137,6 @@ public class UIController : MonoBehaviour
     public IEnumerator InstantiateMenu()
     {
         yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
-        //yield return StartCoroutine(ApartmentController.Instance.PlayReceiveCoinAnim());
         if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
         {
             Instantiate(chooseCardPanel, thisCanvas.transform);
