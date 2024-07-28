@@ -70,7 +70,7 @@ public class GuestInApartment : MonoBehaviour
                 GuestController.Instance.GuestEffect_MoveInNextBy();
                 break;
             case 8:
-                GuestController.Instance.GuestEffect_RentIncreaseByNeighbour();
+                GuestController.Instance.GuestEffect_RentIncreaseByNeighbour(this);
                 break;
             case 9:
                 GuestController.Instance.GuestEffect_GenerateGuest();

@@ -161,8 +161,24 @@ public class GuestController : MonoBehaviour
         Debug.Log("必须住入");
     }
 
-    public void GuestEffect_RentIncreaseByNeighbour()
+    public void GuestEffect_RentIncreaseByNeighbour(GuestInApartment guestInApartment)
     {
+        List<GameObject> adjancentGuest = new List<GameObject>();
+        adjancentGuest.AddRange(GetAdjancentGuest(guestInApartment));
+
+        for (int i = 0; i < adjancentGuest.Count; i++)
+        {
+            if (adjancentGuest[i].CompareTag("Guest") && adjancentGuest[i].transform != guestInApartment.transform)
+            {
+
+                guestInApartment.guestExtraBudget += 1;
+
+            }
+            else
+            {
+                Debug.Log("没有邻居");
+            }
+        }
         Debug.Log("根据邻居增加房租");
     }
 

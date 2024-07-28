@@ -85,23 +85,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             unLockedApartment.SetActive(false);
         }
 
-        //if (apartmentDays - GameManager.Instance.gameDays == -1)
-        //{
-        //    try
-        //    {
-        //        GuestInApartment guestInApartment = gameObject.GetComponentInChildren<GuestInApartment>();
-        //        ApartmentController.Instance.PayRent(guestInApartment, this);
-        //        this.isPayed = true;
-        //        apartmentDays += 1;
-
-        //    }
-        //    catch
-        //    {
-        //        this.isPayed = true;
-        //        apartmentDays += 1;
-        //    }
-            
-        //}
 
         if (this.isUpgradeMode)
         {
