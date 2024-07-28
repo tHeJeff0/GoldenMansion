@@ -54,13 +54,13 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        vaultMoneyText.text = "0";
     }
 
     // Update is called once per frame
     void Update()
     {
-        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
+        
         targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
         progressBar.GetComponent<Image>().fillAmount = ApartmentController.Instance.vaultMoney / Level.GetItem(GameManager.Instance.levelKey).target;
     }
@@ -137,6 +137,8 @@ public class UIController : MonoBehaviour
     public IEnumerator InstantiateMenu()
     {
         yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
+        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
+        yield return new WaitForSecondsRealtime(0.4f);
         if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
         {
             Instantiate(chooseCardPanel, thisCanvas.transform);

@@ -188,7 +188,8 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         if (this.GetComponentInChildren<GuestInApartment>() != null)
         {
             yield return new WaitUntil(() => ApartmentController.Instance.guestCount == ApartmentController.Instance.coinGeneratedCount);
-            yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.5f).WaitForCompletion();
+            yield return new WaitForSecondsRealtime(2.0f);
+            yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.5f).WaitForCompletion();           
             ApartmentController.Instance.coinMovedCount += 1;
             this.coin.SetActive(false);
             roomExtraRent = 0;
