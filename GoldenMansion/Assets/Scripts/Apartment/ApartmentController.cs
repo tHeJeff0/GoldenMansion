@@ -137,7 +137,6 @@ public class ApartmentController : MonoBehaviour
         {
             vaultMoney += apartment.roomRent + apartment.roomExtraRent;
             guestInApartment.guestExtraBudget = 0;
-            apartment.roomExtraRent = 0;
             Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", guestInApartment.guestName, apartment.roomName, apartment.roomRent + apartment.roomExtraRent, guestInApartment.guestEffectID));
 
         }

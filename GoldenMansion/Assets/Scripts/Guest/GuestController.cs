@@ -146,7 +146,6 @@ public class GuestController : MonoBehaviour
     public void GuestEffect_RentIncrease(GuestInApartment guestInApartment)
     {
         Apartment apartment = guestInApartment.transform.parent.GetComponent<Apartment>();
-        apartment.roomExtraRent = guestInApartment.guestBudget + guestInApartment.guestExtraBudget - apartment.roomRent;
         apartment.roomRent += 1;
         Debug.Log("房租增加");
     }
@@ -158,6 +157,7 @@ public class GuestController : MonoBehaviour
 
     public void GuestEffect_MoveInNextBy()
     {
+        
         Debug.Log("必须住入");
     }
 

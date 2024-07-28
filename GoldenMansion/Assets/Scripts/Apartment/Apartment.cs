@@ -191,6 +191,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinMovedCount += 1;
             this.coin.SetActive(false);
+            roomExtraRent = 0;
         }
         
     }
