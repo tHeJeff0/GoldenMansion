@@ -28,7 +28,10 @@ public class Skill : MonoBehaviour
         List<GameObject> adjancentGuest = GuestController.Instance.GetAdjancentGuest(guestInApartment);
         foreach (GameObject guest in adjancentGuest)
         {
-            Destroy(guest.gameObject);
+            if (guest.GetComponent<GuestInApartment>().isDestroyable)
+            {
+                skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
+            }
         }
     }
 
@@ -41,5 +44,46 @@ public class Skill : MonoBehaviour
     {
         int randomID = Random.Range(1, 8);
         skillEffect.GetTemporPersona(guestInApartment, randomID );
+    }
+
+    public void Skill_Sensing(GuestInApartment guestInApartment)
+    {
+        int randomNumber = Random.Range(0, 100);
+        int rate = 50;
+        if (randomNumber >= rate)
+        {
+            skillEffect.IncreaseTemporBudget(guestInApartment, guestInApartment.guestBudget);
+        }
+        else
+        {
+            skillEffect.IncreaseTemporBudget(guestInApartment, -guestInApartment.guestBudget);
+        }
+    }
+
+    public void Skill_Feeling(GuestInApartment guestInApartment)
+    {
+        int randomNumber = Random.Range(0, 100);
+        int rate = 50;
+        if (randomNumber >= rate)
+        {
+            skillEffect.RemoveGuest(guestInApartment);
+
+        }
+    }
+
+    public void Skill_Thinking(GuestInApartment guestInApartment)
+    {
+        guestInApartment.isDestroyable = false;
+        guestInApartment.SkillMethod_WhenGetPersona?.Invoke(guestInApartment);
+    }
+
+    public void Skill_Judging(GuestInApartment guestInApartment)
+    {
+        skillEffect.IncreaseBasicBudget(guestInApartment,1);
+    }
+
+    public void Skill_Perceiving(GuestInApartment guestInApartment)
+    {
+
     }
 }

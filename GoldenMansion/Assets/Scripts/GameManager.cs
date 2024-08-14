@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool isRoundEnd { get; set; } = false;
     public int levelKey { get; set; } = 1;
 
+
     public static GameManager Instance
     {
         get

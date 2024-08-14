@@ -55,7 +55,20 @@ public class SkillEffect : MonoBehaviour
     {
         ApartmentController.Instance.vaultMoney += guestInApartment.guestBasicPrice + guestInApartment.guestExtraPrice;
         GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
-        Destroy(guestInApartment.gameObject);       
+        Destroy(guestInApartment.gameObject);
+        foreach (GameObject guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().persona.Contains(5))
+            {
+                guest.GetComponent<GuestInApartment>().SkillMethod_WhenGuestSold?.Invoke(guest.GetComponent<GuestInApartment>());
+            }
+        }
+    }
+
+    public void RemoveGuest(GuestInApartment guestInApartment)
+    {
+        GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
+        Destroy(guestInApartment.gameObject);
     }
 
     public void BanSellGuestFunction(GameObject sellGuestButton)

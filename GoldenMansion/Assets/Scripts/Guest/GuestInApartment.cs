@@ -23,11 +23,15 @@ public class GuestInApartment : MonoBehaviour
     public int guestExtraBudget { get; set; }
     public int guestEffectID { get; set; }
     public bool isMoveIn { get; set; } = false;
+    public bool isDestroyable { get; set; } = true;
 
     public List<int> persona = new List<int>();
     public List<int> temporPersona = new List<int>();
 
     public Action<GuestInApartment> SkillMethod;
+    public Action<GuestInApartment> SkillMethod_WhenGuestSold;
+    public Action<GuestInApartment> SkillMethod_WhenGetPersona;
+    public Action<GuestInApartment> SkillMethod_WhenDaysChanged;
     public Action<GuestInApartment,int> SkillWithIntMethod;
 
 
@@ -130,6 +134,23 @@ public class GuestInApartment : MonoBehaviour
 
                 case 2:
                     SkillMethod += singlePersonaSkill.Skill_Outer;
+                    break;
+                case 3:
+                    SkillMethod += singlePersonaSkill.Skill_Intuition;
+                    break;
+                case 4:
+                    SkillMethod += singlePersonaSkill.Skill_Sensing;
+                    break;
+                case 5:
+                    SkillMethod_WhenGuestSold += singlePersonaSkill.Skill_Feeling;
+                    break;
+                case 6:
+                    SkillMethod_WhenGetPersona += singlePersonaSkill.Skill_Thinking;
+                    break;
+                case 7:
+                    SkillMethod += singlePersonaSkill.Skill_Judging;
+                    break;
+                case 8:SkillMethod += singlePersonaSkill.Skill_Perceiving;
                     break;
             }
         }
