@@ -3,28 +3,23 @@ using System.Collections.Generic;
 
 namespace ExcelData
 {
-    public class CharacterData : IDataSheet
+    public class LanguageData : IDataSheet
     {
         public class Item
         {
-            public int guestID;
-            public string name;
-            public int nameID;
-            public int budget;
-            public string portraitRoute;
-            public int basicCost;
-            public int basicPrice;
-            public int field;
+            public int ID;
+            public string CHN;
+            public string ENG;
         }
 
-        private static CharacterData s_Instance;
-        private static CharacterData Instance
+        private static LanguageData s_Instance;
+        private static LanguageData Instance
         {
             get
             {
                 if (s_Instance == null)
                 {
-                    s_Instance = new CharacterData();
+                    s_Instance = new LanguageData();
                     s_Instance.Init();
                     DataService.RegisterSheet(s_Instance);
                 }
@@ -51,7 +46,7 @@ namespace ExcelData
 
         private Dictionary<int, Item> m_Items = new Dictionary<int, Item>();
 
-        public string sheetName => "CharacterData";
+        public string sheetName => "LanguageData";
 
         private void Init()
         {
@@ -71,14 +66,9 @@ namespace ExcelData
                     int rows = reader.ReadInt32();
 
                     //Get Item indices
-                    int guestIDIndex = sheetHeader.IndexOf("guestID", "int");
-                    int nameIndex = sheetHeader.IndexOf("name", "string");
-                    int nameIDIndex = sheetHeader.IndexOf("nameID", "int");
-                    int budgetIndex = sheetHeader.IndexOf("budget", "int");
-                    int portraitRouteIndex = sheetHeader.IndexOf("portraitRoute", "string");
-                    int basicCostIndex = sheetHeader.IndexOf("basicCost", "int");
-                    int basicPriceIndex = sheetHeader.IndexOf("basicPrice", "int");
-                    int fieldIndex = sheetHeader.IndexOf("field", "int");
+                    int IDIndex = sheetHeader.IndexOf("ID", "int");
+                    int CHNIndex = sheetHeader.IndexOf("CHN", "string");
+                    int ENGIndex = sheetHeader.IndexOf("ENG", "string");
 
                     #if UNITY_EDITOR
                     bool promptMismatchColumns = false;
@@ -90,37 +80,17 @@ namespace ExcelData
                         {
                             SheetHeader.Item headerItem = headerItems[j];
 
-                            if (j == guestIDIndex)
+                            if (j == IDIndex)
                             {
-                                newItem.guestID = reader.ReadInt32();
+                                newItem.ID = reader.ReadInt32();
                             }
-                            else if (j == nameIndex)
+                            else if (j == CHNIndex)
                             {
-                                newItem.name = reader.ReadString();
+                                newItem.CHN = reader.ReadString();
                             }
-                            else if (j == nameIDIndex)
+                            else if (j == ENGIndex)
                             {
-                                newItem.nameID = reader.ReadInt32();
-                            }
-                            else if (j == budgetIndex)
-                            {
-                                newItem.budget = reader.ReadInt32();
-                            }
-                            else if (j == portraitRouteIndex)
-                            {
-                                newItem.portraitRoute = reader.ReadString();
-                            }
-                            else if (j == basicCostIndex)
-                            {
-                                newItem.basicCost = reader.ReadInt32();
-                            }
-                            else if (j == basicPriceIndex)
-                            {
-                                newItem.basicPrice = reader.ReadInt32();
-                            }
-                            else if (j == fieldIndex)
-                            {
-                                newItem.field = reader.ReadInt32();
+                                newItem.ENG = reader.ReadString();
                             }
                             else
                             {
@@ -134,7 +104,7 @@ namespace ExcelData
                                 #endif
                             }
                         }
-                        m_Items.Add(newItem.guestID, newItem);
+                        m_Items.Add(newItem.ID, newItem);
                     }
                 }
             }

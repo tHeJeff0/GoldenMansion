@@ -131,31 +131,34 @@ public class ApartmentController : MonoBehaviour
 
     public void PayRent(GuestInApartment guestInApartment, Apartment apartment)
     {
-        guestInApartment.GuestEffect();
-        apartment.ApartmentEffect();
-        if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
-        {
-            vaultMoney += apartment.roomRent + apartment.roomExtraRent;
-            Ranking.Instance.AddScore(guestInApartment.key, apartment.roomRent + apartment.roomExtraRent);
-            guestInApartment.guestExtraBudget = 0;
-            Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", guestInApartment.guestName, apartment.roomName, apartment.roomRent + apartment.roomExtraRent, guestInApartment.guestEffectID));
+        guestInApartment.SkillTrigger();
 
-        }
-        else
-        {
-            guestCount -= 1;
-            Debug.Log(string.Format("{0}入住{1},但没交房租", guestInApartment.guestName, apartment.roomName));
-            Debug.Log(string.Format("{0}离开了", guestInApartment.guestName));
-            guestInApartment.transform.SetParent(null);           
-            GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
-            Destroy(guestInApartment.gameObject);
-        }
+        vaultMoney += guestInApartment.guestBudget + guestInApartment.guestExtraBudget;
+        guestInApartment.guestExtraBudget = 0;
+        //apartment.ApartmentEffect();
+        //if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
+        //{
+        //    vaultMoney += apartment.roomRent + apartment.roomExtraRent;
+        //    //Ranking.Instance.AddScore(guestInApartment.key, apartment.roomRent + apartment.roomExtraRent);
+        //    guestInApartment.guestExtraBudget = 0;
+        //    Debug.Log(string.Format("{0}入住{1},上交房租{2},效果ID是{3}", guestInApartment.guestName, apartment.roomName, apartment.roomRent + apartment.roomExtraRent, guestInApartment.guestEffectID));
+
+        //}
+        //else
+        //{
+        //    guestCount -= 1;
+        //    Debug.Log(string.Format("{0}入住{1},但没交房租", guestInApartment.guestName, apartment.roomName));
+        //    Debug.Log(string.Format("{0}离开了", guestInApartment.guestName));
+        //    guestInApartment.transform.SetParent(null);           
+        //    GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
+        //    Destroy(guestInApartment.gameObject);
+        //}
     }
 
-    public void PlusGameDays()
-    {
-        GameManager.Instance.gameDays += 1;
-    }
+    //public void PlusGameDays()
+    //{
+    //    GameManager.Instance.gameDays += 1;
+    //}
 
     
 }

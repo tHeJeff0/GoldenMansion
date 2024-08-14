@@ -126,10 +126,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     }
 
 
-    public void SwitchApartmentPic()
-    {
-
-    }
 
     public void ApartmentEffect()
     {
@@ -174,8 +170,9 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     {
         if (this.GetComponentInChildren<GuestInApartment>() != null)
         {
+            GuestInApartment guestInApartment = this.GetComponentInChildren<GuestInApartment>();
             this.coin.SetActive(true);
-            this.coin.GetComponentInChildren<TextMeshPro>().text = (this.roomRent + this.roomExtraRent).ToString();
+            this.coin.GetComponentInChildren<TextMeshPro>().text = (guestInApartment.guestBudget + guestInApartment.guestExtraBudget).ToString();
             this.coin.transform.localPosition = new Vector3(0, 0, 0);
             yield return this.coin.transform.DOLocalMoveY(1, 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinGeneratedCount += 1;

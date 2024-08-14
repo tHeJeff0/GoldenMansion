@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadSkill(int skillID)
+    {
+
+    }
+
     private void Awake()
     {
         if(instance == null)
@@ -53,5 +58,6 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
 
 }

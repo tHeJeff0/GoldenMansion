@@ -44,10 +44,11 @@ public class UIEventSystem : MonoBehaviour
 
     public void Execute()
     {
-        EventQueueManager.Instance.RegisterEvent(UIController.Instance.GuestMoveIn);
-        EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.GuestPayRent);
 
-        EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.PlusGameDays);
+        EventQueueManager.Instance.RegisterEvent(UIController.Instance.GuestMoveIn);
+
+        EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.GuestPayRent);
+        //EventQueueManager.Instance.RegisterEvent(GameManager.Instance.PlusGameDays);
         EventQueueManager.Instance.RegisterEvent(UIController.Instance.StartInstantiateMenu);
 
         EventQueueManager.Instance.ExecuteEvents();

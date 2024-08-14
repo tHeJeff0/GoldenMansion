@@ -9,11 +9,13 @@ using Unity.VisualScripting;
 public class Guest : MonoBehaviour
 {
     [SerializeField] GameObject guestCardNameTextPrefab;
-    [SerializeField] GameObject guestCardDescTextPrefab;
+    //[SerializeField] GameObject guestCardDescTextPrefab;
     [SerializeField] GameObject guestCardBudgetTextPrefab;
     
 
     public int key { get; set; }
+    public int guestPrice { get; set; }
+    public int guestCost { get; set; }
     public int guestDays { get; set; }
     public string guestName { get; set; }
     public string guestDesc { get; set; }
@@ -28,15 +30,16 @@ public class Guest : MonoBehaviour
     {
         key = GuestController.Instance.RandomKey();
         guestName = CharacterData.GetItem(key).name;
-        guestDesc = CharacterData.GetItem(key).effectDesc;
-        guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
-        
+        //guestDesc = LanguageData.GetItem(CharacterData.GetItem(key).field).CHN;
+        guestBudget = CharacterData.GetItem(key).budget;
+        guestPrice = CharacterData.GetItem(key).basicPrice;
+        guestCost = CharacterData.GetItem(key).basicCost;
         guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
-        guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
+        //guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
         guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
 
         guestNameText.text = guestName;
-        guestDescText.text = guestDesc;
+        //guestDescText.text = guestDesc;
         guestBudgetText.text = guestBudget.ToString();
     }
         

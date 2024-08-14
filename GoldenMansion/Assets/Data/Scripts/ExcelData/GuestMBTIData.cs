@@ -3,28 +3,28 @@ using System.Collections.Generic;
 
 namespace ExcelData
 {
-    public class CharacterData : IDataSheet
+    public class GuestMBTIData : IDataSheet
     {
         public class Item
         {
-            public int guestID;
+            public int ID;
+            public int personaID;
             public string name;
             public int nameID;
-            public int budget;
-            public string portraitRoute;
-            public int basicCost;
-            public int basicPrice;
-            public int field;
+            public string effectDesc;
+            public int descID;
+            public int skillID;
+            public string iconRoute;
         }
 
-        private static CharacterData s_Instance;
-        private static CharacterData Instance
+        private static GuestMBTIData s_Instance;
+        private static GuestMBTIData Instance
         {
             get
             {
                 if (s_Instance == null)
                 {
-                    s_Instance = new CharacterData();
+                    s_Instance = new GuestMBTIData();
                     s_Instance.Init();
                     DataService.RegisterSheet(s_Instance);
                 }
@@ -51,7 +51,7 @@ namespace ExcelData
 
         private Dictionary<int, Item> m_Items = new Dictionary<int, Item>();
 
-        public string sheetName => "CharacterData";
+        public string sheetName => "GuestMBTIData";
 
         private void Init()
         {
@@ -71,14 +71,14 @@ namespace ExcelData
                     int rows = reader.ReadInt32();
 
                     //Get Item indices
-                    int guestIDIndex = sheetHeader.IndexOf("guestID", "int");
+                    int IDIndex = sheetHeader.IndexOf("ID", "int");
+                    int personaIDIndex = sheetHeader.IndexOf("personaID", "int");
                     int nameIndex = sheetHeader.IndexOf("name", "string");
                     int nameIDIndex = sheetHeader.IndexOf("nameID", "int");
-                    int budgetIndex = sheetHeader.IndexOf("budget", "int");
-                    int portraitRouteIndex = sheetHeader.IndexOf("portraitRoute", "string");
-                    int basicCostIndex = sheetHeader.IndexOf("basicCost", "int");
-                    int basicPriceIndex = sheetHeader.IndexOf("basicPrice", "int");
-                    int fieldIndex = sheetHeader.IndexOf("field", "int");
+                    int effectDescIndex = sheetHeader.IndexOf("effectDesc", "string");
+                    int descIDIndex = sheetHeader.IndexOf("descID", "int");
+                    int skillIDIndex = sheetHeader.IndexOf("skillID", "int");
+                    int iconRouteIndex = sheetHeader.IndexOf("iconRoute", "string");
 
                     #if UNITY_EDITOR
                     bool promptMismatchColumns = false;
@@ -90,9 +90,13 @@ namespace ExcelData
                         {
                             SheetHeader.Item headerItem = headerItems[j];
 
-                            if (j == guestIDIndex)
+                            if (j == IDIndex)
                             {
-                                newItem.guestID = reader.ReadInt32();
+                                newItem.ID = reader.ReadInt32();
+                            }
+                            else if (j == personaIDIndex)
+                            {
+                                newItem.personaID = reader.ReadInt32();
                             }
                             else if (j == nameIndex)
                             {
@@ -102,25 +106,21 @@ namespace ExcelData
                             {
                                 newItem.nameID = reader.ReadInt32();
                             }
-                            else if (j == budgetIndex)
+                            else if (j == effectDescIndex)
                             {
-                                newItem.budget = reader.ReadInt32();
+                                newItem.effectDesc = reader.ReadString();
                             }
-                            else if (j == portraitRouteIndex)
+                            else if (j == descIDIndex)
                             {
-                                newItem.portraitRoute = reader.ReadString();
+                                newItem.descID = reader.ReadInt32();
                             }
-                            else if (j == basicCostIndex)
+                            else if (j == skillIDIndex)
                             {
-                                newItem.basicCost = reader.ReadInt32();
+                                newItem.skillID = reader.ReadInt32();
                             }
-                            else if (j == basicPriceIndex)
+                            else if (j == iconRouteIndex)
                             {
-                                newItem.basicPrice = reader.ReadInt32();
-                            }
-                            else if (j == fieldIndex)
-                            {
-                                newItem.field = reader.ReadInt32();
+                                newItem.iconRoute = reader.ReadString();
                             }
                             else
                             {
@@ -134,7 +134,7 @@ namespace ExcelData
                                 #endif
                             }
                         }
-                        m_Items.Add(newItem.guestID, newItem);
+                        m_Items.Add(newItem.ID, newItem);
                     }
                 }
             }

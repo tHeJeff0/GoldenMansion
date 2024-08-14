@@ -1,12 +1,21 @@
 using ExcelData;
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class GuestInApartment : MonoBehaviour
 {
     public int key { get; set; }
+    public int mbti { get; set; }
+    public Skill mbtiSkill { get; set; }
+    public int guestBasicPrice { get; set; }
+    public int guestExtraPrice { get; set; }
+    public int guestBasicCost { get; set; }
+    public int guestExtraCost { get; set; }
     public int guestDays { get; set; }
     public string guestName { get; set; }
     public string guestDesc { get; set; }
@@ -15,17 +24,28 @@ public class GuestInApartment : MonoBehaviour
     public int guestEffectID { get; set; }
     public bool isMoveIn { get; set; } = false;
 
+    public List<int> persona = new List<int>();
+    public List<int> temporPersona = new List<int>();
+
+    public Action<GuestInApartment> SkillMethod;
+    public Action<GuestInApartment,int> SkillWithIntMethod;
+
+
     void Awake()
     {
         key = GuestController.Instance.temporKey;
         this.guestDays = GameManager.Instance.gameDays;
         this.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
         this.guestName = CharacterData.GetItem(key).name;
-        this.guestBudget = Random.Range(CharacterData.GetItem(key).budget[0], CharacterData.GetItem(key).budget[1]);
-        this.guestEffectID = CharacterData.GetItem(key).effectID;
+        this.guestBudget = CharacterData.GetItem(key).budget;
+        this.guestBasicCost = CharacterData.GetItem(key).basicCost;
+        this.guestBasicPrice = CharacterData.GetItem(key).basicPrice;
+
+        //this.guestEffectID = CharacterData.GetItem(key).effectID;
         this.gameObject.SetActive(true);
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
+
 
     }
     // Start is called before the first frame update
@@ -37,6 +57,13 @@ public class GuestInApartment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (persona.Count == 4)
+        {
+            int personaID = persona[0] * 1000 + persona[1] * 100 + persona[2] * 10 + persona[3];
+            mbti = personaID;
+            persona.Clear();
+        }
 
         if (GameManager.Instance.isChooseCardFinish||GameManager.Instance.isRoundEnd)
         {
@@ -78,6 +105,35 @@ public class GuestInApartment : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void SkillTrigger()
+    {
+        SkillMethod?.Invoke(this);
+    }
+
+    public void GetMBTISkill()
+    {
+ 
+    }
+
+    public void GetPersonaSkill( )
+    {
+        Skill singlePersonaSkill = new Skill();
+        foreach (int personaKey in persona)
+        {
+            switch (personaKey)
+            {
+                case 1:
+                    SkillMethod += singlePersonaSkill.Skill_Inner;
+                    break;
+
+                case 2:
+                    SkillMethod += singlePersonaSkill.Skill_Outer;
+                    break;
+            }
+        }
+        
     }
 
     public void Reset()

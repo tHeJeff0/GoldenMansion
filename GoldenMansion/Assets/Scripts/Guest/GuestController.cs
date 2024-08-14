@@ -76,6 +76,7 @@ public class GuestController : MonoBehaviour
     }
 
 
+
     void GenerateBasicGuest(int generateCount)
     {
         for (int i = 0; i < generateCount; i++)
@@ -86,6 +87,7 @@ public class GuestController : MonoBehaviour
             GuestInApartmentPrefabStorage.Add(starterGuest);
         }
     }
+
 
     public void GuestEffect_ChangeJob(GuestInApartment guestInApartment)
     {
