@@ -30,8 +30,9 @@ public class GuestInApartment : MonoBehaviour
 
     public Action<GuestInApartment> SkillMethod;
     public Action<GuestInApartment> SkillMethod_WhenGuestSold;
-    public Action<GuestInApartment> SkillMethod_WhenGetPersona;
+    public Action<GuestInApartment, int> SkillMethod_WhenGetPersona;
     public Action<GuestInApartment> SkillMethod_WhenDaysChanged;
+    public Action<GuestInApartment, int> SkillMethod_EachDays;
     public Action<GuestInApartment,int> SkillWithIntMethod;
 
 
@@ -145,10 +146,10 @@ public class GuestInApartment : MonoBehaviour
                     SkillMethod_WhenGuestSold += singlePersonaSkill.Skill_Feeling;
                     break;
                 case 6:
-                    SkillMethod_WhenGetPersona += singlePersonaSkill.Skill_Thinking;
+                    isDestroyable = false;
                     break;
                 case 7:
-                    SkillMethod += singlePersonaSkill.Skill_Judging;
+                    SkillMethod_WhenDaysChanged += singlePersonaSkill.Skill_Judging;
                     break;
                 case 8:SkillMethod += singlePersonaSkill.Skill_Perceiving;
                     break;

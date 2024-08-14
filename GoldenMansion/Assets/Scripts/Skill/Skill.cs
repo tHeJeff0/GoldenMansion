@@ -71,15 +71,14 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public void Skill_Thinking(GuestInApartment guestInApartment)
-    {
-        guestInApartment.isDestroyable = false;
-        guestInApartment.SkillMethod_WhenGetPersona?.Invoke(guestInApartment);
-    }
+    //public void Skill_Thinking(GuestInApartment guestInApartment,int skillID)
+    //{
+    //    guestInApartment.isDestroyable = false;
+    //}
 
     public void Skill_Judging(GuestInApartment guestInApartment)
-    {
-        skillEffect.IncreaseBasicBudget(guestInApartment,1);
+    {       
+        skillEffect.IncreaseBasicBudget(guestInApartment, 1);             
     }
 
     public void Skill_Perceiving(GuestInApartment guestInApartment)
