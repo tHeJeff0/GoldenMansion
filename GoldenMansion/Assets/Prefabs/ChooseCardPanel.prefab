@@ -729,7 +729,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2920525138294141042}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9207133164763055865, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+        m_TargetAssemblyTypeName: StorageController, Assembly-CSharp
+        m_MethodName: SetThisActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1664849619754795850
 GameObject:
   m_ObjectHideFlags: 0

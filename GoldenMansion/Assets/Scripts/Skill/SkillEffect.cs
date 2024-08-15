@@ -55,6 +55,7 @@ public class SkillEffect : MonoBehaviour
     {
         ApartmentController.Instance.vaultMoney += guestInApartment.guestBasicPrice + guestInApartment.guestExtraPrice;
         GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
+        StorageController.Instance.RemoveStorage(guestInApartment.gameObject);
         Destroy(guestInApartment.gameObject);
         foreach (GameObject guest in GuestController.Instance.GuestInApartmentPrefabStorage)
         {
