@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI vaultMoneyText;
     [SerializeField] private TextMeshProUGUI targetText;
     [SerializeField] private GameObject chooseCardPanel;
+    [SerializeField] private GameObject storagePanel;
     [SerializeField] private GameObject roundEndPanel;
     [SerializeField] private GameObject thisCanvas;
     [SerializeField] private GameObject progressBar;
@@ -126,6 +127,11 @@ public class UIController : MonoBehaviour
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.localPosition = new Vector3(0, 0, -0.1f);
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<BoxCollider>().enabled = true;
+    }
+
+    public void ShowStoragePanel()
+    {
+        storagePanel.SetActive(true);
     }
 
     public void StartInstantiateMenu()

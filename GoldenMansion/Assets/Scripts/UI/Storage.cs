@@ -44,5 +44,10 @@ public class Storage : MonoBehaviour
         }
     }
 
+    public void CloseThisPanel()
+    {
+        storagePrefab.transform.parent.gameObject.SetActive(false);
+        StorageController.Instance.guestStorage.Clear();
+    }
    
 }
