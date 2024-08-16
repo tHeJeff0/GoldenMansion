@@ -2,13 +2,13 @@ using JetBrains.Annotations;
 using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ChooseCardPanelController : MonoBehaviour
 {
     [SerializeField] Button showPanelButton;
+    [SerializeField] private GameObject storagePanel;
     GameObject chooseGuestSlot;
     GameObject hideButton;
     GameObject showButton;
@@ -66,5 +66,10 @@ public class ChooseCardPanelController : MonoBehaviour
     {
         GameManager.Instance.isChooseCardFinish = true;
         
+    }
+
+    public void ShowStoragePanel()
+    {
+        storagePanel.SetActive(true);
     }
 }

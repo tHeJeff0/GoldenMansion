@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using ExcelData;
 using TMPro;
-using Unity.VisualScripting;
 
 public class Guest : MonoBehaviour
 {

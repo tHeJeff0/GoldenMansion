@@ -8,6 +8,10 @@ public class Storage : MonoBehaviour
     public GameObject storagePrefab;
     public GameObject guestPrefab;
 
+    private void Awake()
+    {
+        OnActive();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +24,9 @@ public class Storage : MonoBehaviour
         
     }
 
-    public void SetThisActive()
-    {       
+    public void OnActive()
+    {
         StorageController.Instance.AddStorage();
-        Instantiate(this);
         UpdateStorage();
 
     }
@@ -32,13 +35,12 @@ public class Storage : MonoBehaviour
     {
         foreach (var guest in StorageController.Instance.guestStorage)
         {
-            GameObject guestInStoragePrefab = Instantiate(guestPrefab);
+            GameObject guestInStoragePrefab = Instantiate(guestPrefab,this.transform.Find("GuestSlot").transform);
             guestInStoragePrefab.GetComponent<GuestInStorage>().key = guest.GetComponent<GuestInApartment>().key;
             guestInStoragePrefab.GetComponent<GuestInStorage>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
             guestInStoragePrefab.GetComponent<GuestInStorage>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
             guestInStoragePrefab.GetComponent<GuestInStorage>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
             guestInStoragePrefab.GetComponent<GuestInStorage>().personaID = guest.GetComponent<GuestInApartment>().persona;
-
         }
     }
 

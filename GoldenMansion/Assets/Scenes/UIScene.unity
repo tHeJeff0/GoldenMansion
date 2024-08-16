@@ -1603,6 +1603,7 @@ MonoBehaviour:
   vaultMoneyText: {fileID: 642514365}
   targetText: {fileID: 2109447203}
   chooseCardPanel: {fileID: 5274455034875514631, guid: 5c67bbd4bf880fc49bdf2c6aac30d048, type: 3}
+  storagePanel: {fileID: 5274455034875514631, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
   roundEndPanel: {fileID: 8944045919980209174, guid: 4fcdf7c94f5f0b84882402a11d2d0e70, type: 3}
   thisCanvas: {fileID: 2054844711}
   progressBar: {fileID: 2046055942}
