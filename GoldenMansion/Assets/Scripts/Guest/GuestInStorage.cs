@@ -1,6 +1,7 @@
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class GuestInStorage : MonoBehaviour
     public int extraPrice { get; set; }
     public string portraitRoute { get; set; }
     public int mbtiID { get; set; }
+
+    private TextMeshProUGUI priceText;
     private Image guestPortrait;
     public GameObject guestInStoragePrefab;
 
@@ -19,15 +22,19 @@ public class GuestInStorage : MonoBehaviour
 
     private void Awake()
     {
-        priceShown = basicPrice + extraPrice;
-        //portraitRoute = CharacterData.GetItem(key).portraitRoute;
-        //guestPortrait = this.GetComponentInChildren<Image>();
-        //guestPortrait.sprite = Resources.Load<Sprite>(portraitRoute);
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        priceShown = basicPrice + extraPrice;
+
+        guestPortrait = this.GetComponentsInChildren<Image>()[0];
+        priceText = this.GetComponentInChildren<TextMeshProUGUI>();
+
+        portraitRoute = CharacterData.GetItem(key).portraitRoute;
+        guestPortrait.sprite = Resources.Load<Sprite>(portraitRoute);
+        priceText.text = priceShown.ToString();
     }
 
     // Update is called once per frame
