@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GuestInStorage : MonoBehaviour
 {
-    public int key { get; set; }
+    public int key;
     public int priceShown { get; set; }
     public int basicPrice { get; set; }
     public int extraPrice { get; set; }
@@ -15,7 +15,7 @@ public class GuestInStorage : MonoBehaviour
     private Image guestPortrait;
     public GameObject guestInStoragePrefab;
 
-    private static List<int> personaID = new List<int>();
+    public List<int> personaID = new List<int>();
 
     private void Awake()
     {

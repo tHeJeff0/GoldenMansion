@@ -7,8 +7,6 @@ public class StorageController : MonoBehaviour
     private static StorageController instance;
 
     public List<GameObject> guestStorage = new List<GameObject>();
-    public GameObject storagePrefab;
-    public GameObject guestPrefab;
 
     public static StorageController Instance
     {
@@ -50,27 +48,6 @@ public class StorageController : MonoBehaviour
     void Update()
     {
 
-    }
-
-    public void SetThisActive()
-    {
-        Instantiate(this);
-        AddStorage();
-        UpdateStorage();
-    }
-
-    public void UpdateStorage()
-    {
-        foreach (var guest in guestStorage)
-        {
-            GameObject guestInStoragePrefab = Instantiate(guestPrefab, storagePrefab.transform);
-            guestInStoragePrefab.GetComponent<GuestInStorage>().key = guest.GetComponent<GuestInApartment>().key;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
-            guestInStoragePrefab.GetComponent<GuestInApartment>().persona = guest.GetComponent<GuestInApartment>().persona;
-            
-        }
     }
 
     public void AddStorage()

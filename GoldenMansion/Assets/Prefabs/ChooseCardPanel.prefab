@@ -730,8 +730,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9207133164763055865, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
-        m_TargetAssemblyTypeName: StorageController, Assembly-CSharp
+      - m_Target: {fileID: 7584089492121958400, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+        m_TargetAssemblyTypeName: Storage, Assembly-CSharp
         m_MethodName: SetThisActive
         m_Mode: 1
         m_Arguments:

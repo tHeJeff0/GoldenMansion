@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 5118646143559430111}
   - component: {fileID: 7035112376913033450}
   - component: {fileID: 7741745520681945262}
-  - component: {fileID: 9207133164763055865}
+  - component: {fileID: 7584089492121958400}
   m_Layer: 5
   m_Name: StoragePanel
   m_TagString: Untagged
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9207133164763055865
+--- !u!114 &7584089492121958400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,11 +147,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5274455034875514631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd39440442b54474f9c8ffcbf102a6e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e3ac280a3287a147a7b23d6456a4bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guestStorage: []
-  storagePrefab: {fileID: 4094713088537633173}
+  storagePrefab: {fileID: 5274455034875514631}
   guestPrefab: {fileID: 1557058423533362177, guid: c76d17e2a5ebbad4e83795af795cf2f3, type: 3}
 --- !u!1001 &4234403817611001101
 PrefabInstance:
