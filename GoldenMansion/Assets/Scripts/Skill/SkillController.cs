@@ -9,6 +9,8 @@ public class SkillController : MonoBehaviour
 {
     private static SkillController instance;
 
+    public int temporPersonaKey;
+
     //public delegate void SkillSpace();
 
     //public event SkillSpace onGet;

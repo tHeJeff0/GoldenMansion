@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class GuestInStorage : MonoBehaviour
 {
-    public int key;
+    public int key { get; set; }
     public int priceShown { get; set; }
     public int basicPrice { get; set; }
     public int extraPrice { get; set; }
     public string portraitRoute { get; set; }
     public int mbtiID { get; set; }
+
 
     private TextMeshProUGUI priceText;
     private Image guestPortrait;
@@ -40,11 +41,15 @@ public class GuestInStorage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnSell()
     {
         ApartmentController.Instance.vaultMoney += priceShown;
     }
+
+    
+
+    
 }

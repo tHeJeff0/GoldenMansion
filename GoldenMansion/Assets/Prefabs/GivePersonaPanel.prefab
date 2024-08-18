@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7584089492121958400}
-        m_TargetAssemblyTypeName: Storage, Assembly-CSharp
+      - m_Target: {fileID: 7790936260850555187}
+        m_TargetAssemblyTypeName: GivePersonaPanel, Assembly-CSharp
         m_MethodName: CloseThisPanel
         m_Mode: 1
         m_Arguments:
@@ -166,8 +166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -206.00235, y: -104.3209}
-  m_SizeDelta: {x: 412, y: 272}
+  m_AnchoredPosition: {x: -217.67, y: -174.64}
+  m_SizeDelta: {x: 435.34, y: 349.28}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &3326876077364383067
 MonoBehaviour:
@@ -204,9 +204,9 @@ GameObject:
   - component: {fileID: 5118646143559430111}
   - component: {fileID: 7035112376913033450}
   - component: {fileID: 7741745520681945262}
-  - component: {fileID: 7584089492121958400}
+  - component: {fileID: 7790936260850555187}
   m_Layer: 5
-  m_Name: StoragePanel
+  m_Name: GivePersonaPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7584089492121958400
+--- !u!114 &7790936260850555187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,11 +280,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5274455034875514631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3ac280a3287a147a7b23d6456a4bfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b4100402cb49f540ae20ad6e79b0f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storagePrefab: {fileID: 4094713088537633173}
-  guestPrefab: {fileID: 2926618844314956164, guid: 94c69b1b22978064495906103f7046b8, type: 3}
+  panelPrefab: {fileID: 5274455034875514631}
+  guestPrefab: {fileID: 2926618844314956164, guid: 8d97b30e6f45aa34db0a5061a7068824, type: 3}
+  personaKey: 0
 --- !u!1 &6639043686090315411
 GameObject:
   m_ObjectHideFlags: 0

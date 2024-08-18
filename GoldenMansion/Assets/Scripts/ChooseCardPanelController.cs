@@ -9,6 +9,7 @@ public class ChooseCardPanelController : MonoBehaviour
 {
     [SerializeField] Button showPanelButton;
     [SerializeField] private GameObject storagePanel;
+    [SerializeField] private GameObject givePersonaPanel;
     GameObject chooseGuestSlot;
     GameObject hideButton;
     GameObject showButton;
@@ -71,5 +72,20 @@ public class ChooseCardPanelController : MonoBehaviour
     public void ShowStoragePanel()
     {
         storagePanel.SetActive(true);
+    }
+
+    public void StartGivePersona()
+    {
+        ShowStoragePanel();
+    }
+
+    public void GivePersona()
+    {
+
+    }
+
+    public void ShowGivePersonaPanel()
+    {
+        givePersonaPanel.SetActive(true);
     }
 }
