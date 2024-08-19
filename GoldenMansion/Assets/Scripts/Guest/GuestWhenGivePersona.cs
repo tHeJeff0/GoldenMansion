@@ -45,6 +45,7 @@ public class GuestWhenGivePersona : MonoBehaviour
         if (SkillController.Instance.temporPersonaKey != 0)
         {
             GuestController.Instance.GuestInApartmentPrefabStorage[elementCount].GetComponent<GuestInApartment>().persona.Add(SkillController.Instance.temporPersonaKey);
+            GuestController.Instance.GuestInApartmentPrefabStorage[elementCount].GetComponent<GuestInApartment>().ShowPersonaIcon(SkillController.Instance.temporPersonaKey);
             SkillController.Instance.temporPersonaKey = 0;
         }
 

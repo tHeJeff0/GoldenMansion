@@ -25,6 +25,9 @@ public class GuestInApartment : MonoBehaviour
     public bool isMoveIn { get; set; } = false;
     public bool isDestroyable { get; set; } = true;
 
+    [SerializeField] GameObject personaSlot;
+    [SerializeField] GameObject personaPic;
+
     public List<int> persona = new List<int>();
     public List<int> temporPersona = new List<int>();
 
@@ -70,53 +73,64 @@ public class GuestInApartment : MonoBehaviour
             persona.Clear();
         }
 
+
         if (GameManager.Instance.isChooseCardFinish||GameManager.Instance.isRoundEnd)
         {
             Reset();
         }
     }
 
-    public void GuestEffect()
-    {
-        switch (this.guestEffectID)
-        {
-            case 1:
-                GuestController.Instance.GuestEffect_ChangeJob(this);
-                break;
-            case 2:
-                GuestController.Instance.GuestEffect_IgnoreRoomRentLimit(this);
-                break;
-            case 3:
-                GuestController.Instance.GuestEffect_PayByNeighbour(this);
-                break;
-            case 4:
-                GuestController.Instance.GuestEffect_RateMoveAway(this);
-                break;
-            case 5:
-                GuestController.Instance.GuestEffect_RentIncrease(this);
-                break;
-            case 6:
-                GuestController.Instance.GuestEffect_RandomBudget();
-                break;
-            case 7:
-                GuestController.Instance.GuestEffect_MoveInNextBy();
-                break;
-            case 8:
-                GuestController.Instance.GuestEffect_RentIncreaseByNeighbour(this);
-                break;
-            case 9:
-                GuestController.Instance.GuestEffect_GenerateGuest();
-                break;
-            default:
-                break;
-        }
-    }
+    //public void GuestEffect()
+    //{
+    //    switch (this.guestEffectID)
+    //    {
+    //        case 1:
+    //            GuestController.Instance.GuestEffect_ChangeJob(this);
+    //            break;
+    //        case 2:
+    //            GuestController.Instance.GuestEffect_IgnoreRoomRentLimit(this);
+    //            break;
+    //        case 3:
+    //            GuestController.Instance.GuestEffect_PayByNeighbour(this);
+    //            break;
+    //        case 4:
+    //            GuestController.Instance.GuestEffect_RateMoveAway(this);
+    //            break;
+    //        case 5:
+    //            GuestController.Instance.GuestEffect_RentIncrease(this);
+    //            break;
+    //        case 6:
+    //            GuestController.Instance.GuestEffect_RandomBudget();
+    //            break;
+    //        case 7:
+    //            GuestController.Instance.GuestEffect_MoveInNextBy();
+    //            break;
+    //        case 8:
+    //            GuestController.Instance.GuestEffect_RentIncreaseByNeighbour(this);
+    //            break;
+    //        case 9:
+    //            GuestController.Instance.GuestEffect_GenerateGuest();
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 
     public void SkillTrigger()
     {
         SkillMethod?.Invoke(this);
     }
 
+    public void SkillTrigger_WhenDaysChanged()
+    {
+        SkillMethod_WhenDaysChanged?.Invoke(this);
+    }
+
+
+    public void SkillTrigger_WhenSold()
+    {
+        SkillMethod_WhenGuestSold(this);
+    }
     public void GetMBTISkill()
     {
  
@@ -164,6 +178,12 @@ public class GuestInApartment : MonoBehaviour
         this.transform.localPosition = Vector3.zero;
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void ShowPersonaIcon(int personaKey)
+    {
+        GameObject personaIcon = Instantiate(personaPic, personaSlot.transform);
+        personaIcon.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute);
     }
     //private void OnDrawGizmos()
     //{
