@@ -19,5 +19,6 @@ public class NextDayButton : MonoBehaviour
     public void PlusGameDays()
     {
         GameManager.Instance.gameDays += 1;
+        GameManager.Instance.isChooseCardFinish = true;
     }
 }

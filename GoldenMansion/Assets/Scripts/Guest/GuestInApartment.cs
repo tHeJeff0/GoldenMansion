@@ -73,6 +73,11 @@ public class GuestInApartment : MonoBehaviour
             persona.Clear();
         }
 
+        if (guestDays - GameManager.Instance.gameDays == -1)
+        {
+            SkillTrigger_WhenDaysChanged();
+            guestDays += 1;
+        }
 
         if (GameManager.Instance.isChooseCardFinish||GameManager.Instance.isRoundEnd)
         {
@@ -123,6 +128,7 @@ public class GuestInApartment : MonoBehaviour
 
     public void SkillTrigger_WhenDaysChanged()
     {
+        Debug.Log("该触发改变天数的技能了");
         SkillMethod_WhenDaysChanged?.Invoke(this);
     }
 
@@ -136,11 +142,10 @@ public class GuestInApartment : MonoBehaviour
  
     }
 
-    public void GetPersonaSkill( )
+    public void GetPersonaSkill(int personaKey )
     {
         Skill singlePersonaSkill = new Skill();
-        foreach (int personaKey in persona)
-        {
+       
             switch (personaKey)
             {
                 case 1:
@@ -168,7 +173,7 @@ public class GuestInApartment : MonoBehaviour
                 case 8:SkillMethod += singlePersonaSkill.Skill_Perceiving;
                     break;
             }
-        }
+       
         
     }
 

@@ -66,6 +66,7 @@ public class ChooseCardPanelController : MonoBehaviour
     public void SkipChooseCard()
     {
         GameManager.Instance.isChooseCardFinish = true;
+        GameManager.Instance.gameDays += 1;
         
     }
 
@@ -77,11 +78,6 @@ public class ChooseCardPanelController : MonoBehaviour
     public void StartGivePersona()
     {
         ShowStoragePanel();
-    }
-
-    public void GivePersona()
-    {
-
     }
 
     public void ShowGivePersonaPanel()

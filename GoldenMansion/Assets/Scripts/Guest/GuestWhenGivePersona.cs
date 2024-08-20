@@ -46,6 +46,7 @@ public class GuestWhenGivePersona : MonoBehaviour
         {
             GuestController.Instance.GuestInApartmentPrefabStorage[elementCount].GetComponent<GuestInApartment>().persona.Add(SkillController.Instance.temporPersonaKey);
             GuestController.Instance.GuestInApartmentPrefabStorage[elementCount].GetComponent<GuestInApartment>().ShowPersonaIcon(SkillController.Instance.temporPersonaKey);
+            GuestController.Instance.GuestInApartmentPrefabStorage[elementCount].GetComponent<GuestInApartment>().GetPersonaSkill(SkillController.Instance.temporPersonaKey);
             SkillController.Instance.temporPersonaKey = 0;
         }
 

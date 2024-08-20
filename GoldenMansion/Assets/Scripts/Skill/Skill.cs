@@ -78,7 +78,8 @@ public class Skill : MonoBehaviour
 
     public void Skill_Judging(GuestInApartment guestInApartment)
     {       
-        skillEffect.IncreaseBasicBudget(guestInApartment, 1);             
+        skillEffect.IncreaseBasicBudget(guestInApartment, 1);
+        Debug.Log("触发了J人技能");
     }
 
     public void Skill_Perceiving(GuestInApartment guestInApartment)

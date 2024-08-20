@@ -1,11 +1,14 @@
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GievePersonaButton : MonoBehaviour
 {
     [SerializeField] private GameObject personaButton;
+    [SerializeField] private TextMeshProUGUI buttonText;
     public int personaKey;
 
     private void Awake()
@@ -16,6 +19,7 @@ public class GievePersonaButton : MonoBehaviour
     void Start()
     {
         personaKey = RandomKey();
+        buttonText.text = LanguageData.GetItem(GuestPersonalData.GetItem(personaKey).nameID).CHN;
     }
 
     // Update is called once per frame
