@@ -68,21 +68,6 @@ public class ApartmentController : MonoBehaviour
         {
             apartment.apartmentDays += 1;
         }
-        //for (int i = 0; i < apartment.Count; i++)
-        //{
-        //    GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
-        //    Apartment thisApartment = apartment[i].GetComponent<Apartment>();
-        //    if (guestInApartment != null)
-        //    {
-        //        PayRent(guestInApartment, thisApartment);
-        //        thisApartment.apartmentDays += 1;
-        //    }
-        //    else
-        //    {
-        //        thisApartment.apartmentDays += 1;
-        //    }
-
-        //} 
        
     }
 
@@ -131,7 +116,6 @@ public class ApartmentController : MonoBehaviour
 
     public void PayRent(GuestInApartment guestInApartment, Apartment apartment)
     {
-        guestInApartment.SkillTrigger();
 
         vaultMoney += guestInApartment.guestBudget + guestInApartment.guestExtraBudget;
         guestInApartment.guestExtraBudget = 0;

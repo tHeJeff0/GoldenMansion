@@ -141,7 +141,7 @@ public class UIController : MonoBehaviour
     public IEnumerator InstantiateMenu()
     {
         yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
-        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
+        UpdateVaultMoneyText();
         yield return new WaitForSecondsRealtime(0.4f);
         if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
         {
@@ -152,6 +152,11 @@ public class UIController : MonoBehaviour
             GameManager.Instance.isRoundEnd = true;
             Instantiate(roundEndPanel, thisCanvas.transform);
         }
+    }
+
+    public void UpdateVaultMoneyText()
+    {
+        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
     }
 
     

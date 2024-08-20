@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storagePrefab: {fileID: 4094713088537633173}
   guestPrefab: {fileID: 2926618844314956164, guid: 94c69b1b22978064495906103f7046b8, type: 3}
+  guestSlot: {fileID: 4094713088537633173}
 --- !u!1 &6639043686090315411
 GameObject:
   m_ObjectHideFlags: 0

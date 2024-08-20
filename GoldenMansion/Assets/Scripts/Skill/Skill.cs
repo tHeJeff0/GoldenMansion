@@ -79,11 +79,13 @@ public class Skill : MonoBehaviour
     public void Skill_Judging(GuestInApartment guestInApartment)
     {       
         skillEffect.IncreaseBasicBudget(guestInApartment, 1);
-        Debug.Log("触发了J人技能");
     }
 
-    public void Skill_Perceiving(GuestInApartment guestInApartment)
+    public void Skill_Perceiving(GuestInApartment guestInApartment,int daysRequire)
     {
-
+        if (GameManager.Instance.gameDays - guestInApartment.guestDays == daysRequire)
+        {
+            guestInApartment.key = GuestController.Instance.RandomKey();
+        }
     }
 }

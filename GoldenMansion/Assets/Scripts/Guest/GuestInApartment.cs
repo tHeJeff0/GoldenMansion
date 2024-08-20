@@ -68,8 +68,8 @@ public class GuestInApartment : MonoBehaviour
 
         if (persona.Count == 4)
         {
-            int personaID = persona[0] * 1000 + persona[1] * 100 + persona[2] * 10 + persona[3];
-            mbti = personaID;
+            int mbtiID = persona[0] * 1000 + persona[1] * 100 + persona[2] * 10 + persona[3];
+            mbti = mbtiID;
             persona.Clear();
         }
 
@@ -135,9 +135,9 @@ public class GuestInApartment : MonoBehaviour
 
     public void SkillTrigger_WhenSold()
     {
-        SkillMethod_WhenGuestSold(this);
+        SkillMethod_WhenGuestSold?.Invoke(this);
     }
-    public void GetMBTISkill()
+    public void GetMBTISkill(int mbti)
     {
  
     }
@@ -153,7 +153,7 @@ public class GuestInApartment : MonoBehaviour
                     break;
 
                 case 2:
-                    SkillMethod += singlePersonaSkill.Skill_Outer;
+                    SkillMethod_WhenGuestSold += singlePersonaSkill.Skill_Outer;
                     break;
                 case 3:
                     SkillMethod += singlePersonaSkill.Skill_Intuition;
@@ -170,7 +170,7 @@ public class GuestInApartment : MonoBehaviour
                 case 7:
                     SkillMethod_WhenDaysChanged += singlePersonaSkill.Skill_Judging;
                     break;
-                case 8:SkillMethod += singlePersonaSkill.Skill_Perceiving;
+                case 8:SkillMethod_EachDays += singlePersonaSkill.Skill_Perceiving;
                     break;
             }
        

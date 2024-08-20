@@ -50,6 +50,11 @@ public class StorageController : MonoBehaviour
 
     }
 
+    public void UpdateElementCount()
+    {
+
+    }
+
     public void AddStorage()
     {
         foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)

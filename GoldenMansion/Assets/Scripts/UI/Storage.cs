@@ -7,6 +7,7 @@ public class Storage : MonoBehaviour
 
     public GameObject storagePrefab;
     public GameObject guestPrefab;
+    public GameObject guestSlot;
 
     private void Awake()
     {
@@ -21,7 +22,18 @@ public class Storage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GuestController.Instance.GuestInApartmentPrefabStorage.Count != StorageController.Instance.guestStorage.Count)
+        {
+            Debug.Log("¥•∑¢¡À");
+            int childNum = guestSlot.transform.childCount;
+            for (int i = 0; i < childNum; i++)
+            {
+                Destroy(guestSlot.transform.GetChild(i).gameObject);
+            }
+            StorageController.Instance.guestStorage.Clear();
+            StorageController.Instance.AddStorage();
+            UpdateStorage();
+        }
     }
 
     public void OnActive()
@@ -35,12 +47,13 @@ public class Storage : MonoBehaviour
     {
         foreach (var guest in StorageController.Instance.guestStorage)
         {
-            GameObject guestInStoragePrefab = Instantiate(guestPrefab,this.transform.Find("GuestSlot").transform);
+            GameObject guestInStoragePrefab = Instantiate(guestPrefab,guestSlot.transform);
             guestInStoragePrefab.GetComponent<GuestInStorage>().key = guest.GetComponent<GuestInApartment>().key;
             guestInStoragePrefab.GetComponent<GuestInStorage>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
             guestInStoragePrefab.GetComponent<GuestInStorage>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
             guestInStoragePrefab.GetComponent<GuestInStorage>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
             guestInStoragePrefab.GetComponent<GuestInStorage>().personaID = guest.GetComponent<GuestInApartment>().persona;
+            guestInStoragePrefab.GetComponent<GuestInStorage>().elementCount = GuestController.Instance.GuestInApartmentPrefabStorage.IndexOf(guest);
         }
     }
 
