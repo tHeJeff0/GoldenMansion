@@ -32,6 +32,7 @@ public class GuestInApartment : MonoBehaviour
     public List<int> temporPersona = new List<int>();
 
     public Action<GuestInApartment> SkillMethod;
+    public Action<GuestInApartment> SkillMethod_WhenMoveIn;
     public Action<GuestInApartment> SkillMethod_WhenGuestSold;
     public Action<GuestInApartment, int> SkillMethod_WhenGetPersona;
     public Action<GuestInApartment> SkillMethod_WhenDaysChanged;
@@ -126,6 +127,11 @@ public class GuestInApartment : MonoBehaviour
         SkillMethod?.Invoke(this);
     }
 
+    public void SkillTrigger_WhenMoveIn()
+    {
+        SkillMethod_WhenMoveIn?.Invoke(this);
+    }
+
     public void SkillTrigger_WhenDaysChanged()
     {
         Debug.Log("该触发改变天数的技能了");
@@ -149,7 +155,7 @@ public class GuestInApartment : MonoBehaviour
             switch (personaKey)
             {
                 case 1:
-                    SkillMethod += singlePersonaSkill.Skill_Inner;
+                    SkillMethod_WhenMoveIn += singlePersonaSkill.Skill_Inner;
                     break;
 
                 case 2:

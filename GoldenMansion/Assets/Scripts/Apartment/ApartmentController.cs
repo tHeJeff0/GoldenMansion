@@ -58,6 +58,7 @@ public class ApartmentController : MonoBehaviour
         foreach (var apartment in apartmentWithGuest)
         {
             GuestInApartment guestInApartment = apartment.GetComponentInChildren<GuestInApartment>();
+            guestInApartment.SkillTrigger_WhenMoveIn();
             PayRent(guestInApartment, apartment);
             StartCoroutine(apartment.PlayGenerateCoinAnim());
             StartCoroutine(apartment.PlayMoveCoinAnim());

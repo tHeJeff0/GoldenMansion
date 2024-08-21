@@ -202,7 +202,7 @@ public class GuestController : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(guestInApartment.transform.position, boxSize, Quaternion.identity);
         foreach (var collider in colliders)
         {
-            if (collider.CompareTag("Guest"))
+            if (collider!=guestInApartment.GetComponent<BoxCollider>() && collider.CompareTag("Guest"))
             {
                 adjancentGuest.Add(collider.gameObject);
             }

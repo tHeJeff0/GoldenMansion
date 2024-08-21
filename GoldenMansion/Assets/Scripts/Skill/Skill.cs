@@ -28,6 +28,7 @@ public class Skill : MonoBehaviour
         List<GameObject> adjancentGuest = GuestController.Instance.GetAdjancentGuest(guestInApartment);
         foreach (GameObject guest in adjancentGuest)
         {
+            Debug.Log(guest.GetComponent<GuestInApartment>().key);
             if (guest.GetComponent<GuestInApartment>().isDestroyable)
             {
                 skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
