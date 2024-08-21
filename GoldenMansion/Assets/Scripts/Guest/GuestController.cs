@@ -1,4 +1,5 @@
 using ExcelData;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -209,6 +210,19 @@ public class GuestController : MonoBehaviour
 
         }
         return adjancentGuest;
+    }
+
+    public void GuestSkillTrigger_WhenMoveIn()
+    {
+        List<GameObject> temporList = new List<GameObject>();
+        temporList.AddRange(GuestInApartmentPrefabStorage);
+        foreach (var guest in temporList)
+        {
+
+            guest.GetComponent<GuestInApartment>().SkillTrigger_WhenMoveIn();
+
+
+        }
     }
 
 }

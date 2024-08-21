@@ -53,12 +53,12 @@ public class ApartmentController : MonoBehaviour
             {
                 apartmentNoGuest.Add(thisApartment);
             }
+
         }
 
         foreach (var apartment in apartmentWithGuest)
         {
             GuestInApartment guestInApartment = apartment.GetComponentInChildren<GuestInApartment>();
-            guestInApartment.SkillTrigger_WhenMoveIn();
             PayRent(guestInApartment, apartment);
             StartCoroutine(apartment.PlayGenerateCoinAnim());
             StartCoroutine(apartment.PlayMoveCoinAnim());

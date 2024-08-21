@@ -25,6 +25,7 @@ public class Skill : MonoBehaviour
 
     public void Skill_Inner(GuestInApartment guestInApartment)
     {
+
         List<GameObject> adjancentGuest = GuestController.Instance.GetAdjancentGuest(guestInApartment);
         foreach (GameObject guest in adjancentGuest)
         {
@@ -34,6 +35,7 @@ public class Skill : MonoBehaviour
                 skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
             }
         }
+
     }
 
     public void Skill_Outer(GuestInApartment guestInApartment)
