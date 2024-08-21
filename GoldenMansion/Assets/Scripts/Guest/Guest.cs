@@ -28,6 +28,7 @@ public class Guest : MonoBehaviour
     private void Awake()
     {
         key = GuestController.Instance.RandomKey();
+        Debug.Log(key);
         guestName = CharacterData.GetItem(key).name;
         //guestDesc = LanguageData.GetItem(CharacterData.GetItem(key).field).CHN;
         guestBudget = CharacterData.GetItem(key).budget;
