@@ -36,6 +36,7 @@ public class GuestInApartment : MonoBehaviour
     public Action<GuestInApartment> SkillMethod_WhenGuestSold;
     public Action<GuestInApartment, int> SkillMethod_WhenGetPersona;
     public Action<GuestInApartment> SkillMethod_WhenDaysChanged;
+    public Action<GuestInApartment> TemporSkillMethod_WhenDaysChanged;
     public Action<GuestInApartment, int> SkillMethod_EachDays;
     public Action<GuestInApartment,int> SkillWithIntMethod;
 
@@ -77,13 +78,14 @@ public class GuestInApartment : MonoBehaviour
         if (guestDays - GameManager.Instance.gameDays == -1)
         {
             SkillTrigger_WhenDaysChanged();
+            TemporSkillTrigger_WhenDaysChanged();
             guestDays += 1;
         }
 
-        if (GameManager.Instance.isChooseCardFinish||GameManager.Instance.isRoundEnd)
-        {
-            Reset();
-        }
+        //if (GameManager.Instance.isChooseCardFinish||GameManager.Instance.isRoundEnd)
+        //{
+        //    Reset();
+        //}
     }
 
     //public void GuestEffect()
@@ -138,6 +140,11 @@ public class GuestInApartment : MonoBehaviour
         SkillMethod_WhenDaysChanged?.Invoke(this);
     }
 
+    public void TemporSkillTrigger_WhenDaysChanged()
+    {
+        TemporSkillMethod_WhenDaysChanged?.Invoke(this);
+    }
+
 
     public void SkillTrigger_WhenSold()
     {
@@ -162,7 +169,7 @@ public class GuestInApartment : MonoBehaviour
                     SkillMethod_WhenGuestSold += singlePersonaSkill.Skill_Outer;
                     break;
                 case 3:
-                    SkillMethod += singlePersonaSkill.Skill_Intuition;
+                    TemporSkillMethod_WhenDaysChanged += singlePersonaSkill.Skill_Intuition;
                     break;
                 case 4:
                     SkillMethod += singlePersonaSkill.Skill_Sensing;
@@ -185,6 +192,8 @@ public class GuestInApartment : MonoBehaviour
 
     public void Reset()
     {
+        temporPersona.Clear();
+        TemporSkillMethod_WhenDaysChanged = null;
         this.transform.SetParent(null);
         this.transform.localPosition = Vector3.zero;
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;

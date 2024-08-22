@@ -1,5 +1,4 @@
 using ExcelData;
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -222,6 +221,14 @@ public class GuestController : MonoBehaviour
             guest.GetComponent<GuestInApartment>().SkillTrigger_WhenMoveIn();
 
 
+        }
+    }
+
+    public void ResetGuest()
+    {
+        foreach (var guest in GuestInApartmentPrefabStorage)
+        {
+            guest.GetComponent<GuestInApartment>().Reset();
         }
     }
 

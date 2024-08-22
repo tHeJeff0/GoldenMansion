@@ -69,7 +69,6 @@ public class ApartmentController : MonoBehaviour
         {
             apartment.apartmentDays += 1;
         }
-       
     }
 
     private void Awake()

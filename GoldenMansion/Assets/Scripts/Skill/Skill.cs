@@ -47,6 +47,7 @@ public class Skill : MonoBehaviour
     {
         int randomID = Random.Range(1, 8);
         skillEffect.GetTemporPersona(guestInApartment, randomID );
+        guestInApartment.GetPersonaSkill(randomID);
     }
 
     public void Skill_Sensing(GuestInApartment guestInApartment)
