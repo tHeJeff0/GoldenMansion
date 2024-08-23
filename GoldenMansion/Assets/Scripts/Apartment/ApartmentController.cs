@@ -118,7 +118,6 @@ public class ApartmentController : MonoBehaviour
     {
 
         vaultMoney += guestInApartment.guestBudget + guestInApartment.guestExtraBudget;
-        guestInApartment.guestExtraBudget = 0;
         //apartment.ApartmentEffect();
         //if (guestInApartment.guestBudget + guestInApartment.guestExtraBudget >= apartment.roomRent + apartment.roomExtraRent)
         //{

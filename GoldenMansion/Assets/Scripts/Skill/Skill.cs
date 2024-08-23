@@ -45,9 +45,13 @@ public class Skill : MonoBehaviour
 
     public void Skill_Intuition(GuestInApartment guestInApartment)
     {
-        int randomID = Random.Range(1, 8);
-        skillEffect.GetTemporPersona(guestInApartment, randomID );
-        guestInApartment.GetPersonaSkill(randomID);
+        int randomNumber = Random.Range(0, 9);
+        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == randomNumber)
+        {
+            Debug.Log(guestInApartment.key+"触发了N人技能,"+"randomNumber是"+randomNumber);
+            guestInApartment.guestExtraBudget += guestInApartment.guestBudget;
+        }
+
     }
 
     public void Skill_Sensing(GuestInApartment guestInApartment)

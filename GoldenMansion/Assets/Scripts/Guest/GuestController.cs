@@ -224,12 +224,4 @@ public class GuestController : MonoBehaviour
         }
     }
 
-    public void ResetGuest()
-    {
-        foreach (var guest in GuestInApartmentPrefabStorage)
-        {
-            guest.GetComponent<GuestInApartment>().Reset();
-        }
-    }
-
 }
