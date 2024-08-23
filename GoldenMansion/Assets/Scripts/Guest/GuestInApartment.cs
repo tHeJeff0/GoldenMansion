@@ -172,7 +172,7 @@ public class GuestInApartment : MonoBehaviour
                     SkillMethod_WhenMoveIn += singlePersonaSkill.Skill_Intuition;
                     break;
                 case 4:
-                    SkillMethod += singlePersonaSkill.Skill_Sensing;
+                    SkillMethod_WhenMoveIn += singlePersonaSkill.Skill_Sensing;
                     break;
                 case 5:
                     SkillMethod_WhenOtherGuestSold += singlePersonaSkill.Skill_Feeling;
