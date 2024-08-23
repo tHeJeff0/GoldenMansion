@@ -34,6 +34,7 @@ public class GuestInApartment : MonoBehaviour
     public Action<GuestInApartment> SkillMethod;
     public Action<GuestInApartment> SkillMethod_WhenMoveIn;
     public Action<GuestInApartment> SkillMethod_WhenGuestSold;
+    public Action<GuestInApartment> SkillMethod_WhenOtherGuestSold;
     public Action<GuestInApartment, int> SkillMethod_WhenGetPersona;
     public Action<GuestInApartment> SkillMethod_WhenDaysChanged;
     public Action<GuestInApartment, int> SkillMethod_EachDays;
@@ -144,6 +145,11 @@ public class GuestInApartment : MonoBehaviour
     {
         SkillMethod_WhenGuestSold?.Invoke(this);
     }
+
+    public void SkillTrigger_WhenOtherGuestSold()
+    {
+        SkillMethod_WhenOtherGuestSold?.Invoke(this);
+    }
     public void GetMBTISkill(int mbti)
     {
  
@@ -169,7 +175,7 @@ public class GuestInApartment : MonoBehaviour
                     SkillMethod += singlePersonaSkill.Skill_Sensing;
                     break;
                 case 5:
-                    SkillMethod_WhenGuestSold += singlePersonaSkill.Skill_Feeling;
+                    SkillMethod_WhenOtherGuestSold += singlePersonaSkill.Skill_Feeling;
                     break;
                 case 6:
                     isDestroyable = false;

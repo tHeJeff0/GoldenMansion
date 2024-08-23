@@ -80,6 +80,12 @@ public class GuestInStorage : MonoBehaviour
         Destroy(GuestController.Instance.GuestInApartmentPrefabStorage[elementCount]);
         GuestController.Instance.GuestInApartmentPrefabStorage.RemoveAt(elementCount);
         UIController.Instance.UpdateVaultMoneyText();
+        List<GameObject> temporList = new List<GameObject>();
+        temporList.AddRange(GuestController.Instance.GuestInApartmentPrefabStorage);
+        foreach (var guest in temporList)
+        {
+            guest.GetComponent<GuestInApartment>().SkillTrigger_WhenOtherGuestSold();
+        }
         Destroy(this.gameObject);
     }
 

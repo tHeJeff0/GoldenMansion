@@ -48,7 +48,6 @@ public class Skill : MonoBehaviour
         int randomNumber = Random.Range(0, 9);
         if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == randomNumber)
         {
-            Debug.Log(guestInApartment.key+"触发了N人技能,"+"randomNumber是"+randomNumber);
             guestInApartment.guestExtraBudget += guestInApartment.guestBudget;
         }
 
