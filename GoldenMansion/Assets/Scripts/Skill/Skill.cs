@@ -78,21 +78,18 @@ public class Skill : MonoBehaviour
         }
     }
 
-    //public void Skill_Thinking(GuestInApartment guestInApartment,int skillID)
-    //{
-    //    guestInApartment.isDestroyable = false;
-    //}
+    public void Skill_Thinking(GuestInApartment guestInApartment)
+    {
+        guestInApartment.isDestroyable = false;
+    }
 
     public void Skill_Judging(GuestInApartment guestInApartment)
     {       
         skillEffect.IncreaseBasicBudget(guestInApartment, 1);
     }
 
-    public void Skill_Perceiving(GuestInApartment guestInApartment,int daysRequire)
+    public void Skill_Perceiving()
     {
-        if (GameManager.Instance.gameDays - guestInApartment.guestDays == daysRequire)
-        {
-            guestInApartment.key = GuestController.Instance.RandomKey();
-        }
+        GameManager.Instance.extraRerollTime += 1;
     }
 }

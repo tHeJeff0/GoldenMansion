@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public bool isChooseCardFinish { get; set; } = false;
     public bool isRoundEnd { get; set; } = false;
     public int levelKey { get; set; } = 1;
+    public int basicRerollTime { get; set; } = 1;
+    public int extraRerollTime { get; set; }
 
 
     public static GameManager Instance

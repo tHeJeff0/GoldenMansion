@@ -20,5 +20,6 @@ public class NextDayButton : MonoBehaviour
     {
         GameManager.Instance.gameDays += 1;
         GameManager.Instance.isChooseCardFinish = true;
+        GameManager.Instance.extraRerollTime = 0;
     }
 }

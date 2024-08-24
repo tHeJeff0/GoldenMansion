@@ -25,7 +25,7 @@ public class Guest : MonoBehaviour
     private TextMeshProUGUI guestBudgetText;
 
 
-    private void Awake()
+    private void OnEnable()
     {
         key = GuestController.Instance.RandomKey();
         guestName = CharacterData.GetItem(key).name;
@@ -33,17 +33,12 @@ public class Guest : MonoBehaviour
         guestPrice = CharacterData.GetItem(key).basicPrice;
         guestCost = CharacterData.GetItem(key).basicCost;
         guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
-        //guestDescText = guestCardDescTextPrefab.GetComponent<TextMeshProUGUI>();
         guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
 
         guestNameText.text = guestName;
-        //guestDescText.text = guestDesc;
         guestBudgetText.text = guestBudget.ToString();
     }
-        
-        
-
-
+               
 
     public void addToStorage()
     {
@@ -51,7 +46,8 @@ public class Guest : MonoBehaviour
         GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
         guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
         GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
-        GameManager.Instance.isChooseCardFinish = true;
+        Destroy(gameObject);
+        //GameManager.Instance.isChooseCardFinish = true;
        
     }
 

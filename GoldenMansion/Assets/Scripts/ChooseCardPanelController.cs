@@ -67,6 +67,7 @@ public class ChooseCardPanelController : MonoBehaviour
     {
         GameManager.Instance.isChooseCardFinish = true;
         GameManager.Instance.gameDays += 1;
+        GameManager.Instance.extraRerollTime = 0;
         
     }
 
@@ -83,5 +84,17 @@ public class ChooseCardPanelController : MonoBehaviour
     public void ShowGivePersonaPanel()
     {
         givePersonaPanel.SetActive(true);
+    }
+
+    public void ReRoll()
+    {
+        if (GameManager.Instance.basicRerollTime + GameManager.Instance.extraRerollTime > 0)
+        {
+            chooseGuestSlot.SetActive(false);
+            Debug.Log("÷ÿπˆ¡À");
+            chooseGuestSlot.SetActive(true);
+            GameManager.Instance.extraRerollTime -= 1;
+        }
+        
     }
 }

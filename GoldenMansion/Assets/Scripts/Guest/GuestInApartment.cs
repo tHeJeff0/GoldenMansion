@@ -31,7 +31,7 @@ public class GuestInApartment : MonoBehaviour
     public List<int> persona = new List<int>();
     public List<int> temporPersona = new List<int>();
 
-    public Action<GuestInApartment> SkillMethod;
+    public Action<GuestInApartment> SkillMethod_Normal;
     public Action<GuestInApartment> SkillMethod_WhenMoveIn;
     public Action<GuestInApartment> SkillMethod_WhenGuestSold;
     public Action<GuestInApartment> SkillMethod_WhenOtherGuestSold;
@@ -125,7 +125,7 @@ public class GuestInApartment : MonoBehaviour
 
     public void SkillTrigger()
     {
-        SkillMethod?.Invoke(this);
+        SkillMethod_Normal?.Invoke(this);
     }
 
     public void SkillTrigger_WhenMoveIn()
@@ -178,12 +178,13 @@ public class GuestInApartment : MonoBehaviour
                     SkillMethod_WhenOtherGuestSold += singlePersonaSkill.Skill_Feeling;
                     break;
                 case 6:
-                    isDestroyable = false;
+                    singlePersonaSkill.Skill_Thinking(this);
                     break;
                 case 7:
                     SkillMethod_WhenDaysChanged += singlePersonaSkill.Skill_Judging;
                     break;
-                case 8:SkillMethod_EachDays += singlePersonaSkill.Skill_Perceiving;
+                case 8:
+                    singlePersonaSkill.Skill_Perceiving();
                     break;
             }
        
