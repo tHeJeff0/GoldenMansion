@@ -92,4 +92,91 @@ public class Skill : MonoBehaviour
     {
         GameManager.Instance.extraRerollTime += 1;
     }
+
+    public void Skill_INTJ(GuestInApartment guestInApartment)
+    {
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            guest.GetComponent<GuestInApartment>().guestBudget += 1;
+        }
+    }
+
+    public void Skill_INTP(GuestInApartment guestInApartment)
+    {
+        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == 0)
+        {
+            int randomExtraBudget = Random.Range(1, 11);
+            guestInApartment.guestExtraBudget += randomExtraBudget;
+        }
+    }
+
+    public void Skill_ENTJ()
+    {
+
+    }
+
+    public void Skill_ENTP()
+    {
+
+    }
+
+    public void Skill_INFJ()
+    {
+
+    }
+
+    public void Skill_INFP()
+    {
+
+    }
+
+    public void Skill_ENFJ()
+    {
+
+    }
+
+    public void Skill_ENFP()
+    {
+
+    }
+
+    public void Skill_ISTJ()
+    {
+
+    }
+
+    public void Skill_ISFJ()
+    {
+
+    }
+
+    public void Skill_ESTJ()
+    {
+
+    }
+
+    public void Skill_ESFJ()
+    {
+
+    }
+
+    public void Skill_ISTP()
+    {
+
+    }
+
+    public void Skill_ISFP()
+    {
+
+    }
+
+    public void Skill_ESTP()
+    {
+
+    }
+
+    public void Skill_ESFP()
+    {
+
+    }
 }

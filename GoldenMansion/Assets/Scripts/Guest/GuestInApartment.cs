@@ -11,7 +11,7 @@ public class GuestInApartment : MonoBehaviour
 {
     public int key { get; set; }
     public int mbti { get; set; }
-    public Skill mbtiSkill { get; set; }
+    public int mbtiSkill { get; set; }
     public int guestBasicPrice { get; set; }
     public int guestExtraPrice { get; set; }
     public int guestBasicCost { get; set; }
@@ -51,7 +51,6 @@ public class GuestInApartment : MonoBehaviour
         this.guestBasicCost = CharacterData.GetItem(key).basicCost;
         this.guestBasicPrice = CharacterData.GetItem(key).basicPrice;
 
-        //this.guestEffectID = CharacterData.GetItem(key).effectID;
         this.gameObject.SetActive(true);
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
@@ -70,8 +69,10 @@ public class GuestInApartment : MonoBehaviour
 
         if (persona.Count == 4)
         {
+            persona.Sort();
             int mbtiID = persona[0] * 1000 + persona[1] * 100 + persona[2] * 10 + persona[3];
             mbti = mbtiID;
+            GetMBTISkill(mbti);
             persona.Clear();
         }
 
@@ -152,7 +153,15 @@ public class GuestInApartment : MonoBehaviour
     }
     public void GetMBTISkill(int mbti)
     {
- 
+        Skill singleMBTISkill = new Skill();
+        mbtiSkill = GuestMBTIData.GetItem(mbti).skillID;
+        switch (mbtiSkill)
+        {
+            case 20:SkillMethod_WhenOtherGuestSold += singleMBTISkill.Skill_INTJ;
+                break;
+            case 21:SkillMethod_WhenMoveIn += singleMBTISkill.Skill_INTP;
+                break;
+        }
     }
 
     public void GetPersonaSkill(int personaKey )

@@ -18,8 +18,8 @@ public class GievePersonaButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        personaKey = 8;
-        //personaKey = RandomKey();
+        //personaKey = 8;
+        personaKey = RandomKey();
         buttonText.text = LanguageData.GetItem(GuestPersonalData.GetItem(personaKey).nameID).CHN;
     }
 

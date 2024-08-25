@@ -8,7 +8,6 @@ namespace ExcelData
         public class Item
         {
             public int ID;
-            public int personaID;
             public string name;
             public int nameID;
             public string effectDesc;
@@ -72,7 +71,6 @@ namespace ExcelData
 
                     //Get Item indices
                     int IDIndex = sheetHeader.IndexOf("ID", "int");
-                    int personaIDIndex = sheetHeader.IndexOf("personaID", "int");
                     int nameIndex = sheetHeader.IndexOf("name", "string");
                     int nameIDIndex = sheetHeader.IndexOf("nameID", "int");
                     int effectDescIndex = sheetHeader.IndexOf("effectDesc", "string");
@@ -93,10 +91,6 @@ namespace ExcelData
                             if (j == IDIndex)
                             {
                                 newItem.ID = reader.ReadInt32();
-                            }
-                            else if (j == personaIDIndex)
-                            {
-                                newItem.personaID = reader.ReadInt32();
                             }
                             else if (j == nameIndex)
                             {
