@@ -115,14 +115,30 @@ public class Skill : MonoBehaviour
 
     }
 
-    public void Skill_ENTP()
+    public void Skill_ENTP(GuestInApartment guestInApartment)
     {
-
+        int increaseBudget = 0;
+        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count != 0)
+        {
+            foreach (var adjancentGuest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+            {
+                int budget = adjancentGuest.GetComponent<GuestInApartment>().guestBudget + adjancentGuest.GetComponent<GuestInApartment>().guestExtraBudget;
+                if (budget > increaseBudget)
+                {
+                    increaseBudget = budget;
+                }
+            }
+        }
+        guestInApartment.guestExtraBudget += increaseBudget - guestInApartment.guestBudget;
+        
     }
 
-    public void Skill_INFJ()
+    public void Skill_INFJ(GuestInApartment guestInApartment)
     {
-
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            guest.GetComponent<GuestInApartment>().guestBudget += 1;
+        }
     }
 
     public void Skill_INFP()
