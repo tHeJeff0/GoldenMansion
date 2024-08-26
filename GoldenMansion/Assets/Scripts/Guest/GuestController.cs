@@ -14,6 +14,8 @@ public class GuestController : MonoBehaviour
     public List<GameObject> GuestInApartmentPrefabStorage = new List<GameObject>();
     public Guest guestDetailPrefab;
     public GuestInApartment guestInApartmentPrefab;
+
+    public int[] internID = { 8, 9, 23, 27, 31, 35, 41, 48, 51, 54, 58, 61 };
     private int basicGuestCount { get; set; } = 3;
     public static GuestController Instance
     {

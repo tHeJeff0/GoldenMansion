@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Skill : MonoBehaviour
@@ -190,24 +191,32 @@ public class Skill : MonoBehaviour
     }
 
     public void Skill_ESTJ(GuestInApartment guestInApartment)
-    {
-        int[] internID = { 8, 9, 23, 27, 31, 35, 41, 48, 51, 54, 58, 61 };
-        int newGuestID = internID[Random.Range(0, internID.Length)];
+    {       
+        int newGuestID = GuestController.Instance.internID[Random.Range(0, GuestController.Instance.internID.Length)];
         GuestController.Instance.temporKey = newGuestID;
-        GameObject newGuest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
-        
+        GameObject newGuest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);       
         newGuest.GetComponentInChildren<SpriteRenderer>().enabled = false;
         GuestController.Instance.GuestInApartmentPrefabStorage.Add(newGuest);
     }
 
-    public void Skill_ESFJ()
+    public void Skill_ESFJ(GuestInApartment guestInApartment)
     {
-
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (GuestController.Instance.internID.Contains(guest.GetComponent<GuestInApartment>().key))
+            {
+                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), 1);
+            }
+        }
     }
 
-    public void Skill_ISTP()
+    public void Skill_ISTP(GuestInApartment guestInApartment)
     {
-
+        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count < 8)
+        {
+            int increaseTimes = 8 - GuestController.Instance.GetAdjancentGuest(guestInApartment).Count;
+            skillEffect.IncreaseTemporBudget(guestInApartment, increaseTimes * 10);
+        }
     }
 
     public void Skill_ISFP()
