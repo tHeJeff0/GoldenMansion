@@ -219,18 +219,65 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public void Skill_ISFP()
+    public void Skill_ISFP(GuestInApartment guestInApartment)
     {
-
+        Apartment[] apartmentList = FindObjectsOfType<Apartment>();
+        foreach (var apartment in apartmentList)
+        {
+            if (apartment.transform.GetComponentInChildren<GuestInApartment>() == null)
+            {
+                skillEffect.IncreaseTemporBudget(guestInApartment, 5);
+            }
+        }
     }
 
-    public void Skill_ESTP()
+    public void Skill_ESTP(GuestInApartment guestInApartment)
     {
-
+        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count != 0)
+        {
+            bool isBigger = false;
+            foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+            {
+                if (guest.GetComponent<GuestInApartment>().guestBudget > guestInApartment.guestBudget)
+                {
+                    isBigger = true;
+                    break;
+                }
+            }
+            if (!isBigger)
+            {
+                foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+                {
+                    guest.GetComponent<GuestInApartment>().guestBudget = guestInApartment.guestBudget;
+                }
+            }
+        }
+        
     }
 
-    public void Skill_ESFP()
+    public void Skill_ESFP(GuestInApartment guestInApartment)
     {
-
+        int esfpNum = 0;
+        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count != 0)
+        {
+            foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+            {
+                if (guest.GetComponent<GuestInApartment>().mbti == 2358)
+                {
+                    Debug.Log("对面的人名是"+guest.GetComponent<GuestInApartment>().guestName);
+                    esfpNum += 1;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        Debug.Log(GuestController.Instance.GetAdjancentGuest(guestInApartment).Count);
+        if (esfpNum == 8)
+        {
+            Debug.Log("是你赢了");
+        }
+        
     }
 }

@@ -57,6 +57,7 @@ public class Guest : MonoBehaviour
         if (ApartmentController.Instance.vaultMoney >= guestCost)
         {
             ApartmentController.Instance.vaultMoney -= guestCost;
+            UIController.Instance.UpdateVaultMoneyText();
             GuestController.Instance.temporKey = this.key;
             GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
             guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;

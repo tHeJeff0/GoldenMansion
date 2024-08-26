@@ -183,6 +183,12 @@ public class GuestInApartment : MonoBehaviour
                 break;
             case 32:SkillMethod_WhenMoveIn += singleMBTISkill.Skill_ISTP;
                 break;
+            case 33:SkillMethod_WhenMoveIn += singleMBTISkill.Skill_ISFP;
+                break;
+            case 34:SkillMethod_WhenMoveIn += singleMBTISkill.Skill_ESTP;
+                break;
+            case 35:SkillMethod_WhenMoveIn += singleMBTISkill.Skill_ESFP;
+                break;
         }
     }
 
