@@ -74,8 +74,5 @@ public class SkillEffect : MonoBehaviour
         Destroy(guestInApartment.gameObject);
     }
 
-    public void BanSellGuestFunction(GameObject sellGuestButton)
-    {
-        sellGuestButton.SetActive(false);
-    }
+
 }

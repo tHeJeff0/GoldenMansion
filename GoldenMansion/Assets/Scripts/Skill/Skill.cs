@@ -137,7 +137,7 @@ public class Skill : MonoBehaviour
     {
         foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
         {
-            guest.GetComponent<GuestInApartment>().guestBudget += 1;
+            skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), 1);
         }
     }
 
@@ -157,7 +157,7 @@ public class Skill : MonoBehaviour
         {
             if (guest.GetComponent<GuestInApartment>().persona.Contains(2) && guest.GetComponent<GuestInApartment>().mbti.ToString().Contains("2"))
             {
-                guestInApartment.guestExtraBudget += 1;
+                skillEffect.IncreaseTemporBudget(guestInApartment, 1);
             }
         }
     }
@@ -175,14 +175,29 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public void Skill_ISFJ()
+    public void Skill_ISFJ(GuestInApartment guestInApartment)
     {
-
+        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == 0)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                GameObject newGuest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+                newGuest.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                GuestController.Instance.GuestInApartmentPrefabStorage.Add(newGuest);
+            }
+            skillEffect.RemoveGuest(guestInApartment);
+        }
     }
 
-    public void Skill_ESTJ()
+    public void Skill_ESTJ(GuestInApartment guestInApartment)
     {
-
+        int[] internID = { 8, 9, 23, 27, 31, 35, 41, 48, 51, 54, 58, 61 };
+        int newGuestID = internID[Random.Range(0, internID.Length)];
+        GuestController.Instance.temporKey = newGuestID;
+        GameObject newGuest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+        
+        newGuest.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        GuestController.Instance.GuestInApartmentPrefabStorage.Add(newGuest);
     }
 
     public void Skill_ESFJ()

@@ -175,6 +175,10 @@ public class GuestInApartment : MonoBehaviour
                 break;
             case 28:SkillMethod_WhenDaysChanged += singleMBTISkill.Skill_ISTJ;
                 break;
+            case 29:SkillMethod_WhenMoveIn += singleMBTISkill.Skill_ISFJ;
+                break;
+            case 30:SkillMethod_WhenDaysChanged += singleMBTISkill.Skill_ESTJ;
+                break;
         }
     }
 
