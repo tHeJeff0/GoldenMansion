@@ -14,7 +14,8 @@ public class Guest : MonoBehaviour
 
     public int key { get; set; }
     public int guestPrice { get; set; }
-    public int guestCost { get; set; }
+    public float guestCost { get; set; }
+    public float guestExtraCost { get; set; }
     public int guestDays { get; set; }
     public string guestName { get; set; }
     public string guestDesc { get; set; }
@@ -37,18 +38,34 @@ public class Guest : MonoBehaviour
 
         guestNameText.text = guestName;
         guestBudgetText.text = guestBudget.ToString();
+
+
+        //INFP技能效果
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().mbti == 1458)
+            {
+                guestExtraCost = guestCost * 0.5f;
+                break;
+            }
+        }
     }
                
 
     public void addToStorage()
     {
-        GuestController.Instance.temporKey = this.key;
-        GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
-        guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
-        Destroy(gameObject);
-        //GameManager.Instance.isChooseCardFinish = true;
-       
+        if (ApartmentController.Instance.vaultMoney >= guestCost)
+        {
+            ApartmentController.Instance.vaultMoney -= guestCost;
+            GuestController.Instance.temporKey = this.key;
+            GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+            guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
+            Destroy(gameObject);
+            //GameManager.Instance.isChooseCardFinish = true;
+        }
+
+
     }
 
     

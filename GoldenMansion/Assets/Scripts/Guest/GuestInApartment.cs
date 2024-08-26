@@ -31,6 +31,7 @@ public class GuestInApartment : MonoBehaviour
     public List<int> persona = new List<int>();
     public List<int> temporPersona = new List<int>();
 
+    public Action<GuestInApartment> SkillMethod_OnGoingEffect;
     public Action<GuestInApartment> SkillMethod_Normal;
     public Action<GuestInApartment> SkillMethod_WhenMoveIn;
     public Action<GuestInApartment> SkillMethod_WhenGuestSold;
@@ -55,7 +56,12 @@ public class GuestInApartment : MonoBehaviour
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
 
+        
+    }
 
+    private void OnEnable()
+    {
+        SkillTrigger_OnGoingEffect();
     }
     // Start is called before the first frame update
     void Start()
@@ -165,7 +171,16 @@ public class GuestInApartment : MonoBehaviour
                 break;
             case 24:SkillMethod_WhenDaysChanged += singleMBTISkill.Skill_INFJ;
                 break;
+            case 27:SkillMethod_WhenMoveIn += singleMBTISkill.Skill_ENFP;
+                break;
+            case 28:SkillMethod_WhenDaysChanged += singleMBTISkill.Skill_ISTJ;
+                break;
         }
+    }
+
+    public void SkillTrigger_OnGoingEffect()
+    {
+        SkillMethod_OnGoingEffect?.Invoke(this);
     }
 
     public void GetPersonaSkill(int personaKey )

@@ -143,7 +143,7 @@ public class Skill : MonoBehaviour
 
     public void Skill_INFP()
     {
-
+        //已在Guest实现相关功能
     }
 
     public void Skill_ENFJ()
@@ -151,14 +151,28 @@ public class Skill : MonoBehaviour
 
     }
 
-    public void Skill_ENFP()
+    public void Skill_ENFP(GuestInApartment guestInApartment)
     {
-
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().persona.Contains(2) && guest.GetComponent<GuestInApartment>().mbti.ToString().Contains("2"))
+            {
+                guestInApartment.guestExtraBudget += 1;
+            }
+        }
     }
 
-    public void Skill_ISTJ()
+    public void Skill_ISTJ(GuestInApartment guestInApartment)
     {
-
+        if (ApartmentController.Instance.vaultMoney >= 5)
+        {
+            float vaultMoney = ApartmentController.Instance.vaultMoney;
+            int plusTimes = (int) (vaultMoney / 5.0f);
+            for (int i = 0; i < plusTimes; i++)
+            {
+                ApartmentController.Instance.vaultMoney += 1;
+            }
+        }
     }
 
     public void Skill_ISFJ()
