@@ -1,3 +1,4 @@
+using ExcelData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -67,9 +68,30 @@ public class SkillController : MonoBehaviour
         
     }
 
-    public void SkillTrigger()
+    public int GetFieldCount(int fieldID)
     {
+        int count = 0;
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().field == fieldID)
+            {
+                count += 1;
+            }
+        }
+        return count;
+    }
 
+    public int SkillLevelSelector(int skillID,int condition)
+    {
+        int index = 0;
+        for (int i = 0; i < SkillData.GetItem(skillID).conditionValue.Length; i++)
+        {
+            if (condition > SkillData.GetItem(skillID).conditionValue[i])
+            {
+                index = i;
+            }
+        }
+        return SkillData.GetItem(skillID).effectValue[index];
     }
 
     //public void OnGet()

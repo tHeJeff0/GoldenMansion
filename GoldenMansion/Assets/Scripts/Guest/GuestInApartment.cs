@@ -10,6 +10,8 @@ using UnityEngine;
 public class GuestInApartment : MonoBehaviour
 {
     public int key { get; set; }
+    public int field { get; set; }
+    public int fieldSkillID { get; set; }
     public int mbti { get; set; }
     public int mbtiSkill { get; set; }
     public int guestBasicPrice { get; set; }
@@ -45,6 +47,8 @@ public class GuestInApartment : MonoBehaviour
     void Awake()
     {
         key = GuestController.Instance.temporKey;
+        this.field = CharacterData.GetItem(key).field;
+        this.fieldSkillID = FieldData.GetItem(field).skillID;
         this.guestDays = GameManager.Instance.gameDays;
         this.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
         this.guestName = CharacterData.GetItem(key).name;
@@ -231,6 +235,11 @@ public class GuestInApartment : MonoBehaviour
             }
        
         
+    }
+
+    public void GetFieldSkill(int fieldSkillID)
+    {
+
     }
 
     public void Reset()
