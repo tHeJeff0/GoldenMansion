@@ -15,6 +15,7 @@ public class ChooseCardPanelController : MonoBehaviour
     GameObject showButton;
     GameObject skipButton;
     GameObject upgradeRentButton;
+    List<Guest> guest = new List<Guest>();
 
     private Color temporColor;
 
@@ -28,6 +29,7 @@ public class ChooseCardPanelController : MonoBehaviour
         showButton = GameObject.Find("ShowButton");
         skipButton = GameObject.Find("SkipButton");
         upgradeRentButton = GameObject.Find("UpgradeRentButton");
+        guest.AddRange(chooseGuestSlot.GetComponentsInChildren<Guest>());
     }
 
     // Update is called once per frame
@@ -90,9 +92,14 @@ public class ChooseCardPanelController : MonoBehaviour
     {
         if (GameManager.Instance.basicRerollTime + GameManager.Instance.extraRerollTime > 0)
         {
-            chooseGuestSlot.SetActive(false);
+            foreach (var child in guest)
+            {
+                child.gameObject.SetActive(false);
+                child.gameObject.SetActive(true);
+            }
+            //chooseGuestSlot.SetActive(false);
             Debug.Log("÷ÿπˆ¡À");
-            chooseGuestSlot.SetActive(true);
+            //chooseGuestSlot.SetActive(true);
             GameManager.Instance.extraRerollTime -= 1;
         }
         

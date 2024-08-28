@@ -281,16 +281,5 @@ public class Skill : MonoBehaviour
         
     }
 
-    public void Skill_Student(GuestInApartment guestInApartment)
-    {
-        int fieldCount = SkillController.Instance.GetFieldCount(1);
-        int increaseNumber = SkillController.Instance.SkillLevelSelector(guestInApartment.fieldSkillID, fieldCount);
-        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
-        {
-            if (guest.GetComponent<GuestInApartment>().field == 1)
-            {
-                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
-            }
-        }
-    }
+    
 }

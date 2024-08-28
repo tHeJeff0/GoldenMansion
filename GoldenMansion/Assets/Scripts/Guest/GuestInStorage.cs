@@ -18,6 +18,7 @@ public class GuestInStorage : MonoBehaviour
 
     [SerializeField] private GameObject sellButton;
     [SerializeField] private RectTransform parentRectTransform;
+    [SerializeField] private TextMeshProUGUI nameText;
     private TextMeshProUGUI priceText;
     private Image guestPortrait;
     public GameObject guestInStoragePrefab;
@@ -40,6 +41,7 @@ public class GuestInStorage : MonoBehaviour
         portraitRoute = CharacterData.GetItem(key).portraitRoute;
         guestPortrait.sprite = Resources.Load<Sprite>(portraitRoute);
         priceText.text = priceShown.ToString();
+        nameText.text = CharacterData.GetItem(key).name;
     }
 
     // Update is called once per frame
@@ -79,6 +81,7 @@ public class GuestInStorage : MonoBehaviour
         ApartmentController.Instance.vaultMoney += guestBeenSoldData.guestBasicPrice + guestBeenSoldData.guestExtraPrice;
         Destroy(GuestController.Instance.GuestInApartmentPrefabStorage[elementCount]);
         GuestController.Instance.GuestInApartmentPrefabStorage.RemoveAt(elementCount);
+        SkillController.Instance.guestSoldCount += 1;
         UIController.Instance.UpdateVaultMoneyText();
         List<GameObject> temporList = new List<GameObject>();
         temporList.AddRange(GuestController.Instance.GuestInApartmentPrefabStorage);

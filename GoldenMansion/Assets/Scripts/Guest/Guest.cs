@@ -62,7 +62,7 @@ public class Guest : MonoBehaviour
             GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
             guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
             GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
             //GameManager.Instance.isChooseCardFinish = true;
         }
 

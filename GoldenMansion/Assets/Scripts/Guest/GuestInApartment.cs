@@ -29,6 +29,7 @@ public class GuestInApartment : MonoBehaviour
 
     [SerializeField] GameObject personaSlot;
     [SerializeField] GameObject personaPic;
+    [SerializeField] TextMeshPro nameText;
 
     public List<int> persona = new List<int>();
     public List<int> temporPersona = new List<int>();
@@ -55,10 +56,12 @@ public class GuestInApartment : MonoBehaviour
         this.guestBudget = CharacterData.GetItem(key).budget;
         this.guestBasicCost = CharacterData.GetItem(key).basicCost;
         this.guestBasicPrice = CharacterData.GetItem(key).basicPrice;
+        this.nameText.text = CharacterData.GetItem(key).name;
 
         this.gameObject.SetActive(true);
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
+        this.nameText.enabled = false;
 
         
     }
@@ -250,6 +253,7 @@ public class GuestInApartment : MonoBehaviour
         this.transform.localPosition = Vector3.zero;
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
+        this.nameText.enabled = false;
     }
 
     public void ShowPersonaIcon(int personaKey)

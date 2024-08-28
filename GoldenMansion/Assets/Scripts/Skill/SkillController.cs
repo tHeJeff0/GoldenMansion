@@ -12,18 +12,13 @@ public class SkillController : MonoBehaviour
 
     public int temporPersonaKey;
 
-    //public delegate void SkillSpace();
+    public int studentCount;
+    public int guestSoldCount;
 
-    //public event SkillSpace onGet;
-    //public event SkillSpace onDaysChanged;
-    //public event SkillSpace onGuestMoveIn;
-    //public event SkillSpace onPayRent;
-    //public event SkillSpace afterPayRent;
-    //public event SkillSpace onRoundEnd;
-    //public event SkillSpace onBuyGuest;
-    //public event SkillSpace afterBuyGuest;
-    //public event SkillSpace onSellGuest;
-    //public event SkillSpace afterSellGuest;
+    public Action<int> SkillMethod_Financial;
+    public Action<int> SkillMethod_Student;
+
+    SkillEffect skillEffect = new SkillEffect();
 
 
     public static SkillController Instance
@@ -59,13 +54,26 @@ public class SkillController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        FieldSkillRegister();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public List<GameObject> GetFieldGuest(int fieldID)
+    {
+        List<GameObject> fieldGuest = new List<GameObject>();
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().field == fieldID)
+            {
+                fieldGuest.Add(guest);
+            }
+        }
+        return fieldGuest;
     }
 
     public int GetFieldCount(int fieldID)
@@ -84,63 +92,68 @@ public class SkillController : MonoBehaviour
     public int SkillLevelSelector(int skillID,int condition)
     {
         int index = 0;
-        for (int i = 0; i < SkillData.GetItem(skillID).conditionValue.Length; i++)
+        if (condition == 0)
         {
-            if (condition > SkillData.GetItem(skillID).conditionValue[i])
-            {
-                index = i;
-            }
+            return 0;
         }
-        return SkillData.GetItem(skillID).effectValue[index];
+        else
+        {
+            for (int i = 0; i < SkillData.GetItem(skillID).conditionValue.Length; i++)
+            {
+                if (condition >= SkillData.GetItem(skillID).conditionValue[i])
+                {
+                    index = i;
+                }
+            }
+            return SkillData.GetItem(skillID).effectValue[index];
+        }
+        
     }
 
-    //public void OnGet()
-    //{
-    //    onGet?.Invoke();
-    //}
+    public void FieldSkillTrigger()
+    {
+        SkillTrigger_Student();
+        SkillTrigger_Financial();
+    }
 
-    //public void OnDaysChanged()
-    //{
-    //    onDaysChanged?.Invoke();
-    //}
+    public void SkillTrigger_Student()
+    {
+        int count = GetFieldCount(1);
+        SkillMethod_Student?.Invoke(count);
+    }
 
-    //public void OnGuestMoveIn()
-    //{
-    //    onGuestMoveIn?.Invoke();
-    //}
 
-    //public void OnPayRent()
-    //{
-    //    onPayRent?.Invoke();
-    //}
+    public void SkillTrigger_Financial()
+    {
+        int count = GetFieldCount(2);
+        SkillMethod_Financial?.Invoke(count);
+    }
 
-    //public void AfterPayRent()
-    //{
-    //    afterPayRent?.Invoke();
-    //}
+    public void FieldSkillRegister()
+    {
+        SkillMethod_Financial += Skill_Financial;
+        SkillMethod_Student += Skill_Student;
+    }
 
-    //public void OnRoundEnd()
-    //{
-    //    onRoundEnd?.Invoke();
-    //}
+    public void Skill_Student(int studentCount)
+    {
+        int increaseNumber = SkillLevelSelector(50, studentCount);
+        Debug.Log("学生人数：" + studentCount);
+        foreach (var guest in GetFieldGuest(1))
+        {           
+            skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);           
+        }
+        Debug.Log("触发了学生党技能，房租增加：" + increaseNumber);
+    }
 
-    //public void OnBuyGuest()
-    //{
-    //    onBuyGuest?.Invoke();
-    //}
-
-    //public void AfterBuyGuest()
-    //{
-    //    afterBuyGuest?.Invoke();
-    //}
-
-    //public void OnSellGuest()
-    //{
-    //    onSellGuest?.Invoke();
-    //}
-
-    //public void AfterSellGuest()
-    //{
-    //    afterSellGuest?.Invoke();
-    //}
+    public void Skill_Financial(int financialCount)
+    {
+        int increaseNumber = SkillLevelSelector(51, financialCount);
+        Debug.Log("金融哥人数：" + financialCount);
+        foreach (var guest in GetFieldGuest(2))
+        {
+            skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber*guestSoldCount);
+        }
+        Debug.Log("触发了金融哥技能，房租增加：" + increaseNumber);
+    }
 }

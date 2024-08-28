@@ -127,6 +127,7 @@ public class UIController : MonoBehaviour
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.localPosition = new Vector3(0, 0, -0.1f);
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<BoxCollider>().enabled = true;
+        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<TextMeshPro>().enabled = true;
     }
 
     public void ShowStoragePanel()
