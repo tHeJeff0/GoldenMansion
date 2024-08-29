@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int levelKey { get; set; } = 1;
     public int basicRerollTime { get; set; } = 1;
     public int extraRerollTime { get; set; }
-
+    public int guestRemoveCount { get; set; }
 
     public static GameManager Instance
     {

@@ -186,7 +186,7 @@ public class SkillController : MonoBehaviour
             int increaseNumber = SkillLevelSelector(52, gameCount);
             foreach (var guest in GetFieldGuest(3))
             {
-                guest.GetComponent<GuestInApartment>().guestExtraBudget += guest.GetComponent<GuestInApartment>().guestBudget * increaseNumber;
+                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), guest.GetComponent<GuestInApartment>().guestBudget * increaseNumber);
             }
         }
         
@@ -226,8 +226,8 @@ public class SkillController : MonoBehaviour
         }
         foreach (var guest in GetFieldGuest(5))
         {
-            guest.GetComponent<GuestInApartment>().guestExtraBudget += budgetIncreaseNumber;
-            guest.GetComponent<GuestInApartment>().guestExtraPrice += priceIncreaseNumber;
+            skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), budgetIncreaseNumber);
+            skillEffect.IncreaseTemporPrice(guest.GetComponent<GuestInApartment>(), priceIncreaseNumber);
         }
     }
 
@@ -245,7 +245,7 @@ public class SkillController : MonoBehaviour
         
         foreach (var guest in GetFieldGuest(6))
         {
-            guest.GetComponent<GuestInApartment>().guestExtraBudget += increaseNumber;
+            skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
         }
     }
 
@@ -272,7 +272,7 @@ public class SkillController : MonoBehaviour
             int increaseNumber = SkillLevelSelector(56, physicalCount);
             foreach (var guest in GetFieldGuest(7))
             {
-                guest.GetComponent<GuestInApartment>().guestExtraBudget += (physicalCount - biggestCount) * increaseNumber;
+                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), (physicalCount - biggestCount) * increaseNumber);
             }
         }
     }
@@ -294,13 +294,17 @@ public class SkillController : MonoBehaviour
         }
         foreach (var guest in GetFieldGuest(8))
         {
-            guest.GetComponent<GuestInApartment>().guestExtraBudget += notHouseGuest.Count * increaseNumber;
+            skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), notHouseGuest.Count * increaseNumber);
         }
     }
 
-    public void Skill_Art()
+    public void Skill_Art(int artCount)
     {
-
+        int increaseNumber = SkillLevelSelector(58, artCount);
+        foreach (var guest in GetFieldGuest(9))
+        {
+            skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), GameManager.Instance.guestRemoveCount * increaseNumber);
+        }
     }
 
     public void Skill_Food()

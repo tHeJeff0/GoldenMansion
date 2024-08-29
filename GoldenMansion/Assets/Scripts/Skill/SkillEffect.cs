@@ -71,6 +71,7 @@ public class SkillEffect : MonoBehaviour
         guestInApartment.transform.SetParent(null);
         guestInApartment.SkillMethod_WhenMoveIn = null;
         GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
+        GameManager.Instance.guestRemoveCount += 1;
         Destroy(guestInApartment.gameObject);
     }
 
