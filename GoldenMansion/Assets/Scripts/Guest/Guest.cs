@@ -63,6 +63,7 @@ public class Guest : MonoBehaviour
             guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
             GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
             this.gameObject.SetActive(false);
+            SkillController.Instance.SkillTrigger_EShop("buy");
             //GameManager.Instance.isChooseCardFinish = true;
         }
 
