@@ -249,10 +249,10 @@ public class SkillController : MonoBehaviour
         }
     }
 
-    public void Skill_Physical()
+    public void Skill_Physical(int physicalCount)
     {
         int biggestCount = 0;
-        int fieldCount = GetFieldCount(7);
+        physicalCount = GetFieldCount(7);
         for (int i = 1; i < 7; i++)
         {
             if (biggestCount < GetFieldCount(i))
@@ -267,19 +267,35 @@ public class SkillController : MonoBehaviour
                 biggestCount = GetFieldCount(i);
             }
         }
-        if (fieldCount > biggestCount)
+        if (physicalCount > biggestCount)
         {
-            int increaseNumber = SkillLevelSelector(56, GetFieldCount(7));
+            int increaseNumber = SkillLevelSelector(56, physicalCount);
             foreach (var guest in GetFieldGuest(7))
             {
-                guest.GetComponent<GuestInApartment>().guestExtraBudget += (fieldCount - biggestCount) * increaseNumber;
+                guest.GetComponent<GuestInApartment>().guestExtraBudget += (physicalCount - biggestCount) * increaseNumber;
             }
         }
     }
 
-    public void Skill_House()
+    public void Skill_House(int houseCount)
     {
-
+        int increaseNumber = SkillLevelSelector(57, houseCount);
+        List<GameObject> notHouseGuest = new List<GameObject>();
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().field != 8 && guest.transform.parent != null)
+            {
+                notHouseGuest.Add(guest);
+            }
+        }
+        foreach (var guest in notHouseGuest)
+        {
+            guest.GetComponent<GuestInApartment>().guestExtraBudget -= increaseNumber;
+        }
+        foreach (var guest in GetFieldGuest(8))
+        {
+            guest.GetComponent<GuestInApartment>().guestExtraBudget += notHouseGuest.Count * increaseNumber;
+        }
     }
 
     public void Skill_Art()
