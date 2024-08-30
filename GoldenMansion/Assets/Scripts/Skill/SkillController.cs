@@ -20,7 +20,10 @@ public class SkillController : MonoBehaviour
     public Action<int> SkillMethod_Game;
     public Action<int> SkillMethod_FreeLnacer;
     public Action<int> SkillMethod_Education;
+    public Action<int> SkillMethod_MediaIncreaseBudget;
     public Action<int, string> SkillMethod_EShop;
+    public Action<int> SkillMethod_Media;
+    public Action<int, GuestInApartment> SkillMethod_Tour;
 
     SkillEffect skillEffect = new SkillEffect();
 
@@ -64,7 +67,11 @@ public class SkillController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (GameManager.Instance.mediaDays == 0)
+        {
+            SkillTrigger_MediaIncreaseBudget();
+            GameManager.Instance.mediaDays = -1;
+        }
     }
 
     public List<GameObject> GetFieldGuest(int fieldID)
@@ -146,11 +153,19 @@ public class SkillController : MonoBehaviour
         SkillMethod_EShop?.Invoke(count, behave);
     }
 
+    public void SkillTrigger_MediaIncreaseBudget()
+    {
+        int count = GetFieldCount(11);
+        SkillMethod_MediaIncreaseBudget?.Invoke(count);
+    }
+
     public void FieldSkillRegister()
     {
         SkillMethod_Financial += Skill_Financial;
         SkillMethod_Student += Skill_Student;
         SkillMethod_EShop += Skill_EShop;
+        SkillMethod_MediaIncreaseBudget += Skill_MediaIncreaseBudget;
+        SkillMethod_Tour += Skill_Tour;
     }
 
     public void Skill_Student(int studentCount)
@@ -307,18 +322,59 @@ public class SkillController : MonoBehaviour
         }
     }
 
-    public void Skill_Food()
+    public void Skill_Food(int foodCount)
     {
-
+        int increaseNumber = SkillLevelSelector(59, foodCount);
+        foreach (var foodGuest in GetFieldGuest(10))
+        {
+            if (foodGuest.transform.parent != null)
+            {
+                foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+                {
+                    if (guest.GetComponent<GuestInApartment>().field != 10)
+                    {
+                        skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
+                    }
+                }
+            }
+        }
     }
 
-    public void Skill_Media()
+    public void Skill_MediaBanShop()
     {
-
+        if (GameManager.Instance.isAllowSell && GameManager.Instance.isAllowBuy)
+        {
+            GameManager.Instance.isAllowBuy = false;
+            GameManager.Instance.isAllowSell = false;
+            GameManager.Instance.mediaDays = 3;
+        }
     }
 
-    public void Skill_Tour()
+    public void Skill_MediaIncreaseBudget(int mediaCount)
     {
+        int increaseNumber = SkillLevelSelector(60, mediaCount);
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
+        }
+        GameManager.Instance.isAllowBuy = true;
+        GameManager.Instance.isAllowSell = true;
+    }
+
+
+    public void Skill_Tour(int tourCount,GuestInApartment guestInApartment)
+    {
+        if (guestInApartment.tourDays == 5)
+        {
+            int increaseNumber = SkillLevelSelector(61, tourCount);
+            skillEffect.IncreaseTemporBudget(guestInApartment, increaseNumber * guestInApartment.guestBudget);
+            guestInApartment.tourDays = 0;
+        }
+        else if (guestInApartment.tourDays != 5)
+        {
+            guestInApartment.tourDays += 1;
+        }
+        
 
     }
 

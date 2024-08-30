@@ -26,6 +26,7 @@ public class GuestInApartment : MonoBehaviour
     public int guestEffectID { get; set; }
     public bool isMoveIn { get; set; } = false;
     public bool isDestroyable { get; set; } = true;
+    public int tourDays { get; set; } = 0;
 
     [SerializeField] GameObject personaSlot;
     [SerializeField] GameObject personaPic;
@@ -63,7 +64,6 @@ public class GuestInApartment : MonoBehaviour
         this.GetComponent<BoxCollider>().enabled = false;
         this.nameText.enabled = false;
 
-        
     }
 
     private void OnEnable()

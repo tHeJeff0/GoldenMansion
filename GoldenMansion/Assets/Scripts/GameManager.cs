@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public int basicRerollTime { get; set; } = 1;
     public int extraRerollTime { get; set; }
     public int guestRemoveCount { get; set; }
+    public bool isAllowSell { get; set; } = true;
+    public bool isAllowBuy { get; set; } = true;
+    public int mediaDays { get; set; } = 0;
 
     public static GameManager Instance
     {
@@ -32,10 +35,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadSkill(int skillID)
-    {
-
-    }
 
     private void Awake()
     {

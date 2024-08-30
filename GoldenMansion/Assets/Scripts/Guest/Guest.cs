@@ -54,18 +54,29 @@ public class Guest : MonoBehaviour
 
     public void addToStorage()
     {
-        if (ApartmentController.Instance.vaultMoney >= guestCost)
+        if (GameManager.Instance.isAllowBuy)
         {
-            ApartmentController.Instance.vaultMoney -= guestCost;
-            UIController.Instance.UpdateVaultMoneyText();
-            GuestController.Instance.temporKey = this.key;
-            GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
-            guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
-            GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
-            this.gameObject.SetActive(false);
-            SkillController.Instance.SkillTrigger_EShop("buy");
-            //GameManager.Instance.isChooseCardFinish = true;
+            if (ApartmentController.Instance.vaultMoney >= guestCost)
+            {
+                ApartmentController.Instance.vaultMoney -= guestCost;
+                UIController.Instance.UpdateVaultMoneyText();
+                GuestController.Instance.temporKey = this.key;
+                GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+                guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
+                this.gameObject.SetActive(false);
+                SkillController.Instance.SkillTrigger_EShop("buy");
+                if (key == 49 || key == 50 || key == 51)
+                {
+                    SkillController.Instance.Skill_MediaBanShop();
+                }
+            }
         }
+        else
+        {
+            Debug.Log("²»ÔÊÐí¹ºÂò");
+        }
+        
 
 
     }

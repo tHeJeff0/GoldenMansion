@@ -75,22 +75,30 @@ public class GuestInStorage : MonoBehaviour
 
     public void OnSell()
     {
-        GameObject guestBeenSold = GuestController.Instance.GuestInApartmentPrefabStorage[elementCount];
-        GuestInApartment guestBeenSoldData = guestBeenSold.GetComponent<GuestInApartment>();
-        guestBeenSoldData.SkillTrigger_WhenSold();
-        ApartmentController.Instance.vaultMoney += guestBeenSoldData.guestBasicPrice + guestBeenSoldData.guestExtraPrice;
-        Destroy(GuestController.Instance.GuestInApartmentPrefabStorage[elementCount]);
-        GuestController.Instance.GuestInApartmentPrefabStorage.RemoveAt(elementCount);
-        SkillController.Instance.guestSoldCount += 1;
-        UIController.Instance.UpdateVaultMoneyText();
-        SkillController.Instance.SkillTrigger_EShop("sell");
-        List<GameObject> temporList = new List<GameObject>();
-        temporList.AddRange(GuestController.Instance.GuestInApartmentPrefabStorage);
-        foreach (var guest in temporList)
+        if (GameManager.Instance.isAllowSell)
         {
-            guest.GetComponent<GuestInApartment>().SkillTrigger_WhenOtherGuestSold();
+            GameObject guestBeenSold = GuestController.Instance.GuestInApartmentPrefabStorage[elementCount];
+            GuestInApartment guestBeenSoldData = guestBeenSold.GetComponent<GuestInApartment>();
+            guestBeenSoldData.SkillTrigger_WhenSold();
+            ApartmentController.Instance.vaultMoney += guestBeenSoldData.guestBasicPrice + guestBeenSoldData.guestExtraPrice;
+            Destroy(GuestController.Instance.GuestInApartmentPrefabStorage[elementCount]);
+            GuestController.Instance.GuestInApartmentPrefabStorage.RemoveAt(elementCount);
+            SkillController.Instance.guestSoldCount += 1;
+            UIController.Instance.UpdateVaultMoneyText();
+            SkillController.Instance.SkillTrigger_EShop("sell");
+            List<GameObject> temporList = new List<GameObject>();
+            temporList.AddRange(GuestController.Instance.GuestInApartmentPrefabStorage);
+            foreach (var guest in temporList)
+            {
+                guest.GetComponent<GuestInApartment>().SkillTrigger_WhenOtherGuestSold();
+            }
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
+        else
+        {
+            Debug.Log("还不允许出售");
+        }
+        
     }
 
     
