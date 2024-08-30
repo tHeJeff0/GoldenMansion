@@ -18,8 +18,14 @@ public class SkillController : MonoBehaviour
     public Action<int> SkillMethod_Financial;
     public Action<int> SkillMethod_Student;
     public Action<int> SkillMethod_Game;
+    public Action<int> SkillMethod_Physical;
+    public Action<int> SkillMethod_House;
+    public Action<int> SkillMethod_Art;
+    public Action<int> SkillMethod_Food;
     public Action<int> SkillMethod_FreeLnacer;
     public Action<int> SkillMethod_Education;
+    public Action<int> SkillMethod_Medic;
+    public Action<int> SkillMethod_Jobless;
     public Action<int> SkillMethod_MediaIncreaseBudget;
     public Action<int, string> SkillMethod_EShop;
     public Action<int> SkillMethod_Media;
@@ -126,6 +132,15 @@ public class SkillController : MonoBehaviour
         SkillTrigger_Student();
         SkillTrigger_Financial();
         SkillTrigger_Game();
+        SkillTrigger_Art();
+        SkillTrigger_Education();
+        SkillTrigger_Food();
+        SkillTrigger_FreeLancer();
+        SkillTrigger_House();
+        SkillTrigger_Jobless();
+        SkillTrigger_MediaIncreaseBudget();
+        SkillTrigger_Medic();
+        SkillTrigger_Physical();
     }
 
     public void SkillTrigger_Student()
@@ -147,6 +162,7 @@ public class SkillController : MonoBehaviour
         SkillMethod_Game?.Invoke(count);
     }
 
+    //已在Guest以及GuestInStorage分别触发
     public void SkillTrigger_EShop(string behave)
     {
         int count = GetFieldCount(6);
@@ -159,13 +175,70 @@ public class SkillController : MonoBehaviour
         SkillMethod_MediaIncreaseBudget?.Invoke(count);
     }
 
+    public void SkillTrigger_FreeLancer()
+    {
+        int count = GetFieldCount(4);
+        SkillMethod_FreeLnacer?.Invoke(count);
+    }
+
+    public void SkillTrigger_Education()
+    {
+        int count = GetFieldCount(5);
+        SkillMethod_Education?.Invoke(count);
+    }
+
+    public void SkillTrigger_Physical()
+    {
+        int count = GetFieldCount(7);
+        SkillMethod_Physical?.Invoke(count);
+    }
+
+    public void SkillTrigger_House()
+    {
+        int count = GetFieldCount(8);
+        SkillMethod_House?.Invoke(count);
+    }
+
+    public void SkillTrigger_Art()
+    {
+        int count = GetFieldCount(9);
+        SkillMethod_Art?.Invoke(count);
+    }
+
+    public void SkillTrigger_Food()
+    {
+        int count = GetFieldCount(10);
+        SkillMethod_Food?.Invoke(count);
+    }
+
+    public void SkillTrigger_Medic()
+    {
+        int count = GetFieldCount(14);
+        SkillMethod_Medic?.Invoke(count);
+    }
+
+    public void SkillTrigger_Jobless()
+    {
+        int count = GetFieldCount(15);
+        SkillMethod_Jobless?.Invoke(count);
+    }
+    
+
     public void FieldSkillRegister()
     {
         SkillMethod_Financial += Skill_Financial;
         SkillMethod_Student += Skill_Student;
         SkillMethod_EShop += Skill_EShop;
+        SkillMethod_FreeLnacer += Skill_FreeLancer;
+        SkillMethod_Education += Skill_Education;
+        SkillMethod_Physical += Skill_Physical;
+        SkillMethod_House += Skill_House;
+        SkillMethod_Art += Skill_Art;
+        SkillMethod_Food += Skill_Food;
         SkillMethod_MediaIncreaseBudget += Skill_MediaIncreaseBudget;
-        SkillMethod_Tour += Skill_Tour;
+        SkillMethod_Tour += Skill_Tour;//已在ApartmentController调用
+        SkillMethod_Medic += Skill_Medic;
+        SkillMethod_Jobless += Skill_Jobless;
     }
 
     public void Skill_Student(int studentCount)
@@ -340,6 +413,7 @@ public class SkillController : MonoBehaviour
         }
     }
 
+    //不需要注册
     public void Skill_MediaBanShop()
     {
         if (GameManager.Instance.isAllowSell && GameManager.Instance.isAllowBuy)
@@ -380,12 +454,23 @@ public class SkillController : MonoBehaviour
 
     public void Skill_Jewel()
     {
-
+        //已独立实现
     }
 
-    public void Skill_Medic()
+    public void Skill_Medic(int medicCount)
     {
-
+        int increaseNumber = SkillLevelSelector(63, medicCount);
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().guestDays > 10)
+            {
+                int days = guest.GetComponent<GuestInApartment>().guestDays - 10;
+                foreach (var medicGuest in GetFieldGuest(14))
+                {
+                    skillEffect.IncreaseTemporBudget(medicGuest.GetComponent<GuestInApartment>(), days * increaseNumber);
+                }
+            }
+        }
     }
 
     public void Skill_Jobless(int joblessCount)

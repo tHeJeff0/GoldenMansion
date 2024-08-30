@@ -72,6 +72,10 @@ public class SkillEffect : MonoBehaviour
         guestInApartment.SkillMethod_WhenMoveIn = null;
         GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
         GameManager.Instance.guestRemoveCount += 1;
+        if (guestInApartment.field == 13)
+        {
+            ApartmentController.Instance.vaultMoney += guestInApartment.adjancentPrice;
+        }
         Destroy(guestInApartment.gameObject);
     }
 

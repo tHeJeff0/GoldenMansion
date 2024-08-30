@@ -27,6 +27,7 @@ public class GuestInApartment : MonoBehaviour
     public bool isMoveIn { get; set; } = false;
     public bool isDestroyable { get; set; } = true;
     public int tourDays { get; set; } = 0;
+    public int adjancentPrice { get; set; } = 0;
 
     [SerializeField] GameObject personaSlot;
     [SerializeField] GameObject personaPic;
@@ -260,6 +261,15 @@ public class GuestInApartment : MonoBehaviour
     {
         GameObject personaIcon = Instantiate(personaPic, personaSlot.transform);
         personaIcon.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute);
+    }
+
+    public void saveAdjancentPrice()
+    {
+        foreach (var guest in GuestController.Instance.GetAdjancentGuest(this))
+        {
+            int totalPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice + guest.GetComponent<GuestInApartment>().guestExtraPrice;
+            adjancentPrice += totalPrice;
+        }
     }
     //private void OnDrawGizmos()
     //{
