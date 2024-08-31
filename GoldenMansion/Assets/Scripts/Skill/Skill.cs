@@ -111,9 +111,15 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public void Skill_ENTJ()
+    public void Skill_ENTJ(GuestInApartment guestInApartment)
     {
-
+        foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+        {
+            if (guest.GetComponent<GuestInApartment>().guestBudget < guestInApartment.guestBudget)
+            {
+                skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
+            }
+        }
     }
 
     public void Skill_ENTP(GuestInApartment guestInApartment)
@@ -147,9 +153,12 @@ public class Skill : MonoBehaviour
         //已在Guest实现相关功能
     }
 
-    public void Skill_ENFJ()
+    public void Skill_ENFJ(GuestInApartment guestInApartment)
     {
-
+        foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+        {
+            skillEffect.IncreaseBasicPrice(guest.GetComponent<GuestInApartment>(), 1);
+        }
     }
 
     public void Skill_ENFP(GuestInApartment guestInApartment)
