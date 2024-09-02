@@ -248,7 +248,7 @@ public class SkillController : MonoBehaviour
             int increaseNumber = SkillLevelSelector(50, studentCount);
             foreach (var guest in GetFieldGuest(1))
             {
-                StartCoroutine(skillEffect.PlayEffectAnim(guest));
+                StartCoroutine(guest.GetComponent<GuestInApartment>().PlayShakeAnim());
                 skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
             }
         }
@@ -262,7 +262,7 @@ public class SkillController : MonoBehaviour
             int increaseNumber = SkillLevelSelector(51, financialCount);
             foreach (var guest in GetFieldGuest(2))
             {
-                StartCoroutine(skillEffect.PlayEffectAnim(guest));
+                StartCoroutine(guest.GetComponent<GuestInApartment>().PlayShakeAnim());
                 skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber * guestSoldCount);
             }
         }
@@ -286,7 +286,7 @@ public class SkillController : MonoBehaviour
                 int increaseNumber = SkillLevelSelector(52, gameCount);
                 foreach (var guest in GetFieldGuest(3))
                 {
-                    StartCoroutine(skillEffect.PlayEffectAnim(guest));
+                    StartCoroutine(guest.GetComponent<GuestInApartment>().PlayShakeAnim());
                     skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), guest.GetComponent<GuestInApartment>().guestBudget * increaseNumber);
                 }
             }

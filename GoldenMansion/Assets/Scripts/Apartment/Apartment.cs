@@ -10,7 +10,7 @@ using UnityEngine.TextCore.Text;
 using static UnityEngine.ParticleSystem;
 using UnityEngine.UI;
 
-public class Apartment : MonoBehaviour,IPointerClickHandler
+public class Apartment : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject lockedApartment;
     [SerializeField] GameObject unLockedApartment;
@@ -36,7 +36,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     private void Awake()
     {
-        
+
         roomKey = 1;//暂时的，后面要改成根据玩家选择输入
         roomName = RoomData.GetItem(roomKey).name;
         roomRent = RoomData.GetItem(roomKey).basicRent;
@@ -44,7 +44,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         roomUnlockCost = RoomData.GetItem(roomKey).unlockCost;
         upgradeSelection.SetActive(false);
 
-        
+
 
         //unLockedApartment.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(RoomData.GetItem(roomKey).roomPicRoute);
 
@@ -73,7 +73,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        
+
         if (this.isUnlock)
         {
             lockedApartment.SetActive(false);
@@ -101,7 +101,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
                     foreach (var selection in upgradeSelections)
                     {
                         selection.GetComponent<ApartmentUpgrade>().roomKeyIsSend = false;
-                        selection.SetActive(false);                       
+                        selection.SetActive(false);
                     }
                     isUpgradeMode = false;
                     Debug.Log(string.Format("{0}被升级为了{1}", this.roomName, RoomData.GetItem(roomKey).name));
@@ -119,7 +119,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
                 {
                     isUpgradeMode = false;
                     upgradeSelection.SetActive(false);
-                }                
+                }
             }
         }
 
@@ -129,12 +129,12 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (ApartmentController.Instance.isBuildMode==true && this.isUnlock == false)
+        if (ApartmentController.Instance.isBuildMode == true && this.isUnlock == false)
         {
             this.isUnlock = true;
             this.roomKey = 1;
             ApartmentController.Instance.apartment.Add(this.gameObject);
-            Debug.Log("已解锁"+this.roomName);
+            Debug.Log("已解锁" + this.roomName);
         }
         else if (ApartmentController.Instance.isBuildMode && this.isUnlock)
         {
@@ -159,7 +159,7 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
             yield return this.coin.transform.DOLocalMoveY(1, 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinGeneratedCount += 1;
         }
-        
+
     }
 
     public IEnumerator PlayMoveCoinAnim()
@@ -168,15 +168,15 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
         {
             yield return new WaitUntil(() => ApartmentController.Instance.guestCount == ApartmentController.Instance.coinGeneratedCount);
             yield return new WaitForSecondsRealtime(2.0f);
-            yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.5f).WaitForCompletion();           
+            yield return this.coin.transform.DOMove(new Vector3(-10, 8, 0), 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinMovedCount += 1;
             this.coin.SetActive(false);
             roomExtraRent = 0;
         }
-        
+
     }
 
-    
+
 
 
 }

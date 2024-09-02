@@ -30,6 +30,7 @@ public class SkillEffect : MonoBehaviour
 
     public void IncreaseTemporBudget(GuestInApartment guestInApartment,int temporBudget)
     {
+
         guestInApartment.guestExtraBudget += temporBudget;
     }
 
@@ -77,10 +78,10 @@ public class SkillEffect : MonoBehaviour
         Destroy(guestInApartment.gameObject);
     }
 
-    public IEnumerator PlayEffectAnim(GameObject guestInApartment)
-    {
-        yield return guestInApartment.transform.DOShakePosition(0.6f,1,90).WaitForCompletion();
+    //public IEnumerator PlayEffectAnim(GameObject guestInApartment)
+    //{
+    //    yield return guestInApartment.transform.DOShakePosition(0.6f,1,90).WaitForCompletion();
 
-    }
+    //}
 
 }

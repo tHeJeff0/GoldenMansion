@@ -1,3 +1,4 @@
+using DG.Tweening;
 using ExcelData;
 using JetBrains.Annotations;
 using System;
@@ -274,6 +275,15 @@ public class GuestInApartment : MonoBehaviour
             int totalPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice + guest.GetComponent<GuestInApartment>().guestExtraPrice;
             adjancentPrice += totalPrice;
         }
+    }
+
+    public IEnumerator PlayShakeAnim()
+    {
+        if (this.GetComponent<GuestInApartment>() != null)
+        {
+            yield return this.transform.DOShakePosition(0.6f, 1, 90).WaitForCompletion();
+        }
+        
     }
     //private void OnDrawGizmos()
     //{
