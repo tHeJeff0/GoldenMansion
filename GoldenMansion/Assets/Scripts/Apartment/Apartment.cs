@@ -127,24 +127,6 @@ public class Apartment : MonoBehaviour,IPointerClickHandler
 
 
 
-    public void ApartmentEffect()
-    {
-        switch (roomKey)
-        {
-            case 2:
-                ApartmentController.Instance.ApartmentEffect_IgnoreBudget(GetComponentInChildren<GuestInApartment>(),this);
-                break;
-            case 3:
-                ApartmentController.Instance.ApartmentEffect_LiveTwoGuest(this);
-                break;
-            case 4:
-                ApartmentController.Instance.ApartmentEffect_IncreaseRent(GetComponentInChildren<GuestInApartment>(),this);
-                break;
-            default:
-                break;
-        }
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (ApartmentController.Instance.isBuildMode==true && this.isUnlock == false)

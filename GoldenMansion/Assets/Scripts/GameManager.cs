@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public int guestRemoveCount { get; set; }
     public bool isAllowSell { get; set; } = true;
     public bool isAllowBuy { get; set; } = true;
-    public int mediaDays { get; set; } = 0;
+    public int mediaDays { get; set; } = -1;
 
     public static GameManager Instance
     {

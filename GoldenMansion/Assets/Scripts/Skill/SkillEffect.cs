@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,6 @@ public class SkillEffect : MonoBehaviour
 
     }
 
-    public void ChangeJob(GuestInApartment guestInApartment,int jobID)
-    {
-        guestInApartment.key = jobID;
-    }
 
     public void GetTemporPersona(GuestInApartment guestInApartment,int personaID)
     {
@@ -68,6 +65,7 @@ public class SkillEffect : MonoBehaviour
 
     public void RemoveGuest(GuestInApartment guestInApartment)
     {
+
         guestInApartment.transform.SetParent(null);
         guestInApartment.SkillMethod_WhenMoveIn = null;
         GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
@@ -79,5 +77,10 @@ public class SkillEffect : MonoBehaviour
         Destroy(guestInApartment.gameObject);
     }
 
+    public IEnumerator PlayEffectAnim(GameObject guestInApartment)
+    {
+        yield return guestInApartment.transform.DOShakePosition(0.6f,1,90).WaitForCompletion();
+
+    }
 
 }
