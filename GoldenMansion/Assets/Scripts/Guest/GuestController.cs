@@ -12,6 +12,7 @@ public class GuestController : MonoBehaviour
 
     public int temporKey;
     public List<GameObject> GuestInApartmentPrefabStorage = new List<GameObject>();
+    public List<GameObject> AnimToPlayStorage = new List<GameObject>();
     public Guest guestDetailPrefab;
     public GuestInApartment guestInApartmentPrefab;
 
@@ -77,7 +78,6 @@ public class GuestController : MonoBehaviour
     }
 
 
-
     void GenerateBasicGuest(int generateCount)
     {
         for (int i = 0; i < generateCount; i++)
@@ -90,113 +90,7 @@ public class GuestController : MonoBehaviour
     }
 
 
-    public void GuestEffect_ChangeJob(GuestInApartment guestInApartment)
-    {
-        if (GameManager.Instance.gameDays - guestInApartment.guestDays == 3)
-        {
-            GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
-            while (guestInApartment.key == 1)
-            {
-                temporKey = RandomKey();
-                guestInApartment.key = temporKey;
-            }
-            GuestInApartmentPrefabStorage.Add(Instantiate(guestInApartmentPrefab.gameObject));
-            
-            
-        }
-        Debug.Log("改变了职业");
-    }
-
-    public void GuestEffect_IgnoreRoomRentLimit(GuestInApartment guestInApartment)
-    {
-        Apartment apartment = guestInApartment.transform.parent.GetComponent<Apartment>();
-        apartment.roomExtraRent = guestInApartment.guestBudget + guestInApartment.guestExtraBudget - apartment.roomRent;
-        Debug.Log("无视房租");
-    }
-
-    public void GuestEffect_PayByNeighbour(GuestInApartment guestInApartment)
-    {
-        List<GameObject> adjancentGuest = new List<GameObject>();
-        adjancentGuest.AddRange(GetAdjancentGuest(guestInApartment));
-
-        for (int i = 0; i < adjancentGuest.Count; i++)
-        {
-            if (adjancentGuest[i].CompareTag("Guest") && adjancentGuest[i].transform!=guestInApartment.transform)
-            {
-                
-                guestInApartment.guestExtraBudget += adjancentGuest[i].GetComponent<GuestInApartment>().guestBudget;
-
-            }
-            else
-            {
-                Debug.Log("没有邻居");
-            }
-        }
-    }
-
-    public void GuestEffect_RateMoveAway(GuestInApartment guestInApartment)
-    {
-        float leaveRate = Random.Range(0, 10);
-        if (leaveRate > 8)
-        {
-            GuestInApartmentPrefabStorage.Remove(guestInApartment.gameObject);
-            Destroy(guestInApartment.gameObject);
-            Debug.Log("码农离开了");
-        }
-        Debug.Log("离开");
-    }
-
-    public void GuestEffect_RentIncrease(GuestInApartment guestInApartment)
-    {
-        Apartment apartment = guestInApartment.transform.parent.GetComponent<Apartment>();
-        apartment.roomRent += 1;
-        Debug.Log("房租增加");
-    }
-
-    public void GuestEffect_RandomBudget()
-    {
-        Debug.Log("预算随机");
-    }
-
-    public void GuestEffect_MoveInNextBy()
-    {
-        
-        Debug.Log("必须住入");
-    }
-
-    public void GuestEffect_RentIncreaseByNeighbour(GuestInApartment guestInApartment)
-    {
-        List<GameObject> adjancentGuest = new List<GameObject>();
-        adjancentGuest.AddRange(GetAdjancentGuest(guestInApartment));
-
-        for (int i = 0; i < adjancentGuest.Count; i++)
-        {
-            if (adjancentGuest[i].CompareTag("Guest") && adjancentGuest[i].transform != guestInApartment.transform)
-            {
-
-                guestInApartment.guestExtraBudget += 1;
-
-            }
-            else
-            {
-                Debug.Log("没有邻居");
-            }
-        }
-        Debug.Log("根据邻居增加房租");
-    }
-
-    public void GuestEffect_GenerateGuest()
-    {
-        float generateRate = Random.Range(0, 10);
-        Debug.Log(generateRate);
-        if (generateRate >= 5)
-        {
-            temporKey = 1;
-            GuestInApartmentPrefabStorage.Add(Instantiate(guestInApartmentPrefab.gameObject));
-        }
-        Debug.Log("拉人入伙");
-    }
-
+    
     public List<GameObject> GetAdjancentGuest(GuestInApartment guestInApartment)
     {
         List<GameObject> adjancentGuest = new List<GameObject>();
@@ -219,10 +113,15 @@ public class GuestController : MonoBehaviour
         temporList.AddRange(GuestInApartmentPrefabStorage);
         foreach (var guest in temporList)
         {
-
             guest.GetComponent<GuestInApartment>().SkillTrigger_WhenMoveIn();
+        }
+    }
 
-
+    public void AnimTrigger()
+    {
+        for (int i = 0; i < AnimToPlayStorage.Count; i++)
+        {
+            //调用动画协程
         }
     }
 

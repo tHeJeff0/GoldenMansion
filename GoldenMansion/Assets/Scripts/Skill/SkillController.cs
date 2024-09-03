@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 
 
@@ -15,17 +16,17 @@ public class SkillController : MonoBehaviour
     public int studentCount;
     public int guestSoldCount;
 
-    public Action<int> SkillMethod_Financial;
-    public Action<int> SkillMethod_Student;
-    public Action<int> SkillMethod_Game;
-    public Action<int> SkillMethod_Physical;
-    public Action<int> SkillMethod_House;
-    public Action<int> SkillMethod_Art;
-    public Action<int> SkillMethod_Food;
-    public Action<int> SkillMethod_FreeLnacer;
-    public Action<int> SkillMethod_Education;
-    public Action<int> SkillMethod_Medic;
-    public Action<int> SkillMethod_Jobless;
+    public Action<int,GameObject> SkillMethod_Financial;
+    public Action<int, GameObject> SkillMethod_Student;
+    public Action<int, GameObject> SkillMethod_Game;
+    public Action<int, GameObject> SkillMethod_Physical;
+    public Action<int, GameObject> SkillMethod_House;
+    public Action<int, GameObject> SkillMethod_Art;
+    public Action<int, GameObject> SkillMethod_Food;
+    public Action<int, GameObject> SkillMethod_FreeLnacer;
+    public Action<int, GameObject> SkillMethod_Education;
+    public Action<int, GameObject> SkillMethod_Medic;
+    public Action<int, GameObject> SkillMethod_Jobless;
     public Action<int> SkillMethod_MediaIncreaseBudget;
     public Action<int, string> SkillMethod_EShop;
     public Action<int> SkillMethod_Media;
@@ -127,39 +128,83 @@ public class SkillController : MonoBehaviour
         
     }
 
-    public void FieldSkillTrigger()
+    public void FieldSkillOrderlyTrigger(List<GameObject> guestInApartmentGroup)
     {
-        SkillTrigger_Student();
-        SkillTrigger_Financial();
-        SkillTrigger_Game();
-        SkillTrigger_Art();
-        SkillTrigger_Education();
-        SkillTrigger_Food();
-        SkillTrigger_FreeLancer();
-        SkillTrigger_House();
-        SkillTrigger_Jobless();
-        SkillTrigger_MediaIncreaseBudget();
-        SkillTrigger_Medic();
-        SkillTrigger_Physical();
+        foreach (var guest in guestInApartmentGroup)
+        {
+            FieldSkillTrigger(guest);
+        }
     }
 
-    public void SkillTrigger_Student()
+    public void FieldSkillTrigger(GameObject guest)
+    {
+        switch (guest.GetComponent<GuestInApartment>().fieldSkillID)
+        {
+            case 50:
+                SkillTrigger_Student(guest);
+                break;
+            case 51: 
+                SkillTrigger_Financial(guest);
+                break;
+            case 52:
+                SkillTrigger_Game(guest);
+                break;
+            case 53:
+                SkillTrigger_FreeLancer(guest);
+                break;
+            case 54:
+                SkillTrigger_Education(guest);
+                break;
+            case 56:
+                SkillTrigger_Physical(guest);
+                break;
+            case 57:
+                SkillTrigger_House(guest);
+                break;
+            case 58:
+                SkillTrigger_Art(guest);
+                break;
+            case 59:
+                SkillTrigger_Food(guest);
+                break;
+            case 63:
+                SkillTrigger_Medic(guest);
+                break;
+            case 64:
+                SkillTrigger_Jobless(guest);
+                break;
+        }
+        //SkillTrigger_Student();
+        //SkillTrigger_Financial();
+        //SkillTrigger_Game();
+        //SkillTrigger_Art();
+        //SkillTrigger_Education();
+        //SkillTrigger_Food();
+        //SkillTrigger_FreeLancer();
+        //SkillTrigger_House();
+        //SkillTrigger_Jobless();
+        //SkillTrigger_MediaIncreaseBudget();
+        //SkillTrigger_Medic();
+        //SkillTrigger_Physical();
+    }
+
+    public void SkillTrigger_Student(GameObject guest)
     {
         int count = GetFieldCount(1);
-        SkillMethod_Student?.Invoke(count);
+        SkillMethod_Student?.Invoke(count,guest);
     }
 
 
-    public void SkillTrigger_Financial()
+    public void SkillTrigger_Financial(GameObject guest)
     {
         int count = GetFieldCount(2);
-        SkillMethod_Financial?.Invoke(count);
+        SkillMethod_Financial?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_Game()
+    public void SkillTrigger_Game(GameObject guest)
     {
         int count = GetFieldCount(3);
-        SkillMethod_Game?.Invoke(count);
+        SkillMethod_Game?.Invoke(count,guest);
     }
 
     //已在Guest以及GuestInStorage分别触发
@@ -175,52 +220,52 @@ public class SkillController : MonoBehaviour
         SkillMethod_MediaIncreaseBudget?.Invoke(count);
     }
 
-    public void SkillTrigger_FreeLancer()
+    public void SkillTrigger_FreeLancer(GameObject guest)
     {
         int count = GetFieldCount(4);
-        SkillMethod_FreeLnacer?.Invoke(count);
+        SkillMethod_FreeLnacer?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_Education()
+    public void SkillTrigger_Education(GameObject guest)
     {
         int count = GetFieldCount(5);
-        SkillMethod_Education?.Invoke(count);
+        SkillMethod_Education?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_Physical()
+    public void SkillTrigger_Physical(GameObject guest)
     {
         int count = GetFieldCount(7);
-        SkillMethod_Physical?.Invoke(count);
+        SkillMethod_Physical?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_House()
+    public void SkillTrigger_House(GameObject guest)
     {
         int count = GetFieldCount(8);
-        SkillMethod_House?.Invoke(count);
+        SkillMethod_House?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_Art()
+    public void SkillTrigger_Art(GameObject guest)
     {
         int count = GetFieldCount(9);
-        SkillMethod_Art?.Invoke(count);
+        SkillMethod_Art?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_Food()
+    public void SkillTrigger_Food(GameObject guest)
     {
         int count = GetFieldCount(10);
-        SkillMethod_Food?.Invoke(count);
+        SkillMethod_Food?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_Medic()
+    public void SkillTrigger_Medic(GameObject guest)
     {
         int count = GetFieldCount(14);
-        SkillMethod_Medic?.Invoke(count);
+        SkillMethod_Medic?.Invoke(count,guest);
     }
 
-    public void SkillTrigger_Jobless()
+    public void SkillTrigger_Jobless(GameObject guest)
     {
         int count = GetFieldCount(15);
-        SkillMethod_Jobless?.Invoke(count);
+        SkillMethod_Jobless?.Invoke(count,guest);
     }
     
 
@@ -241,35 +286,35 @@ public class SkillController : MonoBehaviour
         SkillMethod_Jobless += Skill_Jobless;
     }
 
-    public void Skill_Student(int studentCount)
+    public void Skill_Student(int studentCount,GameObject guestInApartment)
     {
         if (CheckFieldCount(1))
         {
             int increaseNumber = SkillLevelSelector(50, studentCount);
-            foreach (var guest in GetFieldGuest(1))
-            {
-                StartCoroutine(guest.GetComponent<GuestInApartment>().PlayShakeAnim());
-                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
-            }
+            skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), increaseNumber);
+            //foreach (var guest in GetFieldGuest(1))
+            //{
+            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
+            //}
         }
         
     }
 
-    public void Skill_Financial(int financialCount)
+    public void Skill_Financial(int financialCount,GameObject guestInApartment)
     {
         if (CheckFieldCount(2))
         {
             int increaseNumber = SkillLevelSelector(51, financialCount);
-            foreach (var guest in GetFieldGuest(2))
-            {
-                StartCoroutine(guest.GetComponent<GuestInApartment>().PlayShakeAnim());
-                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber * guestSoldCount);
-            }
+            skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), increaseNumber * guestSoldCount);
+            //foreach (var guest in GetFieldGuest(2))
+            //{
+            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber * guestSoldCount);
+            //}
         }
         
     }
 
-    public void Skill_Game(int gameCount)
+    public void Skill_Game(int gameCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(3))
         {
@@ -284,9 +329,9 @@ public class SkillController : MonoBehaviour
             if (fieldCount >= 2)
             {
                 int increaseNumber = SkillLevelSelector(52, gameCount);
+                skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), guestInApartment.GetComponent<GuestInApartment>().guestBudget * increaseNumber);
                 foreach (var guest in GetFieldGuest(3))
                 {
-                    StartCoroutine(guest.GetComponent<GuestInApartment>().PlayShakeAnim());
                     skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), guest.GetComponent<GuestInApartment>().guestBudget * increaseNumber);
                 }
             }
@@ -295,7 +340,7 @@ public class SkillController : MonoBehaviour
         
     }
 
-    public void Skill_FreeLancer(int freeLancerCount)
+    public void Skill_FreeLancer(int freeLancerCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(4))
         {
@@ -309,7 +354,7 @@ public class SkillController : MonoBehaviour
         
     }
 
-    public void Skill_Education(int educationCount)
+    public void Skill_Education(int educationCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(5))
         {
@@ -338,11 +383,13 @@ public class SkillController : MonoBehaviour
                     priceIncreaseNumber = -2;
                     break;
             }
-            foreach (var guest in GetFieldGuest(5))
-            {
-                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), budgetIncreaseNumber);
-                skillEffect.IncreaseTemporPrice(guest.GetComponent<GuestInApartment>(), priceIncreaseNumber);
-            }
+            skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), budgetIncreaseNumber);
+            skillEffect.IncreaseTemporPrice(guestInApartment.GetComponent<GuestInApartment>(), priceIncreaseNumber);
+            //foreach (var guest in GetFieldGuest(5))
+            //{
+            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), budgetIncreaseNumber);
+            //    skillEffect.IncreaseTemporPrice(guest.GetComponent<GuestInApartment>(), priceIncreaseNumber);
+            //}
         }
         
     }
@@ -369,7 +416,7 @@ public class SkillController : MonoBehaviour
         
     }
 
-    public void Skill_Physical(int physicalCount)
+    public void Skill_Physical(int physicalCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(7))
         {
@@ -392,16 +439,17 @@ public class SkillController : MonoBehaviour
             if (physicalCount > biggestCount)
             {
                 int increaseNumber = SkillLevelSelector(56, physicalCount);
-                foreach (var guest in GetFieldGuest(7))
-                {
-                    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), (physicalCount - biggestCount) * increaseNumber);
-                }
+                skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), (physicalCount - biggestCount) * increaseNumber);
+                //foreach (var guest in GetFieldGuest(7))
+                //{
+                //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), (physicalCount - biggestCount) * increaseNumber);
+                //}
             }
         }
         
     }
 
-    public void Skill_House(int houseCount)
+    public void Skill_House(int houseCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(8))
         {
@@ -418,45 +466,57 @@ public class SkillController : MonoBehaviour
             {
                 guest.GetComponent<GuestInApartment>().guestExtraBudget -= increaseNumber;
             }
-            foreach (var guest in GetFieldGuest(8))
-            {
-                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), notHouseGuest.Count * increaseNumber);
-            }
+            skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), notHouseGuest.Count * increaseNumber);
+            //foreach (var guest in GetFieldGuest(8))
+            //{
+            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), notHouseGuest.Count * increaseNumber);
+            //}
         }
         
     }
 
-    public void Skill_Art(int artCount)
+    public void Skill_Art(int artCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(9))
         {
             int increaseNumber = SkillLevelSelector(58, artCount);
-            foreach (var guest in GetFieldGuest(9))
-            {
-                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), GameManager.Instance.guestRemoveCount * increaseNumber);
-            }
+            skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), GameManager.Instance.guestRemoveCount * increaseNumber);
+            //foreach (var guest in GetFieldGuest(9))
+            //{
+            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), GameManager.Instance.guestRemoveCount * increaseNumber);
+            //}
         }
         
     }
 
-    public void Skill_Food(int foodCount)
+    public void Skill_Food(int foodCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(10))
         {
             int increaseNumber = SkillLevelSelector(59, foodCount);
-            foreach (var foodGuest in GetFieldGuest(10))
+            if (guestInApartment.transform.parent != null)
             {
-                if (foodGuest.transform.parent != null)
+                foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
                 {
-                    foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+                    if (guest.GetComponent<GuestInApartment>().field != 10)
                     {
-                        if (guest.GetComponent<GuestInApartment>().field != 10)
-                        {
-                            skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
-                        }
+                        skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
                     }
                 }
             }
+            //foreach (var foodGuest in GetFieldGuest(10))
+            //{
+            //    if (foodGuest.transform.parent != null)
+            //    {
+            //        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+            //        {
+            //            if (guest.GetComponent<GuestInApartment>().field != 10)
+            //            {
+            //                skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
+            //            }
+            //        }
+            //    }
+            //}
         }
         
     }
@@ -513,37 +573,49 @@ public class SkillController : MonoBehaviour
         //已独立实现
     }
 
-    public void Skill_Medic(int medicCount)
+    public void Skill_Medic(int medicCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(14))
         {
             int increaseNumber = SkillLevelSelector(63, medicCount);
-            foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+            if (guestInApartment.GetComponent<GuestInApartment>().guestDays > 10)
             {
-                if (guest.GetComponent<GuestInApartment>().guestDays > 10)
+                int days = guestInApartment.GetComponent<GuestInApartment>().guestDays - 10;
+                foreach (var medicGuest in GetFieldGuest(14))
                 {
-                    int days = guest.GetComponent<GuestInApartment>().guestDays - 10;
-                    foreach (var medicGuest in GetFieldGuest(14))
-                    {
-                        skillEffect.IncreaseTemporBudget(medicGuest.GetComponent<GuestInApartment>(), days * increaseNumber);
-                    }
+                    skillEffect.IncreaseTemporBudget(medicGuest.GetComponent<GuestInApartment>(), days * increaseNumber);
                 }
             }
+            //foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+            //{
+            //    if (guest.GetComponent<GuestInApartment>().guestDays > 10)
+            //    {
+            //        int days = guest.GetComponent<GuestInApartment>().guestDays - 10;
+            //        foreach (var medicGuest in GetFieldGuest(14))
+            //        {
+            //            skillEffect.IncreaseTemporBudget(medicGuest.GetComponent<GuestInApartment>(), days * increaseNumber);
+            //        }
+            //    }
+            //}
         }
         
     }
 
-    public void Skill_Jobless(int joblessCount)
+    public void Skill_Jobless(int joblessCount, GameObject guestInApartment)
     {
         if (CheckFieldCount(15))
         {
-            foreach (var guest in GetFieldGuest(15))
+            if (guestInApartment.GetComponent<GuestInApartment>().guestBudget > 0)
             {
-                if (guest.GetComponent<GuestInApartment>().guestBudget > 0)
-                {
-                    guest.GetComponent<GuestInApartment>().guestBudget -= 1;
-                }
+                guestInApartment.GetComponent<GuestInApartment>().guestBudget -= 1;
             }
+            //foreach (var guest in GetFieldGuest(15))
+            //{
+            //    if (guest.GetComponent<GuestInApartment>().guestBudget > 0)
+            //    {
+            //        guest.GetComponent<GuestInApartment>().guestBudget -= 1;
+            //    }
+            //}
         }
         
     }

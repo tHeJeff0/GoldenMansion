@@ -36,7 +36,7 @@ public class ApartmentController : MonoBehaviour
         }
     }
 
-    public void GuestPayRent()
+    public void GenerateBasicCoin()
     {
         List<Apartment> apartmentWithGuest = new List<Apartment>();
         List<Apartment> apartmentNoGuest = new List<Apartment>();
@@ -65,13 +65,8 @@ public class ApartmentController : MonoBehaviour
             }
             if (guestInApartment.field != 13)
             {
-                PayRent(guestInApartment, apartment);
-                StartCoroutine(apartment.PlayGenerateCoinAnim());
-                StartCoroutine(apartment.PlayMoveCoinAnim());
-            }
-            else
-            {
-                guestInApartment.saveAdjancentPrice();
+                StartCoroutine(apartment.GenerateBasicCoin());
+                
             }
             apartment.apartmentDays += 1;
         }
@@ -79,6 +74,46 @@ public class ApartmentController : MonoBehaviour
         foreach (var apartment in apartmentNoGuest)
         {
             apartment.apartmentDays += 1;
+        }
+    }
+
+    public void GuestPayRent()
+    {
+        List<Apartment> apartmentWithGuest = new List<Apartment>();
+        List<Apartment> apartmentNoGuest = new List<Apartment>();
+        for (int i = 0; i < apartment.Count; i++)
+        {
+            GuestInApartment guestInApartment = apartment[i].GetComponentInChildren<GuestInApartment>();
+            Apartment thisApartment = apartment[i].GetComponent<Apartment>();
+            if (guestInApartment != null)
+            {
+                apartmentWithGuest.Add(thisApartment);
+                //guestCount += 1;
+            }
+            else
+            {
+                apartmentNoGuest.Add(thisApartment);
+            }
+
+        }
+
+        foreach (var apartment in apartmentWithGuest)
+        {
+            GuestInApartment guestInApartment = apartment.GetComponentInChildren<GuestInApartment>();
+            if (guestInApartment.field == 12)
+            {
+                SkillController.Instance.SkillMethod_Tour?.Invoke(SkillController.Instance.GetFieldCount(guestInApartment.field), guestInApartment);
+            }
+            if (guestInApartment.field != 13)
+            {
+                PayRent(guestInApartment, apartment);
+                //StartCoroutine(apartment.PlayGenerateCoinAnim());
+                StartCoroutine(apartment.PlayMoveCoinAnim());
+            }
+            else
+            {
+                guestInApartment.saveAdjancentPrice();
+            }
         }
     }
 
@@ -93,35 +128,6 @@ public class ApartmentController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-
-    public void ApartmentEffect_IgnoreBudget(GuestInApartment guestInApartment, Apartment apartment)
-    {
-        if (guestInApartment.key == 2)
-        {
-            apartment.roomExtraRent = guestInApartment.guestBudget + guestInApartment.guestExtraBudget - apartment.roomRent;
-        }
-        Debug.Log("无视预算");
-    }
-
-    public void ApartmentEffect_LiveTwoGuest(Apartment apartment)
-    {
-        float dice = Random.Range(0, 1);
-        if (dice > 0.5f)
-        {
-            apartment.roomGuestExtraLimit += 1;
-        }
-        Debug.Log("可住2人");
-    }
-
-    public void ApartmentEffect_IncreaseRent(GuestInApartment guestInApartment, Apartment apartment)
-    {
-        if (guestInApartment.key == 8)
-        {
-            apartment.roomRent += 1;
-        }
-        Debug.Log("煤老板入住，增加房租");
     }
 
 

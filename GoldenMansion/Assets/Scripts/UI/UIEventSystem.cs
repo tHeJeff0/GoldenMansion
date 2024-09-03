@@ -46,8 +46,9 @@ public class UIEventSystem : MonoBehaviour
     {
 
         EventQueueManager.Instance.RegisterEvent(UIController.Instance.GuestMoveIn);
-        EventQueueManager.Instance.RegisterEvent(GuestController.Instance.GuestSkillTrigger_WhenMoveIn);
+        EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.GenerateBasicCoin);
         EventQueueManager.Instance.RegisterEvent(SkillController.Instance.FieldSkillTrigger);
+        EventQueueManager.Instance.RegisterEvent(GuestController.Instance.GuestSkillTrigger_WhenMoveIn);
         EventQueueManager.Instance.RegisterEvent(ApartmentController.Instance.GuestPayRent);
         EventQueueManager.Instance.RegisterEvent(UIController.Instance.StartInstantiateMenu);
 

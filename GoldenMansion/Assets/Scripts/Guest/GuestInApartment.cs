@@ -103,41 +103,6 @@ public class GuestInApartment : MonoBehaviour
         }
     }
 
-    //public void GuestEffect()
-    //{
-    //    switch (this.guestEffectID)
-    //    {
-    //        case 1:
-    //            GuestController.Instance.GuestEffect_ChangeJob(this);
-    //            break;
-    //        case 2:
-    //            GuestController.Instance.GuestEffect_IgnoreRoomRentLimit(this);
-    //            break;
-    //        case 3:
-    //            GuestController.Instance.GuestEffect_PayByNeighbour(this);
-    //            break;
-    //        case 4:
-    //            GuestController.Instance.GuestEffect_RateMoveAway(this);
-    //            break;
-    //        case 5:
-    //            GuestController.Instance.GuestEffect_RentIncrease(this);
-    //            break;
-    //        case 6:
-    //            GuestController.Instance.GuestEffect_RandomBudget();
-    //            break;
-    //        case 7:
-    //            GuestController.Instance.GuestEffect_MoveInNextBy();
-    //            break;
-    //        case 8:
-    //            GuestController.Instance.GuestEffect_RentIncreaseByNeighbour(this);
-    //            break;
-    //        case 9:
-    //            GuestController.Instance.GuestEffect_GenerateGuest();
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
 
     public void SkillTrigger()
     {
@@ -277,14 +242,12 @@ public class GuestInApartment : MonoBehaviour
         }
     }
 
+
     public IEnumerator PlayShakeAnim()
     {
-        if (this.GetComponent<GuestInApartment>() != null)
-        {
-            yield return this.transform.DOShakePosition(0.6f, 1, 90).WaitForCompletion();
-        }
-        
+        yield return transform.DOShakePosition(0.4f, 1, 90).WaitForCompletion();
     }
+
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.black;
