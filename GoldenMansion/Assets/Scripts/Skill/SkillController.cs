@@ -1,3 +1,4 @@
+using DG.Tweening;
 using ExcelData;
 using System;
 using System.Collections;
@@ -133,7 +134,7 @@ public class SkillController : MonoBehaviour
     {
         List<GameObject> temporList = ApartmentController.Instance.GetGuestInApartment().
             OrderBy(go => go.transform.position.x).
-            ThenBy(go => go.transform.position.y).ToList();
+            ThenByDescending(go => go.transform.position.y).ToList();
         FieldSkillOrderlyTrigger(temporList);
     }
 
@@ -142,6 +143,8 @@ public class SkillController : MonoBehaviour
         foreach (var guest in guestInApartmentGroup)
         {
             FieldSkillTrigger(guest);
+            Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + guestInApartmentGroup.IndexOf(guest));
+
         }
     }
 
@@ -151,36 +154,47 @@ public class SkillController : MonoBehaviour
         {
             case 50:
                 SkillTrigger_Student(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 51: 
                 SkillTrigger_Financial(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 52:
                 SkillTrigger_Game(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 53:
                 SkillTrigger_FreeLancer(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 54:
                 SkillTrigger_Education(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 56:
                 SkillTrigger_Physical(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 57:
                 SkillTrigger_House(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 58:
                 SkillTrigger_Art(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 59:
                 SkillTrigger_Food(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 63:
                 SkillTrigger_Medic(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 64:
                 SkillTrigger_Jobless(guest);
+                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
         }
         //SkillTrigger_Student();
@@ -641,5 +655,10 @@ public class SkillController : MonoBehaviour
             isMoreThanOne = false;
         }
         return isMoreThanOne;
+    }
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
     }
 }
