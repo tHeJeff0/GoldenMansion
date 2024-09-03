@@ -2,6 +2,7 @@ using ExcelData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -126,6 +127,14 @@ public class SkillController : MonoBehaviour
             return SkillData.GetItem(skillID).effectValue[index];
         }
         
+    }
+
+    public void SkillTrigerControll()
+    {
+        List<GameObject> temporList = ApartmentController.Instance.GetGuestInApartment().
+            OrderBy(go => go.transform.position.x).
+            ThenBy(go => go.transform.position.y).ToList();
+        FieldSkillOrderlyTrigger(temporList);
     }
 
     public void FieldSkillOrderlyTrigger(List<GameObject> guestInApartmentGroup)

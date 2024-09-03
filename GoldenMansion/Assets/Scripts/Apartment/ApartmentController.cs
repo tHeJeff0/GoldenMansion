@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -130,6 +131,19 @@ public class ApartmentController : MonoBehaviour
         }
     }
 
+    public List<GameObject> GetGuestInApartment()
+    {
+        List<GameObject> guestInApartment = new List<GameObject>();
+        for (int i = 0; i < apartment.Count; i++)
+        {
+            GuestInApartment guest = apartment[i].GetComponentInChildren<GuestInApartment>();
+            if (guest != null)
+            {
+                guestInApartment.Add(guest.gameObject);
+            }           
+        }
+        return guestInApartment;
+    }
 
     public void PayRent(GuestInApartment guestInApartment, Apartment apartment)
     {
