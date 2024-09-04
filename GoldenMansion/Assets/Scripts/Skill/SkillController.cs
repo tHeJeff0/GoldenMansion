@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -140,12 +141,12 @@ public class SkillController : MonoBehaviour
 
     public void FieldSkillOrderlyTrigger(List<GameObject> guestInApartmentGroup)
     {
-        foreach (var guest in guestInApartmentGroup)
-        {
-            FieldSkillTrigger(guest);
-            Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + guestInApartmentGroup.IndexOf(guest));
-
-        }
+        StartCoroutine(Wait(0, guestInApartmentGroup));
+        //foreach (var guest in guestInApartmentGroup)
+        //{
+        //    FieldSkillTrigger(guest);
+        //    Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + guestInApartmentGroup.IndexOf(guest));
+        //}
     }
 
     public void FieldSkillTrigger(GameObject guest)
@@ -154,61 +155,39 @@ public class SkillController : MonoBehaviour
         {
             case 50:
                 SkillTrigger_Student(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 51: 
                 SkillTrigger_Financial(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 52:
                 SkillTrigger_Game(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 53:
                 SkillTrigger_FreeLancer(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 54:
                 SkillTrigger_Education(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 56:
                 SkillTrigger_Physical(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 57:
                 SkillTrigger_House(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 58:
                 SkillTrigger_Art(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 59:
                 SkillTrigger_Food(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 63:
                 SkillTrigger_Medic(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
             case 64:
                 SkillTrigger_Jobless(guest);
-                guest.transform.DOShakePosition(0.4f, 1, 90);
                 break;
         }
-        //SkillTrigger_Student();
-        //SkillTrigger_Financial();
-        //SkillTrigger_Game();
-        //SkillTrigger_Art();
-        //SkillTrigger_Education();
-        //SkillTrigger_Food();
-        //SkillTrigger_FreeLancer();
-        //SkillTrigger_House();
-        //SkillTrigger_Jobless();
-        //SkillTrigger_MediaIncreaseBudget();
-        //SkillTrigger_Medic();
-        //SkillTrigger_Physical();
+
     }
 
     public void SkillTrigger_Student(GameObject guest)
@@ -408,11 +387,6 @@ public class SkillController : MonoBehaviour
             }
             skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), budgetIncreaseNumber);
             skillEffect.IncreaseTemporPrice(guestInApartment.GetComponent<GuestInApartment>(), priceIncreaseNumber);
-            //foreach (var guest in GetFieldGuest(5))
-            //{
-            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), budgetIncreaseNumber);
-            //    skillEffect.IncreaseTemporPrice(guest.GetComponent<GuestInApartment>(), priceIncreaseNumber);
-            //}
         }
         
     }
@@ -463,10 +437,6 @@ public class SkillController : MonoBehaviour
             {
                 int increaseNumber = SkillLevelSelector(56, physicalCount);
                 skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), (physicalCount - biggestCount) * increaseNumber);
-                //foreach (var guest in GetFieldGuest(7))
-                //{
-                //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), (physicalCount - biggestCount) * increaseNumber);
-                //}
             }
         }
         
@@ -490,10 +460,7 @@ public class SkillController : MonoBehaviour
                 guest.GetComponent<GuestInApartment>().guestExtraBudget -= increaseNumber;
             }
             skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), notHouseGuest.Count * increaseNumber);
-            //foreach (var guest in GetFieldGuest(8))
-            //{
-            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), notHouseGuest.Count * increaseNumber);
-            //}
+            
         }
         
     }
@@ -504,10 +471,7 @@ public class SkillController : MonoBehaviour
         {
             int increaseNumber = SkillLevelSelector(58, artCount);
             skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), GameManager.Instance.guestRemoveCount * increaseNumber);
-            //foreach (var guest in GetFieldGuest(9))
-            //{
-            //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), GameManager.Instance.guestRemoveCount * increaseNumber);
-            //}
+            
         }
         
     }
@@ -527,19 +491,7 @@ public class SkillController : MonoBehaviour
                     }
                 }
             }
-            //foreach (var foodGuest in GetFieldGuest(10))
-            //{
-            //    if (foodGuest.transform.parent != null)
-            //    {
-            //        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
-            //        {
-            //            if (guest.GetComponent<GuestInApartment>().field != 10)
-            //            {
-            //                skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
-            //            }
-            //        }
-            //    }
-            //}
+            
         }
         
     }
@@ -609,17 +561,7 @@ public class SkillController : MonoBehaviour
                     skillEffect.IncreaseTemporBudget(medicGuest.GetComponent<GuestInApartment>(), days * increaseNumber);
                 }
             }
-            //foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
-            //{
-            //    if (guest.GetComponent<GuestInApartment>().guestDays > 10)
-            //    {
-            //        int days = guest.GetComponent<GuestInApartment>().guestDays - 10;
-            //        foreach (var medicGuest in GetFieldGuest(14))
-            //        {
-            //            skillEffect.IncreaseTemporBudget(medicGuest.GetComponent<GuestInApartment>(), days * increaseNumber);
-            //        }
-            //    }
-            //}
+            
         }
         
     }
@@ -632,13 +574,7 @@ public class SkillController : MonoBehaviour
             {
                 guestInApartment.GetComponent<GuestInApartment>().guestBudget -= 1;
             }
-            //foreach (var guest in GetFieldGuest(15))
-            //{
-            //    if (guest.GetComponent<GuestInApartment>().guestBudget > 0)
-            //    {
-            //        guest.GetComponent<GuestInApartment>().guestBudget -= 1;
-            //    }
-            //}
+            
         }
         
     }
@@ -657,8 +593,20 @@ public class SkillController : MonoBehaviour
         return isMoreThanOne;
     }
 
-    public IEnumerator Wait()
+    public IEnumerator Wait(int index,List<GameObject> guestInApartmentGroup)
     {
-        yield return new WaitForSecondsRealtime(1.0f);
+        if (index >= guestInApartmentGroup.Count)
+        {
+            yield break; // 退出协程  
+        }
+
+        var guest = guestInApartmentGroup[index];
+        FieldSkillTrigger(guest);
+        yield return guest.transform.DOShakePosition(0.4f, 1, 90).WaitForCompletion();
+        Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + index);
+
+
+        // 递归调用，处理下一个Guest  
+        StartCoroutine(Wait((index + 1), guestInApartmentGroup));
     }
 }
