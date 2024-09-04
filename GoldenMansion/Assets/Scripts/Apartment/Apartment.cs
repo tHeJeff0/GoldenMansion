@@ -85,43 +85,14 @@ public class Apartment : MonoBehaviour, IPointerClickHandler
             unLockedApartment.SetActive(false);
         }
 
-
-        if (this.isUpgradeMode)
+        if (coin.activeInHierarchy&& GetComponentInChildren<GuestInApartment>() != null)
         {
-            foreach (var upgradeSelection in upgradeSelections)
-            {
-                if (upgradeSelection.GetComponent<ApartmentUpgrade>().roomKeyIsSend)
-                {
-                    this.roomKey = ApartmentController.Instance.apartmentUpgradeKey;
-                    roomName = RoomData.GetItem(roomKey).name;
-                    roomRent = RoomData.GetItem(roomKey).basicRent;
-                    roomEffect = RoomData.GetItem(roomKey).effectID;
-                    ApartmentController.Instance.apartment.Remove(this.gameObject);
-                    ApartmentController.Instance.apartment.Add(this.gameObject);
-                    foreach (var selection in upgradeSelections)
-                    {
-                        selection.GetComponent<ApartmentUpgrade>().roomKeyIsSend = false;
-                        selection.SetActive(false);
-                    }
-                    isUpgradeMode = false;
-                    Debug.Log(string.Format("{0}被升级为了{1}", this.roomName, RoomData.GetItem(roomKey).name));
-                }
-            }
+            
+                GuestInApartment guestInApartment = this.GetComponentInChildren<GuestInApartment>();
+                this.coin.GetComponentInChildren<TextMeshPro>().text = (guestInApartment.guestBudget + guestInApartment.guestExtraBudget).ToString();
+            
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.transform.gameObject != this.gameObject && !upgradeSelections.Contains(hit.transform.gameObject))
-                {
-                    isUpgradeMode = false;
-                    upgradeSelection.SetActive(false);
-                }
-            }
-        }
 
     }
 
@@ -167,7 +138,7 @@ public class Apartment : MonoBehaviour, IPointerClickHandler
         {
             GuestInApartment guestInApartment = this.GetComponentInChildren<GuestInApartment>();
             this.coin.SetActive(true);
-            this.coin.GetComponentInChildren<TextMeshPro>().text = (guestInApartment.guestBudget + guestInApartment.guestExtraBudget).ToString();
+            //this.coin.GetComponentInChildren<TextMeshPro>().text = (guestInApartment.guestBudget + guestInApartment.guestExtraBudget).ToString();
             this.coin.transform.localPosition = new Vector3(0, 0, 0);
             yield return this.coin.transform.DOLocalMoveY(1, 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinGeneratedCount += 1;
