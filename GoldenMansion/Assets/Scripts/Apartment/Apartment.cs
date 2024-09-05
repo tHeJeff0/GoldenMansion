@@ -138,7 +138,6 @@ public class Apartment : MonoBehaviour, IPointerClickHandler
         {
             GuestInApartment guestInApartment = this.GetComponentInChildren<GuestInApartment>();
             this.coin.SetActive(true);
-            //this.coin.GetComponentInChildren<TextMeshPro>().text = (guestInApartment.guestBudget + guestInApartment.guestExtraBudget).ToString();
             this.coin.transform.localPosition = new Vector3(0, 0, 0);
             yield return this.coin.transform.DOLocalMoveY(1, 0.5f).WaitForCompletion();
             ApartmentController.Instance.coinGeneratedCount += 1;
