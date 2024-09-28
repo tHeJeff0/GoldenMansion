@@ -134,7 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personaSlot: {fileID: 8854610548194720220}
   personaPic: {fileID: 2114656277191329424, guid: 5a83dffed996c504e9753dc9864eccf1, type: 3}
-  nameText: {fileID: 2993914458316947380}
   persona: 
   temporPersona: 
 --- !u!65 &5957343955086743118
@@ -176,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4914811942040269811
 RectTransform:
   m_ObjectHideFlags: 0

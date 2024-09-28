@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour
     {
         
         targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
-        progressBar.GetComponent<Image>().fillAmount = ApartmentController.Instance.vaultMoney / Level.GetItem(GameManager.Instance.levelKey).target;
+        //progressBar.GetComponent<Image>().fillAmount = ApartmentController.Instance.vaultMoney / Level.GetItem(GameManager.Instance.levelKey).target;
     }
 
 
@@ -127,7 +127,7 @@ public class UIController : MonoBehaviour
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].transform.localPosition = new Vector3(0, 0, -0.1f);
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<SpriteRenderer>().enabled = true;
         GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<BoxCollider>().enabled = true;
-        GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<TextMeshPro>().enabled = true;
+        //GuestController.Instance.GuestInApartmentPrefabStorage[guestListTag].GetComponentInChildren<TextMeshPro>().enabled = true;
     }
 
     public void ShowStoragePanel()
