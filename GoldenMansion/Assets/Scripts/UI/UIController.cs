@@ -10,8 +10,8 @@ public class UIController : MonoBehaviour
 {
     
     private static UIController instance;
-    [SerializeField] private TextMeshProUGUI vaultMoneyText;
-    [SerializeField] private TextMeshProUGUI targetText;
+    //[SerializeField] private TextMeshProUGUI vaultMoneyText;
+    //[SerializeField] private TextMeshProUGUI targetText;
     [SerializeField] private GameObject chooseCardPanel;
     [SerializeField] private GameObject storagePanel;
     [SerializeField] private GameObject roundEndPanel;
@@ -54,14 +54,14 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        vaultMoneyText.text = "0";
+        //vaultMoneyText.text = "0";
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
+        //targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
         //progressBar.GetComponent<Image>().fillAmount = ApartmentController.Instance.vaultMoney / Level.GetItem(GameManager.Instance.levelKey).target;
     }
 
@@ -142,7 +142,7 @@ public class UIController : MonoBehaviour
     public IEnumerator InstantiateMenu()
     {
         yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
-        UpdateVaultMoneyText();
+        //UpdateVaultMoneyText();
         yield return new WaitForSecondsRealtime(0.4f);
         if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
         {
@@ -155,10 +155,10 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void UpdateVaultMoneyText()
-    {
-        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
-    }
+    //public void UpdateVaultMoneyText()
+    //{
+    //    vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
+    //}
 
     
 

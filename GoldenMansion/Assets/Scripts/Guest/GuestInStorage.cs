@@ -84,7 +84,7 @@ public class GuestInStorage : MonoBehaviour
             Destroy(GuestController.Instance.GuestInApartmentPrefabStorage[elementCount]);
             GuestController.Instance.GuestInApartmentPrefabStorage.RemoveAt(elementCount);
             SkillController.Instance.guestSoldCount += 1;
-            UIController.Instance.UpdateVaultMoneyText();
+            //UIController.Instance.UpdateVaultMoneyText();
             SkillController.Instance.SkillTrigger_EShop("sell");
             List<GameObject> temporList = new List<GameObject>();
             temporList.AddRange(GuestController.Instance.GuestInApartmentPrefabStorage);
