@@ -19,6 +19,9 @@ public class SkillController : MonoBehaviour
     public int studentCount;
     public int guestSoldCount;
 
+    [SerializeField] AudioSource shakeAudioSource;
+    [SerializeField] AudioClip shakeAudio;
+
     public Action<int,GameObject> SkillMethod_Financial;
     public Action<int, GameObject> SkillMethod_Student;
     public Action<int, GameObject> SkillMethod_Game;
@@ -602,6 +605,8 @@ public class SkillController : MonoBehaviour
 
         var guest = guestInApartmentGroup[index];
         FieldSkillTrigger(guest);
+
+        shakeAudioSource.PlayOneShot(shakeAudio);
         yield return guest.transform.DOShakePosition(0.4f, 1, 90).WaitForCompletion();
         Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + index);
 

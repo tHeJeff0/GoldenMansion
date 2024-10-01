@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using ExcelData;
 using TMPro;
+using UnityEngine.UI;
 
 public class Guest : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Guest : MonoBehaviour
     public string guestDesc { get; set; }
     public int guestBudget { get; set; }
 
+    public GameObject guestPortrait;
+
     private TextMeshProUGUI guestNameText;
     private TextMeshProUGUI guestDescText;
     private TextMeshProUGUI guestBudgetText;
@@ -35,6 +38,7 @@ public class Guest : MonoBehaviour
         guestCost = CharacterData.GetItem(key).basicCost;
         guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
         guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
+        guestPortrait.GetComponent<Image>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
 
         guestNameText.text = guestName;
         guestBudgetText.text = guestBudget.ToString();
