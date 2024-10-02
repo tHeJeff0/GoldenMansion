@@ -23,8 +23,8 @@ public class ChooseCardPanelController : MonoBehaviour
 
     void Awake()
     {
-        //transform.localPosition = new Vector3(transform.parent.position.x, -400f, 0);
-        //transform.DOMoveY(210, 0.4f);
+        transform.localPosition = new Vector3(transform.parent.position.x, -999.0f, 0);
+        transform.DOMoveY(0, 0.4f);
     }
     // Start is called before the first frame update
     void Start()
