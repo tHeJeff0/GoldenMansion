@@ -1,3 +1,4 @@
+using DG.Tweening;
 using ExcelData;
 using System.Collections.Generic;
 using TMPro;
@@ -20,7 +21,11 @@ public class ChooseCardPanelController : MonoBehaviour
 
     private Color temporColor;
 
-
+    void Awake()
+    {
+        transform.position = new Vector3(transform.parent.position.x, -400f, 0);
+        transform.DOMoveY(210, 0.4f);
+    }
     // Start is called before the first frame update
     void Start()
     {

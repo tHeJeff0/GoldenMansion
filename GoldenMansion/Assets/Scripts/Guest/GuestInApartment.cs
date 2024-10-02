@@ -242,12 +242,6 @@ public class GuestInApartment : MonoBehaviour
         }
     }
 
-
-    public IEnumerator PlayShakeAnim()
-    {
-        yield return transform.DOShakePosition(0.4f, 1, 90).WaitForCompletion();
-    }
-
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.black;
