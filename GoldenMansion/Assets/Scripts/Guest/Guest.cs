@@ -32,6 +32,30 @@ public class Guest : MonoBehaviour
     private TextMeshProUGUI guestDescText;
     private TextMeshProUGUI guestBudgetText;
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray) != this.gameObject)
+            {
+
+                isSelected = false;
+                inviteButton.SetActive(false);
+            }
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider != GetComponent<BoxCollider>()&&hit.transform.name!="InviteButton")
+                {
+                    isSelected = false;
+                    inviteButton.SetActive(false);
+                }
+            }
+        }
+    }
 
     private void OnEnable()
     {

@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 6815036676886085438}
   - component: {fileID: 3044072032691447175}
   - component: {fileID: 8316954376089593068}
+  - component: {fileID: 2709494647613964264}
   m_Layer: 0
   m_Name: InviteButton
   m_TagString: Untagged
@@ -345,7 +346,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3358738283123280406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -451,6 +452,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &2709494647613964264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3358738283123280406}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 158.912, y: 27.929335, z: 0.99999946}
+  m_Center: {x: -0.28233102, y: -0.84706295, z: 0}
 --- !u!1 &3654294165889173554
 GameObject:
   m_ObjectHideFlags: 0
