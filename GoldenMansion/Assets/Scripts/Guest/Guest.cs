@@ -5,12 +5,14 @@ using UnityEngine;
 using ExcelData;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Guest : MonoBehaviour
 {
-    [SerializeField] GameObject guestCardNameTextPrefab;
-    //[SerializeField] GameObject guestCardDescTextPrefab;
+    //[SerializeField] GameObject guestCardNameTextPrefab;
+    [SerializeField] GameObject guestCardDescPrefab;
     [SerializeField] GameObject guestCardBudgetTextPrefab;
+    [SerializeField] GameObject inviteButton;
     
 
     public int key { get; set; }
@@ -22,9 +24,11 @@ public class Guest : MonoBehaviour
     public string guestDesc { get; set; }
     public int guestBudget { get; set; }
 
+    private bool isSelected { get; set; } = false;
+
     public GameObject guestPortrait;
 
-    private TextMeshProUGUI guestNameText;
+    //private TextMeshProUGUI guestNameText;
     private TextMeshProUGUI guestDescText;
     private TextMeshProUGUI guestBudgetText;
 
@@ -36,11 +40,11 @@ public class Guest : MonoBehaviour
         guestBudget = CharacterData.GetItem(key).budget;
         guestPrice = CharacterData.GetItem(key).basicPrice;
         guestCost = CharacterData.GetItem(key).basicCost;
-        guestNameText = guestCardNameTextPrefab.GetComponent<TextMeshProUGUI>();
+        guestDesc = guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text;
         guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
         guestPortrait.GetComponent<Image>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
 
-        guestNameText.text = guestName;
+        //guestNameText.text = guestName;
         guestBudgetText.text = guestBudget.ToString();
 
 
@@ -79,11 +83,38 @@ public class Guest : MonoBehaviour
         else
         {
             Debug.Log("²»ÔÊÐí¹ºÂò");
-        }
-        
-
+        }     
 
     }
 
-    
+    private void OnMouseEnter()
+    {
+        transform.DOShakePosition(0.1f,1.5f);
+        guestCardDescPrefab.SetActive(true);
+        int skillID = FieldData.GetItem(CharacterData.GetItem(key).field).skillID;
+        int languageID = SkillData.GetItem(skillID).descID;
+        guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+    }
+
+    private void OnMouseExit()
+    {
+        guestCardDescPrefab.SetActive(false);
+    }
+
+    private void OnMouseDown()
+    {
+        if (!isSelected)
+        {
+            inviteButton.SetActive(true);
+            isSelected = true;
+        }
+        else
+        {
+            inviteButton.SetActive(false);
+            isSelected = false;
+        }
+        
+    }
+
+
 }
