@@ -958,7 +958,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5BA2\u4EBA\u4ECB\u7ECD\u5BA2\u4EBA\u4ECB\u7ECD\u5BA2\u4EBA\u4ECB\u7ECD\u5BA2\u4EBA"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10b94635dddba8841be84763cd17a30e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35d57a023a51f8041ae7547a9cc284ac, type: 2}
   m_sharedMaterial: {fileID: 8758247026330349575, guid: 10b94635dddba8841be84763cd17a30e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_margin: {x: 0.5713539, y: -0.24747562, z: -0.33115387, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5554076027436508311

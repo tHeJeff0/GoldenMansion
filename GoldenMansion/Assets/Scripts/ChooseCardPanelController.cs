@@ -52,24 +52,26 @@ public class ChooseCardPanelController : MonoBehaviour
 
     public void HideChooseCardPanel()
     {
-        chooseGuestSlot.SetActive(false);
-        hideButton.SetActive(false);
-        skipButton.SetActive(false);
-        upgradeRentButton.SetActive(false);
+        //chooseGuestSlot.SetActive(false);
+        //hideButton.SetActive(false);
+        //skipButton.SetActive(false);
+        //upgradeRentButton.SetActive(false);
 
-        this.GetComponent<UnityEngine.UI.Image>().color = new Color(0f, 0f, 0f, 0f);
+        transform.DOMoveY(-20, 0.4f);
+        //this.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
         showPanelButton.gameObject.SetActive(true);
         
     }
 
     public void ShowChooseCardPanel()
     {
-        chooseGuestSlot.SetActive(true);
-        hideButton.SetActive(true);
-        skipButton.SetActive(true);
-        upgradeRentButton.SetActive(true);
+        transform.DOMoveY(0, 0.4f);
+        //chooseGuestSlot.SetActive(true);
+        //hideButton.SetActive(true);
+        //skipButton.SetActive(true);
+        //upgradeRentButton.SetActive(true);
 
-        this.GetComponent<UnityEngine.UI.Image>().color = temporColor;
+        //this.GetComponent<Image>().color = temporColor;
         showPanelButton.gameObject.SetActive(false);
     }
 

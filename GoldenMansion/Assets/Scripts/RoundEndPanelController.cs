@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class RoundEndPanelController : MonoBehaviour
 {
-    [SerializeField] private GameObject quitBuildButton;
+    //[SerializeField] private GameObject quitBuildButton;
     GameObject commitRentGroup;
-    GameObject buildButton;
+    //GameObject buildButton;
     GameObject nextLevelButton;
 
     private void Awake()
     {
         commitRentGroup = GameObject.Find("CommitRentGroup");
-        buildButton = GameObject.Find("BuildButton");
+        //buildButton = GameObject.Find("BuildButton");
         nextLevelButton = GameObject.Find("NextLevelButton");
 
         commitRentGroup.SetActive(true);
-        buildButton.SetActive(false);
+        //buildButton.SetActive(false);
         nextLevelButton.SetActive(false);
     }
     // Start is called before the first frame update
@@ -32,27 +32,27 @@ public class RoundEndPanelController : MonoBehaviour
         
     }
 
-    public void StartBuildMode()
-    {
-        ApartmentController.Instance.isBuildMode = true;
-        foreach (Transform child in transform)
-        { 
-            child.gameObject.SetActive(false);
-        }
-        quitBuildButton.SetActive(true);
+    //public void StartBuildMode()
+    //{
+    //    ApartmentController.Instance.isBuildMode = true;
+    //    foreach (Transform child in transform)
+    //    { 
+    //        child.gameObject.SetActive(false);
+    //    }
+    //    quitBuildButton.SetActive(true);
 
-    }
+    //}
 
-    public void QuitBuildMode()
-    {
-        ApartmentController.Instance.isBuildMode = false;
-        foreach (Transform child in transform)
-        {
+    //public void QuitBuildMode()
+    //{
+    //    ApartmentController.Instance.isBuildMode = false;
+    //    foreach (Transform child in transform)
+    //    {
             
-            child.gameObject.SetActive(true);
-        }
-        quitBuildButton.SetActive(false);
-    }
+    //        child.gameObject.SetActive(true);
+    //    }
+    //    quitBuildButton.SetActive(false);
+    //}
 
     public void GoToNextLevel()
     {
@@ -68,7 +68,7 @@ public class RoundEndPanelController : MonoBehaviour
         float moneyLeft = vaultMoney - targetMoney;
         if (moneyLeft >= 0)
         {
-            buildButton.SetActive(true);
+            //buildButton.SetActive(true);
             nextLevelButton.SetActive(true);
             commitRentGroup.SetActive(false);
         }

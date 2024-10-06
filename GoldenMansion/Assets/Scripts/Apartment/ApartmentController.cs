@@ -69,6 +69,10 @@ public class ApartmentController : MonoBehaviour
                 StartCoroutine(apartment.GenerateBasicCoin());
                 
             }
+            if (guestInApartment.field == 13)
+            {
+                coinGeneratedCount += 1;
+            }
             apartment.apartmentDays += 1;
         }
 
@@ -113,6 +117,7 @@ public class ApartmentController : MonoBehaviour
             }
             else
             {
+                coinMovedCount += 1;
                 guestInApartment.saveAdjancentPrice();
             }
         }
