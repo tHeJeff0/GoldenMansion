@@ -107,10 +107,17 @@ public class ChooseCardPanelController : MonoBehaviour
                 child.gameObject.SetActive(false);
                 child.gameObject.SetActive(true);
             }
+            GameObject.Find("RerollButton").GetComponent<Button>().interactable = false;
+            GameObject.Find("RerollButton").GetComponent<Button>().interactable = true;
             //chooseGuestSlot.SetActive(false);
             Debug.Log("÷ÿπˆ¡À");
             //chooseGuestSlot.SetActive(true);
             GameManager.Instance.extraRerollTime -= 1;
+        }
+        else
+        {
+            GameObject.Find("RerollButton").GetComponent<Button>().interactable = false;
+            GameObject.Find("RerollButton").GetComponent<Button>().interactable = true;
         }
         
     }
