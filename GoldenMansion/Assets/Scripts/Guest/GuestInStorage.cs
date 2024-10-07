@@ -22,7 +22,7 @@ public class GuestInStorage : MonoBehaviour
     private TextMeshProUGUI priceText;
     private Image guestPortrait;
     public GameObject guestInStoragePrefab;
-
+    private bool isSelected;
 
     public List<int> personaID = new List<int>();
 
@@ -47,9 +47,43 @@ public class GuestInStorage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnClick();
+        //OnClick();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-        
+            if (Physics.Raycast(ray) != this.gameObject)
+            {
+
+                isSelected = false;
+                sellButton.SetActive(false);
+            }
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider != GetComponent<BoxCollider>() && hit.transform.name != "SellButton")
+                {
+                    isSelected = false;
+                    sellButton.SetActive(false);
+                }
+            }
+        }
+
+    }
+
+    private void OnMouseDown()
+    {
+        if (!isSelected)
+        {
+            sellButton.SetActive(true);
+            isSelected = true;
+        }
+        else
+        {
+            sellButton.SetActive(false);
+            isSelected = false;
+        }
     }
 
     void OnClick()

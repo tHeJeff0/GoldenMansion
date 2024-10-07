@@ -364,7 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 496298822243493690}
   - component: {fileID: 8761867421621747225}
-  - component: {fileID: 5692364761781361531}
+  - component: {fileID: 7595717336337324539}
   m_Layer: 0
   m_Name: GuestInStorage
   m_TagString: Untagged
@@ -414,15 +414,13 @@ MonoBehaviour:
   nameText: {fileID: 7154138771854600675}
   guestInStoragePrefab: {fileID: 1798404223420829243}
   personaID: 
---- !u!61 &5692364761781361531
-BoxCollider2D:
+--- !u!65 &7595717336337324539
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2926618844314956164}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -431,34 +429,12 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.04156494, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 99.88312, y: 100.049866}
-  m_EdgeRadius: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 82.67935, y: 100.59978, z: 1}
+  m_Center: {x: 1.8894806, y: -0.62981415, z: 0}
 --- !u!1 &4746721575568881806
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,8 +507,9 @@ GameObject:
   - component: {fileID: 6312489815254850778}
   - component: {fileID: 2689605854243069978}
   - component: {fileID: 3721755359086227941}
+  - component: {fileID: 6461860422458646536}
   m_Layer: 0
-  m_Name: Button
+  m_Name: SellButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,6 +629,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &6461860422458646536
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467460492561316967}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 97.29416, y: 25.280685, z: 1}
+  m_Center: {x: -0.62983704, y: 0.62981415, z: 0}
 --- !u!1 &6558362012398407789
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,10 +790,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sell
+  m_text: "\u5356\u6389"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9211257a21a6507429e46554f09b0fcc, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 6656121320604619178, guid: 9211257a21a6507429e46554f09b0fcc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
