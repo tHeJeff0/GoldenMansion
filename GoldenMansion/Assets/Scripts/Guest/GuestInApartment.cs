@@ -211,10 +211,6 @@ public class GuestInApartment : MonoBehaviour
         
     }
 
-    public void GetFieldSkill(int fieldSkillID)
-    {
-
-    }
 
     public void Reset()
     {

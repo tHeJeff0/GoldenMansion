@@ -176,7 +176,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5BA2\u4EBA\u540D\u5B57"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10b94635dddba8841be84763cd17a30e, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 8758247026330349575, guid: 10b94635dddba8841be84763cd17a30e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -471,8 +471,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 158.912, y: 27.929335, z: 0.99999946}
-  m_Center: {x: -0.28233102, y: -0.84706295, z: 0}
+  m_Size: {x: 152.16933, y: 71.75787, z: 0.99999946}
+  m_Center: {x: 3.089005, y: -0.28517026, z: 0}
 --- !u!1 &3654294165889173554
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: 40}
+  m_AnchoredPosition: {x: -43.999985, y: 63.49999}
   m_SizeDelta: {x: 13, y: 13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9170310772251516941
@@ -582,7 +582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 40}
+  m_AnchoredPosition: {x: 3, y: 63.5}
   m_SizeDelta: {x: 76.6809, y: 14.2911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2039948669710284872
@@ -622,8 +622,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278650631
-  m_fontColor: {r: 0.028301895, g: 0.028301895, b: 0.028301895, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1059,7 +1059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: 40}
+  m_AnchoredPosition: {x: 3.0000162, y: 63.49999}
   m_SizeDelta: {x: 76.6809, y: 14.2911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8931933735817736349
@@ -1099,8 +1099,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278650631
-  m_fontColor: {r: 0.028301895, g: 0.028301895, b: 0.028301895, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

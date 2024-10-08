@@ -43,6 +43,7 @@ public class Guest : MonoBehaviour
             {
 
                 isSelected = false;
+                transform.DOLocalMoveY(150, 0.05f);
                 inviteButton.SetActive(false);
             }
 
@@ -51,6 +52,7 @@ public class Guest : MonoBehaviour
                 if (hit.collider != GetComponent<BoxCollider>()&&hit.transform.name!="InviteButton")
                 {
                     isSelected = false;
+                    transform.DOLocalMoveY(150, 0.05f);
                     inviteButton.SetActive(false);
                 }
             }
@@ -96,6 +98,9 @@ public class Guest : MonoBehaviour
                 GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
                 guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
+                inviteButton.SetActive(false);
+                transform.DOLocalMoveY(150, 0.05f);
+                isSelected = false;
                 this.gameObject.SetActive(false);
                 SkillController.Instance.SkillTrigger_EShop("buy");
                 if (key == 49 || key == 50 || key == 51)
@@ -113,7 +118,8 @@ public class Guest : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        transform.DOShakePosition(0.1f,1.5f);
+        transform.DOLocalMoveY(160, 0.05f);
+
         guestCardDescPrefab.SetActive(true);
         int skillID = FieldData.GetItem(CharacterData.GetItem(key).field).skillID;
         int languageID = SkillData.GetItem(skillID).descID;
@@ -122,6 +128,10 @@ public class Guest : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (isSelected == false)
+        {
+            transform.DOLocalMoveY(150, 0.05f);
+        }   
         guestCardDescPrefab.SetActive(false);
     }
 
@@ -130,11 +140,14 @@ public class Guest : MonoBehaviour
         if (!isSelected)
         {
             inviteButton.SetActive(true);
+            transform.DOLocalMoveY(160, 0.05f);
+            transform.DOShakePosition(0.04f, 10);
             isSelected = true;
         }
         else
         {
             inviteButton.SetActive(false);
+            transform.DOLocalMoveY(150, 0.05f);
             isSelected = false;
         }
         

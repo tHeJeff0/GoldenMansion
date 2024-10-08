@@ -78,10 +78,4 @@ public class SkillEffect : MonoBehaviour
         Destroy(guestInApartment.gameObject);
     }
 
-    //public IEnumerator PlayEffectAnim(GameObject guestInApartment)
-    //{
-    //    yield return guestInApartment.transform.DOShakePosition(0.6f,1,90).WaitForCompletion();
-
-    //}
-
 }

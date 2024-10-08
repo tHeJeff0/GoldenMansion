@@ -607,8 +607,8 @@ public class SkillController : MonoBehaviour
         FieldSkillTrigger(guest);
 
         shakeAudioSource.PlayOneShot(shakeAudio);
-        yield return guest.transform.DOShakePosition(0.4f, 1, 90).WaitForCompletion();
-        Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + index);
+        yield return guest.transform.DOShakePosition(0.4f,new Vector3(1.0f,1.0f,0),50,90).WaitForCompletion();
+        //Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + index);
 
 
         // 递归调用，处理下一个Guest  
