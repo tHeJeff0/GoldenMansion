@@ -50,6 +50,7 @@ public class GuestController : MonoBehaviour
         GenerateBasicGuest(basicGuestCount);
     }
 
+
     private void Update()
     {
         
@@ -78,7 +79,7 @@ public class GuestController : MonoBehaviour
     }
 
 
-    void GenerateBasicGuest(int generateCount)
+    public void GenerateBasicGuest(int generateCount)
     {
         for (int i = 0; i < generateCount; i++)
         {

@@ -25,6 +25,6 @@ public class NextDayButton : MonoBehaviour
         {
             GameManager.Instance.mediaDays -= 1;
         }
-        
+
     }
 }

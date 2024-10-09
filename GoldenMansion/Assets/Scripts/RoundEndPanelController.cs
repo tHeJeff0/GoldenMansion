@@ -2,6 +2,7 @@ using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundEndPanelController : MonoBehaviour
 {
@@ -74,7 +75,31 @@ public class RoundEndPanelController : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.isRoundEnd = false;
+            Destroy(this.gameObject);
+            commitRentGroup.SetActive(false);
+            GameReset();
+            SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);       
+            //SceneManager.UnloadSceneAsync("GameScene",UnloadSceneOptions.None);
+            //SceneManager.UnloadSceneAsync("UIScene", UnloadSceneOptions.None);       
             Debug.Log("Game Over!");
         }
+    }
+
+    private void GameReset()
+    {
+        GameManager.Instance.gameDays = 0;
+        GameManager.Instance.levelKey = 1;
+        GameManager.Instance.mediaDays = -1;       
+        foreach (var apartment in ApartmentController.Instance.apartment)
+        {
+            apartment.GetComponent<Apartment>().apartmentDays = 0;
+        }
+        foreach (var guestInApartment in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            Destroy(guestInApartment);
+        }
+        GuestController.Instance.GuestInApartmentPrefabStorage.Clear();
+        GuestController.Instance.GenerateBasicGuest(3);
     }
 }

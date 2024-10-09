@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/SnowwolfStudio/SWExcelExporter/Scenes/Main.unity
     guid: 9b25a2c071c3ed44a9af829112830060
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: ee5eb579099a35a47a9ccc47c69d3369
+  - enabled: 1
+    path: Assets/Scenes/Camera.unity
+    guid: 72dfb9faf2983de48b710e7e818f27f0
+  - enabled: 1
+    path: Assets/Scenes/UIScene.unity
+    guid: ac59ba37ce7e7154094185a4a892852f
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: ba52fde412df6eb4d90bb9e262f40f0a
   m_configObjects: {}

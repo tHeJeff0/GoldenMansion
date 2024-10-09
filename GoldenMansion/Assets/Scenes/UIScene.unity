@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 369239649}
   - component: {fileID: 369239648}
   - component: {fileID: 369239647}
+  - component: {fileID: 369239650}
   m_Layer: 5
   m_Name: StorageButton
   m_TagString: Untagged
@@ -568,9 +569,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2055868759}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: ShowStoragePanel
+      - m_Target: {fileID: 369239650}
+        m_TargetAssemblyTypeName: StorageButton, Assembly-CSharp
+        m_MethodName: OpenStorage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -618,6 +619,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369239645}
   m_CullTransparentMesh: 1
+--- !u!114 &369239650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369239645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4691ee329ec1bb44a94eadab22eb5cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &432427418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,6 +1771,7 @@ GameObject:
   - component: {fileID: 1988559894}
   - component: {fileID: 1988559893}
   - component: {fileID: 1988559892}
+  - component: {fileID: 1988559895}
   m_Layer: 5
   m_Name: NextDayButton
   m_TagString: Untagged
@@ -1830,9 +1844,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 700569640}
-        m_TargetAssemblyTypeName: UIEventSystem, Assembly-CSharp
-        m_MethodName: Execute
+      - m_Target: {fileID: 1988559895}
+        m_TargetAssemblyTypeName: MoveInButton, Assembly-CSharp
+        m_MethodName: MoveIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1892,6 +1906,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988559890}
   m_CullTransparentMesh: 1
+--- !u!114 &1988559895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988559890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee318263a9f49647b5727628ef97bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2046055942
 GameObject:
   m_ObjectHideFlags: 0
