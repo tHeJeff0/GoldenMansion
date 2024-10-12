@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Guest
   - UpgradeButton
+  - GuestInfoCard
+  - JobText
+  - MBTILogo
+  - PersonaLogo
   layers:
   - Default
   - TransparentFX

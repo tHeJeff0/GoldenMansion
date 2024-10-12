@@ -48,18 +48,20 @@ public class Storage : MonoBehaviour
         foreach (var guest in StorageController.Instance.guestStorage)
         {
             GameObject guestInStoragePrefab = Instantiate(guestPrefab,guestSlot.transform);
-            guestInStoragePrefab.GetComponent<GuestInStorage>().key = guest.GetComponent<GuestInApartment>().key;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().personaID = guest.GetComponent<GuestInApartment>().persona;
-            guestInStoragePrefab.GetComponent<GuestInStorage>().elementCount = GuestController.Instance.GuestInApartmentPrefabStorage.IndexOf(guest);
+            guestInStoragePrefab.GetComponent<GuestInfo>().key = guest.GetComponent<GuestInApartment>().key;
+            guestInStoragePrefab.GetComponent<GuestInfo>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
+            guestInStoragePrefab.GetComponent<GuestInfo>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
+            guestInStoragePrefab.GetComponent<GuestInfo>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
+            guestInStoragePrefab.GetComponent<GuestInfo>().basicBudget = guest.GetComponent<GuestInApartment>().guestBudget;
+            guestInStoragePrefab.GetComponent<GuestInfo>().extraBudget = guest.GetComponent<GuestInApartment>().guestExtraBudget;
+            //guestInStoragePrefab.GetComponent<GuestInfo>().personaID = guest.GetComponent<GuestInApartment>().persona;
+            //guestInStoragePrefab.GetComponent<GuestInfo>().elementCount = GuestController.Instance.GuestInApartmentPrefabStorage.IndexOf(guest);
         }
     }
 
     public void CloseThisPanel()
     {
-        storagePrefab.transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         StorageController.Instance.guestStorage.Clear();
     }
    
