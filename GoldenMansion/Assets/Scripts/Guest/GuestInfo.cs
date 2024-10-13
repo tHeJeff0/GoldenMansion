@@ -4,9 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GuestInfo : MonoBehaviour
+public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     public int key { get; set; }
     public int priceShown { get; set; }
@@ -51,40 +52,51 @@ public class GuestInfo : MonoBehaviour
         
     }
 
-    private void OnMouseOver()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (CompareTag("GuestInfoCard"))
-        {
-            transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 1);
-        }
-        if (CompareTag("JobText"))
-        {
-            Debug.Log("显示职业描述");
-        }
-        else
-        {
-            transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 0);
-            transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0);
-            Debug.Log("隐藏职业描述");
-        }
         
+        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 1);
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0);
         
     }
 
+    //private void OnMouseEnter()
+    //{
+        
+    //    if (CompareTag("GuestInfoCard"))
+    //    {
+    //        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 1);
+    //        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 1);
+    //    }
+    //    else if (CompareTag("JobText"))
+    //    {
+    //        Debug.Log("显示职业描述");
+    //    }
+        
+        
+    //}
+
     //private void OnMouseExit()
     //{
+        
     //    if (CompareTag("GuestInfoCard"))
     //    {
     //        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 0);
     //        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0);
     //    }
-    //    if (CompareTag("JobText"))
+    //    else if (CompareTag("JobText"))
     //    {
     //        Debug.Log("隐藏职业描述");
     //    }
-        
+
     //}
 
-    
+
 }
