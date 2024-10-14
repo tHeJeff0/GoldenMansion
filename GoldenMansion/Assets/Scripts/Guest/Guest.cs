@@ -28,7 +28,6 @@ public class Guest : MonoBehaviour
 
     public GameObject guestPortrait;
 
-    //private TextMeshProUGUI guestNameText;
     private TextMeshProUGUI guestDescText;
     private TextMeshProUGUI guestBudgetText;
 
@@ -69,8 +68,6 @@ public class Guest : MonoBehaviour
         guestDesc = guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text;
         guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
         guestPortrait.GetComponent<Image>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
-
-        //guestNameText.text = guestName;
         guestBudgetText.text = guestBudget.ToString();
 
 
@@ -93,7 +90,6 @@ public class Guest : MonoBehaviour
             if (ApartmentController.Instance.vaultMoney >= guestCost)
             {
                 ApartmentController.Instance.vaultMoney -= guestCost;
-                //UIController.Instance.UpdateVaultMoneyText();
                 GuestController.Instance.temporKey = this.key;
                 GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
                 guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;

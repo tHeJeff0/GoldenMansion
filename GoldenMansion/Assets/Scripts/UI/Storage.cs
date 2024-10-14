@@ -14,11 +14,6 @@ public class Storage : MonoBehaviour
     {
         OnActive();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -56,7 +51,6 @@ public class Storage : MonoBehaviour
             guestInStoragePrefab.GetComponent<GuestInfo>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
             guestInStoragePrefab.GetComponent<GuestInfo>().basicBudget = guest.GetComponent<GuestInApartment>().guestBudget;
             guestInStoragePrefab.GetComponent<GuestInfo>().extraBudget = guest.GetComponent<GuestInApartment>().guestExtraBudget;
-            //guestInStoragePrefab.GetComponent<GuestInfo>().personaID = guest.GetComponent<GuestInApartment>().persona;
             guestInStoragePrefab.GetComponent<GuestInfo>().elementID = guest.GetComponent<GuestInApartment>().guestElementID;
         }
     }
@@ -70,49 +64,15 @@ public class Storage : MonoBehaviour
     public void SellGuest()
     {
         
-        //StorageController.Instance.temporGuestList.AddRange(GuestController.Instance.GuestInApartmentPrefabStorage);
         List<GameObject> temporList = new List<GameObject>();
         temporList.AddRange(StorageController.Instance.guestSelected);
         for (int i = temporList.Count - 1; i >= 0 ; i--)
         {
             temporList[i].GetComponent<GuestInfo>().OnSell();
-            //StorageController.Instance.RemoveStorage(temporList[i]);
         }
         temporList.Clear();
         StorageController.Instance.guestSelected.Clear();
-        //StorageController.Instance.temporGuestList.Clear();
-        //foreach (var guest in temporList)
-        //{
-        //    Debug.Log(guest.GetComponent<GuestInfo>().elementCount);
-        //    guest.GetComponent<GuestInfo>().OnSell();
-        //    StorageController.Instance.RemoveStorage(guest);
-        //    foreach (var guestremaining in temporList)
-        //    {
-        //        guestremaining.GetComponent<GuestInfo>().elementCount -= 1;
-        //    }
-        //    //UpdateStorage();
-        //    //if (temporList.IndexOf(guest) > 1)
-        //    //{
-        //    //    guest.GetComponent<GuestInfo>().elementCount -= (temporList.Count-1);
-        //    //    guest.GetComponent<GuestInfo>().OnSell();
-        //    //    StorageController.Instance.RemoveStorage(guest);
-        //    //}
-        //    //else if(temporList.IndexOf(guest) == 1)
-        //    //{
-        //    //    guest.GetComponent<GuestInfo>().elementCount -= 1;
-        //    //    guest.GetComponent<GuestInfo>().OnSell();
-        //    //    StorageController.Instance.RemoveStorage(guest);
-        //    //}
-        //    //else
-        //    //{
-        //    //    guest.GetComponent<GuestInfo>().OnSell();
-        //    //    StorageController.Instance.RemoveStorage(guest);
-        //    //}
-
-        //}
-        //temporList.Clear();
-        //StorageController.Instance.temporGuestList.Clear();
-        //UpdateStorage();
+        
     }
    
 }

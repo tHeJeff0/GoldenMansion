@@ -56,7 +56,6 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     public void OnPointerEnter(PointerEventData eventData)
     {
         ChangeIntoHighlighted();
-
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -80,9 +79,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
         if (!isSelected)
         {
             StopHighlighted();
-        }
-        
-        
+        }              
     }
 
     void ChangeIntoHighlighted()
@@ -131,26 +128,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
                     StorageController.Instance.guestSelected.Remove(gameObject);
                     Destroy(gameObject);
                 }
-            }
-            //GameObject guestBeenSold = StorageController.Instance.temporGuestList[elementCount];
-            //GameObject guestBeenSold = GuestController.Instance.GuestInApartmentPrefabStorage[elementCount];
-            //GuestInApartment guestBeenSoldData = guestBeenSold.GetComponent<GuestInApartment>();
-            //guestBeenSoldData.SkillTrigger_WhenSold();
-            //ApartmentController.Instance.vaultMoney += guestBeenSoldData.guestBasicPrice + guestBeenSoldData.guestExtraPrice;
-            //Destroy(GuestController.Instance.GuestInApartmentPrefabStorage[elementCount]);
-            //GuestController.Instance.GuestInApartmentPrefabStorage.RemoveAt(elementCount);
-            //SkillController.Instance.guestSoldCount += 1;
-            //UIController.Instance.UpdateVaultMoneyText();
-            //SkillController.Instance.SkillTrigger_EShop("sell");
-            //List<GameObject> temporList = new List<GameObject>();
-            //temporList.AddRange(GuestController.Instance.GuestInApartmentPrefabStorage);
-            //foreach (var guest in temporList)
-            //{
-            //    guest.GetComponent<GuestInApartment>().SkillTrigger_WhenOtherGuestSold();
-            //}
-            //StorageController.Instance.guestStorage.Remove(gameObject);
-            //StorageController.Instance.guestSelected.Remove(gameObject);
-            //Destroy(gameObject);
+            }            
         }
         else
         {
@@ -158,37 +136,6 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
         }
 
     }
-
-    //private void OnMouseEnter()
-    //{
-
-    //    if (CompareTag("GuestInfoCard"))
-    //    {
-    //        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 1);
-    //        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 1);
-    //    }
-    //    else if (CompareTag("JobText"))
-    //    {
-    //        Debug.Log("显示职业描述");
-    //    }
-
-
-    //}
-
-    //private void OnMouseExit()
-    //{
-
-    //    if (CompareTag("GuestInfoCard"))
-    //    {
-    //        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 0);
-    //        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0);
-    //    }
-    //    else if (CompareTag("JobText"))
-    //    {
-    //        Debug.Log("隐藏职业描述");
-    //    }
-
-    //}
 
 
 }

@@ -8,7 +8,6 @@ public class StorageController : MonoBehaviour
 
     public List<GameObject> guestStorage = new List<GameObject>();
     public List<GameObject> guestSelected = new List<GameObject>();
-    //public List<GameObject> temporGuestList = new List<GameObject>();
 
     public static StorageController Instance
     {
@@ -40,22 +39,7 @@ public class StorageController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void UpdateElementCount()
-    {
-
-    }
 
     public void AddStorage()
     {
