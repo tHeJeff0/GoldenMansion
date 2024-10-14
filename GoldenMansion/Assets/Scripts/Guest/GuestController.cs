@@ -1,9 +1,12 @@
 using ExcelData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class GuestController : MonoBehaviour
 {
@@ -74,7 +77,7 @@ public class GuestController : MonoBehaviour
                 keyMin = key;
             }
         }
-        randomKey = Random.Range(keyMin, keyMax + 1);
+        randomKey = UnityEngine.Random.Range(keyMin, keyMax + 1);
         return randomKey;
     }
 
@@ -124,6 +127,22 @@ public class GuestController : MonoBehaviour
         {
             //调用动画协程
         }
+    }
+
+    public  string GenerateRandomCode(int length)
+    {
+        System.Random random = new System.Random();
+        char[] characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".ToCharArray();
+
+        StringBuilder sb = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++)
+        {
+            int index = random.Next(characters.Length);
+            sb.Append(characters[index]);
+        }
+
+        return sb.ToString();
     }
 
 }

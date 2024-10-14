@@ -7,6 +7,8 @@ public class StorageController : MonoBehaviour
     private static StorageController instance;
 
     public List<GameObject> guestStorage = new List<GameObject>();
+    public List<GameObject> guestSelected = new List<GameObject>();
+    //public List<GameObject> temporGuestList = new List<GameObject>();
 
     public static StorageController Instance
     {

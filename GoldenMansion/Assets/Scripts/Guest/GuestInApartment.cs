@@ -29,6 +29,7 @@ public class GuestInApartment : MonoBehaviour
     public bool isDestroyable { get; set; } = true;
     public int tourDays { get; set; } = 0;
     public int adjancentPrice { get; set; } = 0;
+    public string guestElementID { get; set; }
 
     [SerializeField] GameObject personaSlot;
     [SerializeField] GameObject personaPic;
@@ -51,20 +52,20 @@ public class GuestInApartment : MonoBehaviour
     void Awake()
     {
         key = GuestController.Instance.temporKey;
-        this.field = CharacterData.GetItem(key).field;
-        this.fieldSkillID = FieldData.GetItem(field).skillID;
-        this.guestDays = GameManager.Instance.gameDays;
-        this.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
-        this.guestName = CharacterData.GetItem(key).name;
-        this.guestBudget = CharacterData.GetItem(key).budget;
-        this.guestBasicCost = CharacterData.GetItem(key).basicCost;
-        this.guestBasicPrice = CharacterData.GetItem(key).basicPrice;
-        //this.nameText.text = CharacterData.GetItem(key).name;
+        guestElementID = GuestController.Instance.GenerateRandomCode(8);
+        field = CharacterData.GetItem(key).field;
+        fieldSkillID = FieldData.GetItem(field).skillID;
+        guestDays = GameManager.Instance.gameDays;
+        GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
+        guestName = CharacterData.GetItem(key).name;
+        guestBudget = CharacterData.GetItem(key).budget;
+        guestBasicCost = CharacterData.GetItem(key).basicCost;
+        guestBasicPrice = CharacterData.GetItem(key).basicPrice;
+        
 
-        this.gameObject.SetActive(true);
-        this.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        this.GetComponent<BoxCollider>().enabled = false;
-        //this.nameText.enabled = false;
+        gameObject.SetActive(true);
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
 
     }
 
