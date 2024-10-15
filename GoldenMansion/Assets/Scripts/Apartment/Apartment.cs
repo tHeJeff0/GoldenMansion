@@ -54,20 +54,6 @@ public class Apartment : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         ApartmentController.Instance.apartment.Add(this.gameObject);
-
-        //if (this.transform.parent.name == "Row1")
-        //{
-        //    this.isUnlock = true;
-        //    this.roomKey = 1;
-        //    //ApartmentController.Instance.unLockedApartmentCount += 1;
-        //}
-        //if (this.isUnlock)
-        //{
-        //    Debug.Log("解锁第一行");
-        //    this.lockedApartment.SetActive(false);
-        //    this.unLockedApartment.SetActive(true);
-        //    
-        //}
     }
 
     // Update is called once per frame

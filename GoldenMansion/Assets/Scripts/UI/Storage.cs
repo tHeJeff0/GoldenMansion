@@ -28,21 +28,21 @@ public class Storage : MonoBehaviour
             }
             StorageController.Instance.guestStorage.Clear();
             StorageController.Instance.AddStorage();
-            UpdateStorage();
+            UpdateStorage(StorageController.Instance.guestStorage);
         }
     }
 
     public void OnActive()
     {
         StorageController.Instance.AddStorage();
-        UpdateStorage();
+        UpdateStorage(StorageController.Instance.guestStorage);
 
     }
 
-    public void UpdateStorage()
+    public void UpdateStorage(List<GameObject> storageShown)
     {
         
-        foreach (var guest in StorageController.Instance.guestStorage)
+        foreach (var guest in storageShown)
         {
             GameObject guestInStoragePrefab = Instantiate(guestPrefab,guestSlot.transform);
             guestInStoragePrefab.GetComponent<GuestInfo>().key = guest.GetComponent<GuestInApartment>().key;
@@ -75,4 +75,21 @@ public class Storage : MonoBehaviour
         
     }
    
+    public List<GameObject> GuestFilter(List<int> jobKey)
+    {
+        List<GameObject> guestsMatchedLabel = new List<GameObject>();
+        return guestsMatchedLabel;
+    }
+
+    public List<GameObject> GuestFilter(List<int> jobKey,List<int> personaKey)
+    {
+        List<GameObject> guestsMatchedLabel = new List<GameObject>();
+        return guestsMatchedLabel;
+    }
+
+    public List<GameObject> GuestFilter(List<int> jobKey, List<int> personaKey,List<bool> isIntern)
+    {
+        List<GameObject> guestsMatchedLabel = new List<GameObject>();
+        return guestsMatchedLabel;
+    }
 }
