@@ -10,6 +10,7 @@ TagManager:
   - JobText
   - MBTILogo
   - PersonaLogo
+  - FirstStageFilterButton
   layers:
   - Default
   - TransparentFX

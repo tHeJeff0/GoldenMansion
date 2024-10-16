@@ -18,6 +18,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject thisCanvas;
     [SerializeField] private GameObject progressBar;
 
+    public List<string> FirstFilterStageSelection = new List<string>();
+
     int guestInApartmentPrefabCount;
     int unlockedApartmentCount;
 
