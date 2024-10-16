@@ -14,6 +14,7 @@ public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
 
     public string buttonName { get; set; }
 
+    Filter filter = new Filter();
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -21,6 +22,10 @@ public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
         {
             GetComponentInChildren<TextMeshProUGUI>().color = new Color(0, 0, 0, 1);
             GetComponent<Image>().color = new Color(1, 1, 1, 1);            
+        }
+        if (CompareTag("FirstStageFilterButton"))
+        {
+            StartCoroutine(filter.ShowJobFilterSelection(tag));
         }
         
     }

@@ -17,8 +17,13 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject roundEndPanel;
     [SerializeField] private GameObject thisCanvas;
     [SerializeField] private GameObject progressBar;
+    public GameObject filterFirstStage;
+    public GameObject filterSecondStage;
+    public GameObject filterSelectionButton;
 
     public List<string> FirstFilterStageSelection = new List<string>();
+    public List<int> JobFilterSelection = new List<int>();
+    public List<int> PersonaFilterSelection = new List<int>();
 
     int guestInApartmentPrefabCount;
     int unlockedApartmentCount;
