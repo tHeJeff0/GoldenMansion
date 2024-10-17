@@ -11,6 +11,8 @@ TagManager:
   - MBTILogo
   - PersonaLogo
   - FirstStageFilterButton
+  - type0
+  - type1
   layers:
   - Default
   - TransparentFX

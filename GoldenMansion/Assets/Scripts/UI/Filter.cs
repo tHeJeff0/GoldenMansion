@@ -58,7 +58,7 @@ public class Filter : MonoBehaviour
         {
             GameObject button = Instantiate(UIController.Instance.filterSelectionButton,UIController.Instance.filterFirstStage.transform.Find("Content").transform);
             button.GetComponentInChildren<TextMeshProUGUI>().text = UIController.Instance.FirstFilterStageSelection[i];
-            button.tag = "FirstStageFilterButton";
+            button.tag = new string("type" + i);
             yield return new WaitForSecondsRealtime(0.1f);
         }
         
@@ -75,13 +75,25 @@ public class Filter : MonoBehaviour
         isInFilterMode = false;
     }
 
-    public IEnumerator ShowJobFilterSelection(string filterType)
+    public IEnumerator ShowJobFilterSelection(GameObject jobFilterSelection,GameObject parent)
     {
         for (int i = 0; i < UIController.Instance.JobFilterSelection.Count; i++)
         {
-            GameObject button = Instantiate(UIController.Instance.filterSelectionButton, UIController.Instance.filterSecondStage.transform.Find("FilterScrollView").Find("Viewport").Find("Content"));
-            button.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(FieldData.GetItem(UIController.Instance.JobFilterSelection[i]).nameID).CHN;
-            yield return new WaitForSecondsRealtime(0.01f);
+            GameObject button = Instantiate(jobFilterSelection, parent.transform);
+            button.GetComponent<JobFilterSelection>().key = UIController.Instance.JobFilterSelection[i];
+            yield return new WaitForSecondsRealtime(0.001f);
+        }        
+    }
+
+    public IEnumerator ShowPersonaFilterSelection(GameObject personaFilterSelection,GameObject parent)
+    {
+        for (int i = 0; i < UIController.Instance.PersonaFilterSelection.Count; i++)
+        {
+            GameObject button = Instantiate(personaFilterSelection, parent.transform);
+            button.GetComponent<PersonaFilterSelection>().key = UIController.Instance.PersonaFilterSelection[i];
+            yield return new WaitForSecondsRealtime(0.001f);
         }
     }
+
+   
 }

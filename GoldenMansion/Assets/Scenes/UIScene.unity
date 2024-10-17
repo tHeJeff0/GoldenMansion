@@ -1389,6 +1389,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1686733326421834390, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 381.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1686733326421834390, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 168.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 1686733326421834390, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -157.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1686733326421834390, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.86
+      objectReference: {fileID: 0}
     - target: {fileID: 2222637041971442633, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1457,6 +1473,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3831684376977128196, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_HorizontalFit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4017973034461919031, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1487,6 +1507,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4697471548941093553, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716344343117622822, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086103767310194530, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_Vertical
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086103767310194530, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: m_Horizontal
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5118646143559430111, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
