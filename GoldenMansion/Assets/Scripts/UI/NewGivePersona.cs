@@ -78,13 +78,13 @@ public class NewGivePersona : MonoBehaviour
             if (guest != null && guest.GetComponent<GuestInApartment>()!=null)
             {
                 GameObject guestInStoragePrefab = Instantiate(guestPrefab, guestSlot.transform);
-                guestInStoragePrefab.GetComponent<GuestInfo>().key = guest.GetComponent<GuestInApartment>().key;
-                guestInStoragePrefab.GetComponent<GuestInfo>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
-                guestInStoragePrefab.GetComponent<GuestInfo>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
-                guestInStoragePrefab.GetComponent<GuestInfo>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
-                guestInStoragePrefab.GetComponent<GuestInfo>().basicBudget = guest.GetComponent<GuestInApartment>().guestBudget;
-                guestInStoragePrefab.GetComponent<GuestInfo>().extraBudget = guest.GetComponent<GuestInApartment>().guestExtraBudget;
-                guestInStoragePrefab.GetComponent<GuestInfo>().elementID = guest.GetComponent<GuestInApartment>().guestElementID;
+                guestInStoragePrefab.GetComponent<GuestInfoWhenGivePersona>().key = guest.GetComponent<GuestInApartment>().key;
+                guestInStoragePrefab.GetComponent<GuestInfoWhenGivePersona>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
+                guestInStoragePrefab.GetComponent<GuestInfoWhenGivePersona>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
+                guestInStoragePrefab.GetComponent<GuestInfoWhenGivePersona>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
+                guestInStoragePrefab.GetComponent<GuestInfoWhenGivePersona>().basicBudget = guest.GetComponent<GuestInApartment>().guestBudget;
+                guestInStoragePrefab.GetComponent<GuestInfoWhenGivePersona>().extraBudget = guest.GetComponent<GuestInApartment>().guestExtraBudget;
+                guestInStoragePrefab.GetComponent<GuestInfoWhenGivePersona>().elementID = guest.GetComponent<GuestInApartment>().guestElementID;
             }
             
         }
@@ -94,27 +94,6 @@ public class NewGivePersona : MonoBehaviour
     {
         gameObject.SetActive(false);
         StorageController.Instance.guestStorage.Clear();
-    }
-
-    public void SellGuest()
-    {
-        StartCoroutine(SellGuestCoroutine());
-        
-
-    }
-
-    IEnumerator SellGuestCoroutine()
-    {
-        List<GameObject> temporList = new List<GameObject>();
-        temporList.AddRange(StorageController.Instance.guestSelected);
-        for (int i = temporList.Count - 1; i >= 0; i--)
-        {
-            temporList[i].GetComponent<GuestInfo>().OnSell();
-            yield return true;
-        }
-        StorageController.Instance.filterWaitingUpdate = true;
-        temporList.Clear();
-        StorageController.Instance.guestSelected.Clear();
     }
    
 }
