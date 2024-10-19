@@ -153,6 +153,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guestStorage: []
   guestSelected: []
+  guestFilteredStorage: []
+  filterSelectedCount: 0
+  filterWaitingUpdate: 0
+  isFilterMode: 0
 --- !u!4 &47104003
 Transform:
   m_ObjectHideFlags: 0
@@ -1429,6 +1433,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2652167439959251267, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
+      propertyPath: filterSelectionButton
+      value: 
+      objectReference: {fileID: 631819164908883094, guid: 3a217b85fcd0d0042a4fd488dbbe2b9e, type: 3}
     - target: {fileID: 2998301843899138575, guid: 3d3f5152a185a474483f4477b5a18a9b, type: 3}
       propertyPath: m_Size
       value: 0.3338703
@@ -2745,6 +2753,14 @@ PrefabInstance:
       propertyPath: filterSecondStage
       value: 
       objectReference: {fileID: 807763573}
+    - target: {fileID: 9041395642930946112, guid: 8b21ee07ae4d57f4986d591e36a1083a, type: 3}
+      propertyPath: filterFirstStageInGivePersona
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041395642930946112, guid: 8b21ee07ae4d57f4986d591e36a1083a, type: 3}
+      propertyPath: filterSecondStageInGivePersona
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

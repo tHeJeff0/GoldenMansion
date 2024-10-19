@@ -10,6 +10,9 @@ public class Filter : MonoBehaviour
 
     bool isInFilterMode = false;
 
+    [SerializeField] GameObject filterFirstStage;
+    [SerializeField] GameObject filterSelectionButton;
+
     private void Awake()
     {
         UIController.Instance.FirstFilterStageSelection.Add("ְҵ");
@@ -41,7 +44,7 @@ public class Filter : MonoBehaviour
     {
         if (!isInFilterMode)
         {
-            UIController.Instance.filterFirstStage.SetActive(true);
+            filterFirstStage.SetActive(true);
             StartCoroutine(ShowFilterSelection());
             isInFilterMode = true;
         }
@@ -56,7 +59,7 @@ public class Filter : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            GameObject button = Instantiate(UIController.Instance.filterSelectionButton,UIController.Instance.filterFirstStage.transform.Find("Content").transform);
+            GameObject button = Instantiate(filterSelectionButton, filterFirstStage.transform.Find("Content").transform);
             button.GetComponentInChildren<TextMeshProUGUI>().text = UIController.Instance.FirstFilterStageSelection[i];
             button.tag = new string("type" + i);
             yield return new WaitForSecondsRealtime(0.1f);
@@ -66,12 +69,12 @@ public class Filter : MonoBehaviour
 
     IEnumerator HideFilterSelection()
     {
-        for (int i = 0; i < UIController.Instance.filterFirstStage.transform.Find("Content").childCount+1; i++)
+        for (int i = 0; i < filterFirstStage.transform.Find("Content").childCount+1; i++)
         {
-            Destroy(UIController.Instance.filterFirstStage.transform.Find("Content").GetChild(0).gameObject);
+            Destroy(filterFirstStage.transform.Find("Content").GetChild(0).gameObject);
             yield return new WaitForSecondsRealtime(0.1f);
         }
-        UIController.Instance.filterFirstStage.SetActive(false);
+        filterFirstStage.SetActive(false);
         isInFilterMode = false;
     }
 

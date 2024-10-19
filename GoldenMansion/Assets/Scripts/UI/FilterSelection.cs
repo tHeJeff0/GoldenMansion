@@ -20,20 +20,6 @@ public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
 
     Filter filter = new Filter();
 
-    private void Awake()
-    {
-        //if (CompareTag("type0"))
-        //{
-        //    StartCoroutine(filter.ShowJobFilterSelection(JobFilterButton, SecondStepTransform));
-        //    //SecondStepTransform.SetActive(false);
-        //}
-        //else if (CompareTag("type1"))
-        //{
-        //    StartCoroutine(filter.ShowPersonaFilterSelection(PersonaFilterButton, SecondStepTransform));
-        //    //SecondStepTransform.SetActive(false);
-        //}
-
-    }
 
     private void Start()
     {

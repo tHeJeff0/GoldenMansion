@@ -17,9 +17,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject roundEndPanel;
     [SerializeField] private GameObject thisCanvas;
     [SerializeField] private GameObject progressBar;
-    public GameObject filterFirstStage;
-    public GameObject filterSecondStage;
-    public GameObject filterSelectionButton;
 
     public List<string> FirstFilterStageSelection = new List<string>();
     public List<int> JobFilterSelection = new List<int>();
@@ -68,8 +65,6 @@ public class UIController : MonoBehaviour
     void Update()
     {
         
-        //targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
-        //progressBar.GetComponent<Image>().fillAmount = ApartmentController.Instance.vaultMoney / Level.GetItem(GameManager.Instance.levelKey).target;
     }
 
 

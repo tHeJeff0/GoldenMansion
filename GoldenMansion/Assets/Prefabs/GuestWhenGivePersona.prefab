@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.5424, y: 67.749}
-  m_SizeDelta: {x: 66.9151, y: 30}
+  m_AnchoredPosition: {x: 10.56, y: 65.1576}
+  m_SizeDelta: {x: 54.951, y: 24.8172}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2745830843791084084
 MeshRenderer:
@@ -110,8 +110,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 111
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9211257a21a6507429e46554f09b0fcc, type: 2}
+  m_sharedMaterial: {fileID: 6656121320604619178, guid: 9211257a21a6507429e46554f09b0fcc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -187,7 +187,6 @@ GameObject:
   m_Component:
   - component: {fileID: 496298822243493690}
   - component: {fileID: 3570335950052503626}
-  - component: {fileID: 2770471120614691989}
   m_Layer: 0
   m_Name: GuestWhenGivePersona
   m_TagString: Untagged
@@ -233,51 +232,6 @@ MonoBehaviour:
   guestInStoragePrefab: {fileID: 2926618844314956164}
   parentRectTransform: {fileID: 5118646143559430111, guid: 371185f49588bd14b85611831f5defaa, type: 3}
   personaID: 
---- !u!61 &2770471120614691989
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2926618844314956164}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.10649109, y: -0.25017548}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 99.66904, y: 99.95561}
-  m_EdgeRadius: 0
 --- !u!1 &6558362012398407789
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,8 +266,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.283386, y: 67.74881}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: -29.889, y: 62.3547}
+  m_SizeDelta: {x: 19.212, y: 19.2117}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3480255267372304613
 CanvasRenderer:
@@ -478,7 +432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fded096aed50d9449b95e69f95a74b7c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
