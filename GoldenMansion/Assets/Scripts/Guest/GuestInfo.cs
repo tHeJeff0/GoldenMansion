@@ -19,6 +19,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     public string portraitRoute { get; set; }
     public int mbtiID { get; set; }
     public string elementID { get; set; }
+    public int fieldID { get; set; }
 
     [SerializeField] private RectTransform parentRectTransform;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -34,6 +35,8 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     {
         priceShown = basicPrice + extraPrice;
         budgetShown = basicBudget + extraBudget;
+
+        fieldID = CharacterData.GetItem(key).field;
 
         guestPortrait = GetComponentsInChildren<Image>()[2];
         nameText = GetComponentsInChildren<TextMeshProUGUI>()[1];
@@ -126,6 +129,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
                     }
                     StorageController.Instance.guestStorage.Remove(gameObject);
                     StorageController.Instance.guestSelected.Remove(gameObject);
+                    StorageController.Instance.guestFilteredStorage.Remove(gameObject);
                     Destroy(gameObject);
                 }
             }            

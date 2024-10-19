@@ -10,6 +10,7 @@ public class Storage : MonoBehaviour
     public GameObject guestPrefab;
     public GameObject guestSlot;
 
+
     private void Awake()
     {
         OnActive();
@@ -18,18 +19,48 @@ public class Storage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GuestController.Instance.GuestInApartmentPrefabStorage.Count != StorageController.Instance.guestStorage.Count)
+
+        if (StorageController.Instance.filterSelectedCount == 0)
         {
-            Debug.Log("触发了");
-            int childNum = guestSlot.transform.childCount;
-            for (int i = 0; i < childNum; i++)
-            {
-                Destroy(guestSlot.transform.GetChild(i).gameObject);
-            }
-            StorageController.Instance.guestStorage.Clear();
-            StorageController.Instance.AddStorage();
-            UpdateStorage(StorageController.Instance.guestStorage);
+            StorageController.Instance.isFilterMode = false;
         }
+        else
+        {
+            StorageController.Instance.isFilterMode = true;
+        }
+
+        if (!StorageController.Instance.isFilterMode)
+        {
+            if (GuestController.Instance.GuestInApartmentPrefabStorage.Count != StorageController.Instance.guestStorage.Count)
+            {
+                Debug.Log("触发了刷新仓库");
+                int childNum = guestSlot.transform.childCount;
+                for (int i = 0; i < childNum; i++)
+                {
+                    Destroy(guestSlot.transform.GetChild(i).gameObject);
+                }
+                StorageController.Instance.guestStorage.Clear();
+                StorageController.Instance.AddStorage();
+                UpdateStorage(StorageController.Instance.guestStorage);
+            }
+        }
+        else
+        {
+            if (StorageController.Instance.filterWaitingUpdate)
+            {
+                Debug.Log("筛选状态下触发了刷新仓库");
+                int childNum = guestSlot.transform.childCount;
+                for (int i = 0; i < childNum; i++)
+                {
+                    Destroy(guestSlot.transform.GetChild(i).gameObject);
+                }
+                UpdateStorage(StorageController.Instance.guestFilteredStorage);
+                StorageController.Instance.filterWaitingUpdate = false;
+            }
+        }
+        
+
+        
     }
 
     public void OnActive()
@@ -44,14 +75,18 @@ public class Storage : MonoBehaviour
         
         foreach (var guest in storageShown)
         {
-            GameObject guestInStoragePrefab = Instantiate(guestPrefab,guestSlot.transform);
-            guestInStoragePrefab.GetComponent<GuestInfo>().key = guest.GetComponent<GuestInApartment>().key;
-            guestInStoragePrefab.GetComponent<GuestInfo>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
-            guestInStoragePrefab.GetComponent<GuestInfo>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
-            guestInStoragePrefab.GetComponent<GuestInfo>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
-            guestInStoragePrefab.GetComponent<GuestInfo>().basicBudget = guest.GetComponent<GuestInApartment>().guestBudget;
-            guestInStoragePrefab.GetComponent<GuestInfo>().extraBudget = guest.GetComponent<GuestInApartment>().guestExtraBudget;
-            guestInStoragePrefab.GetComponent<GuestInfo>().elementID = guest.GetComponent<GuestInApartment>().guestElementID;
+            if (guest != null && guest.GetComponent<GuestInApartment>()!=null)
+            {
+                GameObject guestInStoragePrefab = Instantiate(guestPrefab, guestSlot.transform);
+                guestInStoragePrefab.GetComponent<GuestInfo>().key = guest.GetComponent<GuestInApartment>().key;
+                guestInStoragePrefab.GetComponent<GuestInfo>().basicPrice = guest.GetComponent<GuestInApartment>().guestBasicPrice;
+                guestInStoragePrefab.GetComponent<GuestInfo>().extraPrice = guest.GetComponent<GuestInApartment>().guestExtraPrice;
+                guestInStoragePrefab.GetComponent<GuestInfo>().mbtiID = guest.GetComponent<GuestInApartment>().mbti;
+                guestInStoragePrefab.GetComponent<GuestInfo>().basicBudget = guest.GetComponent<GuestInApartment>().guestBudget;
+                guestInStoragePrefab.GetComponent<GuestInfo>().extraBudget = guest.GetComponent<GuestInApartment>().guestExtraBudget;
+                guestInStoragePrefab.GetComponent<GuestInfo>().elementID = guest.GetComponent<GuestInApartment>().guestElementID;
+            }
+            
         }
     }
 
@@ -63,33 +98,23 @@ public class Storage : MonoBehaviour
 
     public void SellGuest()
     {
+        StartCoroutine(SellGuestCoroutine());
         
+
+    }
+
+    IEnumerator SellGuestCoroutine()
+    {
         List<GameObject> temporList = new List<GameObject>();
         temporList.AddRange(StorageController.Instance.guestSelected);
-        for (int i = temporList.Count - 1; i >= 0 ; i--)
+        for (int i = temporList.Count - 1; i >= 0; i--)
         {
             temporList[i].GetComponent<GuestInfo>().OnSell();
+            yield return true;
         }
+        StorageController.Instance.filterWaitingUpdate = true;
         temporList.Clear();
         StorageController.Instance.guestSelected.Clear();
-        
     }
    
-    public List<GameObject> GuestFilter(List<int> jobKey)
-    {
-        List<GameObject> guestsMatchedLabel = new List<GameObject>();
-        return guestsMatchedLabel;
-    }
-
-    public List<GameObject> GuestFilter(List<int> jobKey,List<int> personaKey)
-    {
-        List<GameObject> guestsMatchedLabel = new List<GameObject>();
-        return guestsMatchedLabel;
-    }
-
-    public List<GameObject> GuestFilter(List<int> jobKey, List<int> personaKey,List<bool> isIntern)
-    {
-        List<GameObject> guestsMatchedLabel = new List<GameObject>();
-        return guestsMatchedLabel;
-    }
 }

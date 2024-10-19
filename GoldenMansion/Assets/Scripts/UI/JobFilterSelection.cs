@@ -1,6 +1,7 @@
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,7 +11,6 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
 {
     public int key { get; set; }
     public bool isSelected { get; set; } = false;
-
     private void Awake()
     {
         
@@ -49,6 +49,7 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
     public void OnPointerClick(PointerEventData eventData)
     {
         FilterSelect();
+        
     }
 
     void FilterSelect()
@@ -56,14 +57,42 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
         if (!isSelected)
         {
             isSelected = true;
+            FiltThisGuest();
             GetComponentInChildren<TextMeshProUGUI>().color = new Color(0, 0, 0, 1);
             GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
         else
         {
             isSelected = false;
+            StopFiltThisGuest();
             GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1, 1);
             GetComponent<Image>().color = new Color(0, 0, 0, 1);
         }
     }
+
+    void FiltThisGuest()
+    {
+        var filtedGuest = StorageController.Instance.guestStorage.Where(
+            obj => key == obj.GetComponent<GuestInApartment>().field
+            ).ToList();
+        StorageController.Instance.guestFilteredStorage.AddRange(filtedGuest);
+        StorageController.Instance.filterWaitingUpdate = true;
+        StorageController.Instance.isFilterMode = true;
+        StorageController.Instance.filterSelectedCount += 1;
+    }
+
+    void StopFiltThisGuest()
+    {
+        for (int i = StorageController.Instance.guestFilteredStorage.Count; i > 0; i--)
+        {
+            int fieldKey = CharacterData.GetItem(StorageController.Instance.guestFilteredStorage[i-1].GetComponent<GuestInApartment>().key).field;
+            if (fieldKey == key)
+            {
+                StorageController.Instance.guestFilteredStorage.RemoveAt(i-1);
+            }
+        }
+        StorageController.Instance.filterWaitingUpdate = true;
+        StorageController.Instance.filterSelectedCount -= 1;      
+    }
+
 }

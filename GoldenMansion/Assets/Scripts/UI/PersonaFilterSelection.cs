@@ -1,6 +1,7 @@
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -59,6 +60,7 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
             isSelected = true;
             GetComponentInChildren<TextMeshProUGUI>().color = new Color(0, 0, 0, 1);
             GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            FiltThisGuest();
         }
         else
         {
@@ -67,4 +69,30 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
             GetComponent<Image>().color = new Color(0, 0, 0, 1);
         }
     }
+
+    void FiltThisGuest()
+    {
+        var filtedGuest = StorageController.Instance.guestStorage.Where(
+            obj => obj.GetComponent<GuestInApartment>().persona.Contains(key)
+            ).ToList();
+        StorageController.Instance.guestFilteredStorage.AddRange(filtedGuest);
+        StorageController.Instance.filterWaitingUpdate = true;
+        StorageController.Instance.isFilterMode = true;
+        StorageController.Instance.filterSelectedCount += 1;
+    }
+
+    void StopFiltThisGuest()
+    {
+        for (int i = StorageController.Instance.guestFilteredStorage.Count; i > 0; i--)
+        {
+            List<int> personaKey = StorageController.Instance.guestFilteredStorage[i - 1].GetComponent<GuestInApartment>().persona;
+            if (personaKey.Contains(key))
+            {
+                StorageController.Instance.guestFilteredStorage.RemoveAt(i - 1);
+            }
+        }
+        StorageController.Instance.filterWaitingUpdate = true;
+        StorageController.Instance.filterSelectedCount -= 1;
+    }
+
 }
