@@ -14,17 +14,27 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
     private void Awake()
     {
         
+
     }
     // Start is called before the first frame update
     void Start()
     {
         int languageID = FieldData.GetItem(key).nameID;
         GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+        
+
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
+        if (StorageController.Instance.isFilterMode == false)
+        {
+            isSelected = false;           
+        }
+
         
     }
 
@@ -92,7 +102,20 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
             }
         }
         StorageController.Instance.filterWaitingUpdate = true;
-        StorageController.Instance.filterSelectedCount -= 1;      
+        StorageController.Instance.filterSelectedCount -= 1;
+        //ChangeFilterMode();
     }
+
+    //void ChangeFilterMode()
+    //{
+    //    if (StorageController.Instance.filterSelectedCount == 0)
+    //    {
+    //        StorageController.Instance.isFilterMode = false;
+    //    }
+    //    else
+    //    {
+    //        StorageController.Instance.isFilterMode = true;
+    //    }
+    //}
 
 }

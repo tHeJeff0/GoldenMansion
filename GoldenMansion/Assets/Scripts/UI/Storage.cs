@@ -19,7 +19,6 @@ public class Storage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (StorageController.Instance.filterSelectedCount == 0)
         {
             StorageController.Instance.isFilterMode = false;
@@ -31,7 +30,7 @@ public class Storage : MonoBehaviour
 
         if (!StorageController.Instance.isFilterMode)
         {
-            if (GuestController.Instance.GuestInApartmentPrefabStorage.Count != StorageController.Instance.guestStorage.Count)
+            if (GuestController.Instance.GuestInApartmentPrefabStorage.Count != guestSlot.transform.childCount)
             {
                 Debug.Log("´¥·¢ÁËË¢ÐÂ²Ö¿â");
                 int childNum = guestSlot.transform.childCount;
@@ -92,8 +91,11 @@ public class Storage : MonoBehaviour
 
     public void CloseThisPanel()
     {
-        gameObject.SetActive(false);
         StorageController.Instance.guestStorage.Clear();
+        StorageController.Instance.guestFilteredStorage.Clear();
+        StorageController.Instance.filterSelectedCount = 0;
+        StorageController.Instance.isFilterMode = false;
+        gameObject.SetActive(false);
     }
 
     public void SellGuest()
@@ -107,14 +109,17 @@ public class Storage : MonoBehaviour
     {
         List<GameObject> temporList = new List<GameObject>();
         temporList.AddRange(StorageController.Instance.guestSelected);
-        for (int i = temporList.Count - 1; i >= 0; i--)
+        for (int i = temporList.Count-1; i >= 0; i--)
         {
-            temporList[i].GetComponent<GuestInfo>().OnSell();
-            yield return true;
+            temporList[i].GetComponent<GuestInfo>().OnSell();                     
+            
+            Debug.Log(i);
         }
         StorageController.Instance.filterWaitingUpdate = true;
         temporList.Clear();
         StorageController.Instance.guestSelected.Clear();
+        yield return true;
     }
+
    
 }

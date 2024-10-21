@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Filter : MonoBehaviour
 {
@@ -15,8 +16,12 @@ public class Filter : MonoBehaviour
 
     private void Awake()
     {
+               
         UIController.Instance.FirstFilterStageSelection.Add("职业");
         UIController.Instance.FirstFilterStageSelection.Add("人格");
+        UIController.Instance.FirstFilterStageSelection.Add("清除");
+
+        
 
         foreach (var key in FieldData.GetDict())
         {
@@ -40,6 +45,19 @@ public class Filter : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        if (filterFirstStage.transform.Find("Content").transform.childCount > 0)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Destroy(filterFirstStage.transform.Find("Content").GetChild(i).gameObject);
+            }
+            filterFirstStage.SetActive(false);
+            isInFilterMode = false;
+        }
+    }
+
     public void FilterSwitch()
     {
         if (!isInFilterMode)
@@ -53,25 +71,41 @@ public class Filter : MonoBehaviour
             StartCoroutine(HideFilterSelection());           
         }
 
+
+
     }
 
     IEnumerator ShowFilterSelection()
     {
-        for (int i = 0; i < 2; i++)
+        if (filterFirstStage.transform.Find("Content").transform.childCount == 0)
         {
-            GameObject button = Instantiate(filterSelectionButton, filterFirstStage.transform.Find("Content").transform);
-            button.GetComponentInChildren<TextMeshProUGUI>().text = UIController.Instance.FirstFilterStageSelection[i];
-            button.tag = new string("type" + i);
-            yield return new WaitForSecondsRealtime(0.1f);
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject button = Instantiate(filterSelectionButton, filterFirstStage.transform.Find("Content").transform);
+                button.GetComponentInChildren<TextMeshProUGUI>().text = UIController.Instance.FirstFilterStageSelection[i];
+                button.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1, 1);
+                button.GetComponent<Image>().color = new Color(0, 0, 0, 1);
+                button.tag = new string("type" + i);
+                yield return new WaitForSecondsRealtime(0.1f);
+            }
         }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                filterFirstStage.transform.Find("Content").transform.GetChild(i).gameObject.SetActive(true);
+                yield return new WaitForSecondsRealtime(0.1f);
+            }
+        }
+        
         
     }
 
     IEnumerator HideFilterSelection()
     {
-        for (int i = 0; i < filterFirstStage.transform.Find("Content").childCount+1; i++)
+        for (int i = 0; i < filterFirstStage.transform.Find("Content").childCount+2; i++)
         {
-            Destroy(filterFirstStage.transform.Find("Content").GetChild(0).gameObject);
+            filterFirstStage.transform.Find("Content").GetChild(0).gameObject.SetActive(false);
             yield return new WaitForSecondsRealtime(0.1f);
         }
         filterFirstStage.SetActive(false);

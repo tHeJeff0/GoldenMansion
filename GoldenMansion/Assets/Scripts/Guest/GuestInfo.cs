@@ -114,9 +114,9 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
                     foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
                     {
                         if (guest.GetComponent<GuestInApartment>().guestElementID == elementID)
-                        {
-                            Destroy(guest);
+                        {                           
                             GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guest);
+                            Destroy(guest);
                             return;
                         }
                     }                   

@@ -27,7 +27,10 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
     // Update is called once per frame
     void Update()
     {
-        
+        if (StorageController.Instance.isFilterMode == false)
+        {
+            isSelected = false;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -93,6 +96,19 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
         }
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.filterSelectedCount -= 1;
+        ChangeFilterMode();
+    }
+
+    void ChangeFilterMode()
+    {
+        if (StorageController.Instance.filterSelectedCount == 0)
+        {
+            StorageController.Instance.isFilterMode = false;
+        }
+        else
+        {
+            StorageController.Instance.isFilterMode = true;
+        }
     }
 
 }

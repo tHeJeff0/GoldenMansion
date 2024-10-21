@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler, IPointerClickHandler
+public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     public bool isSelected { get; set; } = false;
     public int fieldKey { get; set; }
@@ -54,14 +54,50 @@ public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
             SecondStepTransform.SetActive(false);
             GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1, 1);
             GetComponent<Image>().color = new Color(0, 0, 0, 1);
-            
+
         }
-        
+
     }
+
+    //public void OnPointerClick(PointerEventData eventData)
+    //{
+    //    FilterSelect();
+    //}
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        FilterSelect();
+        if (CompareTag("type2"))
+        {
+            Debug.Log("µã»÷ÁËÇå³ý");
+            StorageController.Instance.filterSelectedCount = 0;
+            StorageController.Instance.guestFilteredStorage.Clear();
+            StorageController.Instance.filterWaitingUpdate = true;
+            Transform parent = transform.parent;
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                if (parent.GetChild(i).CompareTag("type0"))
+                {
+                    for (int j = 0; j < parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").childCount; j++)
+                    {
+                        parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").GetChild(j).GetComponentInChildren<JobFilterSelection>().isSelected = false;
+                        parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").GetChild(j).GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1, 1);
+                        parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").GetChild(j).GetComponent<Image>().color = new Color(0, 0, 0, 1);
+                    }
+                    
+                }
+                else if (parent.GetChild(i).CompareTag("type1"))
+                {
+                    for (int j = 0; j < parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").childCount; j++)
+                    {
+                        parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").GetChild(j).GetComponentInChildren<PersonaFilterSelection>().isSelected = false;
+                        parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").GetChild(j).GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1, 1);
+                        parent.GetChild(i).Find("SecondStepSelection").Find("FilterScrollView").Find("Viewport").Find("Content").GetChild(j).GetComponent<Image>().color = new Color(0, 0, 0, 1);
+
+                    }
+                }
+            }
+            
+        }
     }
 
     void FilterSelect()

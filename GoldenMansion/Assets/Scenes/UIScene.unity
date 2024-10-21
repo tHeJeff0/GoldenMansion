@@ -574,9 +574,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 369239650}
-        m_TargetAssemblyTypeName: StorageButton, Assembly-CSharp
-        m_MethodName: OpenStorage
+      - m_Target: {fileID: 1903811780}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: ShowStoragePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1962,6 +1962,17 @@ Transform:
   - {fileID: 228933208}
   m_Father: {fileID: 310113187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1903811780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9041395642930946112, guid: 8b21ee07ae4d57f4986d591e36a1083a, type: 3}
+  m_PrefabInstance: {fileID: 2768964277788499242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e1b6570b6c6084abf43846004eaadb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1904276172
 GameObject:
   m_ObjectHideFlags: 0
