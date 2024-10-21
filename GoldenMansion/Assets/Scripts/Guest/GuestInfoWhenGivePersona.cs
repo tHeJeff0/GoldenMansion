@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler
+public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
 {
     public int key { get; set; }
     public int priceShown { get; set; }
@@ -21,6 +21,7 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler
     public int mbtiID { get; set; }
     public string elementID { get; set; }
     public int fieldID { get; set; }
+    public bool isSelected { get; set; }
 
     [SerializeField] private RectTransform parentRectTransform;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -62,7 +63,10 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler
         GetPersona();
     }
 
-
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ChangeIntoHighlighted();
+    }
 
     public void GetPersona()
     {
@@ -82,5 +86,25 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler
 
         
 
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!isSelected)
+        {
+            StopHighlighted();
+        }
+    }
+
+    void ChangeIntoHighlighted()
+    {
+        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 1);
+    }
+
+    void StopHighlighted()
+    {
+        transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0);
     }
 }

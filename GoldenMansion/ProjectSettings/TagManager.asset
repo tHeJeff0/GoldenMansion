@@ -13,6 +13,7 @@ TagManager:
   - FirstStageFilterButton
   - type0
   - type1
+  - type2
   layers:
   - Default
   - TransparentFX

@@ -82,8 +82,14 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
 
     void FiltThisGuest()
     {
+        List<string> excistedFiltedID = new List<string>();
+        foreach (var guest in StorageController.Instance.guestFilteredStorage)
+        {
+            excistedFiltedID.Add(guest.GetComponent<GuestInApartment>().guestElementID);
+            
+        }
         var filtedGuest = StorageController.Instance.guestStorage.Where(
-            obj => key == obj.GetComponent<GuestInApartment>().field
+            obj => key == obj.GetComponent<GuestInApartment>().field && !excistedFiltedID.Contains(obj.GetComponent<GuestInApartment>().guestElementID)
             ).ToList();
         StorageController.Instance.guestFilteredStorage.AddRange(filtedGuest);
         StorageController.Instance.filterWaitingUpdate = true;
@@ -103,19 +109,5 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
         }
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.filterSelectedCount -= 1;
-        //ChangeFilterMode();
     }
-
-    //void ChangeFilterMode()
-    //{
-    //    if (StorageController.Instance.filterSelectedCount == 0)
-    //    {
-    //        StorageController.Instance.isFilterMode = false;
-    //    }
-    //    else
-    //    {
-    //        StorageController.Instance.isFilterMode = true;
-    //    }
-    //}
-
 }

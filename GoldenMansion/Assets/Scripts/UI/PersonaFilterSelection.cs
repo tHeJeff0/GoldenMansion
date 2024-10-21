@@ -68,6 +68,7 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
         else
         {
             isSelected = false;
+            StopFiltThisGuest();
             GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1, 1);
             GetComponent<Image>().color = new Color(0, 0, 0, 1);
         }
@@ -96,19 +97,6 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
         }
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.filterSelectedCount -= 1;
-        ChangeFilterMode();
-    }
-
-    void ChangeFilterMode()
-    {
-        if (StorageController.Instance.filterSelectedCount == 0)
-        {
-            StorageController.Instance.isFilterMode = false;
-        }
-        else
-        {
-            StorageController.Instance.isFilterMode = true;
-        }
     }
 
 }
