@@ -201,15 +201,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7cd0a0706911c4f4ca20b07a32f96294, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91828a875a358e14c9035061c53c22a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 2.72, y: 3.34}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5936493624812046023
@@ -263,8 +263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personaSlot: {fileID: 8854610548194720220}
   personaPic: {fileID: 2114656277191329424, guid: 5a83dffed996c504e9753dc9864eccf1, type: 3}
-  shakeAudioSource: {fileID: 8835364199918233879}
-  shakeAudio: {fileID: 8300000, guid: 8a18bff5e29b24cca878def972fa02a9, type: 3}
   persona: 
   temporPersona: 
 --- !u!65 &5957343955086743118
@@ -501,8 +499,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0006, y: 0.306}
-  m_SizeDelta: {x: 3.2403, y: 1.02}
+  m_AnchoredPosition: {x: 0.191, y: 0.054}
+  m_SizeDelta: {x: 0.7094, y: 2.4398}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &663351915265770866
 MonoBehaviour:
@@ -525,6 +523,6 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 0.79, y: 1}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 0, y: -0.64}
   m_Constraint: 0
   m_ConstraintCount: 2
