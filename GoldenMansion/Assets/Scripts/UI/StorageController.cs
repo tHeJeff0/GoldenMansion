@@ -10,6 +10,8 @@ public class StorageController : MonoBehaviour
     public List<GameObject> guestStorage = new List<GameObject>();
     public List<GameObject> guestSelected = new List<GameObject>();
     public List<GameObject> guestFilteredStorage = new List<GameObject>();
+    public List<int> jobFilterSelected = new List<int>();
+    public List<int> personaFilterSelected = new List<int>();
 
     public int filterSelectedCount = 0;
     public bool filterWaitingUpdate = false;

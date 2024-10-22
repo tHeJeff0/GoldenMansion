@@ -95,6 +95,7 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.isFilterMode = true;
         StorageController.Instance.filterSelectedCount += 1;
+        StorageController.Instance.jobFilterSelected.Add(key);
     }
 
     void StopFiltThisGuest()
@@ -104,10 +105,18 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
             int fieldKey = CharacterData.GetItem(StorageController.Instance.guestFilteredStorage[i-1].GetComponent<GuestInApartment>().key).field;
             if (fieldKey == key)
             {
-                StorageController.Instance.guestFilteredStorage.RemoveAt(i-1);
+                List<int> guestPersona = new List<int>();
+                guestPersona.AddRange(StorageController.Instance.guestFilteredStorage[i - 1].GetComponent<GuestInApartment>().persona);
+                bool isInPersonaFilter = guestPersona.Any(item => StorageController.Instance.personaFilterSelected.Contains(item));
+                if (!isInPersonaFilter)
+                {
+                    StorageController.Instance.guestFilteredStorage.RemoveAt(i - 1);
+                }
+
             }
         }
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.filterSelectedCount -= 1;
+        StorageController.Instance.jobFilterSelected.Remove(key);
     }
 }

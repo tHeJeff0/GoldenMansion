@@ -76,13 +76,20 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
 
     void FiltThisGuest()
     {
+        List<string> excistedFiltedID = new List<string>();
+        foreach (var guest in StorageController.Instance.guestFilteredStorage)
+        {
+            excistedFiltedID.Add(guest.GetComponent<GuestInApartment>().guestElementID);
+
+        }
         var filtedGuest = StorageController.Instance.guestStorage.Where(
-            obj => obj.GetComponent<GuestInApartment>().persona.Contains(key)
+            obj => obj.GetComponent<GuestInApartment>().persona.Contains(key) && !excistedFiltedID.Contains(obj.GetComponent<GuestInApartment>().guestElementID)
             ).ToList();
         StorageController.Instance.guestFilteredStorage.AddRange(filtedGuest);
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.isFilterMode = true;
         StorageController.Instance.filterSelectedCount += 1;
+        StorageController.Instance.personaFilterSelected.Add(key);
     }
 
     void StopFiltThisGuest()
@@ -92,11 +99,16 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
             List<int> personaKey = StorageController.Instance.guestFilteredStorage[i - 1].GetComponent<GuestInApartment>().persona;
             if (personaKey.Contains(key))
             {
-                StorageController.Instance.guestFilteredStorage.RemoveAt(i - 1);
+                int guestJob = StorageController.Instance.guestFilteredStorage[i - 1].GetComponent<GuestInApartment>().field;
+                if (!StorageController.Instance.jobFilterSelected.Contains(guestJob))
+                {
+                    StorageController.Instance.guestFilteredStorage.RemoveAt(i - 1);
+                }               
             }
         }
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.filterSelectedCount -= 1;
+        StorageController.Instance.personaFilterSelected.Remove(key);
     }
 
 }
