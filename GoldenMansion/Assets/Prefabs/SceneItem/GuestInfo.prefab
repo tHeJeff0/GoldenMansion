@@ -1513,7 +1513,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4348793566154599661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1552,7 +1552,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 20, y: 20}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
@@ -2175,6 +2175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentRectTransform: {fileID: 0}
   nameText: {fileID: 1408442947799101100}
+  personaSlot: {fileID: 4348793566154599661}
+  personaPic: {fileID: 2114656277191329424, guid: a65754408b5587e40a8d17b95548b2da, type: 3}
   personaID: 
 --- !u!114 &3802537691832896205
 MonoBehaviour:

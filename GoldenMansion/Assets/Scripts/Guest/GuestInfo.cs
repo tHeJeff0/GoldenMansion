@@ -23,7 +23,10 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
 
     [SerializeField] private RectTransform parentRectTransform;
     [SerializeField] private TextMeshProUGUI nameText;
-    
+
+    [SerializeField] GameObject personaSlot;
+    [SerializeField] GameObject personaPic;
+
     private TextMeshProUGUI budgetText;
     private TextMeshProUGUI priceText;
     private Image guestPortrait;
@@ -48,6 +51,11 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
         priceText.text = priceShown.ToString();
         nameText.text = CharacterData.GetItem(key).name;
         budgetText.text = budgetShown.ToString();
+
+        foreach (var persona in personaID)
+        {
+            ShowPersonaIcon(persona);
+        }
     }
 
     // Update is called once per frame
@@ -141,5 +149,9 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
 
     }
 
-
+    public void ShowPersonaIcon(int personaKey)
+    {
+        GameObject personaIcon = Instantiate(personaPic, personaSlot.transform);
+        personaIcon.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute);
+    }
 }
