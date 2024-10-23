@@ -919,7 +919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u79DF\u91D1\u6536\u96C6\u591A\u5C11\u4E86?"
+  m_text: "\u8BE5\u4EA4\u623F\u79DF\u4E86"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9211257a21a6507429e46554f09b0fcc, type: 2}
   m_sharedMaterial: {fileID: 6656121320604619178, guid: 9211257a21a6507429e46554f09b0fcc, type: 2}

@@ -1,14 +1,17 @@
+using DG.Tweening;
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GievePersonaButton : MonoBehaviour
+public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     [SerializeField] private GameObject personaButton;
     [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private GameObject personaDesc;
     public int personaKey;
 
     private void Awake()
@@ -20,7 +23,8 @@ public class GievePersonaButton : MonoBehaviour
     {
         //personaKey = 1;
         personaKey = RandomKey();
-        buttonText.text = LanguageData.GetItem(GuestPersonalData.GetItem(personaKey).nameID).CHN;
+        personaButton.transform.Find("Button").Find("BottomPic").GetComponent<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute+"L");
+        //buttonText.text = LanguageData.GetItem(GuestPersonalData.GetItem(personaKey).nameID).CHN;
     }
 
     // Update is called once per frame
@@ -54,5 +58,19 @@ public class GievePersonaButton : MonoBehaviour
     public void DelieverTemporKey()
     {
         SkillController.Instance.temporPersonaKey = personaKey;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        transform.DOLocalMoveY(10, 0.05f);
+        personaDesc.SetActive(true);
+        int languageID = GuestPersonalData.GetItem(personaKey).descID;
+        personaDesc.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        transform.DOLocalMoveY(0, 0.05f);
+        personaDesc.SetActive(false);
     }
 }
