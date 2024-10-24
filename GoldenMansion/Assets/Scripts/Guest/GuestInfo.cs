@@ -26,6 +26,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
 
     [SerializeField] GameObject personaSlot;
     [SerializeField] GameObject personaPic;
+    [SerializeField] GameObject mbtiPic;
 
     private TextMeshProUGUI budgetText;
     private TextMeshProUGUI priceText;
@@ -55,6 +56,11 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
         foreach (var persona in personaID)
         {
             ShowPersonaIcon(persona);
+        }
+
+        if (mbtiID != 0)
+        {
+            ShowMBTIIcon(mbtiID);
         }
     }
 
@@ -152,6 +158,14 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     public void ShowPersonaIcon(int personaKey)
     {
         GameObject personaIcon = Instantiate(personaPic, personaSlot.transform);
-        personaIcon.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute);
+        personaIcon.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute);
+        personaIcon.GetComponent<PersonaIconInGuestInfo>().personaKey = personaKey;
+    }
+
+    public void ShowMBTIIcon(int mbtiKey)
+    {
+        GameObject mbtiIcon = Instantiate(mbtiPic, personaSlot.transform);
+        mbtiIcon.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(GuestMBTIData.GetItem(mbtiKey).iconRoute);
+
     }
 }

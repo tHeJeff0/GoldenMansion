@@ -82,15 +82,15 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
                 }
             }
 
-            foreach (var guest in StorageController.Instance.guestStorage)
-            {
-                if (guest.GetComponent<GuestInApartment>().guestElementID == elementID)
-                {
-                    guest.GetComponent<GuestInApartment>().persona.Add(SkillController.Instance.temporPersonaKey);
-                    guest.GetComponent<GuestInApartment>().ShowPersonaIcon(SkillController.Instance.temporPersonaKey);
-                    guest.GetComponent<GuestInApartment>().GetPersonaSkill(SkillController.Instance.temporPersonaKey);
-                }
-            }
+            //foreach (var guest in StorageController.Instance.guestStorage)
+            //{
+            //    if (guest.GetComponent<GuestInApartment>().guestElementID == elementID)
+            //    {
+            //        guest.GetComponent<GuestInApartment>().persona.Add(SkillController.Instance.temporPersonaKey);
+            //        guest.GetComponent<GuestInApartment>().ShowPersonaIcon(SkillController.Instance.temporPersonaKey);
+            //        guest.GetComponent<GuestInApartment>().GetPersonaSkill(SkillController.Instance.temporPersonaKey);
+            //    }
+            //}
 
             SkillController.Instance.temporPersonaKey = 0;
         }

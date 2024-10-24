@@ -24,7 +24,6 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
         //personaKey = 1;
         personaKey = RandomKey();
         personaButton.transform.Find("Button").Find("BottomPic").GetComponent<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute+"L");
-        //buttonText.text = LanguageData.GetItem(GuestPersonalData.GetItem(personaKey).nameID).CHN;
     }
 
     // Update is called once per frame

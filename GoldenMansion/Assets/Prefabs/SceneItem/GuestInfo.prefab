@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7750264071049574563}
   - component: {fileID: 4360000684315463647}
   - component: {fileID: 3549835385180708370}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: JobSkillDesc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1423,7 +1423,7 @@ GameObject:
   - component: {fileID: 4968547878437884668}
   - component: {fileID: 8744838718822574546}
   - component: {fileID: 6284218617795782625}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BottomPic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1513,7 +1513,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4348793566154599661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2177,6 +2177,7 @@ MonoBehaviour:
   nameText: {fileID: 1408442947799101100}
   personaSlot: {fileID: 4348793566154599661}
   personaPic: {fileID: 2114656277191329424, guid: a65754408b5587e40a8d17b95548b2da, type: 3}
+  mbtiPic: {fileID: 4287706528870714945, guid: 71093418c3c87784a906ad1d897c76d7, type: 3}
   personaID: 
 --- !u!114 &3802537691832896205
 MonoBehaviour:
@@ -2231,7 +2232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3475142486208249252}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: JobEffectDesc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
