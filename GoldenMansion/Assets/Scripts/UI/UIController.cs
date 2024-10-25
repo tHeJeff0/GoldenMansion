@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     public List<int> JobFilterSelection = new List<int>();
     public List<int> PersonaFilterSelection = new List<int>();
 
+    public GameObject givePersonaButtonSelected;
     int guestInApartmentPrefabCount;
     int unlockedApartmentCount;
 

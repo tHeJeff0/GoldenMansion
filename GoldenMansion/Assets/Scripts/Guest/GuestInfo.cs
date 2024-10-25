@@ -166,6 +166,6 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     {
         GameObject mbtiIcon = Instantiate(mbtiPic, personaSlot.transform);
         mbtiIcon.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(GuestMBTIData.GetItem(mbtiKey).iconRoute);
-
+        mbtiIcon.GetComponent<MBTIInGuestInfoDesc>().mbtiKey = mbtiKey;
     }
 }

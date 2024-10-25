@@ -48,6 +48,8 @@ public class GuestInApartment : MonoBehaviour
     public Action<GuestInApartment, int> SkillMethod_EachDays;
     public Action<GuestInApartment,int> SkillWithIntMethod;
 
+    Skill singlePersonaSkill = new Skill();
+
 
     void Awake()
     {
@@ -96,6 +98,10 @@ public class GuestInApartment : MonoBehaviour
             {
                 mbti = mbtiID;
                 GetMBTISkill(mbti);
+                foreach (var persona in persona)
+                {
+                    RemovePersonaSkill(persona);
+                }
                 persona.Clear();
             }
             
@@ -187,8 +193,7 @@ public class GuestInApartment : MonoBehaviour
 
     public void GetPersonaSkill(int personaKey )
     {
-        Skill singlePersonaSkill = new Skill();
-       
+            
             switch (personaKey)
             {
                 case 1:
@@ -216,9 +221,39 @@ public class GuestInApartment : MonoBehaviour
                 case 8:
                     singlePersonaSkill.Skill_Perceiving();
                     break;
-            }
-       
-        
+            }       
+    }
+
+    public void RemovePersonaSkill(int personaKey)
+    {
+        switch (personaKey)
+        {
+            case 1:
+                SkillMethod_WhenMoveIn -= singlePersonaSkill.Skill_Inner;
+                break;
+
+            case 2:
+                SkillMethod_WhenGuestSold -= singlePersonaSkill.Skill_Outer;
+                break;
+            case 3:
+                SkillMethod_WhenMoveIn -= singlePersonaSkill.Skill_Intuition;
+                break;
+            case 4:
+                SkillMethod_WhenMoveIn -= singlePersonaSkill.Skill_Sensing;
+                break;
+            case 5:
+                SkillMethod_WhenOtherGuestSold -= singlePersonaSkill.Skill_Feeling;
+                break;
+            case 6:
+                isDestroyable = true;
+                break;
+            case 7:
+                SkillMethod_WhenDaysChanged -= singlePersonaSkill.Skill_Judging;
+                break;
+            case 8:
+                GameManager.Instance.extraRerollTime -= 1;
+                break;
+        }
     }
 
 

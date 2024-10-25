@@ -57,6 +57,7 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
     public void DelieverTemporKey()
     {
         SkillController.Instance.temporPersonaKey = personaKey;
+        UIController.Instance.givePersonaButtonSelected = this.gameObject;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -77,10 +77,14 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
         if (personaID.Count < 4 && mbtiID == 0)
         {
             GetPersona();
+            GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();
+            UIController.Instance.givePersonaButtonSelected.SetActive(false);
         }
         else
         {
             Debug.Log("超出人格限制");
+            SkillController.Instance.temporPersonaKey = 0;
+            GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();
         }
     }
 
