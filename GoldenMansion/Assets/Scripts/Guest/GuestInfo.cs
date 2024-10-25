@@ -28,6 +28,10 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     [SerializeField] GameObject personaPic;
     [SerializeField] GameObject mbtiPic;
 
+    [SerializeField] AudioSource AudioSource;
+    [SerializeField] AudioClip clickAudio;
+    [SerializeField] AudioClip hoverAudio;
+
     private TextMeshProUGUI budgetText;
     private TextMeshProUGUI priceText;
     private Image guestPortrait;
@@ -73,6 +77,11 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     public void OnPointerEnter(PointerEventData eventData)
     {
         ChangeIntoHighlighted();
+        if (!isSelected)
+        {
+            AudioSource.PlayOneShot(hoverAudio);
+        }
+        
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -89,6 +98,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
             ChangeIntoHighlighted();
             StorageController.Instance.guestSelected.Add(gameObject);
         }
+        AudioSource.PlayOneShot(clickAudio);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -96,7 +106,8 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
         if (!isSelected)
         {
             StopHighlighted();
-        }              
+        }
+
     }
 
     void ChangeIntoHighlighted()
