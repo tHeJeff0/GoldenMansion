@@ -87,9 +87,18 @@ public class GuestInApartment : MonoBehaviour
         {
             persona.Sort();
             int mbtiID = persona[0] * 1000 + persona[1] * 100 + persona[2] * 10 + persona[3];
-            mbti = mbtiID;
-            GetMBTISkill(mbti);
-            persona.Clear();
+            List<int> mbtiList = new List<int>();
+            foreach (var item in GuestMBTIData.GetDict())
+            {
+                mbtiList.Add(item.Key);
+            }
+            if (mbtiList.Contains(mbtiID))
+            {
+                mbti = mbtiID;
+                GetMBTISkill(mbti);
+                persona.Clear();
+            }
+            
         }
 
         if (guestDays - GameManager.Instance.gameDays == -1)

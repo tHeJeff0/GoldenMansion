@@ -2219,6 +2219,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentRectTransform: {fileID: 0}
   nameText: {fileID: 1408442947799101100}
+  personaSlot: {fileID: 4348793566154599661}
+  personaPic: {fileID: 2114656277191329424, guid: a65754408b5587e40a8d17b95548b2da, type: 3}
+  mbtiPic: {fileID: 4287706528870714945, guid: 71093418c3c87784a906ad1d897c76d7, type: 3}
   personaID: 
 --- !u!1 &8567494762845459870
 GameObject:

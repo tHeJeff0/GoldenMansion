@@ -25,7 +25,11 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
 
     [SerializeField] private RectTransform parentRectTransform;
     [SerializeField] private TextMeshProUGUI nameText;
-    
+
+    [SerializeField] GameObject personaSlot;
+    [SerializeField] GameObject personaPic;
+    [SerializeField] GameObject mbtiPic;
+
     private TextMeshProUGUI budgetText;
     private TextMeshProUGUI priceText;
     private Image guestPortrait;
@@ -49,6 +53,16 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
         priceText.text = priceShown.ToString();
         nameText.text = CharacterData.GetItem(key).name;
         budgetText.text = budgetShown.ToString();
+
+        foreach (var persona in personaID)
+        {
+            ShowPersonaIcon(persona);
+        }
+
+        if (mbtiID != 0)
+        {
+            ShowMBTIIcon(mbtiID);
+        }
     }
 
     // Update is called once per frame
@@ -60,7 +74,14 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GetPersona();
+        if (personaID.Count < 4 && mbtiID == 0)
+        {
+            GetPersona();
+        }
+        else
+        {
+            Debug.Log("超出人格限制");
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -82,21 +103,10 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
                 }
             }
 
-            //foreach (var guest in StorageController.Instance.guestStorage)
-            //{
-            //    if (guest.GetComponent<GuestInApartment>().guestElementID == elementID)
-            //    {
-            //        guest.GetComponent<GuestInApartment>().persona.Add(SkillController.Instance.temporPersonaKey);
-            //        guest.GetComponent<GuestInApartment>().ShowPersonaIcon(SkillController.Instance.temporPersonaKey);
-            //        guest.GetComponent<GuestInApartment>().GetPersonaSkill(SkillController.Instance.temporPersonaKey);
-            //    }
-            //}
 
             SkillController.Instance.temporPersonaKey = 0;
         }
-
         
-
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -117,5 +127,19 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
     {
         transform.Find("Bottom").GetComponent<Image>().color = new Color(1, 1, 1, 0);
         transform.Find("Shadow").GetComponent<Image>().color = new Color(0.35f, 0.35f, 0.35f, 0);
+    }
+
+    public void ShowPersonaIcon(int personaKey)
+    {
+        GameObject personaIcon = Instantiate(personaPic, personaSlot.transform);
+        personaIcon.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute);
+        personaIcon.GetComponent<PersonaIconInGuestInfo>().personaKey = personaKey;
+    }
+
+    public void ShowMBTIIcon(int mbtiKey)
+    {
+        GameObject mbtiIcon = Instantiate(mbtiPic, personaSlot.transform);
+        mbtiIcon.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(GuestMBTIData.GetItem(mbtiKey).iconRoute);
+
     }
 }
