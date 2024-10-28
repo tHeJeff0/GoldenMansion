@@ -8,6 +8,7 @@ using UnityEngine;
 public class SaveSystem : MonoBehaviour
 {
     private static SaveSystem instance;
+    public string saveName = "save.sav";
 
     public static SaveSystem Instance
     {
@@ -44,8 +45,7 @@ public class SaveSystem : MonoBehaviour
     
     public void SaveData(string saveFileName)
     {
-        SaveData saveData = new SaveData();
-        saveData.gameDays = GameManager.Instance.gameDays;
+        SaveData saveData = savingData();
         var data = JsonUtility.ToJson(saveData);
         var path = Path.Combine(Application.persistentDataPath, saveFileName);
         Debug.Log(path);
@@ -61,4 +61,42 @@ public class SaveSystem : MonoBehaviour
         var loadData = JsonUtility.FromJson<T>(data);
         return loadData;
     }
+
+    SaveData savingData()
+    {
+        SaveData saveData = new SaveData();
+        saveData.gameDays = GameManager.Instance.gameDays;
+        saveData.isChooseCardFinish = GameManager.Instance.isChooseCardFinish;
+        saveData.isRoundEnd = GameManager.Instance.isRoundEnd;
+        saveData.vaultMoney = ApartmentController.Instance.vaultMoney;
+        saveData.levelKey = GameManager.Instance.levelKey;
+        saveData.basicRerollTime = GameManager.Instance.basicRerollTime;
+        saveData.extraRerollTime = GameManager.Instance.extraRerollTime;
+        saveData.guestRemoveCount = GameManager.Instance.guestRemoveCount;
+        saveData.isAllowSell = GameManager.Instance.isAllowSell;
+        saveData.isAllowBuy = GameManager.Instance.isAllowBuy;
+        saveData.mediaDays = GameManager.Instance.mediaDays;
+        saveData.guestInApartmentPrefabStorage = GuestController.Instance.GuestInApartmentPrefabStorage;
+        saveData.guestStorage = StorageController.Instance.guestStorage;
+        return saveData;
+    }
+
+    public void readData(SaveData saveData)
+    {
+        GameManager.Instance.gameDays = saveData.gameDays;
+        GameManager.Instance.isChooseCardFinish = saveData.isChooseCardFinish;
+        GameManager.Instance.isRoundEnd = saveData.isRoundEnd;
+        ApartmentController.Instance.vaultMoney = saveData.vaultMoney;
+        GameManager.Instance.levelKey = saveData.levelKey;
+        GameManager.Instance.basicRerollTime = saveData.basicRerollTime;
+        GameManager.Instance.extraRerollTime = saveData.extraRerollTime;
+        GameManager.Instance.guestRemoveCount = saveData.guestRemoveCount;
+        GameManager.Instance.isAllowSell = saveData.isAllowSell;
+        GameManager.Instance.isAllowBuy = saveData.isAllowBuy;
+        GameManager.Instance.mediaDays = saveData.mediaDays;
+        GuestController.Instance.GuestInApartmentPrefabStorage = saveData.guestInApartmentPrefabStorage;
+        StorageController.Instance.guestStorage = saveData.guestStorage;
+    }
+
+
 }

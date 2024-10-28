@@ -13,7 +13,7 @@ public class StartScene : MonoBehaviour
         SceneManager.LoadSceneAsync("Camera", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("UIScene", LoadSceneMode.Additive);
         var data = SaveSystem.Instance.LoadData<SaveData>("save.sav");
-        GameManager.Instance.gameDays = data.gameDays;
+        SaveSystem.Instance.readData(data);
         Debug.Log(GameManager.Instance.gameDays);
 
     }

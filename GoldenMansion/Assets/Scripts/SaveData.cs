@@ -6,4 +6,16 @@ using UnityEngine;
 public class SaveData
 {
     public int gameDays;
+    public bool isChooseCardFinish = false;
+    public bool isRoundEnd = false;
+    public float vaultMoney;
+    public int levelKey;
+    public int basicRerollTime = 1;
+    public int extraRerollTime;
+    public int guestRemoveCount;
+    public bool isAllowSell;
+    public bool isAllowBuy;
+    public int mediaDays = -1;
+    public List<GameObject> guestInApartmentPrefabStorage = new List<GameObject>();
+    public List<GameObject> guestStorage = new List<GameObject>();
 }
