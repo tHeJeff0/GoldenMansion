@@ -24,7 +24,7 @@ public class NextDayButton : MonoBehaviour
         if (GameManager.Instance.mediaDays > 0)
         {
             GameManager.Instance.mediaDays -= 1;
-        }
-
+        }        
+        SaveSystem.Instance.SaveData("save.sav");
     }
 }

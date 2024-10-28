@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,9 @@ public class StartScene : MonoBehaviour
         SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("Camera", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("UIScene", LoadSceneMode.Additive);
+        var data = SaveSystem.Instance.LoadData<SaveData>("save.sav");
+        GameManager.Instance.gameDays = data.gameDays;
+        Debug.Log(GameManager.Instance.gameDays);
 
     }
     public void StartNewGame()
