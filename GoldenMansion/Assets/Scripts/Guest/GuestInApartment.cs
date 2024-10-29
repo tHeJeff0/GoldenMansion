@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GuestInApartment : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class GuestInApartment : MonoBehaviour
     public bool isDestroyable { get; set; } = true;
     public int tourDays { get; set; } = 0;
     public int adjancentPrice { get; set; } = 0;
-    public string guestElementID { get; set; }
+    public string guestElementID { get; set; } = "0";
 
     [SerializeField] GameObject personaSlot;
     [SerializeField] GameObject personaPic;
@@ -53,21 +54,29 @@ public class GuestInApartment : MonoBehaviour
 
     void Awake()
     {
-        key = GuestController.Instance.temporKey;
-        guestElementID = GuestController.Instance.GenerateRandomCode(8);
-        field = CharacterData.GetItem(key).field;
-        fieldSkillID = FieldData.GetItem(field).skillID;
-        guestDays = GameManager.Instance.gameDays;
-        GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
-        guestName = CharacterData.GetItem(key).name;
-        guestBudget = CharacterData.GetItem(key).budget;
-        guestBasicCost = CharacterData.GetItem(key).basicCost;
-        guestBasicPrice = CharacterData.GetItem(key).basicPrice;
-        
+        if (gameObject.scene.name!="GameScene")
+        {
+            Debug.Log("∂¡»°¡À");
+        }
+        else
+        {
+            key = GuestController.Instance.temporKey;
+            guestElementID = GuestController.Instance.GenerateRandomCode(8);
+            field = CharacterData.GetItem(key).field;
+            fieldSkillID = FieldData.GetItem(field).skillID;
+            guestDays = GameManager.Instance.gameDays;
+            GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
+            guestName = CharacterData.GetItem(key).name;
+            guestBudget = CharacterData.GetItem(key).budget;
+            guestBasicCost = CharacterData.GetItem(key).basicCost;
+            guestBasicPrice = CharacterData.GetItem(key).basicPrice;
 
-        gameObject.SetActive(true);
-        GetComponentInChildren<SpriteRenderer>().enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
+
+            gameObject.SetActive(true);
+            GetComponentInChildren<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        
 
     }
 

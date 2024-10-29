@@ -16,6 +16,7 @@ public class SaveData
     public bool isAllowSell;
     public bool isAllowBuy;
     public int mediaDays = -1;
-    public List<GameObject> guestInApartmentPrefabStorage = new List<GameObject>();
-    public List<GameObject> guestStorage = new List<GameObject>();
+    public List<string> guestID = new List<string>();
+    public List<int> guestKey = new List<int>();
+    //public List<GameObject> guestStorage = new List<GameObject>();
 }

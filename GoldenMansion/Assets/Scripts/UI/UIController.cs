@@ -150,11 +150,13 @@ public class UIController : MonoBehaviour
         if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
         {
             Instantiate(chooseCardPanel, thisCanvas.transform);
+            SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
         }
         else
         {
             GameManager.Instance.isRoundEnd = true;
             Instantiate(roundEndPanel, thisCanvas.transform);
+            SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
         }
     }
 

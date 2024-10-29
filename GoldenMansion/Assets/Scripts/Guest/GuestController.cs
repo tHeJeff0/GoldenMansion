@@ -50,7 +50,10 @@ public class GuestController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        GenerateBasicGuest(basicGuestCount);
+        if (GameObject.Find("GuestInApartment(Clone)")==null)
+        {
+            GenerateBasicGuest(basicGuestCount);
+        }
     }
 
 

@@ -62,6 +62,12 @@ public class SaveSystem : MonoBehaviour
         return loadData;
     }
 
+    public void DeleteData(string saveFileName)
+    {
+        var path = Path.Combine(Application.persistentDataPath, saveFileName);
+        File.Delete(path);
+    }
+
     SaveData savingData()
     {
         SaveData saveData = new SaveData();
@@ -76,13 +82,23 @@ public class SaveSystem : MonoBehaviour
         saveData.isAllowSell = GameManager.Instance.isAllowSell;
         saveData.isAllowBuy = GameManager.Instance.isAllowBuy;
         saveData.mediaDays = GameManager.Instance.mediaDays;
-        saveData.guestInApartmentPrefabStorage = GuestController.Instance.GuestInApartmentPrefabStorage;
-        saveData.guestStorage = StorageController.Instance.guestStorage;
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            string guestID = guest.GetComponent<GuestInApartment>().guestElementID;
+            int guestKey = guest.GetComponent<GuestInApartment>().key;
+            saveData.guestID.Add(guestID);
+            saveData.guestKey.Add(guestKey);
+        }
+        //saveData.guestStorage = StorageController.Instance.guestStorage;
         return saveData;
     }
 
     public void readData(SaveData saveData)
     {
+        for (int i = 0; i < 3; i++)
+        {
+            Destroy(GameObject.Find("GuestInApartment(Clone)"));
+        }       
         GameManager.Instance.gameDays = saveData.gameDays;
         GameManager.Instance.isChooseCardFinish = saveData.isChooseCardFinish;
         GameManager.Instance.isRoundEnd = saveData.isRoundEnd;
@@ -94,9 +110,27 @@ public class SaveSystem : MonoBehaviour
         GameManager.Instance.isAllowSell = saveData.isAllowSell;
         GameManager.Instance.isAllowBuy = saveData.isAllowBuy;
         GameManager.Instance.mediaDays = saveData.mediaDays;
-        GuestController.Instance.GuestInApartmentPrefabStorage = saveData.guestInApartmentPrefabStorage;
-        StorageController.Instance.guestStorage = saveData.guestStorage;
+        LoadGuestData(saveData);
+        //StorageController.Instance.guestStorage = saveData.guestStorage;
     }
 
+    
+
+    public void LoadGuestData(SaveData saveData)
+    {
+        Dictionary<string, int> guestKey = new Dictionary<string, int>();
+        for (int i = 0; i < saveData.guestID.Count; i++)
+        {
+            guestKey.Add(saveData.guestID[i], saveData.guestKey[i]);
+        }
+        foreach (var guestID in saveData.guestID)
+        {
+            GameObject guest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+            guest.GetComponent<GuestInApartment>().guestElementID = guestID;
+            guest.GetComponent<GuestInApartment>().key = guestKey[guestID];
+            guest.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            GuestController.Instance.GuestInApartmentPrefabStorage.Add(guest);
+        }
+    }
 
 }

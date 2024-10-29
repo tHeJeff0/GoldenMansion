@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22fef81919b6c1046b3dd05befc1ccd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveName: save.sav
 --- !u!4 &175197611
 Transform:
   m_ObjectHideFlags: 0
@@ -1095,6 +1096,18 @@ PrefabInstance:
     - target: {fileID: 3050353256258343463, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
       propertyPath: m_Name
       value: ContinueButtonText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497300054884909542, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 826504944}
+    - target: {fileID: 3497300054884909542, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497300054884909542, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StartScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4370956748964878313, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
       propertyPath: m_Pivot.x
