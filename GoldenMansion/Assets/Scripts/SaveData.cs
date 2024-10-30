@@ -18,5 +18,6 @@ public class SaveData
     public int mediaDays = -1;
     public List<string> guestID = new List<string>();
     public List<int> guestKey = new List<int>();
+    public List<string> guestPersona = new List<string>();
     //public List<GameObject> guestStorage = new List<GameObject>();
 }

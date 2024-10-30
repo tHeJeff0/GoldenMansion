@@ -54,7 +54,7 @@ public class GuestInApartment : MonoBehaviour
 
     void Awake()
     {
-        if (gameObject.scene.name!="GameScene")
+        if (gameObject.scene.name!="GameScene" && GuestController.Instance.temporKey == 0)
         {
             Debug.Log("∂¡»°¡À");
         }
@@ -62,19 +62,7 @@ public class GuestInApartment : MonoBehaviour
         {
             key = GuestController.Instance.temporKey;
             guestElementID = GuestController.Instance.GenerateRandomCode(8);
-            field = CharacterData.GetItem(key).field;
-            fieldSkillID = FieldData.GetItem(field).skillID;
-            guestDays = GameManager.Instance.gameDays;
-            GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
-            guestName = CharacterData.GetItem(key).name;
-            guestBudget = CharacterData.GetItem(key).budget;
-            guestBasicCost = CharacterData.GetItem(key).basicCost;
-            guestBasicPrice = CharacterData.GetItem(key).basicPrice;
-
-
-            gameObject.SetActive(true);
-            GetComponentInChildren<SpriteRenderer>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
+            InitialGuest();
         }
         
 
@@ -128,7 +116,20 @@ public class GuestInApartment : MonoBehaviour
         }
     }
 
-
+    public void InitialGuest()
+    {
+        field = CharacterData.GetItem(key).field;
+        fieldSkillID = FieldData.GetItem(field).skillID;
+        guestDays = GameManager.Instance.gameDays;
+        GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
+        guestName = CharacterData.GetItem(key).name;
+        guestBudget = CharacterData.GetItem(key).budget;
+        guestBasicCost = CharacterData.GetItem(key).basicCost;
+        guestBasicPrice = CharacterData.GetItem(key).basicPrice;
+        gameObject.SetActive(true);
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+    }
     public void SkillTrigger()
     {
         SkillMethod_Normal?.Invoke(this);

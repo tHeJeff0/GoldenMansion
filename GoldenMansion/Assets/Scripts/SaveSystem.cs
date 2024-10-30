@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 
@@ -86,8 +88,19 @@ public class SaveSystem : MonoBehaviour
         {
             string guestID = guest.GetComponent<GuestInApartment>().guestElementID;
             int guestKey = guest.GetComponent<GuestInApartment>().key;
+            List<int> guestPersona = guest.GetComponent<GuestInApartment>().persona;
+            string guestPersonaString = "";
+            if (guestPersona.Count > 0)
+            {
+                guestPersonaString = string.Join("_", guestPersona);
+            }
+            else
+            {
+                guestPersonaString = "";
+            }
             saveData.guestID.Add(guestID);
             saveData.guestKey.Add(guestKey);
+            saveData.guestPersona.Add(guestPersonaString);
         }
         //saveData.guestStorage = StorageController.Instance.guestStorage;
         return saveData;
@@ -119,16 +132,38 @@ public class SaveSystem : MonoBehaviour
     public void LoadGuestData(SaveData saveData)
     {
         Dictionary<string, int> guestKey = new Dictionary<string, int>();
+        Dictionary<string, string> guestPersona = new Dictionary<string, string>();
         for (int i = 0; i < saveData.guestID.Count; i++)
         {
-            guestKey.Add(saveData.guestID[i], saveData.guestKey[i]);
+            guestKey.Add(saveData.guestID[i]+"guestKey", saveData.guestKey[i]);
+            if (saveData.guestPersona.Count > 0)
+            {
+                guestPersona.Add(saveData.guestID[i]+"guestPersona", saveData.guestPersona[i]);
+            }
         }
         foreach (var guestID in saveData.guestID)
         {
             GameObject guest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
             guest.GetComponent<GuestInApartment>().guestElementID = guestID;
-            guest.GetComponent<GuestInApartment>().key = guestKey[guestID];
-            guest.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            guest.GetComponent<GuestInApartment>().key = guestKey[guestID+"guestKey"];
+            if(guestPersona[guestID + "guestPersona"] != "")
+            {
+                List<int> persona = guestPersona[guestID + "guestPersona"].Split("_").Select(int.Parse).ToList<int>();
+                guest.GetComponent<GuestInApartment>().persona = persona;
+            }
+            else
+            {
+                guest.GetComponent<GuestInApartment>().persona = new List<int>();
+            }
+            
+            if (guest.GetComponent<GuestInApartment>().persona.Count > 0)
+            {
+                foreach (var persona in guest.GetComponent<GuestInApartment>().persona)
+                {
+                    guest.GetComponent<GuestInApartment>().GetPersonaSkill(persona);
+                }
+            }
+            guest.GetComponent<GuestInApartment>().InitialGuest();
             GuestController.Instance.GuestInApartmentPrefabStorage.Add(guest);
         }
     }

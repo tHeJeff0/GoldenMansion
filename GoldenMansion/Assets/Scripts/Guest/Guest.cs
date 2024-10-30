@@ -6,6 +6,7 @@ using ExcelData;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Guest : MonoBehaviour
 {
