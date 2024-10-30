@@ -3,24 +3,23 @@ using System.Collections.Generic;
 
 namespace ExcelData
 {
-    public class LanguageData : IDataSheet
+    public class ChapterStoryData : IDataSheet
     {
         public class Item
         {
-            public int ID;
+            public int storyID;
+            public int languageID;
             public string CHN;
-            public string ENG;
-            public string TCHN;
         }
 
-        private static LanguageData s_Instance;
-        private static LanguageData Instance
+        private static ChapterStoryData s_Instance;
+        private static ChapterStoryData Instance
         {
             get
             {
                 if (s_Instance == null)
                 {
-                    s_Instance = new LanguageData();
+                    s_Instance = new ChapterStoryData();
                     s_Instance.Init();
                     DataService.RegisterSheet(s_Instance);
                 }
@@ -47,7 +46,7 @@ namespace ExcelData
 
         private Dictionary<int, Item> m_Items = new Dictionary<int, Item>();
 
-        public string sheetName => "LanguageData";
+        public string sheetName => "ChapterStoryData";
 
         private void Init()
         {
@@ -67,10 +66,9 @@ namespace ExcelData
                     int rows = reader.ReadInt32();
 
                     //Get Item indices
-                    int IDIndex = sheetHeader.IndexOf("ID", "int");
+                    int storyIDIndex = sheetHeader.IndexOf("storyID", "int");
+                    int languageIDIndex = sheetHeader.IndexOf("languageID", "int");
                     int CHNIndex = sheetHeader.IndexOf("CHN", "string");
-                    int ENGIndex = sheetHeader.IndexOf("ENG", "string");
-                    int TCHNIndex = sheetHeader.IndexOf("TCHN", "string");
 
                     #if UNITY_EDITOR
                     bool promptMismatchColumns = false;
@@ -82,21 +80,17 @@ namespace ExcelData
                         {
                             SheetHeader.Item headerItem = headerItems[j];
 
-                            if (j == IDIndex)
+                            if (j == storyIDIndex)
                             {
-                                newItem.ID = reader.ReadInt32();
+                                newItem.storyID = reader.ReadInt32();
+                            }
+                            else if (j == languageIDIndex)
+                            {
+                                newItem.languageID = reader.ReadInt32();
                             }
                             else if (j == CHNIndex)
                             {
                                 newItem.CHN = reader.ReadString();
-                            }
-                            else if (j == ENGIndex)
-                            {
-                                newItem.ENG = reader.ReadString();
-                            }
-                            else if (j == TCHNIndex)
-                            {
-                                newItem.TCHN = reader.ReadString();
                             }
                             else
                             {
@@ -110,7 +104,7 @@ namespace ExcelData
                                 #endif
                             }
                         }
-                        m_Items.Add(newItem.ID, newItem);
+                        m_Items.Add(newItem.storyID, newItem);
                     }
                 }
             }

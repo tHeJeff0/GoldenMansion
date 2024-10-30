@@ -1,6 +1,9 @@
 using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -70,8 +73,23 @@ public class RoundEndPanelController : MonoBehaviour
         if (moneyLeft >= 0)
         {
             //buildButton.SetActive(true);
-            nextLevelButton.SetActive(true);
-            commitRentGroup.SetActive(false);
+            if (GameManager.Instance.levelKey + 1 > 5)
+            {
+                Debug.Log("”Æ¡À£°");
+#if UNITY_EDITOR
+                EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+            }
+            else
+            {
+                nextLevelButton.SetActive(true);
+                commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
+                GameManager.Instance.storyID += 1;
+                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
+            }
+            
         }
         else
         {
