@@ -121,7 +121,7 @@ public class GuestInApartment : MonoBehaviour
         field = CharacterData.GetItem(key).field;
         fieldSkillID = FieldData.GetItem(field).skillID;
         guestDays = GameManager.Instance.gameDays;
-        GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
+        GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute+"inapartment");
         guestName = CharacterData.GetItem(key).name;
         guestBudget = CharacterData.GetItem(key).budget;
         guestBasicCost = CharacterData.GetItem(key).basicCost;
