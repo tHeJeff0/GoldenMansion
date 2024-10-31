@@ -120,7 +120,19 @@ public class Guest : MonoBehaviour
         guestCardDescPrefab.SetActive(true);
         int skillID = FieldData.GetItem(CharacterData.GetItem(key).field).skillID;
         int languageID = SkillData.GetItem(skillID).descID;
-        guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+            case 2: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).ENG;
+                break;
+            case 3: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).TCHN;
+                break;
+            default: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+        }
+        
     }
 
     private void OnMouseExit()

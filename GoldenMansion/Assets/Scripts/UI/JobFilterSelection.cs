@@ -20,7 +20,21 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
     void Start()
     {
         int languageID = FieldData.GetItem(key).nameID;
-        GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+            case 2:
+                GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).ENG;
+                break;
+            case 3: GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).TCHN;
+                break;
+            default:
+                GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+        }
+        
         
 
     }

@@ -65,7 +65,21 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
         transform.DOLocalMoveY(10, 0.05f);
         personaDesc.SetActive(true);
         int languageID = GuestPersonalData.GetItem(personaKey).descID;
-        personaDesc.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+        switch (GameManager.Instance.Language)
+        {
+            case 1: 
+                personaDesc.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+            case 2:
+                personaDesc.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).ENG;
+                break;
+            case 3: personaDesc.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).TCHN;
+                break;
+            default:
+                personaDesc.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+        }
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)

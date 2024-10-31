@@ -21,7 +21,19 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
     void Start()
     {
         int languageID = GuestPersonalData.GetItem(key).nameID;
-        GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+            case 2: GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).ENG;
+                break;
+            case 3: GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).TCHN;
+                break;
+            default: GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                break;
+        }
+        
     }
 
     // Update is called once per frame

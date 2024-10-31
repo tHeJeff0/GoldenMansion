@@ -7,14 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class StartScene : MonoBehaviour
 {
+    [SerializeField] GameObject gameGroup;
+    [SerializeField] GameObject chooseLanguageGroup;
     private void Awake()
     {
-        #if !UNITY_EDITOR
+        SaveSystem.Instance.LoadPlayerPrefs();
+#if !UNITY_EDITOR
         SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("Camera", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("UIScene", LoadSceneMode.Additive);      
-        #endif
-          
+#endif
+
+        if (GameManager.Instance.Language == 0)
+        {
+            gameGroup.SetActive(false);
+            chooseLanguageGroup.SetActive(true);
+        }
+        else
+        {
+            gameGroup.SetActive(true);
+            chooseLanguageGroup.SetActive(false);
+        }
         Debug.Log(GameManager.Instance.gameDays);
 
     }
@@ -49,6 +62,61 @@ public class StartScene : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+
+    public void ChooseChinese()
+    {
+        GameManager.Instance.Language = 1;
+        SaveSystem.Instance.SavePlayerPrefs();
+        gameGroup.SetActive(true);
+        chooseLanguageGroup.SetActive(false);
+    }
+
+    public void ChooseEnglish()
+    {
+        GameManager.Instance.Language = 2;
+        SaveSystem.Instance.SavePlayerPrefs();
+        gameGroup.SetActive(true);
+        chooseLanguageGroup.SetActive(false);
+
+    }
+
+    public void ChooseRussian()
+    {
+
+    }
+
+    public void ChooseSpanish()
+    {
+
+    }
+
+    public void ChoosePortuguese()
+    {
+
+    }
+
+    public void ChooseJapanese()
+    {
+
+    }
+
+    public void ChooseGerman()
+    {
+
+    }
+
+    public void ChooseFrench()
+    {
+
+    }
+
+    public void ChooseTraditionalChinese()
+    {
+        GameManager.Instance.Language = 3;
+        SaveSystem.Instance.SavePlayerPrefs();
+        gameGroup.SetActive(true);
+        chooseLanguageGroup.SetActive(false);
     }
 
 }

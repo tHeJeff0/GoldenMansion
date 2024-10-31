@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool isAllowBuy { get; set; } = true;
     public int mediaDays { get; set; } = -1;
     public int storyID { get; set; } = 0;
+    public int Language { get; set; } = 0;
 
     public static GameManager Instance
     {

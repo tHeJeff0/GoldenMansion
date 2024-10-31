@@ -27,6 +27,19 @@ public class JobTextDesc : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         int skillKey = FieldData.GetItem(jobKey).skillID;
         int skillDescKey = SkillData.GetItem(skillKey).descID;
         string skillDescText = LanguageData.GetItem(skillDescKey).CHN;
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                skillDescText = LanguageData.GetItem(skillDescKey).CHN;
+                break;
+            case 2: skillDescText = LanguageData.GetItem(skillDescKey).ENG;
+                break;
+            case 3: skillDescText = LanguageData.GetItem(skillDescKey).TCHN;
+                break;
+            default:
+                skillDescText = LanguageData.GetItem(skillDescKey).CHN;
+                break;
+        }
         jobEffectDescCopy.GetComponentsInChildren<TextMeshProUGUI>()[0].text = skillDescText;      
         
         jobEffectDescCopy.transform.SetParent(GameObject.Find("Canvas").transform);

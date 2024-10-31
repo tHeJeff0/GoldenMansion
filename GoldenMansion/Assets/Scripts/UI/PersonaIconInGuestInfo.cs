@@ -29,6 +29,21 @@ public class PersonaIconInGuestInfo : MonoBehaviour, IPointerEnterHandler, IPoin
         personaEffectDescCopy = Instantiate(personaEffectDesc, transform);
         int personaEffectDescID = GuestPersonalData.GetItem(personaKey).descID;
         string skillDescText = LanguageData.GetItem(personaEffectDescID).CHN;
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                skillDescText = LanguageData.GetItem(personaEffectDescID).CHN;
+                break;
+            case 2:
+                skillDescText = LanguageData.GetItem(personaEffectDescID).ENG;
+                break;
+            case 3:
+                skillDescText = LanguageData.GetItem(personaEffectDescID).TCHN;
+                break;
+            default:
+                skillDescText = LanguageData.GetItem(personaEffectDescID).CHN;
+                break;
+        }
         personaEffectDescCopy.GetComponentsInChildren<TextMeshProUGUI>()[0].text = skillDescText;
 
         personaEffectDescCopy.transform.SetParent(GameObject.Find("Canvas").transform);

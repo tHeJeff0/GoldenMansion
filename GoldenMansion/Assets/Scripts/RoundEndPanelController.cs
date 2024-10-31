@@ -87,7 +87,19 @@ public class RoundEndPanelController : MonoBehaviour
                 nextLevelButton.SetActive(true);
                 commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
                 GameManager.Instance.storyID += 1;
-                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
+                switch (GameManager.Instance.Language)
+                {
+                    case 1 :
+                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
+                        break;
+                    case 2: 
+                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
+                        break;
+                    case 3:
+                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
+                        break;
+                }
+                
             }
             
         }

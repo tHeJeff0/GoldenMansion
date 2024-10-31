@@ -168,4 +168,15 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
+    public void SavePlayerPrefs()
+    {
+        PlayerPrefs.SetInt("Language", GameManager.Instance.Language);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadPlayerPrefs()
+    {
+        GameManager.Instance.Language = PlayerPrefs.GetInt("Language");
+    }
+
 }
