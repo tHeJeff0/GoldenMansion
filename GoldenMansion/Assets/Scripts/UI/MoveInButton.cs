@@ -8,4 +8,9 @@ public class MoveInButton : MonoBehaviour
     {
         UIEventSystem.Instance.Execute();
     }
+
+    public void GetVolume()
+    {
+        transform.Find("NextDayButtonVoice").GetComponent<AudioSource>().volume = GameManager.Instance.SFVolume;
+    }
 }

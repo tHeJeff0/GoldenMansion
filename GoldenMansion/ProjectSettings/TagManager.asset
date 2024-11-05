@@ -14,6 +14,7 @@ TagManager:
   - type0
   - type1
   - type2
+  - Button
   layers:
   - Default
   - TransparentFX

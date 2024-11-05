@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public int storyID { get; set; } = 0;
     public int Language { get; set; } = 0;
 
+    public float SFVolume { get; set; } = 1;
+
     public static GameManager Instance
     {
         get

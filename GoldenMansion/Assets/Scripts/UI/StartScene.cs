@@ -8,6 +8,7 @@ public class StartScene : MonoBehaviour
 {
     [SerializeField] GameObject gameGroup;
     [SerializeField] GameObject chooseLanguageGroup;
+    [SerializeField] GameObject settingPanel;
     private void Awake()
     {
         SaveSystem.Instance.LoadPlayerPrefs();
@@ -118,4 +119,8 @@ public class StartScene : MonoBehaviour
         chooseLanguageGroup.SetActive(false);
     }
 
+    public void CallSettingPanel()
+    {
+        settingPanel.SetActive(true);
+    }
 }

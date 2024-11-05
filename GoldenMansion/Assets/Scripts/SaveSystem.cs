@@ -1,3 +1,4 @@
+using ExcelData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,8 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class SaveSystem : MonoBehaviour
@@ -177,6 +180,63 @@ public class SaveSystem : MonoBehaviour
     public void LoadPlayerPrefs()
     {
         GameManager.Instance.Language = PlayerPrefs.GetInt("Language");
+        TranslateButtonText();
+    }
+
+    public void TranslateButtonText()
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            if (scene.isLoaded)
+            {
+                // 遍历场景中的所有根对象
+                foreach (GameObject rootObject in scene.GetRootGameObjects())
+                {
+                    TextMeshProUGUI[] texts = rootObject.GetComponentsInChildren<TextMeshProUGUI>(true);
+                    foreach (var text in texts)
+                    {
+                        if (text.CompareTag("Button"))
+                        {
+                            switch (GameManager.Instance.Language)
+                            {
+                                case 1: text.text = ButtonLanguageData.GetItem(text.text).CHN;
+                                    break;
+                                case 2: text.text = ButtonLanguageData.GetItem(text.text).ENG;
+                                    break;
+                                case 3:text.text = ButtonLanguageData.GetItem(text.text).TCHN;
+                                    break;
+                            }
+                        }
+                    }
+                    // 获取该根对象及其子对象中的所有Button组件
+                    Button[] buttons = rootObject.GetComponentsInChildren<Button>(true);
+
+                    foreach (Button button in buttons)
+                    {
+
+                        if (button.GetComponentInChildren<TextMeshProUGUI>() != null&& button.CompareTag("Button"))
+                        {
+                            switch (GameManager.Instance.Language)
+                            {
+                                case 1:
+                                    button.GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(button.GetComponentInChildren<TextMeshProUGUI>().text).CHN;
+                                    break;
+                                case 2: button.GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(button.GetComponentInChildren<TextMeshProUGUI>().text).ENG;
+                                    break;
+                                case 3: button.GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(button.GetComponentInChildren<TextMeshProUGUI>().text).TCHN;
+                                    break;
+                            }                           
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Button " + button.name + " 没有找到TextMeshProUGUI组件");
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

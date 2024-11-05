@@ -54,7 +54,19 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
         portraitRoute = CharacterData.GetItem(key).portraitRoute;
         guestPortrait.sprite = Resources.Load<Sprite>(portraitRoute);
         priceText.text = priceShown.ToString();
-        nameText.text = CharacterData.GetItem(key).name;
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                nameText.text = LanguageData.GetItem(CharacterData.GetItem(key).nameID).CHN;
+                break;
+            case 2:
+                nameText.text = LanguageData.GetItem(CharacterData.GetItem(key).nameID).ENG;
+                break;
+            case 3:
+                nameText.text = LanguageData.GetItem(CharacterData.GetItem(key).nameID).TCHN;
+                break;
+        }
+        
         budgetText.text = budgetShown.ToString();
 
         foreach (var persona in personaID)
@@ -79,6 +91,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
         ChangeIntoHighlighted();
         if (!isSelected)
         {
+            AudioSource.volume = GameManager.Instance.SFVolume;
             AudioSource.PlayOneShot(hoverAudio);
         }
         
@@ -98,6 +111,7 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
             ChangeIntoHighlighted();
             StorageController.Instance.guestSelected.Add(gameObject);
         }
+        AudioSource.volume = GameManager.Instance.SFVolume;
         AudioSource.PlayOneShot(clickAudio);
     }
 

@@ -30,6 +30,10 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
     [SerializeField] GameObject personaPic;
     [SerializeField] GameObject mbtiPic;
 
+    [SerializeField] AudioSource AudioSource;
+    [SerializeField] AudioClip clickAudio;
+    [SerializeField] AudioClip hoverAudio;
+
     private TextMeshProUGUI budgetText;
     private TextMeshProUGUI priceText;
     private Image guestPortrait;
@@ -51,7 +55,18 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
         portraitRoute = CharacterData.GetItem(key).portraitRoute;
         guestPortrait.sprite = Resources.Load<Sprite>(portraitRoute);
         priceText.text = priceShown.ToString();
-        nameText.text = CharacterData.GetItem(key).name;
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                nameText.text = LanguageData.GetItem(CharacterData.GetItem(key).nameID).CHN;
+                break;
+            case 2:
+                nameText.text = LanguageData.GetItem(CharacterData.GetItem(key).nameID).ENG;
+                break;
+            case 3:
+                nameText.text = LanguageData.GetItem(CharacterData.GetItem(key).nameID).TCHN;
+                break;
+        }
         budgetText.text = budgetShown.ToString();
 
         foreach (var persona in personaID)
@@ -86,11 +101,18 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
             SkillController.Instance.temporPersonaKey = 0;
             GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();
         }
+        AudioSource.volume = GameManager.Instance.SFVolume;
+        AudioSource.PlayOneShot(clickAudio);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         ChangeIntoHighlighted();
+        if (!isSelected)
+        {
+            AudioSource.volume = GameManager.Instance.SFVolume;
+            AudioSource.PlayOneShot(hoverAudio);
+        }
     }
 
     public void GetPersona()

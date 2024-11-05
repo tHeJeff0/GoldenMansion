@@ -24,6 +24,11 @@ public class SettingPanel : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = transform.Find("SoundSetting").Find("BGMSlider").GetComponent<Slider>().value;
     }
 
+    public void SFVolumeChange()
+    {
+        GameManager.Instance.SFVolume = transform.Find("SoundSetting").Find("SFSlider").GetComponent<Slider>().value;
+    }
+
     public void ChooseChinese()
     {
         GameManager.Instance.Language = 1;
@@ -87,4 +92,10 @@ public class SettingPanel : MonoBehaviour
             Screen.fullScreen = GameObject.Find("FullScreenSelection").GetComponent<Toggle>().isOn;
         }
     }
+
+    public void CloseSettingPanel()
+    {
+        gameObject.SetActive(false);
+    }
+
 }
