@@ -13,51 +13,20 @@ public class RoundEndPanelController : MonoBehaviour
     GameObject commitRentGroup;
     //GameObject buildButton;
     GameObject nextLevelButton;
+    GameObject winGroup;
 
     private void Awake()
     {
         commitRentGroup = GameObject.Find("CommitRentGroup");
         //buildButton = GameObject.Find("BuildButton");
         nextLevelButton = GameObject.Find("NextLevelButton");
+        winGroup = GameObject.Find("WinGroup");
 
         commitRentGroup.SetActive(true);
         //buildButton.SetActive(false);
         nextLevelButton.SetActive(false);
+        winGroup.SetActive(false);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //public void StartBuildMode()
-    //{
-    //    ApartmentController.Instance.isBuildMode = true;
-    //    foreach (Transform child in transform)
-    //    { 
-    //        child.gameObject.SetActive(false);
-    //    }
-    //    quitBuildButton.SetActive(true);
-
-    //}
-
-    //public void QuitBuildMode()
-    //{
-    //    ApartmentController.Instance.isBuildMode = false;
-    //    foreach (Transform child in transform)
-    //    {
-            
-    //        child.gameObject.SetActive(true);
-    //    }
-    //    quitBuildButton.SetActive(false);
-    //}
-
     public void GoToNextLevel()
     {
         GameManager.Instance.isRoundEnd = false;
@@ -68,52 +37,86 @@ public class RoundEndPanelController : MonoBehaviour
     public void CommitRent()
     {
         float vaultMoney = ApartmentController.Instance.vaultMoney;
-        float targetMoney = Level.GetItem(GameManager.Instance.levelKey).target;
-        float moneyLeft = vaultMoney - targetMoney;
-        if (moneyLeft >= 0)
+        if (!GameManager.Instance.isEndlessMode)//如果不是无尽模式
         {
-            //buildButton.SetActive(true);
-            if (GameManager.Instance.levelKey + 1 > 5)
+            float targetMoney = Level.GetItem(GameManager.Instance.levelKey).target;
+            float moneyLeft = vaultMoney - targetMoney;
+            if (moneyLeft >= 0)//如果金币足够交租
             {
-                Debug.Log("赢了！");
-#if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+                //buildButton.SetActive(true);
+                if (GameManager.Instance.levelKey + 1 > 5)//如果是最后一关
+                {
+                    winGroup.SetActive(true);
+                    commitRentGroup.SetActive(false);
+                    Debug.Log("赢了！");
+
+                }
+                else//如果不是最后一关
+                {
+                    nextLevelButton.SetActive(true);
+                    commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
+                    GameManager.Instance.storyID += 1;
+                    switch (GameManager.Instance.Language)
+                    {
+                        case 1:
+                            commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
+                            break;
+                        case 2:
+                            commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
+                            break;
+                        case 3:
+                            commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
+                            break;
+                    }
+
+                }
+
             }
-            else
+            else//如果金币不够交租
+            {
+                GameManager.Instance.isRoundEnd = false;
+                Destroy(this.gameObject);
+                commitRentGroup.SetActive(false);
+                GameReset();
+                SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
+                Debug.Log("Game Over!");
+            }
+        }
+        else//如果是无尽模式
+        {
+            float targetMoney = GameManager.Instance.endlessModeTarget;
+            float moneyLeft = vaultMoney - targetMoney;
+            if (moneyLeft >= 0)//如果金币足够交租
             {
                 nextLevelButton.SetActive(true);
                 commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
                 GameManager.Instance.storyID += 1;
+                GameManager.Instance.endlessModeTarget *= GameManager.Instance.endlessModeTargetTimes;
+                GameManager.Instance.endlessModeDays += GameManager.Instance.endlessModeDaysPlus;
                 switch (GameManager.Instance.Language)
                 {
-                    case 1 :
+                    case 1:
                         commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
                         break;
-                    case 2: 
+                    case 2:
                         commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
                         break;
                     case 3:
                         commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
                         break;
                 }
-                
             }
-            
+            else//如果金币不够交租
+            {
+                GameManager.Instance.isRoundEnd = false;
+                Destroy(this.gameObject);
+                commitRentGroup.SetActive(false);
+                GameReset();
+                SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
+                Debug.Log("Game Over!");
+            }
         }
-        else
-        {
-            GameManager.Instance.isRoundEnd = false;
-            Destroy(this.gameObject);
-            commitRentGroup.SetActive(false);
-            GameReset();
-            SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);       
-            //SceneManager.UnloadSceneAsync("GameScene",UnloadSceneOptions.None);
-            //SceneManager.UnloadSceneAsync("UIScene", UnloadSceneOptions.None);       
-            Debug.Log("Game Over!");
-        }
+        
     }
 
     private void GameReset()
@@ -131,5 +134,22 @@ public class RoundEndPanelController : MonoBehaviour
         }
         GuestController.Instance.GuestInApartmentPrefabStorage.Clear();
         GuestController.Instance.GenerateBasicGuest(3);
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    public void ContinuePlaying()
+    {
+        GameManager.Instance.isEndlessMode = true;
+        GameManager.Instance.endlessModeTarget = Level.GetItem(5).target * GameManager.Instance.endlessModeTargetTimes;
+        GameManager.Instance.endlessModeDays = Level.GetItem(5).days + GameManager.Instance.endlessModeDaysPlus;
+        GoToNextLevel();
     }
 }

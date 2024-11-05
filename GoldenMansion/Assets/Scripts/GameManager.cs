@@ -19,8 +19,12 @@ public class GameManager : MonoBehaviour
     public int mediaDays { get; set; } = -1;
     public int storyID { get; set; } = 0;
     public int Language { get; set; } = 0;
-
     public float SFVolume { get; set; } = 1;
+    public bool isEndlessMode { get; set; } = false;
+    public float endlessModeTarget { get; set; }
+    public float endlessModeTargetTimes { get; set; } = 1.5f;
+    public int endlessModeDays { get; set; }
+    public int endlessModeDaysPlus { get; set; } = 3;
 
     public static GameManager Instance
     {

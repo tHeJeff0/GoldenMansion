@@ -147,23 +147,37 @@ public class UIController : MonoBehaviour
         yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
         //UpdateVaultMoneyText();
         yield return new WaitForSecondsRealtime(0.4f);
-        if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
+        if (!GameManager.Instance.isEndlessMode)
         {
-            Instantiate(chooseCardPanel, thisCanvas.transform);
-            SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
+            if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
+            {
+                Instantiate(chooseCardPanel, thisCanvas.transform);
+                SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
+            }
+            else
+            {
+                GameManager.Instance.isRoundEnd = true;
+                Instantiate(roundEndPanel, thisCanvas.transform);
+                SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
+            }
         }
         else
         {
-            GameManager.Instance.isRoundEnd = true;
-            Instantiate(roundEndPanel, thisCanvas.transform);
-            SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
+            if (GameManager.Instance.endlessModeDays - GameManager.Instance.gameDays > 0)
+            {
+                Instantiate(chooseCardPanel, thisCanvas.transform);
+                SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
+            }
+            else
+            {
+                GameManager.Instance.isRoundEnd = true;
+                Instantiate(roundEndPanel, thisCanvas.transform);
+                SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
+            }
         }
+        
     }
 
-    //public void UpdateVaultMoneyText()
-    //{
-    //    vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
-    //}
 
     
 

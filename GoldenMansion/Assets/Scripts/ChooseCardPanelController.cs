@@ -41,12 +41,20 @@ public class ChooseCardPanelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
+        if (!GameManager.Instance.isEndlessMode)
+        {
+            targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
+        }
+        else
+        {
+            targetText.text = string.Format("{0}天后上交租金:{1}", GameManager.Instance.endlessModeDays - GameManager.Instance.gameDays, GameManager.Instance.endlessModeTarget);
+        }
+        
         vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
         if (GameManager.Instance.isChooseCardFinish)
         {
             GameManager.Instance.isChooseCardFinish = false;
-            Destroy(this.gameObject);           
+            Destroy(gameObject);           
         }
     }
 

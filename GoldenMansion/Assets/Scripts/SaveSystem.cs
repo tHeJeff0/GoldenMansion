@@ -87,6 +87,11 @@ public class SaveSystem : MonoBehaviour
         saveData.isAllowSell = GameManager.Instance.isAllowSell;
         saveData.isAllowBuy = GameManager.Instance.isAllowBuy;
         saveData.mediaDays = GameManager.Instance.mediaDays;
+        saveData.isEndlessMode = GameManager.Instance.isEndlessMode;
+        saveData.endlessModeTarget = GameManager.Instance.endlessModeTarget;
+        saveData.endlessModeTargetTimes = GameManager.Instance.endlessModeTargetTimes;
+        saveData.endlessModeDays = GameManager.Instance.endlessModeDays;
+        saveData.endlessModeDaysPlus = GameManager.Instance.endlessModeDaysPlus;
         foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
         {
             string guestID = guest.GetComponent<GuestInApartment>().guestElementID;
@@ -126,6 +131,11 @@ public class SaveSystem : MonoBehaviour
         GameManager.Instance.isAllowSell = saveData.isAllowSell;
         GameManager.Instance.isAllowBuy = saveData.isAllowBuy;
         GameManager.Instance.mediaDays = saveData.mediaDays;
+        GameManager.Instance.isEndlessMode = saveData.isEndlessMode;
+        GameManager.Instance.endlessModeDays = saveData.endlessModeDays;
+        GameManager.Instance.endlessModeDaysPlus = saveData.endlessModeDaysPlus;
+        GameManager.Instance.endlessModeTarget = saveData.endlessModeTarget;
+        GameManager.Instance.endlessModeTargetTimes = saveData.endlessModeTargetTimes;
         LoadGuestData(saveData);
         //StorageController.Instance.guestStorage = saveData.guestStorage;
     }

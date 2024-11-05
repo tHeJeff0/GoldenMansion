@@ -15,7 +15,12 @@ public class SaveData
     public int guestRemoveCount;
     public bool isAllowSell;
     public bool isAllowBuy;
+    public bool isEndlessMode;
     public int mediaDays = -1;
+    public float endlessModeTarget;
+    public float endlessModeTargetTimes;
+    public int endlessModeDays;
+    public int endlessModeDaysPlus;
     public List<string> guestID = new List<string>();
     public List<int> guestKey = new List<int>();
     public List<string> guestPersona = new List<string>();
