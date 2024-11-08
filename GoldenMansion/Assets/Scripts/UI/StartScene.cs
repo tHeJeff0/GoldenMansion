@@ -29,7 +29,12 @@ public class StartScene : MonoBehaviour
             chooseLanguageGroup.SetActive(false);
         }
         Debug.Log(GameManager.Instance.gameDays);
+        
+    }
 
+    private void Start()
+    {
+        SaveSystem.Instance.TranslateButtonText();
     }
     public void StartNewGame()
     {

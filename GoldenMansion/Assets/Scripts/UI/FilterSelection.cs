@@ -1,3 +1,4 @@
+using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -33,6 +34,22 @@ public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
             StartCoroutine(filter.ShowPersonaFilterSelection(PersonaFilterButton, SecondStepTransform.transform.Find("FilterScrollView").Find("Viewport").Find("Content").gameObject));
             SecondStepTransform.SetActive(false);
         }
+
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(GetComponentInChildren<TextMeshProUGUI>().text).CHN;
+                break;
+            case 2:
+                GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(GetComponentInChildren<TextMeshProUGUI>().text).ENG;
+                break;
+            case 3:
+                GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(GetComponentInChildren<TextMeshProUGUI>().text).TCHN;
+                break;
+            default:
+                GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(GetComponentInChildren<TextMeshProUGUI>().text).CHN;
+                break;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -58,11 +75,6 @@ public class FilterSelection : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
         }
 
     }
-
-    //public void OnPointerClick(PointerEventData eventData)
-    //{
-    //    FilterSelect();
-    //}
 
     public void OnPointerClick(PointerEventData eventData)
     {

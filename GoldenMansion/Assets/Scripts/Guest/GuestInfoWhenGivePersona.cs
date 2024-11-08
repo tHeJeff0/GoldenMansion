@@ -78,6 +78,11 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
         {
             ShowMBTIIcon(mbtiID);
         }
+
+        TranslateSelfTitle("JobText", GameManager.Instance.Language);
+        TranslateSelfTitle("PersonaText", GameManager.Instance.Language);
+        TranslateSelfTitle("BudgetText", GameManager.Instance.Language);
+        TranslateSelfTitle("PriceText", GameManager.Instance.Language);
     }
 
     // Update is called once per frame
@@ -166,6 +171,23 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
     {
         GameObject mbtiIcon = Instantiate(mbtiPic, personaSlot.transform);
         mbtiIcon.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(GuestMBTIData.GetItem(mbtiKey).iconRoute);
+
+    }
+
+    void TranslateSelfTitle(string titleName, int languageID)
+    {
+        switch (languageID)
+        {
+            case 1:
+                transform.Find(titleName).Find("Title").GetComponent<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(transform.Find(titleName).Find("Title").GetComponent<TextMeshProUGUI>().text).CHN;
+                break;
+            case 2:
+                transform.Find(titleName).Find("Title").GetComponent<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(transform.Find(titleName).Find("Title").GetComponent<TextMeshProUGUI>().text).ENG;
+                break;
+            case 3:
+                transform.Find(titleName).Find("Title").GetComponent<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(transform.Find(titleName).Find("Title").GetComponent<TextMeshProUGUI>().text).TCHN;
+                break;
+        }
 
     }
 }

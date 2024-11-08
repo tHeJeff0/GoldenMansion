@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Guest : MonoBehaviour
 {
@@ -81,6 +82,9 @@ public class Guest : MonoBehaviour
                 break;
             }
         }
+
+        TranslateBudgetTitle(GameManager.Instance.Language);
+        TranslateInviteButton(GameManager.Instance.Language);
     }
                
 
@@ -113,17 +117,24 @@ public class Guest : MonoBehaviour
 
     }
 
+    
+
     private void OnMouseEnter()
     {
         transform.DOLocalMoveY(160, 0.05f);
 
         guestCardDescPrefab.SetActive(true);
-        int skillID = FieldData.GetItem(CharacterData.GetItem(key).field).skillID;
+        int fieldID = CharacterData.GetItem(key).field;
+        int skillID = FieldData.GetItem(fieldID).skillID;
         int languageID = SkillData.GetItem(skillID).descID;
+        //string conditionValue = GuestController.Instance.GetLanguageConditionValue(fieldID).ToString();
+        //string effectValue = GuestController.Instance.GetLanguageEffectValue(fieldID).ToString();
         switch (GameManager.Instance.Language)
         {
             case 1:
                 guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
+                //string.Format(LanguageData.GetItem(languageID).CHN, conditionValue,effectValue);
+                //LanguageData.GetItem(languageID).CHN;
                 break;
             case 2: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).ENG;
                 break;
@@ -162,5 +173,37 @@ public class Guest : MonoBehaviour
         
     }
 
+    void TranslateInviteButton(int languageID)
+    {
+        switch (languageID)
+        {
+            case 1:
+                transform.Find("InviteButton").GetComponentInChildren<TextMeshProUGUI>().text = "买 入";
+                break;
+            case 2:
+                transform.Find("InviteButton").GetComponentInChildren<TextMeshProUGUI>().text = "BUY";
+                break;
+            case 3:
+                transform.Find("InviteButton").GetComponentInChildren<TextMeshProUGUI>().text = "買 入";
+                break;
+        }
+
+    }
+
+    void TranslateBudgetTitle(int languageID)
+    {
+        switch (languageID)
+        {
+            case 1:
+                transform.Find("GuestCard").Find("BudgetTitleText").GetComponent<TextMeshProUGUI>().text = "房租:";
+                break;
+            case 2:
+                transform.Find("GuestCard").Find("BudgetTitleText").GetComponent<TextMeshProUGUI>().text = "Budget:";
+                break;
+            case 3:
+                transform.Find("GuestCard").Find("BudgetTitleText").GetComponent<TextMeshProUGUI>().text = "房租:";
+                break;
+        }
+    }
 
 }

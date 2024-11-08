@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -14,6 +15,7 @@ public class NewGivePersona : MonoBehaviour
     private void Awake()
     {
         OnActive();
+        TranslateDescText();
     }
 
     // Update is called once per frame
@@ -94,6 +96,26 @@ public class NewGivePersona : MonoBehaviour
     {
         gameObject.SetActive(false);
         StorageController.Instance.guestStorage.Clear();
+    }
+
+    void TranslateDescText()
+    {
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                transform.Find("LimitDesc").GetComponent<TextMeshProUGUI>().text = "*每个租客最多拥有4个人格";
+                break;
+            case 2:
+                transform.Find("LimitDesc").GetComponent<TextMeshProUGUI>().text = "* Utmost 4 persona for each guest";
+                break;
+            case 3:
+                transform.Find("LimitDesc").GetComponent<TextMeshProUGUI>().text = "*每個租客最多擁有4個人格" ;
+                break;
+            default:
+                transform.Find("LimitDesc").GetComponent<TextMeshProUGUI>().text = "*每个租客最多拥有4个人格";
+                break;
+        }
+        
     }
    
 }

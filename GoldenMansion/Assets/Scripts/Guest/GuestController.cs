@@ -148,4 +148,38 @@ public class GuestController : MonoBehaviour
         return sb.ToString();
     }
 
+    public int GetLanguageConditionValue(int fieldID)
+    {
+        int skillID = FieldData.GetItem(fieldID).skillID;
+        int index = 0;
+        int condition = SkillController.Instance.GetFieldCount(fieldID);
+        for (int i = 0; i < SkillData.GetItem(skillID).conditionValue.Length; i++)
+        {
+            if (condition >= SkillData.GetItem(skillID).conditionValue[i])
+            {
+                index = i;
+            }
+        }
+        int conditionValue = SkillData.GetItem(fieldID).conditionValue[index];
+        Debug.Log(SkillData.GetItem(fieldID).conditionValue[index]);
+        return conditionValue;
+    }
+
+    public int GetLanguageEffectValue(int fieldID)
+    {
+        int index = 0;
+        int skillID = FieldData.GetItem(fieldID).skillID;
+        int condition = SkillController.Instance.GetFieldCount(fieldID);
+        for (int i = 0; i < SkillData.GetItem(skillID).conditionValue.Length; i++)
+        {
+            if (condition >= SkillData.GetItem(skillID).conditionValue[i])
+            {
+                index = i;
+            }
+        }
+        int effectValue = SkillData.GetItem(skillID).effectValue[index];
+        Debug.Log(SkillData.GetItem(skillID).effectValue[index]);
+        return effectValue;
+    }
+
 }

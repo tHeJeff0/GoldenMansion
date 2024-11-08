@@ -25,6 +25,7 @@ public class ChooseCardPanelController : MonoBehaviour
     {
         transform.localPosition = new Vector3(transform.parent.position.x, -999.0f, 0);
         transform.DOMoveY(0, 0.4f);
+        SaveSystem.Instance.TranslateButtonText();
     }
     // Start is called before the first frame update
     void Start()
@@ -43,11 +44,43 @@ public class ChooseCardPanelController : MonoBehaviour
     {
         if (!GameManager.Instance.isEndlessMode)
         {
-            targetText.text = string.Format("{0}天后上交租金:{1}", Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
+            string targetTextString;
+            switch (GameManager.Instance.Language)
+            {
+                case 1:
+                    targetTextString = "{0}天后上交租金:{1}";
+                    break;
+                case 2:
+                    targetTextString = "{0}days left to pey rent:{1}";
+                    break;
+                case 3:
+                    targetTextString = "{0}天后上交租金:{1}";
+                    break;
+                default:
+                    targetTextString = "{0}天后上交租金:{1}";
+                    break;
+            }
+            targetText.text = string.Format(targetTextString, Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays, Level.GetItem(GameManager.Instance.levelKey).target);
         }
         else
         {
-            targetText.text = string.Format("{0}天后上交租金:{1}", GameManager.Instance.endlessModeDays - GameManager.Instance.gameDays, GameManager.Instance.endlessModeTarget);
+            string targetTextString;
+            switch (GameManager.Instance.Language)
+            {
+                case 1:
+                    targetTextString = "{0}天后上交租金:{1}";
+                    break;
+                case 2:
+                    targetTextString = "{0}days left to pey rent:{1}";
+                    break;
+                case 3:
+                    targetTextString = "{0}天后上交租金:{1}";
+                    break;
+                default:
+                    targetTextString = "{0}天后上交租金:{1}";
+                    break;
+            }
+            targetText.text = string.Format(targetTextString, GameManager.Instance.endlessModeDays - GameManager.Instance.gameDays, GameManager.Instance.endlessModeTarget);
         }
         
         vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
