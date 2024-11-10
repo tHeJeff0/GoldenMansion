@@ -520,7 +520,9 @@ public class SkillController : MonoBehaviour
             GameManager.Instance.isAllowBuy = true;
             GameManager.Instance.isAllowSell = true;
         }
-        
+        GameManager.Instance.isAllowBuy = true;
+        GameManager.Instance.isAllowSell = true;
+
     }
 
 

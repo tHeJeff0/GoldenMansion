@@ -26,16 +26,19 @@ public class Skill : MonoBehaviour
 
     public void Skill_Inner(GuestInApartment guestInApartment)
     {
-
-        List<GameObject> adjancentGuest = GuestController.Instance.GetAdjancentGuest(guestInApartment);
-        foreach (GameObject guest in adjancentGuest)
+        if (guestInApartment.transform.parent != null)
         {
-            Debug.Log(guest.GetComponent<GuestInApartment>().key);
-            if (guest.GetComponent<GuestInApartment>().isDestroyable)
+            List<GameObject> adjancentGuest = GuestController.Instance.GetAdjancentGuest(guestInApartment);
+            foreach (GameObject guest in adjancentGuest)
             {
-                skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
+                Debug.Log(guest.GetComponent<GuestInApartment>().key);
+                if (guest.GetComponent<GuestInApartment>().isDestroyable)
+                {
+                    skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
+                }
             }
         }
+        
 
     }
 
@@ -46,11 +49,15 @@ public class Skill : MonoBehaviour
 
     public void Skill_Intuition(GuestInApartment guestInApartment)
     {
-        int randomNumber = Random.Range(0, 9);
-        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == randomNumber)
+        if (guestInApartment.transform.parent != null)
         {
-            guestInApartment.guestExtraBudget += guestInApartment.guestBudget;
+            int randomNumber = Random.Range(0, 9);
+            if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == randomNumber)
+            {
+                guestInApartment.guestExtraBudget += guestInApartment.guestBudget;
+            }
         }
+        
 
     }
 
@@ -104,39 +111,51 @@ public class Skill : MonoBehaviour
 
     public void Skill_INTP(GuestInApartment guestInApartment)
     {
-        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == 0)
+        if (guestInApartment.transform.parent != null)
         {
-            int randomExtraBudget = Random.Range(1, 11);
-            guestInApartment.guestExtraBudget += randomExtraBudget;
+            if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == 0)
+            {
+                int randomExtraBudget = Random.Range(1, 11);
+                guestInApartment.guestExtraBudget += randomExtraBudget;
+            }
         }
+        
     }
 
     public void Skill_ENTJ(GuestInApartment guestInApartment)
     {
-        foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+        if (guestInApartment.transform.parent != null)
         {
-            if (guest.GetComponent<GuestInApartment>().guestBudget < guestInApartment.guestBudget)
+            foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
             {
-                skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
+                if (guest.GetComponent<GuestInApartment>().guestBudget < guestInApartment.guestBudget)
+                {
+                    skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
+                }
             }
         }
+        
     }
 
     public void Skill_ENTP(GuestInApartment guestInApartment)
     {
-        int increaseBudget = 0;
-        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count != 0)
+        if (guestInApartment.transform.parent != null)
         {
-            foreach (var adjancentGuest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+            int increaseBudget = 0;
+            if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count != 0)
             {
-                int budget = adjancentGuest.GetComponent<GuestInApartment>().guestBudget + adjancentGuest.GetComponent<GuestInApartment>().guestExtraBudget;
-                if (budget > increaseBudget)
+                foreach (var adjancentGuest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
                 {
-                    increaseBudget = budget;
+                    int budget = adjancentGuest.GetComponent<GuestInApartment>().guestBudget + adjancentGuest.GetComponent<GuestInApartment>().guestExtraBudget;
+                    if (budget > increaseBudget)
+                    {
+                        increaseBudget = budget;
+                    }
                 }
             }
+            guestInApartment.guestExtraBudget += increaseBudget - guestInApartment.guestBudget;
         }
-        guestInApartment.guestExtraBudget += increaseBudget - guestInApartment.guestBudget;
+        
         
     }
 
@@ -155,10 +174,14 @@ public class Skill : MonoBehaviour
 
     public void Skill_ENFJ(GuestInApartment guestInApartment)
     {
-        foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+        if (guestInApartment.transform.parent != null)
         {
-            skillEffect.IncreaseBasicPrice(guest.GetComponent<GuestInApartment>(), 1);
+            foreach (var guest in GuestController.Instance.GetAdjancentGuest(guestInApartment))
+            {
+                skillEffect.IncreaseBasicPrice(guest.GetComponent<GuestInApartment>(), 1);
+            }
         }
+        
     }
 
     public void Skill_ENFP(GuestInApartment guestInApartment)
@@ -187,16 +210,20 @@ public class Skill : MonoBehaviour
 
     public void Skill_ISFJ(GuestInApartment guestInApartment)
     {
-        if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == 0)
+        if (guestInApartment.transform.parent != null)
         {
-            for (int i = 0; i < 8; i++)
+            if (GuestController.Instance.GetAdjancentGuest(guestInApartment).Count == 0)
             {
-                GameObject newGuest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
-                newGuest.GetComponentInChildren<SpriteRenderer>().enabled = false;
-                GuestController.Instance.GuestInApartmentPrefabStorage.Add(newGuest);
+                for (int i = 0; i < 8; i++)
+                {
+                    GameObject newGuest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+                    newGuest.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                    GuestController.Instance.GuestInApartmentPrefabStorage.Add(newGuest);
+                }
+                skillEffect.RemoveGuest(guestInApartment);
             }
-            skillEffect.RemoveGuest(guestInApartment);
         }
+        
     }
 
     public void Skill_ESTJ(GuestInApartment guestInApartment)

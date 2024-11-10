@@ -100,18 +100,26 @@ public class GuestController : MonoBehaviour
     
     public List<GameObject> GetAdjancentGuest(GuestInApartment guestInApartment)
     {
-        List<GameObject> adjancentGuest = new List<GameObject>();
-        Vector3 boxSize = guestInApartment.transform.parent.GetComponent<BoxCollider>().size;
-        Collider[] colliders = Physics.OverlapBox(guestInApartment.transform.position, boxSize, Quaternion.identity);
-        foreach (var collider in colliders)
+        if (guestInApartment.transform.parent != null)
         {
-            if (collider!=guestInApartment.GetComponent<BoxCollider>() && collider.CompareTag("Guest"))
+            List<GameObject> adjancentGuest = new List<GameObject>();
+            Vector3 boxSize = guestInApartment.transform.parent.GetComponent<BoxCollider>().size;
+            Collider[] colliders = Physics.OverlapBox(guestInApartment.transform.position, boxSize, Quaternion.identity);
+            foreach (var collider in colliders)
             {
-                adjancentGuest.Add(collider.gameObject);
-            }
+                if (collider != guestInApartment.GetComponent<BoxCollider>() && collider.CompareTag("Guest"))
+                {
+                    adjancentGuest.Add(collider.gameObject);
+                }
 
+            }
+            return adjancentGuest;
         }
-        return adjancentGuest;
+        else
+        {
+            return null;
+        }
+        
     }
 
     public void GuestSkillTrigger_WhenMoveIn()

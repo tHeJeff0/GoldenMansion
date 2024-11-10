@@ -4,10 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 
 public class SaveSystem : MonoBehaviour
@@ -110,6 +112,9 @@ public class SaveSystem : MonoBehaviour
             saveData.guestKey.Add(guestKey);
             saveData.guestPersona.Add(guestPersonaString);
         }
+        string[] moneyLeft = new string[1];
+        moneyLeft[0] = saveData.vaultMoney.ToString();
+        WriteToCsv("C:/Users/8/Desktop/数值.csv", moneyLeft);
         //saveData.guestStorage = StorageController.Instance.guestStorage;
         return saveData;
     }
@@ -246,6 +251,25 @@ public class SaveSystem : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void WriteToCsv(string filePath, string[] data)
+    {
+        // 检查文件是否存在
+        bool fileExists = File.Exists(filePath);
+
+        // 使用StreamWriter，指定UTF-8编码和BOM
+        using (StreamWriter writer = new StreamWriter(filePath, append: true, encoding: new UTF8Encoding(true)))
+        {
+            // 如果文件不存在，写入标题行（可选）
+            if (!fileExists)
+            {
+                writer.WriteLine("Column1,Column2,Column3"); // 根据数据结构自定义列名
+            }
+
+            // 写入数据
+            writer.WriteLine(string.Join(",", data));
         }
     }
 

@@ -35,12 +35,16 @@ public class StartScene : MonoBehaviour
     private void Start()
     {
         SaveSystem.Instance.TranslateButtonText();
+        //GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled = true;
+        StartCoroutine(BGMFadeIn(0.3f));
+
     }
     public void StartNewGame()
     {
         SaveSystem.Instance.DeleteData(SaveSystem.Instance.saveName);
         SceneManager.UnloadSceneAsync("StartScene");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
+        //GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled = true;
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("UIScene"));
 
     }
@@ -56,6 +60,7 @@ public class StartScene : MonoBehaviour
         SceneManager.UnloadSceneAsync("StartScene");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("UIScene"));
+        //GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled = true;
         var data = SaveSystem.Instance.LoadData<SaveData>(SaveSystem.Instance.saveName);
         SaveSystem.Instance.readData(data);
     }
@@ -127,5 +132,14 @@ public class StartScene : MonoBehaviour
     public void CallSettingPanel()
     {
         settingPanel.SetActive(true);
+    }
+
+    IEnumerator BGMFadeIn(float fadeInSpeed)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            GetComponent<AudioSource>().volume = i/10.0f;
+            yield return new WaitForSecondsRealtime(fadeInSpeed);
+        }             
     }
 }

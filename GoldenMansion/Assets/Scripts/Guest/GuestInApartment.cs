@@ -272,7 +272,8 @@ public class GuestInApartment : MonoBehaviour
         temporPersona.Clear();
         guestExtraBudget = 0;
         this.transform.SetParent(null);
-        this.transform.localPosition = Vector3.zero;
+        Vector3 defaultPosition = new Vector3(3.55f, -7.35f, 0);
+        this.transform.localPosition = defaultPosition;
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;
         //this.nameText.enabled = false;
