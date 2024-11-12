@@ -607,7 +607,20 @@ public class SkillController : MonoBehaviour
         FieldSkillTrigger(guest);
         shakeAudioSource.volume = GameManager.Instance.SFVolume;
         shakeAudioSource.PlayOneShot(shakeAudio);
+        if (guest.GetComponent<GuestInApartment>().guestDestroyedTemporList.Count > 0)
+        {
+            for (int i = guest.GetComponent<GuestInApartment>().guestDestroyedTemporList.Count-1; i >= 0; i--)
+            {
+                guest.GetComponent<GuestInApartment>().guestDestroyedTemporList[i].transform.DOShakePosition(0.4f, new Vector3(1.0f, 1.0f, 0), 50, 90);               
+                yield return null;
+                Destroy(guest.GetComponent<GuestInApartment>().guestDestroyedTemporList[i]);
+            }
+            
+        }
+        guest.GetComponent<GuestInApartment>().guestDestroyedTemporList.Clear();
         yield return guest.transform.DOShakePosition(0.4f,new Vector3(1.0f,1.0f,0),50,90).WaitForCompletion();
+        
+
         //Debug.Log(guest.GetComponent<GuestInApartment>().guestName + "   " + index);
 
 

@@ -31,16 +31,23 @@ public class Skill : MonoBehaviour
             List<GameObject> adjancentGuest = GuestController.Instance.GetAdjancentGuest(guestInApartment);
             foreach (GameObject guest in adjancentGuest)
             {
-                Debug.Log(guest.GetComponent<GuestInApartment>().key);
+                Debug.Log(guestInApartment.guestName + "ฯ๛ณýมห"+guest.GetComponent<GuestInApartment>().guestName+"ื๘ฑ๊:"+guest.transform.position);
                 if (guest.GetComponent<GuestInApartment>().isDestroyable)
                 {
+                    GameObject guestDestroyed = Instantiate(guest.GetComponent<GuestInApartment>().destroyedGuest,guest.transform);
+                    guestDestroyed.transform.SetParent(null);
+                    guestDestroyed.GetComponent<GuestDestroyed>().key = guest.GetComponent<GuestInApartment>().key;
+                    guestDestroyed.GetComponent<GuestDestroyed>().OnInstantiate();
+                    guestDestroyed.GetComponentInChildren<SpriteRenderer>().enabled = true;
+                    guestInApartment.guestDestroyedTemporList.Add(guestDestroyed);
                     skillEffect.RemoveGuest(guest.GetComponent<GuestInApartment>());
+
                 }
             }
         }
         
-
     }
+
 
     public void Skill_Outer(GuestInApartment guestInApartment)
     {

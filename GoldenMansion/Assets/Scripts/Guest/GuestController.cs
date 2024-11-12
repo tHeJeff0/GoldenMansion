@@ -104,7 +104,7 @@ public class GuestController : MonoBehaviour
         {
             List<GameObject> adjancentGuest = new List<GameObject>();
             Vector3 boxSize = guestInApartment.transform.parent.GetComponent<BoxCollider>().size;
-            Collider[] colliders = Physics.OverlapBox(guestInApartment.transform.position, boxSize, Quaternion.identity);
+            Collider[] colliders = Physics.OverlapBox(guestInApartment.transform.position, boxSize/2, Quaternion.identity);
             foreach (var collider in colliders)
             {
                 if (collider != guestInApartment.GetComponent<BoxCollider>() && collider.CompareTag("Guest"))
@@ -125,7 +125,10 @@ public class GuestController : MonoBehaviour
     public void GuestSkillTrigger_WhenMoveIn()
     {
         List<GameObject> temporList = new List<GameObject>();
-        temporList.AddRange(GuestInApartmentPrefabStorage);
+        //temporList.AddRange(GuestInApartmentPrefabStorage);
+        temporList = ApartmentController.Instance.GetGuestInApartment().
+            OrderBy(go => go.transform.position.x).
+            ThenByDescending(go => go.transform.position.y).ToList();
         foreach (var guest in temporList)
         {
             guest.GetComponent<GuestInApartment>().SkillTrigger_WhenMoveIn();

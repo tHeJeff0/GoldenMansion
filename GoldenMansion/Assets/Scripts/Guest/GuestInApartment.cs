@@ -34,10 +34,12 @@ public class GuestInApartment : MonoBehaviour
 
     [SerializeField] GameObject personaSlot;
     [SerializeField] GameObject personaPic;
+    public GameObject destroyedGuest;
     //[SerializeField] TextMeshPro nameText;
 
     public List<int> persona = new List<int>();
     public List<int> temporPersona = new List<int>();
+    public List<GameObject> guestDestroyedTemporList = new List<GameObject>();
 
     public Action<GuestInApartment> SkillMethod_OnGoingEffect;
     public Action<GuestInApartment> SkillMethod_Normal;
@@ -81,6 +83,14 @@ public class GuestInApartment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (transform.parent != null)
+        //{
+        //    gameObject.tag = "Guest";
+        //}
+        //else
+        //{
+        //    gameObject.tag = "Untagged";
+        //}
 
         if (persona.Count == 4)
         {
@@ -114,6 +124,8 @@ public class GuestInApartment : MonoBehaviour
         {
             Reset();
         }
+
+        
     }
 
     public void InitialGuest()
@@ -129,6 +141,8 @@ public class GuestInApartment : MonoBehaviour
         gameObject.SetActive(true);
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
+        //destroyedGuest.GetComponent<GuestDestroyed>().field = field;
+        //destroyedGuest.GetComponent<GuestDestroyed>().key = key;
     }
     public void SkillTrigger()
     {

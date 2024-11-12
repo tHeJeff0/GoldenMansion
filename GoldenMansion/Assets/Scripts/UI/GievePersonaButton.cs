@@ -21,8 +21,8 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
     // Start is called before the first frame update
     void Start()
     {
-        //personaKey = 1;
-        personaKey = RandomKey();
+        personaKey = 1;
+        //personaKey = RandomKey();
         personaButton.transform.Find("Button").Find("BottomPic").GetComponent<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute+"L");
     }
 

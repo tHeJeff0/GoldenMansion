@@ -93,10 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6572756587022980548}
-  - component: {fileID: 5915425962316406885}
-  - component: {fileID: 5957343955086743118}
+  - component: {fileID: 4453297251791905037}
   m_Layer: 0
-  m_Name: GuestInApartment
+  m_Name: GuestDestroyed
   m_TagString: Guest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +111,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.1}
-  m_LocalScale: {x: 4, y: 4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1.125, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1115440158944532592}
@@ -120,7 +119,7 @@ Transform:
   - {fileID: 4656271665196292470}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5915425962316406885
+--- !u!114 &4453297251791905037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,35 +128,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5936493624812046023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b38a5dabd35ac644af5cc14dc1ffad7, type: 3}
+  m_Script: {fileID: 11500000, guid: e60a2f109ff514d46a43adb890c9b278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   personaSlot: {fileID: 8854610548194720220}
   personaPic: {fileID: 2114656277191329424, guid: 5a83dffed996c504e9753dc9864eccf1, type: 3}
-  destroyedGuest: {fileID: 5936493624812046023, guid: dbd94ebe532e10044be742cc2a7555a9, type: 3}
   persona: 
   temporPersona: 
---- !u!65 &5957343955086743118
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5936493624812046023}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6689001914645238974
 GameObject:
   m_ObjectHideFlags: 0
