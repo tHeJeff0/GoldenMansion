@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int levelKey { get; set; } = 1;
     public int basicRerollTime { get; set; } = 1;
     public int extraRerollTime { get; set; }
+    public int rerollTime { get; set; } = 1;
     public int guestRemoveCount { get; set; }
     public bool isAllowSell { get; set; } = true;
     public bool isAllowBuy { get; set; } = true;

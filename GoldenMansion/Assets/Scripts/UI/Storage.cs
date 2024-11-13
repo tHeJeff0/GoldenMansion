@@ -119,6 +119,7 @@ public class Storage : MonoBehaviour
         StorageController.Instance.filterWaitingUpdate = true;
         temporList.Clear();
         StorageController.Instance.guestSelected.Clear();
+        Debug.Log("extra£º" + GameManager.Instance.extraRerollTime);
         yield return true;
     }
 

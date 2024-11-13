@@ -133,11 +133,8 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
                     guest.GetComponent<GuestInApartment>().GetPersonaSkill(SkillController.Instance.temporPersonaKey);
                 }
             }
-
-
             SkillController.Instance.temporPersonaKey = 0;
         }
-        
     }
 
     public void OnPointerExit(PointerEventData eventData)

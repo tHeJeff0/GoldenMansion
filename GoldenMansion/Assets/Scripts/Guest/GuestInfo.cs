@@ -158,7 +158,11 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
                     foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
                     {
                         if (guest.GetComponent<GuestInApartment>().guestElementID == elementID)
-                        {                           
+                        {
+                            foreach (var personaID in guest.GetComponent<GuestInApartment>().persona)
+                            {
+                                guest.GetComponent<GuestInApartment>().RemovePersonaSkill(personaID);
+                            }                                               
                             GuestController.Instance.GuestInApartmentPrefabStorage.Remove(guest);
                             Destroy(guest);
                             return;
@@ -176,7 +180,8 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
                     StorageController.Instance.guestFilteredStorage.Remove(gameObject);
                     Destroy(gameObject);
                 }
-            }            
+            }
+            
         }
         else
         {

@@ -83,14 +83,6 @@ public class GuestInApartment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (transform.parent != null)
-        //{
-        //    gameObject.tag = "Guest";
-        //}
-        //else
-        //{
-        //    gameObject.tag = "Untagged";
-        //}
 
         if (persona.Count == 4)
         {
