@@ -63,28 +63,8 @@ public class Guest : MonoBehaviour
     private void OnEnable()
     {
         key = GuestController.Instance.RandomKey();
-        guestName = CharacterData.GetItem(key).name;
-        guestBudget = CharacterData.GetItem(key).budget;
-        guestPrice = CharacterData.GetItem(key).basicPrice;
-        guestCost = CharacterData.GetItem(key).basicCost;
-        guestDesc = guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text;
-        guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
-        guestPortrait.GetComponent<Image>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
-        guestBudgetText.text = guestBudget.ToString();
-
-
-        //INFP技能效果
-        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
-        {
-            if (guest.GetComponent<GuestInApartment>().mbti == 1458)
-            {
-                guestExtraCost = guestCost * 0.5f;
-                break;
-            }
-        }
-
-        TranslateBudgetTitle(GameManager.Instance.Language);
-        TranslateInviteButton(GameManager.Instance.Language);
+        LoadGuestMessage(key);
+               
     }
                
 
@@ -207,4 +187,28 @@ public class Guest : MonoBehaviour
         }
     }
 
+    public void LoadGuestMessage(int key)
+    {
+        guestName = CharacterData.GetItem(key).name;
+        guestBudget = CharacterData.GetItem(key).budget;
+        guestPrice = CharacterData.GetItem(key).basicPrice;
+        guestCost = CharacterData.GetItem(key).basicCost;
+        guestDesc = guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text;
+        guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
+        guestPortrait.GetComponent<Image>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
+        guestBudgetText.text = guestBudget.ToString();
+
+        //INFP技能效果
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().mbti == 1458)
+            {
+                guestExtraCost = guestCost * 0.5f;
+                break;
+            }
+        }
+
+        TranslateBudgetTitle(GameManager.Instance.Language);
+        TranslateInviteButton(GameManager.Instance.Language);
+    }
 }

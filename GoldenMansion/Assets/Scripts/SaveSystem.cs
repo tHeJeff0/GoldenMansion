@@ -17,6 +17,12 @@ public class SaveSystem : MonoBehaviour
     private static SaveSystem instance;
     public string saveName = "save.sav";
 
+    public int temporPersonaIDOne;
+    public int temporPersonaIDTwo;
+    public int temporGuestIDOne;
+    public int temporGuestIDTwo;
+    public int temporGuestIDThree;
+
     public static SaveSystem Instance
     {
         get
@@ -94,6 +100,11 @@ public class SaveSystem : MonoBehaviour
         saveData.endlessModeTargetTimes = GameManager.Instance.endlessModeTargetTimes;
         saveData.endlessModeDays = GameManager.Instance.endlessModeDays;
         saveData.endlessModeDaysPlus = GameManager.Instance.endlessModeDaysPlus;
+        saveData.guestIDOne = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1").GetComponent<Guest>().key;
+        saveData.guestIDTwo = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (1)").GetComponent<Guest>().key;
+        saveData.guestIDThree = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (2)").GetComponent<Guest>().key;
+        saveData.personaIDOne = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").GetComponent<GievePersonaButton>().personaKey;
+        saveData.personaIDTwo = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona2").GetComponent<GievePersonaButton>().personaKey;
         foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
         {
             string guestID = guest.GetComponent<GuestInApartment>().guestElementID;
@@ -141,7 +152,13 @@ public class SaveSystem : MonoBehaviour
         GameManager.Instance.endlessModeDaysPlus = saveData.endlessModeDaysPlus;
         GameManager.Instance.endlessModeTarget = saveData.endlessModeTarget;
         GameManager.Instance.endlessModeTargetTimes = saveData.endlessModeTargetTimes;
+        temporGuestIDOne = saveData.guestIDOne;
+        temporGuestIDTwo = saveData.guestIDTwo;
+        temporGuestIDThree = saveData.guestIDThree;
+        temporPersonaIDOne = saveData.personaIDOne;
+        temporPersonaIDTwo = saveData.personaIDTwo;
         LoadGuestData(saveData);
+        
         //StorageController.Instance.guestStorage = saveData.guestStorage;
     }
 

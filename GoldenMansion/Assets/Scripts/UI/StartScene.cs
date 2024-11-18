@@ -1,5 +1,7 @@
+using ExcelData;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -63,6 +65,9 @@ public class StartScene : MonoBehaviour
         //GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled = true;
         var data = SaveSystem.Instance.LoadData<SaveData>(SaveSystem.Instance.saveName);
         SaveSystem.Instance.readData(data);
+        UIController.Instance.GenerateMenu();
+
+        LoadGuestToChoose();
     }
 
     public void QuitGame()
@@ -141,5 +146,26 @@ public class StartScene : MonoBehaviour
             GetComponent<AudioSource>().volume = i/10.0f;
             yield return new WaitForSecondsRealtime(fadeInSpeed);
         }             
+    }
+
+    void LoadGuestToChoose()
+    {
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1").GetComponent<Guest>().LoadGuestMessage(SaveSystem.Instance.temporGuestIDOne);
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (1)").GetComponent<Guest>().LoadGuestMessage(SaveSystem.Instance.temporGuestIDTwo);
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (2)").GetComponent<Guest>().LoadGuestMessage(SaveSystem.Instance.temporGuestIDThree);
+
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1").GetComponent<Guest>().key = SaveSystem.Instance.temporGuestIDOne;
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (1)").GetComponent<Guest>().key = SaveSystem.Instance.temporGuestIDTwo;
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (2)").GetComponent<Guest>().key = SaveSystem.Instance.temporGuestIDThree;
+    }
+
+    void LoadPersonaToChoose()
+    {
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").GetComponent<GievePersonaButton>().GenerateButtonPic(SaveSystem.Instance.temporPersonaIDOne);
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona2").GetComponent<GievePersonaButton>().GenerateButtonPic(SaveSystem.Instance.temporPersonaIDTwo);
+
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").GetComponent<GievePersonaButton>().personaKey = SaveSystem.Instance.temporPersonaIDOne;
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").GetComponent<GievePersonaButton>().personaKey = SaveSystem.Instance.temporPersonaIDTwo;
+
     }
 }

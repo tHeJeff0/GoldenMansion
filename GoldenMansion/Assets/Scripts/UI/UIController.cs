@@ -147,6 +147,12 @@ public class UIController : MonoBehaviour
         yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
         //UpdateVaultMoneyText();
         yield return new WaitForSecondsRealtime(0.4f);
+        GenerateMenu();
+        
+    }
+
+    public void GenerateMenu()
+    {
         if (!GameManager.Instance.isEndlessMode)
         {
             if (Level.GetItem(GameManager.Instance.levelKey).days - GameManager.Instance.gameDays > 0)
@@ -175,7 +181,6 @@ public class UIController : MonoBehaviour
                 SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
             }
         }
-        
     }
 
 

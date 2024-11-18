@@ -58,31 +58,34 @@ public class SceneStory : MonoBehaviour
     IEnumerator ShowSceneStory()
     {
         int randomNum = Random.Range(1, 3);
+        int randomTextID = Random.Range(1, 20);
         if (randomNum == 1)
         {
             GameObject storyBGPic = groupOne.transform.Find("StoryBGPic").gameObject;
             GameObject wordPic = groupOne.transform.Find("WordGroup").gameObject;
             GameObject text = groupOne.transform.Find("StoryText").gameObject;
-            yield return storyBGPic.transform.DOScale(1.0f, 1.0f).WaitForCompletion();
-            wordPic.GetComponent<CanvasGroup>().DOFade(1.0f, 1.0f).WaitForCompletion();
-            text.GetComponent<CanvasGroup>().DOFade(1.0f, 1.0f).WaitForCompletion();
+            yield return storyBGPic.transform.DOScale(1.0f, 0.6f).WaitForCompletion();
+            wordPic.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
+            text.GetComponent<SceneStoryText>().GetSceneStoryText(randomTextID);
+            text.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
             yield return new WaitForSecondsRealtime(3.0f);
-            yield return wordPic.GetComponent<CanvasGroup>().DOFade(0.0f, 1.0f).WaitForCompletion();
-            yield return text.GetComponent<CanvasGroup>().DOFade(0.0f, 1.0f).WaitForCompletion();
-            yield return storyBGPic.transform.DOScale(0.0f, 1.0f).WaitForCompletion();
+            yield return wordPic.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
+            yield return text.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
+            yield return storyBGPic.transform.DOScale(0.0f, 0.6f).WaitForCompletion();
         }
         else
         {
             GameObject storyBGPic = groupTwo.transform.Find("StoryBGPic").gameObject;
             GameObject wordPic = groupTwo.transform.Find("WordGroup").gameObject;
             GameObject text = groupTwo.transform.Find("StoryText").gameObject;
-            yield return storyBGPic.transform.DOScale(1.0f, 1.0f).WaitForCompletion();
-            wordPic.GetComponent<CanvasGroup>().DOFade(1.0f, 1.0f).WaitForCompletion();
-            text.GetComponent<CanvasGroup>().DOFade(1.0f, 1.0f).WaitForCompletion();
+            yield return storyBGPic.transform.DOScale(1.0f, 0.6f).WaitForCompletion();
+            wordPic.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
+            text.GetComponent<SceneStoryText>().GetSceneStoryText(randomTextID);
+            text.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
             yield return new WaitForSecondsRealtime(3.0f);
-            yield return wordPic.GetComponent<CanvasGroup>().DOFade(0.0f, 1.0f).WaitForCompletion();
-            yield return text.GetComponent<CanvasGroup>().DOFade(0.0f, 1.0f).WaitForCompletion();
-            yield return storyBGPic.transform.DOScale(0.0f, 1.0f).WaitForCompletion();
+            yield return wordPic.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
+            yield return text.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
+            yield return storyBGPic.transform.DOScale(0.0f, 0.6f).WaitForCompletion();
         }
     }
 

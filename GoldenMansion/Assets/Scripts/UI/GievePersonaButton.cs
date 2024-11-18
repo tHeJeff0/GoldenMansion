@@ -23,7 +23,7 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
     {
         personaKey = 8;
         //personaKey = RandomKey();
-        personaButton.transform.Find("Button").Find("BottomPic").GetComponent<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute+"L");
+        GenerateButtonPic(personaKey);
     }
 
     // Update is called once per frame
@@ -86,5 +86,10 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
     {
         transform.DOLocalMoveY(0, 0.05f);
         personaDesc.SetActive(false);
+    }
+
+    public void GenerateButtonPic(int key)
+    {
+        personaButton.transform.Find("Button").Find("BottomPic").GetComponent<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute + "L");
     }
 }

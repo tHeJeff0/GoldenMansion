@@ -24,5 +24,10 @@ public class SaveData
     public List<string> guestID = new List<string>();
     public List<int> guestKey = new List<int>();
     public List<string> guestPersona = new List<string>();
+    public int personaIDOne;
+    public int personaIDTwo;
+    public int guestIDOne;
+    public int guestIDTwo;
+    public int guestIDThree;
     //public List<GameObject> guestStorage = new List<GameObject>();
 }
