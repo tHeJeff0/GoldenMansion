@@ -16,14 +16,14 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
     private void Awake()
     {
-        
+        personaKey = RandomKey();
+        GenerateButtonPic(personaKey);
     }
     // Start is called before the first frame update
     void Start()
     {
-        personaKey = 8;
-        //personaKey = RandomKey();
-        GenerateButtonPic(personaKey);
+        
+        
     }
 
     // Update is called once per frame
@@ -90,6 +90,6 @@ public class GievePersonaButton : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
     public void GenerateButtonPic(int key)
     {
-        personaButton.transform.Find("Button").Find("BottomPic").GetComponent<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(personaKey).iconRoute + "L");
+        personaButton.transform.Find("Button").Find("BottomPic").GetComponent<Image>().sprite = Resources.Load<Sprite>(GuestPersonalData.GetItem(key).iconRoute + "L");
     }
 }

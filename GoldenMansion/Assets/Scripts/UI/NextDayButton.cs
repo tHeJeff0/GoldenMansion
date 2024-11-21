@@ -23,7 +23,7 @@ public class NextDayButton : MonoBehaviour
         if (GameManager.Instance.mediaDays > 0)
         {
             GameManager.Instance.mediaDays -= 1;
-        }        
-
+        }
+        GameManager.Instance.rerollTime = GameManager.Instance.basicRerollTime + GameManager.Instance.extraRerollTime;
     }
 }

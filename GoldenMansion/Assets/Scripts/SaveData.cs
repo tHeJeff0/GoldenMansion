@@ -29,5 +29,6 @@ public class SaveData
     public int guestIDOne;
     public int guestIDTwo;
     public int guestIDThree;
+    public int rerollTime;
     //public List<GameObject> guestStorage = new List<GameObject>();
 }

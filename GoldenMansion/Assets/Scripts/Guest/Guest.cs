@@ -15,7 +15,6 @@ public class Guest : MonoBehaviour
     [SerializeField] GameObject guestCardDescPrefab;
     [SerializeField] GameObject guestCardBudgetTextPrefab;
     [SerializeField] GameObject inviteButton;
-    
 
     public int key { get; set; }
     public int guestPrice { get; set; }
@@ -83,13 +82,14 @@ public class Guest : MonoBehaviour
                 inviteButton.SetActive(false);
                 transform.DOLocalMoveY(150, 0.05f);
                 isSelected = false;
-                this.gameObject.SetActive(false);
+                gameObject.SetActive(false);
                 SkillController.Instance.SkillTrigger_EShop("buy");
                 if (key == 49 || key == 50 || key == 51)
                 {
                     SkillController.Instance.Skill_MediaBanShop();
                 }
             }
+            key = 0;
         }
         else
         {
@@ -197,6 +197,7 @@ public class Guest : MonoBehaviour
         guestBudgetText = guestCardBudgetTextPrefab.GetComponent<TextMeshProUGUI>();
         guestPortrait.GetComponent<Image>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(key).portraitRoute);
         guestBudgetText.text = guestBudget.ToString();
+        inviteButton.transform.Find("Cost").Find("BudgetTitleText").GetComponent<TextMeshProUGUI>().text = "-"+(CharacterData.GetItem(key).basicCost + guestExtraCost).ToString();
 
         //INFP技能效果
         foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)

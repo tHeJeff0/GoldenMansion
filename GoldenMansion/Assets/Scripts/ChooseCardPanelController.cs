@@ -18,8 +18,6 @@ public class ChooseCardPanelController : MonoBehaviour
     GameObject skipButton;
     GameObject upgradeRentButton;
     List<Guest> guest = new List<Guest>();
-    int temporBasicRerollTime;
-    int temporExtraRerollTime;
 
     private Color temporColor;
 
@@ -28,8 +26,6 @@ public class ChooseCardPanelController : MonoBehaviour
         transform.localPosition = new Vector3(transform.parent.position.x, -999.0f, 0);
         transform.DOMoveY(0, 0.4f);
         SaveSystem.Instance.TranslateButtonText();
-        temporBasicRerollTime = GameManager.Instance.basicRerollTime;
-        temporExtraRerollTime = GameManager.Instance.extraRerollTime;
     }
     // Start is called before the first frame update
     void Start()
@@ -41,8 +37,6 @@ public class ChooseCardPanelController : MonoBehaviour
         skipButton = GameObject.Find("SkipButton");
         upgradeRentButton = GameObject.Find("UpgradeRentButton");
         guest.AddRange(chooseGuestSlot.GetComponentsInChildren<Guest>());
-        temporBasicRerollTime = GameManager.Instance.basicRerollTime;
-        temporBasicRerollTime = GameManager.Instance.basicRerollTime;
     }
 
     // Update is called once per frame
@@ -136,7 +130,7 @@ public class ChooseCardPanelController : MonoBehaviour
     public void ReRoll()
     {
         
-        if (0 < temporBasicRerollTime)
+        if (0 < GameManager.Instance.rerollTime)
         {
             foreach (var child in guest)
             {
@@ -146,19 +140,7 @@ public class ChooseCardPanelController : MonoBehaviour
             GameObject.Find("RerollButton").GetComponent<Button>().interactable = false;
             GameObject.Find("RerollButton").GetComponent<Button>().interactable = true;
             Debug.Log("重滚了");
-            temporBasicRerollTime -= 1;
-        }
-        else if (0 < temporExtraRerollTime)
-        {
-            foreach (var child in guest)
-            {
-                child.gameObject.SetActive(false);
-                child.gameObject.SetActive(true);
-            }
-            GameObject.Find("RerollButton").GetComponent<Button>().interactable = false;
-            GameObject.Find("RerollButton").GetComponent<Button>().interactable = true;
-            Debug.Log("重滚了");
-            temporExtraRerollTime -= 1;
+            GameManager.Instance.rerollTime -= 1;
         }
         else
         {

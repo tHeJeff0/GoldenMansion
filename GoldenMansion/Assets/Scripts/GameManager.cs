@@ -56,19 +56,20 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Application.quitting += OnQuit;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnDestroy()
     {
-        
+        Application.quitting -= OnQuit;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnQuit()
     {
-        
+        SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
     }
+    
 
 
 }

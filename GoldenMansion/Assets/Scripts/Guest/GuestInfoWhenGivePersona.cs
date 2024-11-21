@@ -69,6 +69,8 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
         }
         budgetText.text = budgetShown.ToString();
 
+        GetPersonaMessage();
+
         foreach (var persona in personaID)
         {
             ShowPersonaIcon(persona);
@@ -186,5 +188,16 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
                 break;
         }
 
+    }
+
+    void GetPersonaMessage()
+    {
+        foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+        {
+            if (guest.GetComponent<GuestInApartment>().guestElementID == elementID)
+            {
+                personaID.AddRange(guest.GetComponent<GuestInApartment>().persona);
+            }
+        }
     }
 }

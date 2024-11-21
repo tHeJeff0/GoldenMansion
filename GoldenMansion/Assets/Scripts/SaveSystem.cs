@@ -100,6 +100,7 @@ public class SaveSystem : MonoBehaviour
         saveData.endlessModeTargetTimes = GameManager.Instance.endlessModeTargetTimes;
         saveData.endlessModeDays = GameManager.Instance.endlessModeDays;
         saveData.endlessModeDaysPlus = GameManager.Instance.endlessModeDaysPlus;
+        saveData.rerollTime = GameManager.Instance.rerollTime;
         saveData.guestIDOne = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1").GetComponent<Guest>().key;
         saveData.guestIDTwo = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (1)").GetComponent<Guest>().key;
         saveData.guestIDThree = GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (2)").GetComponent<Guest>().key;
@@ -152,6 +153,7 @@ public class SaveSystem : MonoBehaviour
         GameManager.Instance.endlessModeDaysPlus = saveData.endlessModeDaysPlus;
         GameManager.Instance.endlessModeTarget = saveData.endlessModeTarget;
         GameManager.Instance.endlessModeTargetTimes = saveData.endlessModeTargetTimes;
+        GameManager.Instance.rerollTime = saveData.rerollTime;
         temporGuestIDOne = saveData.guestIDOne;
         temporGuestIDTwo = saveData.guestIDTwo;
         temporGuestIDThree = saveData.guestIDThree;
