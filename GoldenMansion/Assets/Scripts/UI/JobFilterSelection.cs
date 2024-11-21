@@ -46,7 +46,7 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
     {
         if (StorageController.Instance.isFilterMode == false)
         {
-            isSelected = false;           
+            isSelected = false;
         }
 
         
@@ -132,5 +132,10 @@ public class JobFilterSelection : MonoBehaviour,IPointerClickHandler,IPointerEnt
         StorageController.Instance.filterWaitingUpdate = true;
         StorageController.Instance.filterSelectedCount -= 1;
         StorageController.Instance.jobFilterSelected.Remove(key);
+    }
+
+    public void DestroyJobFilter()
+    {
+        Destroy(gameObject);       
     }
 }

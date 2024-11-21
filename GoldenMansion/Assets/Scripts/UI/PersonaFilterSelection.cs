@@ -92,7 +92,6 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
         foreach (var guest in StorageController.Instance.guestFilteredStorage)
         {
             excistedFiltedID.Add(guest.GetComponent<GuestInApartment>().guestElementID);
-
         }
         var filtedGuest = StorageController.Instance.guestStorage.Where(
             obj => obj.GetComponent<GuestInApartment>().persona.Contains(key) && !excistedFiltedID.Contains(obj.GetComponent<GuestInApartment>().guestElementID)
@@ -123,4 +122,8 @@ public class PersonaFilterSelection : MonoBehaviour,IPointerClickHandler,IPointe
         StorageController.Instance.personaFilterSelected.Remove(key);
     }
 
+    public void DestroyPersonaFilter()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -93,9 +93,15 @@ public class NewGivePersona : MonoBehaviour
     }
 
     public void CloseThisPanel()
-    {
-        gameObject.SetActive(false);
+    {       
         StorageController.Instance.guestStorage.Clear();
+        StorageController.Instance.guestFilteredStorage.Clear();
+        StorageController.Instance.filterSelectedCount = 0;
+        UIController.Instance.JobFilterSelection.Clear();
+        UIController.Instance.PersonaFilterSelection.Clear();
+        StorageController.Instance.isFilterMode = false;
+        //StorageController.Instance.OnCloseStoragePanel();
+        gameObject.SetActive(false);
     }
 
     void TranslateDescText()

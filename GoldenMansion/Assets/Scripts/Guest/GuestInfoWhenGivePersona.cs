@@ -100,13 +100,13 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
         {
             GetPersona();
             GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();
-            UIController.Instance.givePersonaButtonSelected.SetActive(false);
+            UIController.Instance.givePersonaButtonSelected.SetActive(false);           
         }
         else
         {
             Debug.Log("超出人格限制");
             SkillController.Instance.temporPersonaKey = 0;
-            GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();
+            GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();            
         }
         AudioSource.volume = GameManager.Instance.SFVolume;
         AudioSource.PlayOneShot(clickAudio);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class StorageController : MonoBehaviour
     public List<GameObject> guestFilteredStorage = new List<GameObject>();
     public List<int> jobFilterSelected = new List<int>();
     public List<int> personaFilterSelected = new List<int>();
+
+    public int jobChildCount { get; set; } = 0;
+    public int personaChildCount { get; set; } = 0;
 
     public int filterSelectedCount = 0;
     public bool filterWaitingUpdate = false;

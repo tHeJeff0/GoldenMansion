@@ -71,8 +71,6 @@ public class Filter : MonoBehaviour
             StartCoroutine(HideFilterSelection());           
         }
 
-
-
     }
 
     IEnumerator ShowFilterSelection()
@@ -84,8 +82,12 @@ public class Filter : MonoBehaviour
                 GameObject button = Instantiate(filterSelectionButton, filterFirstStage.transform.Find("Content").transform);
                 button.GetComponentInChildren<TextMeshProUGUI>().text = UIController.Instance.FirstFilterStageSelection[i];
                 button.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1, 1);
-                button.GetComponent<Image>().color = new Color(0, 0, 0, 1);
-                button.tag = new string("type" + i);
+                button.GetComponent<Image>().color = new Color(0, 0, 0, 1);               
+                if (button.CompareTag("Button"))
+                {
+                    button.tag = new string("type" + i);
+                    button.GetComponent<FilterSelection>().GenerateFilterList(button);
+                }
                 yield return new WaitForSecondsRealtime(0.1f);
             }
         }
@@ -105,7 +107,8 @@ public class Filter : MonoBehaviour
     {
         for (int i = 0; i < filterFirstStage.transform.Find("Content").childCount+2; i++)
         {
-            filterFirstStage.transform.Find("Content").GetChild(0).gameObject.SetActive(false);
+            Destroy(filterFirstStage.transform.Find("Content").GetChild(0).gameObject);
+            //filterFirstStage.transform.Find("Content").GetChild(0).gameObject.SetActive(false);
             yield return new WaitForSecondsRealtime(0.1f);
         }
         filterFirstStage.SetActive(false);

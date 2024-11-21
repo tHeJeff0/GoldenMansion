@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Storage : MonoBehaviour
     public GameObject storagePrefab;
     public GameObject guestPrefab;
     public GameObject guestSlot;
+    
 
 
     private void Awake()
@@ -94,6 +96,8 @@ public class Storage : MonoBehaviour
     {
         StorageController.Instance.guestStorage.Clear();
         StorageController.Instance.guestFilteredStorage.Clear();
+        UIController.Instance.JobFilterSelection.Clear();
+        UIController.Instance.PersonaFilterSelection.Clear();
         StorageController.Instance.filterSelectedCount = 0;
         StorageController.Instance.isFilterMode = false;
         gameObject.SetActive(false);
