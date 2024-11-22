@@ -96,6 +96,14 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (GameObject.Find("JobEffectDesc(Clone)") != null)
+        {
+            Destroy(GameObject.Find("JobEffectDesc(Clone)"));
+        }
+        if (GameObject.Find("PersonaEffectDesc(Clone)") != null)
+        {
+            Destroy(GameObject.Find("PersonaEffectDesc(Clone)"));
+        }
         if (personaID.Count < 4 && mbtiID == 0)
         {
             GetPersona();
