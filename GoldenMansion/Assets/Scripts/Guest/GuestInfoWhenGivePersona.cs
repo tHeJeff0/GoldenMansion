@@ -100,7 +100,9 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
         {
             GetPersona();
             GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();
-            UIController.Instance.givePersonaButtonSelected.SetActive(false);           
+            UIController.Instance.givePersonaButtonSelected.GetComponent<GievePersonaButton>().personaKey = 0;
+            UIController.Instance.givePersonaButtonSelected.SetActive(false);
+            SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
         }
         else
         {

@@ -261,7 +261,7 @@ public class GuestInApartment : MonoBehaviour
                 SkillMethod_WhenOtherGuestSold -= singlePersonaSkill.Skill_Feeling;
                 break;
             case 6:
-                isDestroyable = true;
+                isDestroyable = false;
                 break;
             case 7:
                 SkillMethod_WhenDaysChanged -= singlePersonaSkill.Skill_Judging;

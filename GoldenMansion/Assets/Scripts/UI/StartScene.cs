@@ -11,6 +11,7 @@ public class StartScene : MonoBehaviour
     [SerializeField] GameObject gameGroup;
     [SerializeField] GameObject chooseLanguageGroup;
     [SerializeField] GameObject settingPanel;
+
     private void Awake()
     {
         SaveSystem.Instance.LoadPlayerPrefs();
@@ -73,7 +74,8 @@ public class StartScene : MonoBehaviour
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         EditorApplication.isPlaying = false;
         #else
         Application.Quit();
@@ -163,11 +165,18 @@ public class StartScene : MonoBehaviour
         {
             GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (1)").GetComponent<Guest>().LoadGuestMessage(SaveSystem.Instance.temporGuestIDTwo);
         }
+        else
+        {
+            GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (1)").gameObject.SetActive(false);
+        }
         if (SaveSystem.Instance.temporGuestIDThree != 0)
         {
             GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (2)").GetComponent<Guest>().LoadGuestMessage(SaveSystem.Instance.temporGuestIDThree);
         }
-
+        else
+        {
+            GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (2)").gameObject.SetActive(false);
+        }
         GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1").GetComponent<Guest>().key = SaveSystem.Instance.temporGuestIDOne;
         GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (1)").GetComponent<Guest>().key = SaveSystem.Instance.temporGuestIDTwo;
         GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChooseGuestSlot").Find("Guest1 (2)").GetComponent<Guest>().key = SaveSystem.Instance.temporGuestIDThree;
@@ -179,13 +188,20 @@ public class StartScene : MonoBehaviour
         {
             GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").GetComponent<GievePersonaButton>().GenerateButtonPic(SaveSystem.Instance.temporPersonaIDOne);
         }
+        else
+        {
+            GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").gameObject.SetActive(false);
+        }
         if (SaveSystem.Instance.temporPersonaIDTwo != 0)
         {
             GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona2").GetComponent<GievePersonaButton>().GenerateButtonPic(SaveSystem.Instance.temporPersonaIDTwo);
         }
-
+        else
+        {
+            GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona2").gameObject.SetActive(false);
+        }
         GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").GetComponent<GievePersonaButton>().personaKey = SaveSystem.Instance.temporPersonaIDOne;
-        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona1").GetComponent<GievePersonaButton>().personaKey = SaveSystem.Instance.temporPersonaIDTwo;
+        GameObject.Find("ChooseCardPanel(Clone)").transform.Find("ChoosePersonaSlot").Find("Persona2").GetComponent<GievePersonaButton>().personaKey = SaveSystem.Instance.temporPersonaIDTwo;
 
     }
 }

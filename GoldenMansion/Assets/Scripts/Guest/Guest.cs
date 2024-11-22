@@ -88,8 +88,8 @@ public class Guest : MonoBehaviour
                 {
                     SkillController.Instance.Skill_MediaBanShop();
                 }
-            }
-            key = 0;
+                key = 0;
+            }           
         }
         else
         {

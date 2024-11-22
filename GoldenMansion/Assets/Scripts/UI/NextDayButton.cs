@@ -18,6 +18,7 @@ public class NextDayButton : MonoBehaviour
 
     public void PlusGameDays()
     {
+        GameObject.Find("AudioSource").GetComponent<AudioSource>().PlayOneShot(GetComponent<ButtonSound>().clickSound);
         GameManager.Instance.gameDays += 1;
         GameManager.Instance.isChooseCardFinish = true;
         if (GameManager.Instance.mediaDays > 0)
