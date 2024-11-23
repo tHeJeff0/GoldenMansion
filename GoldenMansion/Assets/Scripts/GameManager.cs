@@ -80,6 +80,29 @@ public class GameManager : MonoBehaviour
         SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
     }
     
-
+    //public void InitialGame()
+    //{
+    //    for (int i = GuestController.Instance.GuestInApartmentPrefabStorage.Count - 1; i >= 0; i--)
+    //    {
+    //        Destroy(GuestController.Instance.GuestInApartmentPrefabStorage[i]);
+    //    }
+    //    GuestController.Instance.GuestInApartmentPrefabStorage.Clear();
+    //    StorageController.Instance.guestStorage.Clear();
+    //    gameDays = 0;
+    //    levelKey = 1;
+    //    basicRerollTime = 1;
+    //    extraRerollTime = 0;
+    //    rerollTime = 1;
+    //    guestRemoveCount = 0;
+    //    isAllowBuy = true;
+    //    isAllowSell = true;
+    //    mediaDays = -1;
+    //    isEndlessMode = false;
+    //    endlessModeTarget = 0;
+    //    endlessModeTargetTimes  = 1.5f;
+    //    endlessModeDays = 0;
+    //    endlessModeDaysPlus  = 3;
+    //    ApartmentController.Instance.vaultMoney = 0;
+    // }
 
 }

@@ -65,6 +65,7 @@ public class RoundEndPanelController : MonoBehaviour
                             break;
                     }
                     commitRentGroup.SetActive(false);
+                    ApartmentController.Instance.vaultMoney = moneyLeft;
                     Debug.Log("赢了！");
 
                 }
@@ -85,7 +86,7 @@ public class RoundEndPanelController : MonoBehaviour
                             commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
                             break;
                     }
-
+                    ApartmentController.Instance.vaultMoney = moneyLeft;
                 }
 
             }
@@ -122,6 +123,7 @@ public class RoundEndPanelController : MonoBehaviour
                         commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
                         break;
                 }
+                ApartmentController.Instance.vaultMoney = moneyLeft;
             }
             else//如果金币不够交租
             {
@@ -149,6 +151,7 @@ public class RoundEndPanelController : MonoBehaviour
         {
             Destroy(guestInApartment);
         }
+        ApartmentController.Instance.vaultMoney = 0;
         GuestController.Instance.GuestInApartmentPrefabStorage.Clear();
         GuestController.Instance.GenerateBasicGuest(3);
     }
