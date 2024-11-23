@@ -49,7 +49,7 @@ public class RoundEndPanelController : MonoBehaviour
             if (moneyLeft >= 0)//如果金币足够交租
             {
                 //buildButton.SetActive(true);
-                if (GameManager.Instance.levelKey + 1 > 5)//如果是最后一关
+                if (GameManager.Instance.levelKey + 1 > 8)//如果是最后一关
                 {
                     winGroup.SetActive(true);
                     switch (GameManager.Instance.Language)

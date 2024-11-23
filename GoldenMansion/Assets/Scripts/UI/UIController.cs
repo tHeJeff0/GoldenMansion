@@ -146,7 +146,7 @@ public class UIController : MonoBehaviour
     {
         yield return new WaitUntil(()=>ApartmentController.Instance.guestCount == ApartmentController.Instance.coinMovedCount);
         //UpdateVaultMoneyText();
-        yield return new WaitForSecondsRealtime(0.4f);
+        //yield return new WaitForSecondsRealtime(0.4f);
         GenerateMenu();
         
     }

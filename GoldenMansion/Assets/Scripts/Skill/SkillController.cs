@@ -17,6 +17,9 @@ public class SkillController : MonoBehaviour
     public int studentCount;
     public int guestSoldCount;
 
+    public int skillToTriggerCount;
+    public int skillTriggeredCount;
+
     [SerializeField] AudioSource shakeAudioSource;
     [SerializeField] AudioClip shakeAudio;
 
@@ -137,6 +140,7 @@ public class SkillController : MonoBehaviour
         List<GameObject> temporList = ApartmentController.Instance.GetGuestInApartment().
             OrderBy(go => go.transform.position.x).
             ThenByDescending(go => go.transform.position.y).ToList();
+        skillToTriggerCount = temporList.Count;
         FieldSkillOrderlyTrigger(temporList);
     }
 
@@ -607,6 +611,7 @@ public class SkillController : MonoBehaviour
         FieldSkillTrigger(guest);
         shakeAudioSource.volume = GameManager.Instance.SFVolume;
         shakeAudioSource.PlayOneShot(shakeAudio);
+        skillTriggeredCount += 1;
         if (guest.GetComponent<GuestInApartment>().guestDestroyedTemporList.Count > 0)
         {
             for (int i = guest.GetComponent<GuestInApartment>().guestDestroyedTemporList.Count-1; i >= 0; i--)

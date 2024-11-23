@@ -84,6 +84,11 @@ public class ApartmentController : MonoBehaviour
 
     public void GuestPayRent()
     {
+        StartCoroutine(WaitForSkillTriggerThenPayRent());
+    }
+
+    public void GuestPayRentAfterSkillTriggered()
+    {
         List<Apartment> apartmentWithGuest = new List<Apartment>();
         List<Apartment> apartmentNoGuest = new List<Apartment>();
         for (int i = 0; i < apartment.Count; i++)
@@ -155,7 +160,13 @@ public class ApartmentController : MonoBehaviour
 
         vaultMoney += guestInApartment.guestBudget + guestInApartment.guestExtraBudget;
     }
-
-
     
+    IEnumerator WaitForSkillTriggerThenPayRent()
+    {
+        yield return new WaitUntil(() => SkillController.Instance.skillToTriggerCount == SkillController.Instance.skillTriggeredCount);
+        GuestPayRentAfterSkillTriggered();
+        SkillController.Instance.skillToTriggerCount = 0;
+        SkillController.Instance.skillTriggeredCount = 0;
+    
+    }
 }
