@@ -114,7 +114,7 @@ public class SkillController : MonoBehaviour
     public int SkillLevelSelector(int skillID,int condition)
     {
         int index = 0;
-        if (condition == 0)
+        if (condition == 0|| condition==1 )
         {
             return 0;
         }
@@ -530,13 +530,13 @@ public class SkillController : MonoBehaviour
     {
         if (CheckFieldCount(12))
         {
-            if (guestInApartment.tourDays == 5)
+            if (guestInApartment.tourDays == 10)
             {
                 int increaseNumber = SkillLevelSelector(61, tourCount);
                 skillEffect.IncreaseTemporBudget(guestInApartment, increaseNumber * guestInApartment.guestBudget);
                 guestInApartment.tourDays = 0;
             }
-            else if (guestInApartment.tourDays != 5)
+            else if (guestInApartment.tourDays != 10)
             {
                 guestInApartment.tourDays += 1;
             }

@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public int endlessModeDays { get; set; }
     public int endlessModeDaysPlus { get; set; } = 3;
 
+    public bool canQuit { get; set; } = true; 
+
     public static GameManager Instance
     {
         get
@@ -57,12 +59,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        Application.wantsToQuit += HandleWantsToQuit;
         Application.quitting += OnQuit;
+
     }
 
     private void OnDestroy()
     {
+        Application.wantsToQuit -= HandleWantsToQuit;
         Application.quitting -= OnQuit;
+    }
+
+    bool HandleWantsToQuit()
+    {
+        return canQuit;
     }
 
     void OnQuit()

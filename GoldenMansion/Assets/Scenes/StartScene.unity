@@ -2767,6 +2767,14 @@ PrefabInstance:
       value: ContinueButtonText
       objectReference: {fileID: 0}
     - target: {fileID: 3497300054884909542, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497300054884909542, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497300054884909542, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
       value: 0
       objectReference: {fileID: 0}
@@ -2887,6 +2895,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8413832897196776389, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
+      propertyPath: m_fontColor.a
+      value: 0.47058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 8413832897196776389, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
       propertyPath: m_fontColor.b
       value: 0
       objectReference: {fileID: 0}
@@ -2904,7 +2916,7 @@ PrefabInstance:
       objectReference: {fileID: -1371602080542815903, guid: e9f9c79135b1bcf469252ee6f19c958f, type: 2}
     - target: {fileID: 8413832897196776389, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190122
+      value: 2013265962
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2916,6 +2928,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4890712747787335446, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1567844480}
+    - targetCorrespondingSourceObject: {fileID: 4890712747787335446, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1567844485}
   m_SourcePrefab: {fileID: 100100000, guid: b9ba39f25daa8704992eb993f56bc1d7, type: 3}
 --- !u!224 &1567844476 stripped
 RectTransform:
@@ -3033,6 +3048,18 @@ MonoBehaviour:
   audioSource: {fileID: 1567844480}
   hoverSound: {fileID: 8300000, guid: 2c27e0f020620d1439d65d3b752725de, type: 3}
   clickSound: {fileID: 8300000, guid: 523924e8918aa8e47a8e695ff5b7a463, type: 3}
+--- !u!114 &1567844485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328317886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f5afe67beb91d43955d9fac56ca5bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1627149631
 GameObject:
   m_ObjectHideFlags: 0
