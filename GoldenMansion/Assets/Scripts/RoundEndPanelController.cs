@@ -156,6 +156,22 @@ public class RoundEndPanelController : MonoBehaviour
         GuestController.Instance.GenerateBasicGuest(3);
     }
 
+    public void ShowChapterStoryText()
+    {
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
+                break;
+            case 2:
+                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
+                break;
+            case 3:
+                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
+                break;
+        }
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
