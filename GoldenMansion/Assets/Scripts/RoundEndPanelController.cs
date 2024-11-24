@@ -13,6 +13,7 @@ public class RoundEndPanelController : MonoBehaviour
     GameObject commitRentGroup;
     //GameObject buildButton;
     GameObject nextLevelButton;
+    GameObject nextLevelButton2;
     GameObject winGroup;
 
     private void Start()
@@ -24,11 +25,14 @@ public class RoundEndPanelController : MonoBehaviour
         commitRentGroup = GameObject.Find("CommitRentGroup");
         //buildButton = GameObject.Find("BuildButton");
         nextLevelButton = GameObject.Find("NextLevelButton");
+        nextLevelButton2 = GameObject.Find("NextLevelButton2");
+        
         winGroup = GameObject.Find("WinGroup");
 
         commitRentGroup.SetActive(true);
         //buildButton.SetActive(false);
         nextLevelButton.SetActive(false);
+        nextLevelButton2.SetActive(false);
         winGroup.SetActive(false);
         
     }
@@ -72,20 +76,10 @@ public class RoundEndPanelController : MonoBehaviour
                 else//如果不是最后一关
                 {
                     nextLevelButton.SetActive(true);
+                    nextLevelButton2.SetActive(true);
                     commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
                     GameManager.Instance.storyID += 1;
-                    switch (GameManager.Instance.Language)
-                    {
-                        case 1:
-                            commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
-                            break;
-                        case 2:
-                            commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
-                            break;
-                        case 3:
-                            commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
-                            break;
-                    }
+                    ShowChapterStoryText();
                     ApartmentController.Instance.vaultMoney = moneyLeft;
                 }
 
@@ -107,22 +101,12 @@ public class RoundEndPanelController : MonoBehaviour
             if (moneyLeft >= 0)//如果金币足够交租
             {
                 nextLevelButton.SetActive(true);
+                nextLevelButton2.SetActive(true);
                 commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
                 GameManager.Instance.storyID += 1;
                 GameManager.Instance.endlessModeTarget *= GameManager.Instance.endlessModeTargetTimes;
                 GameManager.Instance.endlessModeDays += GameManager.Instance.endlessModeDaysPlus;
-                switch (GameManager.Instance.Language)
-                {
-                    case 1:
-                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
-                        break;
-                    case 2:
-                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
-                        break;
-                    case 3:
-                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
-                        break;
-                }
+                ShowChapterStoryText();
                 ApartmentController.Instance.vaultMoney = moneyLeft;
             }
             else//如果金币不够交租
@@ -161,13 +145,19 @@ public class RoundEndPanelController : MonoBehaviour
         switch (GameManager.Instance.Language)
         {
             case 1:
-                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
+                commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).selectionOneID).CHN;
+                nextLevelButton2.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).selectionTwoID).CHN;
                 break;
             case 2:
-                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
+                commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).selectionOneID).ENG;
+                nextLevelButton2.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).selectionTwoID).ENG;
                 break;
             case 3:
-                commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
+                commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).selectionOneID).TCHN;
+                nextLevelButton2.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).selectionTwoID).TCHN;
                 break;
         }
     }
