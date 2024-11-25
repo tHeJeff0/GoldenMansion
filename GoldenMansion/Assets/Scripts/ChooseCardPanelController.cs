@@ -2,6 +2,7 @@ using DG.Tweening;
 using ExcelData;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -125,6 +126,17 @@ public class ChooseCardPanelController : MonoBehaviour
     public void ShowGivePersonaPanel()
     {
         givePersonaPanel.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+        SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
+
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public void ReRoll()

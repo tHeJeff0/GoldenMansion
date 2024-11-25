@@ -21,11 +21,13 @@ public class SettingPanel : MonoBehaviour
 
     public void BGMVolumeChange()
     {
-        GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = transform.Find("SoundSetting").Find("BGMSlider").GetComponent<Slider>().value;
+        GameObject.Find("PlayMusic").GetComponent<AudioSource>().volume = transform.Find("SoundSetting").Find("BGMSlider").GetComponent<Slider>().value;
+
     }
 
     public void SFVolumeChange()
     {
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = transform.Find("SoundSetting").Find("BGMSlider").GetComponent<Slider>().value;
         GameManager.Instance.SFVolume = transform.Find("SoundSetting").Find("SFSlider").GetComponent<Slider>().value;
     }
 

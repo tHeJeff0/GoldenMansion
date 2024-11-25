@@ -75,7 +75,7 @@ public class Guest : MonoBehaviour
             {
                 ApartmentController.Instance.vaultMoney -= guestCost;
                 GuestController.Instance.temporKey = this.key;
-                Vector3 instantiatePosition = new Vector3(3.55f,-7.35f,0);
+                Vector3 instantiatePosition = new Vector3(30.0f,-7.35f,0);
                 GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject, instantiatePosition,transform.rotation);
                 guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
