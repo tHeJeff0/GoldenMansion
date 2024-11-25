@@ -107,7 +107,7 @@ public class Guest : MonoBehaviour
         guestCardDescPrefab.SetActive(true);
         int fieldID = CharacterData.GetItem(key).field;
         int skillID = FieldData.GetItem(fieldID).skillID;
-        int languageID = SkillData.GetItem(skillID).descID;
+        int languageID = SkillData.GetItem(skillID).descID + 300;
         //string conditionValue = GuestController.Instance.GetLanguageConditionValue(fieldID).ToString();
         //string effectValue = GuestController.Instance.GetLanguageEffectValue(fieldID).ToString();
         switch (GameManager.Instance.Language)

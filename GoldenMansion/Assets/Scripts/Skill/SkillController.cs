@@ -374,20 +374,20 @@ public class SkillController : MonoBehaviour
                     priceIncreaseNumber = 0;
                     break;
                 case 1:
-                    budgetIncreaseNumber = 0;
-                    priceIncreaseNumber = 1;
+                    budgetIncreaseNumber = 1;
+                    priceIncreaseNumber = 0;
                     break;
                 case 2:
-                    budgetIncreaseNumber = 1;
-                    priceIncreaseNumber = -1;
+                    budgetIncreaseNumber = 2;
+                    priceIncreaseNumber = 1;
                     break;
                 case 3:
-                    budgetIncreaseNumber = 2;
-                    priceIncreaseNumber = -2;
+                    budgetIncreaseNumber = 3;
+                    priceIncreaseNumber = 2;
                     break;
                 default:
-                    budgetIncreaseNumber = 2;
-                    priceIncreaseNumber = -2;
+                    budgetIncreaseNumber = 3;
+                    priceIncreaseNumber = 2;
                     break;
             }
             skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), budgetIncreaseNumber);
