@@ -15,6 +15,7 @@ public class RoundEndPanelController : MonoBehaviour
     GameObject nextLevelButton;
     GameObject nextLevelButton2;
     GameObject winGroup;
+    GameObject loseGroup;
 
     private void Start()
     {
@@ -28,12 +29,14 @@ public class RoundEndPanelController : MonoBehaviour
         nextLevelButton2 = GameObject.Find("NextLevelButton2");
         
         winGroup = GameObject.Find("WinGroup");
+        loseGroup = GameObject.Find("LoseGroup");
 
         commitRentGroup.SetActive(true);
         //buildButton.SetActive(false);
         nextLevelButton.SetActive(false);
         nextLevelButton2.SetActive(false);
         winGroup.SetActive(false);
+        loseGroup.SetActive(false);
         
     }
     public void GoToNextLevel()
@@ -87,10 +90,10 @@ public class RoundEndPanelController : MonoBehaviour
             else//如果金币不够交租
             {
                 GameManager.Instance.isRoundEnd = false;
-                Destroy(this.gameObject);
+                loseGroup.SetActive(true);
                 commitRentGroup.SetActive(false);
                 GameReset();
-                SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
+                //SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
                 Debug.Log("Game Over!");
             }
         }
@@ -112,10 +115,10 @@ public class RoundEndPanelController : MonoBehaviour
             else//如果金币不够交租
             {
                 GameManager.Instance.isRoundEnd = false;
-                Destroy(this.gameObject);
+                loseGroup.SetActive(true);
                 commitRentGroup.SetActive(false);
                 GameReset();
-                SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
+                //SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
                 Debug.Log("Game Over!");
             }
         }
