@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SceneStory : MonoBehaviour
 {
     float fadeDuration = 1f; // Ω•±‰ ±º‰
-    float randomTime = 10.0f;
+    float randomTime = 8.0f;
     float timer = 0.0f;
     private Material material;
 
@@ -68,7 +68,7 @@ public class SceneStory : MonoBehaviour
             wordPic.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
             text.GetComponent<SceneStoryText>().GetSceneStoryText(randomTextID);
             text.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
-            yield return new WaitForSecondsRealtime(3.0f);
+            yield return new WaitForSecondsRealtime(5.0f);
             yield return wordPic.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
             yield return text.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
             yield return storyBGPic.transform.DOScale(0.0f, 0.6f).WaitForCompletion();
@@ -82,7 +82,7 @@ public class SceneStory : MonoBehaviour
             wordPic.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
             text.GetComponent<SceneStoryText>().GetSceneStoryText(randomTextID);
             text.GetComponent<CanvasGroup>().DOFade(1.0f, 0.6f).WaitForCompletion();
-            yield return new WaitForSecondsRealtime(3.0f);
+            yield return new WaitForSecondsRealtime(5.0f);
             yield return wordPic.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
             yield return text.GetComponent<CanvasGroup>().DOFade(0.0f, 0.6f).WaitForCompletion();
             yield return storyBGPic.transform.DOScale(0.0f, 0.6f).WaitForCompletion();
