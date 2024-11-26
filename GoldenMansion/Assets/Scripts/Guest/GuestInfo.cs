@@ -88,7 +88,10 @@ public class GuestInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
     // Update is called once per frame
     void Update()
     {
-        
+        priceShown = basicPrice + extraPrice;
+        budgetShown = basicBudget + extraBudget;
+        priceText.text = priceShown.ToString();
+        priceText.text = priceShown.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

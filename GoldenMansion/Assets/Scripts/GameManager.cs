@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public int endlessModeDays { get; set; }
     public int endlessModeDaysPlus { get; set; } = 3;
 
-    public bool canQuit { get; set; } = true; 
+    public bool canQuit { get; set; } = true;
 
     public static GameManager Instance
     {

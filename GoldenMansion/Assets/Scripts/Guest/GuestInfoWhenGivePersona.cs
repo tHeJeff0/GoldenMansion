@@ -143,6 +143,7 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
                     guest.GetComponent<GuestInApartment>().persona.Add(SkillController.Instance.temporPersonaKey);
                     guest.GetComponent<GuestInApartment>().ShowPersonaIcon(SkillController.Instance.temporPersonaKey);
                     guest.GetComponent<GuestInApartment>().GetPersonaSkill(SkillController.Instance.temporPersonaKey);
+                    guest.GetComponent<GuestInApartment>().guestBasicPrice += 1;
                 }
             }
             SkillController.Instance.temporPersonaKey = 0;

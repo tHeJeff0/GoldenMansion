@@ -34,6 +34,8 @@ public class Guest : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -141,6 +143,20 @@ public class Guest : MonoBehaviour
     {
         if (!isSelected)
         {
+            float rate = 0;
+            switch (GameManager.Instance.levelKey)
+            {
+                case 1:rate = 0.3f;
+                    break;
+                case 2:rate = 0.5f;
+                    break;
+                default:rate = 0.6f;
+                    break;
+            }
+            guestCost = CharacterData.GetItem(key).basicCost;
+            guestExtraCost = (int)Math.Ceiling((ApartmentController.Instance.vaultMoney * rate));
+            guestCost += guestExtraCost;
+            inviteButton.transform.Find("Cost").Find("BudgetTitleText").GetComponent<TextMeshProUGUI>().text = "-" + (guestCost).ToString();
             inviteButton.SetActive(true);
             transform.DOLocalMoveY(160, 0.05f);
             transform.DOShakePosition(0.04f, 10);

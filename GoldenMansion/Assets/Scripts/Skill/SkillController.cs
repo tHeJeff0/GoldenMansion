@@ -312,7 +312,7 @@ public class SkillController : MonoBehaviour
         if (CheckFieldCount(2))
         {
             int increaseNumber = SkillLevelSelector(51, financialCount);
-            skillEffect.IncreaseTemporBudget(guestInApartment.GetComponent<GuestInApartment>(), increaseNumber * guestSoldCount);
+            skillEffect.IncreaseBasicBudget(guestInApartment.GetComponent<GuestInApartment>(), increaseNumber * guestSoldCount);
             //foreach (var guest in GetFieldGuest(2))
             //{
             //    skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber * guestSoldCount);
@@ -412,7 +412,7 @@ public class SkillController : MonoBehaviour
 
             foreach (var guest in GetFieldGuest(6))
             {
-                skillEffect.IncreaseTemporBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
+                skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);
             }
         }
         
@@ -516,7 +516,15 @@ public class SkillController : MonoBehaviour
     {
         if (CheckFieldCount(11))
         {
-            int increaseNumber = SkillLevelSelector(60, mediaCount);
+            int increaseNumber = 0;
+            foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
+            {
+                if (guest.GetComponent<GuestInApartment>().field == 11)
+                {
+                    increaseNumber += guest.GetComponent<GuestInApartment>().guestBudget;
+                    increaseNumber += guest.GetComponent<GuestInApartment>().guestExtraBudget;
+                }
+            }
             foreach (var guest in GuestController.Instance.GuestInApartmentPrefabStorage)
             {
                 skillEffect.IncreaseBasicBudget(guest.GetComponent<GuestInApartment>(), increaseNumber);

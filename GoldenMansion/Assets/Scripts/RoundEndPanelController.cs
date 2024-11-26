@@ -16,6 +16,8 @@ public class RoundEndPanelController : MonoBehaviour
     GameObject nextLevelButton2;
     GameObject winGroup;
     GameObject loseGroup;
+    TextMeshProUGUI targetText;
+    TextMeshProUGUI vaultMoneyText;
 
     private void Start()
     {
@@ -24,6 +26,10 @@ public class RoundEndPanelController : MonoBehaviour
     private void Awake()
     {
         commitRentGroup = GameObject.Find("CommitRentGroup");
+        targetText = commitRentGroup.transform.Find("StoryText").Find("TargetText").GetComponent<TextMeshProUGUI>();
+        vaultMoneyText = commitRentGroup.transform.Find("VaultMoneyText").GetComponent<TextMeshProUGUI>();
+        targetText.text = Level.GetItem(GameManager.Instance.levelKey).target.ToString();
+        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
         //buildButton = GameObject.Find("BuildButton");
         nextLevelButton = GameObject.Find("NextLevelButton");
         nextLevelButton2 = GameObject.Find("NextLevelButton2");
@@ -81,6 +87,8 @@ public class RoundEndPanelController : MonoBehaviour
                     nextLevelButton.SetActive(true);
                     nextLevelButton2.SetActive(true);
                     commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
+                    targetText.gameObject.SetActive(false);
+                    vaultMoneyText.gameObject.SetActive(false);
                     GameManager.Instance.storyID += 1;
                     ShowChapterStoryText();
                     ApartmentController.Instance.vaultMoney = moneyLeft;
@@ -153,7 +161,11 @@ public class RoundEndPanelController : MonoBehaviour
     {
         GameManager.Instance.gameDays = 0;
         GameManager.Instance.levelKey = 1;
-        GameManager.Instance.mediaDays = -1;       
+        GameManager.Instance.mediaDays = -1;
+        GameManager.Instance.extraRerollTime = 0;
+        GameManager.Instance.rerollTime = 1;
+        GameManager.Instance.isAllowBuy = true;
+        GameManager.Instance.isAllowSell = true;
         foreach (var apartment in ApartmentController.Instance.apartment)
         {
             apartment.GetComponent<Apartment>().apartmentDays = 0;
@@ -169,7 +181,7 @@ public class RoundEndPanelController : MonoBehaviour
 
     public void ShowChapterStoryText()
     {
-        int storyID = Random.Range(1, 33);
+        int storyID = Random.Range(1, 36);
         switch (GameManager.Instance.Language)
         {
             case 1:

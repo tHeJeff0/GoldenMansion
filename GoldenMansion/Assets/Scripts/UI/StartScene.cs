@@ -60,16 +60,15 @@ public class StartScene : MonoBehaviour
         }
         GuestController.Instance.GuestInApartmentPrefabStorage.Clear();
         StorageController.Instance.guestStorage.Clear();
+        var data = SaveSystem.Instance.LoadData<SaveData>(SaveSystem.Instance.saveName);
+        SaveSystem.Instance.readData(data);
+        UIController.Instance.GenerateMenu();
+        LoadGuestToChoose();
+        LoadPersonaToChoose();
         SceneManager.UnloadSceneAsync("StartScene");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("UIScene"));
         //GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled = true;
-        var data = SaveSystem.Instance.LoadData<SaveData>(SaveSystem.Instance.saveName);
-        SaveSystem.Instance.readData(data);
-        UIController.Instance.GenerateMenu();
-
-        LoadGuestToChoose();
-        LoadPersonaToChoose();
     }
 
     public void QuitGame()
