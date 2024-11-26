@@ -118,13 +118,14 @@ public class Guest : MonoBehaviour
                 //LanguageData.GetItem(languageID).CHN;
                 break;
             case 2: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).ENG;
+                guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().enableAutoSizing = true;
                 break;
             case 3: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).TCHN;
                 break;
             default: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
                 break;
         }
-        
+
     }
 
     private void OnMouseExit()

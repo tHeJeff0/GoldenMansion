@@ -91,6 +91,18 @@ public class RoundEndPanelController : MonoBehaviour
             {
                 GameManager.Instance.isRoundEnd = false;
                 loseGroup.SetActive(true);
+                switch (GameManager.Instance.Language)
+                {
+                    case 1:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).CHN;
+                        break;
+                    case 2:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).ENG;
+                        break;
+                    case 3:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).TCHN;
+                        break;
+                }
                 commitRentGroup.SetActive(false);
                 GameReset();
                 //SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
@@ -117,6 +129,18 @@ public class RoundEndPanelController : MonoBehaviour
                 GameManager.Instance.isRoundEnd = false;
                 loseGroup.SetActive(true);
                 commitRentGroup.SetActive(false);
+                switch (GameManager.Instance.Language)
+                {
+                    case 1:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(winGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).CHN;
+                        break;
+                    case 2:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(winGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).ENG;
+                        break;
+                    case 3:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(winGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).TCHN;
+                        break;
+                }
                 GameReset();
                 //SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
                 Debug.Log("Game Over!");
@@ -181,5 +205,15 @@ public class RoundEndPanelController : MonoBehaviour
         GameManager.Instance.endlessModeTarget = Level.GetItem(5).target * GameManager.Instance.endlessModeTargetTimes;
         GameManager.Instance.endlessModeDays = Level.GetItem(5).days + GameManager.Instance.endlessModeDaysPlus;
         GoToNextLevel();
+    }
+
+    public void TryAgain()
+    {
+        GameReset();
+        GameManager.Instance.isRoundEnd = false;
+        Destroy(gameObject);
+        SaveSystem.Instance.DeleteData(SaveSystem.Instance.saveName);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("UIScene"));
     }
 }
