@@ -6,6 +6,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoundEndPanelController : MonoBehaviour
 {
@@ -28,8 +29,15 @@ public class RoundEndPanelController : MonoBehaviour
         commitRentGroup = GameObject.Find("CommitRentGroup");
         targetText = commitRentGroup.transform.Find("StoryText").Find("TargetText").GetComponent<TextMeshProUGUI>();
         vaultMoneyText = commitRentGroup.transform.Find("VaultMoneyText").GetComponent<TextMeshProUGUI>();
-        targetText.text = Level.GetItem(GameManager.Instance.levelKey).target.ToString();
-        vaultMoneyText.text = ApartmentController.Instance.vaultMoney.ToString();
+        if (!GameManager.Instance.isEndlessMode)
+        {
+            targetText.text = Level.GetItem(GameManager.Instance.levelKey).target.ToString();
+        }
+        else
+        {
+            targetText.text = GameManager.Instance.endlessModeTarget.ToString();
+        }
+        vaultMoneyText.text = "(" + ApartmentController.Instance.vaultMoney.ToString() + ")";
         //buildButton = GameObject.Find("BuildButton");
         nextLevelButton = GameObject.Find("NextLevelButton");
         nextLevelButton2 = GameObject.Find("NextLevelButton2");
@@ -50,6 +58,7 @@ public class RoundEndPanelController : MonoBehaviour
         GameManager.Instance.isRoundEnd = false;
         Destroy(this.gameObject);
         GameManager.Instance.levelKey += 1;
+        GameObject.Find("NextDayButton").GetComponent<Button>().interactable = true;
     }
 
     public void CommitRent()
@@ -126,6 +135,8 @@ public class RoundEndPanelController : MonoBehaviour
                 nextLevelButton.SetActive(true);
                 nextLevelButton2.SetActive(true);
                 commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
+                targetText.gameObject.SetActive(false);
+                vaultMoneyText.gameObject.SetActive(false);
                 GameManager.Instance.storyID += 1;
                 GameManager.Instance.endlessModeTarget *= GameManager.Instance.endlessModeTargetTimes;
                 GameManager.Instance.endlessModeDays += GameManager.Instance.endlessModeDaysPlus;
@@ -177,11 +188,12 @@ public class RoundEndPanelController : MonoBehaviour
         ApartmentController.Instance.vaultMoney = 0;
         GuestController.Instance.GuestInApartmentPrefabStorage.Clear();
         GuestController.Instance.GenerateBasicGuest(3);
+        GameObject.Find("NextDayButton").GetComponent<Button>().interactable = true;
     }
 
     public void ShowChapterStoryText()
     {
-        int storyID = Random.Range(1, 36);
+        int storyID = Random.Range(1, 28);
         switch (GameManager.Instance.Language)
         {
             case 1:
@@ -214,8 +226,8 @@ public class RoundEndPanelController : MonoBehaviour
     public void ContinuePlaying()
     {
         GameManager.Instance.isEndlessMode = true;
-        GameManager.Instance.endlessModeTarget = Level.GetItem(5).target * GameManager.Instance.endlessModeTargetTimes;
-        GameManager.Instance.endlessModeDays = Level.GetItem(5).days + GameManager.Instance.endlessModeDaysPlus;
+        GameManager.Instance.endlessModeTarget = Level.GetItem(8).target * GameManager.Instance.endlessModeTargetTimes;
+        GameManager.Instance.endlessModeDays = Level.GetItem(8).days + GameManager.Instance.endlessModeDaysPlus;
         GoToNextLevel();
     }
 

@@ -88,7 +88,8 @@ public class ChooseCardPanelController : MonoBehaviour
         if (GameManager.Instance.isChooseCardFinish)
         {
             GameManager.Instance.isChooseCardFinish = false;
-            Destroy(gameObject);           
+            Destroy(gameObject);
+            GameObject.Find("NextDayButton").GetComponent<Button>().interactable = true;
         }
 
         

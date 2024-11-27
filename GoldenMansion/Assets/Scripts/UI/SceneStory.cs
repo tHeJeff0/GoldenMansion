@@ -58,7 +58,7 @@ public class SceneStory : MonoBehaviour
     IEnumerator ShowSceneStory()
     {
         int randomNum = Random.Range(1, 3);
-        int randomTextID = Random.Range(1, 20);
+        int randomTextID = Random.Range(1, 38);
         if (randomNum == 1)
         {
             GameObject storyBGPic = groupOne.transform.Find("StoryBGPic").gameObject;
