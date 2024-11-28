@@ -65,9 +65,9 @@ public class StartScene : MonoBehaviour
         UIController.Instance.GenerateMenu();
         LoadGuestToChoose();
         LoadPersonaToChoose();
-        SceneManager.UnloadSceneAsync("StartScene");
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("UIScene"));
+        SceneManager.UnloadSceneAsync("StartScene");
         //GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled = true;
     }
 
