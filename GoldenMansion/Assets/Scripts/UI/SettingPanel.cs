@@ -21,11 +21,13 @@ public class SettingPanel : MonoBehaviour
 
     public void BGMVolumeChange()
     {
-        GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = transform.Find("SoundSetting").Find("BGMSlider").GetComponent<Slider>().value;
+        GameObject.Find("PlayMusic").GetComponent<AudioSource>().volume = transform.Find("SoundSetting").Find("BGMSlider").GetComponent<Slider>().value;
+
     }
 
     public void SFVolumeChange()
     {
+        GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = transform.Find("SoundSetting").Find("BGMSlider").GetComponent<Slider>().value;
         GameManager.Instance.SFVolume = transform.Find("SoundSetting").Find("SFSlider").GetComponent<Slider>().value;
     }
 
@@ -69,14 +71,57 @@ public class SettingPanel : MonoBehaviour
         {
             
             case 0:
-                Screen.SetResolution(715, 402, Screen.fullScreen);
+                Screen.SetResolution(462, 174, Screen.fullScreen);
                 SaveSystem.Instance.LoadPlayerPrefs();
                 break;
             case 1:
+                Screen.SetResolution(715, 402, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 2:
+                Screen.SetResolution(1024, 600, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 3:
+                Screen.SetResolution(1024, 768, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 4:
+                Screen.SetResolution(1280, 800, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 5:
+                Screen.SetResolution(1280, 1024, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 6:
                 Screen.SetResolution(1366, 768, Screen.fullScreen);
                 SaveSystem.Instance.LoadPlayerPrefs();
                 break;
-                
+            case 7:
+                Screen.SetResolution(1440, 1050, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 8:
+                Screen.SetResolution(1600, 900, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 9:
+                Screen.SetResolution(1600, 1200, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 10:
+                Screen.SetResolution(1680, 1050, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 11:
+                Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
+            case 12:
+                Screen.SetResolution(1920, 1200, Screen.fullScreen);
+                SaveSystem.Instance.LoadPlayerPrefs();
+                break;
         }       
     }
 

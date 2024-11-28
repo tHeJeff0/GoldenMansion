@@ -261,7 +261,7 @@ public class GuestInApartment : MonoBehaviour
                 SkillMethod_WhenOtherGuestSold -= singlePersonaSkill.Skill_Feeling;
                 break;
             case 6:
-                isDestroyable = true;
+                isDestroyable = false;
                 break;
             case 7:
                 SkillMethod_WhenDaysChanged -= singlePersonaSkill.Skill_Judging;
@@ -278,7 +278,7 @@ public class GuestInApartment : MonoBehaviour
         temporPersona.Clear();
         guestExtraBudget = 0;
         this.transform.SetParent(null);
-        Vector3 defaultPosition = new Vector3(3.55f, -7.35f, 0);
+        Vector3 defaultPosition = new Vector3(30.0f, -7.35f, 0);
         this.transform.localPosition = defaultPosition;
         this.GetComponentInChildren<SpriteRenderer>().enabled = false;
         this.GetComponent<BoxCollider>().enabled = false;

@@ -123,20 +123,33 @@ public class SaveSystem : MonoBehaviour
             saveData.guestID.Add(guestID);
             saveData.guestKey.Add(guestKey);
             saveData.guestPersona.Add(guestPersonaString);
+            saveData.guestBasicCost.Add(guest.GetComponent<GuestInApartment>().guestBasicCost);
+            saveData.guestExtraCost.Add(guest.GetComponent<GuestInApartment>().guestExtraCost);
+            saveData.guestBasicPrice.Add(guest.GetComponent<GuestInApartment>().guestBasicPrice);
+            saveData.guestExtraPrice.Add(guest.GetComponent<GuestInApartment>().guestExtraPrice);
+            saveData.guestBudget.Add(guest.GetComponent<GuestInApartment>().guestBudget);
+            saveData.guestExtraBudget.Add(guest.GetComponent<GuestInApartment>().guestExtraBudget);
+            saveData.guestIsDestroyable.Add(guest.GetComponent<GuestInApartment>().isDestroyable);
+            saveData.guestTourDays.Add(guest.GetComponent<GuestInApartment>().tourDays);
+            saveData.guestDays.Add(guest.GetComponent<GuestInApartment>().guestDays);
+            saveData.guestMBTI.Add(guest.GetComponent<GuestInApartment>().mbti);
+            saveData.guestAdjancentPrice.Add(guest.GetComponent<GuestInApartment>().adjancentPrice);
         }
         string[] moneyLeft = new string[1];
         moneyLeft[0] = saveData.vaultMoney.ToString();
-        WriteToCsv("C:/Users/8/Desktop/数值.csv", moneyLeft);
+        //WriteToCsv("C:/Users/8/Desktop/数值.csv", moneyLeft);
         //saveData.guestStorage = StorageController.Instance.guestStorage;
         return saveData;
     }
 
     public void readData(SaveData saveData)
     {
+        
         for (int i = 0; i < 3; i++)
         {
             Destroy(GameObject.Find("GuestInApartment(Clone)"));
-        }       
+        }
+        LoadGuestData(saveData);
         GameManager.Instance.gameDays = saveData.gameDays;
         GameManager.Instance.isChooseCardFinish = saveData.isChooseCardFinish;
         GameManager.Instance.isRoundEnd = saveData.isRoundEnd;
@@ -159,31 +172,111 @@ public class SaveSystem : MonoBehaviour
         temporGuestIDThree = saveData.guestIDThree;
         temporPersonaIDOne = saveData.personaIDOne;
         temporPersonaIDTwo = saveData.personaIDTwo;
-        LoadGuestData(saveData);
+        //LoadGuestData(saveData);
         
         //StorageController.Instance.guestStorage = saveData.guestStorage;
     }
 
-    
+    //public void LoadGuestData(SaveData saveData)
+    //{
+    //    for (int i = 0; i < saveData.guestID.Count; i++)
+    //    {
+    //        GameObject guest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject,GameObject.Find("GuestController").transform);
+    //        guest.GetComponent<GuestInApartment>().guestElementID = saveData.guestID[i];
+    //        guest.GetComponent<GuestInApartment>().key = saveData.guestKey[i];
+    //        guest.GetComponent<GuestInApartment>().guestBasicCost = saveData.guestBasicCost[i];
+    //        guest.GetComponent<GuestInApartment>().guestExtraCost = saveData.guestExtraCost[i];
+    //        guest.GetComponent<GuestInApartment>().guestBasicPrice = saveData.guestBasicPrice[i];
+    //        guest.GetComponent<GuestInApartment>().guestExtraPrice = saveData.guestExtraPrice[i];
+    //        guest.GetComponent<GuestInApartment>().guestBudget = saveData.guestBudget[i];
+    //        guest.GetComponent<GuestInApartment>().guestExtraBudget = saveData.guestExtraBudget[i];
+    //        guest.GetComponent<GuestInApartment>().isDestroyable = saveData.guestIsDestroyable[i];
+    //        guest.GetComponent<GuestInApartment>().tourDays = saveData.guestTourDays[i];
+    //        guest.GetComponent<GuestInApartment>().guestDays = saveData.guestDays[i];
+    //        guest.GetComponent<GuestInApartment>().mbti = saveData.guestMBTI[i];
+    //        guest.GetComponent<GuestInApartment>().adjancentPrice = saveData.guestAdjancentPrice[i];
+    //        if (saveData.guestPersona[i] != "")
+    //        {
+    //            guest.GetComponent<GuestInApartment>().persona = saveData.guestPersona[i].Split("_").Select(int.Parse).ToList<int>();
+    //        }
+    //        else
+    //        {
+    //            guest.GetComponent<GuestInApartment>().persona = new List<int>();
+    //        }            
+    //        if (guest.GetComponent<GuestInApartment>().persona.Count > 0)
+    //        {
+    //            foreach (var persona in guest.GetComponent<GuestInApartment>().persona)
+    //            {
+    //                guest.GetComponent<GuestInApartment>().GetPersonaSkill(persona);
+    //            }
+    //        }
+    //        guest.GetComponent<GuestInApartment>().field = CharacterData.GetItem(guest.GetComponent<GuestInApartment>().key).field;
+    //        guest.GetComponent<GuestInApartment>().fieldSkillID = FieldData.GetItem(guest.GetComponent<GuestInApartment>().field).skillID;
+    //        guest.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(guest.GetComponent<GuestInApartment>().key).portraitRoute + "inapartment");
+    //        guest.GetComponent<GuestInApartment>().guestName = CharacterData.GetItem(guest.GetComponent<GuestInApartment>().key).name;
+    //        guest.SetActive(true);
+    //        guest.GetComponentInChildren<SpriteRenderer>().enabled = false;
+    //        guest.GetComponent<BoxCollider>().enabled = false;
+    //        if (guest.GetComponent<GuestInApartment>().mbti != 0)
+    //        {
+    //            guest.GetComponent<GuestInApartment>().GetMBTISkill(guest.GetComponent<GuestInApartment>().mbti);
+    //        }
+    //        GuestController.Instance.GuestInApartmentPrefabStorage.Add(guest);
+    //    }
+        
+    //}
 
     public void LoadGuestData(SaveData saveData)
     {
         Dictionary<string, int> guestKey = new Dictionary<string, int>();
         Dictionary<string, string> guestPersona = new Dictionary<string, string>();
+        Dictionary<string, int> guestBasicCost = new Dictionary<string, int>();
+        Dictionary<string, int> guestExtraCost = new Dictionary<string, int>();
+        Dictionary<string, int> guestBasicPrice = new Dictionary<string, int>();
+        Dictionary<string, int> guestExtraPrice = new Dictionary<string, int>();
+        Dictionary<string, int> guestBudget = new Dictionary<string, int>();
+        Dictionary<string, int> guestExtraBudget = new Dictionary<string, int>();
+        Dictionary<string, bool> guestIsDestroyable = new Dictionary<string, bool>();
+        Dictionary<string, int> guestTourDays = new Dictionary<string, int>();
+        Dictionary<string, int> guestDays = new Dictionary<string, int>();
+        Dictionary<string, int> guestMBTI = new Dictionary<string, int>();
+        Dictionary<string, int> guestAdjancentPrice = new Dictionary<string, int>();
         for (int i = 0; i < saveData.guestID.Count; i++)
         {
-            guestKey.Add(saveData.guestID[i]+"guestKey", saveData.guestKey[i]);
+            guestKey.Add(saveData.guestID[i] + "guestKey", saveData.guestKey[i]);
+            guestBasicCost.Add(saveData.guestID[i] + "guestBasicCost", saveData.guestBasicCost[i]);
+            guestExtraCost.Add(saveData.guestID[i] + "guestExtraCost", saveData.guestExtraCost[i]);
+            guestBasicPrice.Add(saveData.guestID[i] + "guestBasicPrice", saveData.guestBasicPrice[i]);
+            guestExtraPrice.Add(saveData.guestID[i] + "guestExtraPrice", saveData.guestExtraPrice[i]);
+            guestBudget.Add(saveData.guestID[i] + "guestBudget", saveData.guestBudget[i]);
+            guestExtraBudget.Add(saveData.guestID[i] + "guestExtraBudget", saveData.guestExtraBudget[i]);
+            guestIsDestroyable.Add(saveData.guestID[i] + "guestIsDestroyable", saveData.guestIsDestroyable[i]);
+            guestTourDays.Add(saveData.guestID[i] + "guestTourDays", saveData.guestTourDays[i]);
+            guestDays.Add(saveData.guestID[i] + "guestDays", saveData.guestDays[i]);
+            guestMBTI.Add(saveData.guestID[i] + "guestMBTI", saveData.guestMBTI[i]);
+            guestAdjancentPrice.Add(saveData.guestID[i] + "guestAdjancentPrice", saveData.guestAdjancentPrice[i]);
             if (saveData.guestPersona.Count > 0)
             {
-                guestPersona.Add(saveData.guestID[i]+"guestPersona", saveData.guestPersona[i]);
+                guestPersona.Add(saveData.guestID[i] + "guestPersona", saveData.guestPersona[i]);
             }
         }
         foreach (var guestID in saveData.guestID)
         {
-            GameObject guest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject);
+            GameObject guest = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject,GameObject.Find("GuestController").transform);
             guest.GetComponent<GuestInApartment>().guestElementID = guestID;
-            guest.GetComponent<GuestInApartment>().key = guestKey[guestID+"guestKey"];
-            if(guestPersona[guestID + "guestPersona"] != "")
+            guest.GetComponent<GuestInApartment>().key = guestKey[guestID + "guestKey"];
+            guest.GetComponent<GuestInApartment>().guestBasicCost = guestBasicCost[guestID + "guestBasicCost"];
+            guest.GetComponent<GuestInApartment>().guestExtraCost = guestExtraCost[guestID + "guestExtraCost"];
+            guest.GetComponent<GuestInApartment>().guestBasicPrice = guestBasicPrice[guestID + "guestBasicPrice"];
+            guest.GetComponent<GuestInApartment>().guestExtraPrice = guestExtraPrice[guestID + "guestExtraPrice"];
+            guest.GetComponent<GuestInApartment>().guestBudget = guestBudget[guestID + "guestBudget"];
+            guest.GetComponent<GuestInApartment>().guestExtraBudget = guestExtraBudget[guestID + "guestExtraBudget"];
+            guest.GetComponent<GuestInApartment>().isDestroyable = guestIsDestroyable[guestID + "guestIsDestroyable"];
+            guest.GetComponent<GuestInApartment>().tourDays = guestTourDays[guestID + "guestTourDays"];
+            guest.GetComponent<GuestInApartment>().guestDays = guestDays[guestID + "guestDays"];
+            guest.GetComponent<GuestInApartment>().mbti = guestMBTI[guestID + "guestMBTI"];
+            guest.GetComponent<GuestInApartment>().adjancentPrice = guestAdjancentPrice[guestID + "guestAdjancentPrice"];
+            if (guestPersona[guestID + "guestPersona"] != "")
             {
                 List<int> persona = guestPersona[guestID + "guestPersona"].Split("_").Select(int.Parse).ToList<int>();
                 guest.GetComponent<GuestInApartment>().persona = persona;
@@ -192,7 +285,7 @@ public class SaveSystem : MonoBehaviour
             {
                 guest.GetComponent<GuestInApartment>().persona = new List<int>();
             }
-            
+
             if (guest.GetComponent<GuestInApartment>().persona.Count > 0)
             {
                 foreach (var persona in guest.GetComponent<GuestInApartment>().persona)
@@ -200,7 +293,17 @@ public class SaveSystem : MonoBehaviour
                     guest.GetComponent<GuestInApartment>().GetPersonaSkill(persona);
                 }
             }
-            guest.GetComponent<GuestInApartment>().InitialGuest();
+            guest.GetComponent<GuestInApartment>().field = CharacterData.GetItem(guest.GetComponent<GuestInApartment>().key).field;
+            guest.GetComponent<GuestInApartment>().fieldSkillID = FieldData.GetItem(guest.GetComponent<GuestInApartment>().field).skillID;
+            guest.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(CharacterData.GetItem(guest.GetComponent<GuestInApartment>().key).portraitRoute + "inapartment");
+            guest.GetComponent<GuestInApartment>().guestName = CharacterData.GetItem(guest.GetComponent<GuestInApartment>().key).name;
+            guest.SetActive(true);
+            guest.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            guest.GetComponent<BoxCollider>().enabled = false;
+            if (guest.GetComponent<GuestInApartment>().mbti != 0)
+            {
+                guest.GetComponent<GuestInApartment>().GetMBTISkill(guest.GetComponent<GuestInApartment>().mbti);
+            }
             GuestController.Instance.GuestInApartmentPrefabStorage.Add(guest);
         }
     }

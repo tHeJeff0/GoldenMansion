@@ -10,6 +10,10 @@ namespace ExcelData
             public int storyID;
             public int languageID;
             public string CHN;
+            public int selectionOneID;
+            public string selectionOneText;
+            public int selectionTwoID;
+            public string selectionTwotTXT;
         }
 
         private static ChapterStoryData s_Instance;
@@ -69,6 +73,10 @@ namespace ExcelData
                     int storyIDIndex = sheetHeader.IndexOf("storyID", "int");
                     int languageIDIndex = sheetHeader.IndexOf("languageID", "int");
                     int CHNIndex = sheetHeader.IndexOf("CHN", "string");
+                    int selectionOneIDIndex = sheetHeader.IndexOf("selectionOneID", "int");
+                    int selectionOneTextIndex = sheetHeader.IndexOf("selectionOneText", "string");
+                    int selectionTwoIDIndex = sheetHeader.IndexOf("selectionTwoID", "int");
+                    int selectionTwotTXTIndex = sheetHeader.IndexOf("selectionTwotTXT", "string");
 
                     #if UNITY_EDITOR
                     bool promptMismatchColumns = false;
@@ -91,6 +99,22 @@ namespace ExcelData
                             else if (j == CHNIndex)
                             {
                                 newItem.CHN = reader.ReadString();
+                            }
+                            else if (j == selectionOneIDIndex)
+                            {
+                                newItem.selectionOneID = reader.ReadInt32();
+                            }
+                            else if (j == selectionOneTextIndex)
+                            {
+                                newItem.selectionOneText = reader.ReadString();
+                            }
+                            else if (j == selectionTwoIDIndex)
+                            {
+                                newItem.selectionTwoID = reader.ReadInt32();
+                            }
+                            else if (j == selectionTwotTXTIndex)
+                            {
+                                newItem.selectionTwotTXT = reader.ReadString();
                             }
                             else
                             {

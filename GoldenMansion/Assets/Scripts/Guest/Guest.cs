@@ -34,6 +34,8 @@ public class Guest : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -75,7 +77,7 @@ public class Guest : MonoBehaviour
             {
                 ApartmentController.Instance.vaultMoney -= guestCost;
                 GuestController.Instance.temporKey = this.key;
-                Vector3 instantiatePosition = new Vector3(3.55f,-7.35f,0);
+                Vector3 instantiatePosition = new Vector3(30.0f,-7.35f,0);
                 GameObject guestInvited = Instantiate(GuestController.Instance.guestInApartmentPrefab.gameObject, instantiatePosition,transform.rotation);
                 guestInvited.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 GuestController.Instance.GuestInApartmentPrefabStorage.Add(guestInvited);
@@ -88,8 +90,8 @@ public class Guest : MonoBehaviour
                 {
                     SkillController.Instance.Skill_MediaBanShop();
                 }
-            }
-            key = 0;
+                key = 0;
+            }           
         }
         else
         {
@@ -107,7 +109,7 @@ public class Guest : MonoBehaviour
         guestCardDescPrefab.SetActive(true);
         int fieldID = CharacterData.GetItem(key).field;
         int skillID = FieldData.GetItem(fieldID).skillID;
-        int languageID = SkillData.GetItem(skillID).descID;
+        int languageID = SkillData.GetItem(skillID).descID + 300;
         //string conditionValue = GuestController.Instance.GetLanguageConditionValue(fieldID).ToString();
         //string effectValue = GuestController.Instance.GetLanguageEffectValue(fieldID).ToString();
         switch (GameManager.Instance.Language)
@@ -118,13 +120,14 @@ public class Guest : MonoBehaviour
                 //LanguageData.GetItem(languageID).CHN;
                 break;
             case 2: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).ENG;
+                guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().enableAutoSizing = true;
                 break;
             case 3: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).TCHN;
                 break;
             default: guestCardDescPrefab.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(languageID).CHN;
                 break;
         }
-        
+
     }
 
     private void OnMouseExit()
@@ -140,6 +143,20 @@ public class Guest : MonoBehaviour
     {
         if (!isSelected)
         {
+            float rate = 0;
+            switch (GameManager.Instance.levelKey)
+            {
+                case 1:rate = 0.3f;
+                    break;
+                case 2:rate = 0.5f;
+                    break;
+                default:rate = 0.6f;
+                    break;
+            }
+            guestCost = CharacterData.GetItem(key).basicCost;
+            guestExtraCost = (int)Math.Ceiling((ApartmentController.Instance.vaultMoney * rate));
+            guestCost += guestExtraCost;
+            inviteButton.transform.Find("Cost").Find("BudgetTitleText").GetComponent<TextMeshProUGUI>().text = "-" + (guestCost).ToString();
             inviteButton.SetActive(true);
             transform.DOLocalMoveY(160, 0.05f);
             transform.DOShakePosition(0.04f, 10);

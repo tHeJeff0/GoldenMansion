@@ -56,12 +56,6 @@ public class GuestController : MonoBehaviour
         }
     }
 
-
-    private void Update()
-    {
-        
-    }
-
     public int RandomKey()
     {
         int randomKey = 1;

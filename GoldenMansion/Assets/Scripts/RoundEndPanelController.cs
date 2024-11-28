@@ -6,6 +6,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoundEndPanelController : MonoBehaviour
 {
@@ -13,7 +14,11 @@ public class RoundEndPanelController : MonoBehaviour
     GameObject commitRentGroup;
     //GameObject buildButton;
     GameObject nextLevelButton;
+    GameObject nextLevelButton2;
     GameObject winGroup;
+    GameObject loseGroup;
+    TextMeshProUGUI targetText;
+    TextMeshProUGUI vaultMoneyText;
 
     private void Start()
     {
@@ -22,14 +27,30 @@ public class RoundEndPanelController : MonoBehaviour
     private void Awake()
     {
         commitRentGroup = GameObject.Find("CommitRentGroup");
+        targetText = commitRentGroup.transform.Find("StoryText").Find("TargetText").GetComponent<TextMeshProUGUI>();
+        vaultMoneyText = commitRentGroup.transform.Find("VaultMoneyText").GetComponent<TextMeshProUGUI>();
+        if (!GameManager.Instance.isEndlessMode)
+        {
+            targetText.text = Level.GetItem(GameManager.Instance.levelKey).target.ToString();
+        }
+        else
+        {
+            targetText.text = GameManager.Instance.endlessModeTarget.ToString();
+        }
+        vaultMoneyText.text = "(" + ApartmentController.Instance.vaultMoney.ToString() + ")";
         //buildButton = GameObject.Find("BuildButton");
         nextLevelButton = GameObject.Find("NextLevelButton");
+        nextLevelButton2 = GameObject.Find("NextLevelButton2");
+        
         winGroup = GameObject.Find("WinGroup");
+        loseGroup = GameObject.Find("LoseGroup");
 
         commitRentGroup.SetActive(true);
         //buildButton.SetActive(false);
         nextLevelButton.SetActive(false);
+        nextLevelButton2.SetActive(false);
         winGroup.SetActive(false);
+        loseGroup.SetActive(false);
         
     }
     public void GoToNextLevel()
@@ -37,6 +58,7 @@ public class RoundEndPanelController : MonoBehaviour
         GameManager.Instance.isRoundEnd = false;
         Destroy(this.gameObject);
         GameManager.Instance.levelKey += 1;
+        GameObject.Find("NextDayButton").GetComponent<Button>().interactable = true;
     }
 
     public void CommitRent()
@@ -49,7 +71,7 @@ public class RoundEndPanelController : MonoBehaviour
             if (moneyLeft >= 0)//如果金币足够交租
             {
                 //buildButton.SetActive(true);
-                if (GameManager.Instance.levelKey + 1 > 5)//如果是最后一关
+                if (GameManager.Instance.levelKey + 1 > 8)//如果是最后一关
                 {
                     winGroup.SetActive(true);
                     switch (GameManager.Instance.Language)
@@ -65,37 +87,42 @@ public class RoundEndPanelController : MonoBehaviour
                             break;
                     }
                     commitRentGroup.SetActive(false);
+                    ApartmentController.Instance.vaultMoney = moneyLeft;
                     Debug.Log("赢了！");
 
                 }
                 else//如果不是最后一关
                 {
                     nextLevelButton.SetActive(true);
+                    nextLevelButton2.SetActive(true);
                     commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
+                    targetText.gameObject.SetActive(false);
+                    vaultMoneyText.gameObject.SetActive(false);
                     GameManager.Instance.storyID += 1;
-                    switch (GameManager.Instance.Language)
-                    {
-                        case 1:
-                            commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
-                            break;
-                        case 2:
-                            commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
-                            break;
-                        case 3:
-                            commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
-                            break;
-                    }
-
+                    ShowChapterStoryText();
+                    ApartmentController.Instance.vaultMoney = moneyLeft;
                 }
 
             }
             else//如果金币不够交租
             {
                 GameManager.Instance.isRoundEnd = false;
-                Destroy(this.gameObject);
+                loseGroup.SetActive(true);
+                switch (GameManager.Instance.Language)
+                {
+                    case 1:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).CHN;
+                        break;
+                    case 2:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).ENG;
+                        break;
+                    case 3:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).TCHN;
+                        break;
+                }
                 commitRentGroup.SetActive(false);
                 GameReset();
-                SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
+                //SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
                 Debug.Log("Game Over!");
             }
         }
@@ -106,30 +133,35 @@ public class RoundEndPanelController : MonoBehaviour
             if (moneyLeft >= 0)//如果金币足够交租
             {
                 nextLevelButton.SetActive(true);
+                nextLevelButton2.SetActive(true);
                 commitRentGroup.transform.Find("CommitButton").gameObject.SetActive(false);
+                targetText.gameObject.SetActive(false);
+                vaultMoneyText.gameObject.SetActive(false);
                 GameManager.Instance.storyID += 1;
                 GameManager.Instance.endlessModeTarget *= GameManager.Instance.endlessModeTargetTimes;
                 GameManager.Instance.endlessModeDays += GameManager.Instance.endlessModeDaysPlus;
-                switch (GameManager.Instance.Language)
-                {
-                    case 1:
-                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).CHN;
-                        break;
-                    case 2:
-                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).ENG;
-                        break;
-                    case 3:
-                        commitRentGroup.transform.Find("StoryText").GetComponent<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(GameManager.Instance.storyID).languageID).TCHN;
-                        break;
-                }
+                ShowChapterStoryText();
+                ApartmentController.Instance.vaultMoney = moneyLeft;
             }
             else//如果金币不够交租
             {
                 GameManager.Instance.isRoundEnd = false;
-                Destroy(this.gameObject);
+                loseGroup.SetActive(true);
                 commitRentGroup.SetActive(false);
+                switch (GameManager.Instance.Language)
+                {
+                    case 1:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(winGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).CHN;
+                        break;
+                    case 2:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(winGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).ENG;
+                        break;
+                    case 3:
+                        loseGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = ButtonLanguageData.GetItem(winGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text).TCHN;
+                        break;
+                }
                 GameReset();
-                SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
+                //SceneManager.LoadScene("StartScene", LoadSceneMode.Additive);
                 Debug.Log("Game Over!");
             }
         }
@@ -140,7 +172,11 @@ public class RoundEndPanelController : MonoBehaviour
     {
         GameManager.Instance.gameDays = 0;
         GameManager.Instance.levelKey = 1;
-        GameManager.Instance.mediaDays = -1;       
+        GameManager.Instance.mediaDays = -1;
+        GameManager.Instance.extraRerollTime = 0;
+        GameManager.Instance.rerollTime = 1;
+        GameManager.Instance.isAllowBuy = true;
+        GameManager.Instance.isAllowSell = true;
         foreach (var apartment in ApartmentController.Instance.apartment)
         {
             apartment.GetComponent<Apartment>().apartmentDays = 0;
@@ -149,8 +185,33 @@ public class RoundEndPanelController : MonoBehaviour
         {
             Destroy(guestInApartment);
         }
+        ApartmentController.Instance.vaultMoney = 0;
         GuestController.Instance.GuestInApartmentPrefabStorage.Clear();
         GuestController.Instance.GenerateBasicGuest(3);
+        GameObject.Find("NextDayButton").GetComponent<Button>().interactable = true;
+    }
+
+    public void ShowChapterStoryText()
+    {
+        int storyID = Random.Range(1, 28);
+        switch (GameManager.Instance.Language)
+        {
+            case 1:
+                commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).languageID).CHN;
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).selectionOneID).CHN;
+                nextLevelButton2.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).selectionTwoID).CHN;
+                break;
+            case 2:
+                commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).languageID).ENG;
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).selectionOneID).ENG;
+                nextLevelButton2.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).selectionTwoID).ENG;
+                break;
+            case 3:
+                commitRentGroup.transform.Find("StoryText").GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).languageID).TCHN;
+                nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).selectionOneID).TCHN;
+                nextLevelButton2.GetComponentInChildren<TextMeshProUGUI>().text = LanguageData.GetItem(ChapterStoryData.GetItem(storyID).selectionTwoID).TCHN;
+                break;
+        }
     }
 
     public void QuitGame()
@@ -165,8 +226,18 @@ public class RoundEndPanelController : MonoBehaviour
     public void ContinuePlaying()
     {
         GameManager.Instance.isEndlessMode = true;
-        GameManager.Instance.endlessModeTarget = Level.GetItem(5).target * GameManager.Instance.endlessModeTargetTimes;
-        GameManager.Instance.endlessModeDays = Level.GetItem(5).days + GameManager.Instance.endlessModeDaysPlus;
+        GameManager.Instance.endlessModeTarget = Level.GetItem(8).target * GameManager.Instance.endlessModeTargetTimes;
+        GameManager.Instance.endlessModeDays = Level.GetItem(8).days + GameManager.Instance.endlessModeDaysPlus;
         GoToNextLevel();
+    }
+
+    public void TryAgain()
+    {
+        GameReset();
+        GameManager.Instance.isRoundEnd = false;
+        Destroy(gameObject);
+        SaveSystem.Instance.DeleteData(SaveSystem.Instance.saveName);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("UIScene"));
     }
 }

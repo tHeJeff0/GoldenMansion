@@ -96,11 +96,21 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (GameObject.Find("JobEffectDesc(Clone)") != null)
+        {
+            Destroy(GameObject.Find("JobEffectDesc(Clone)"));
+        }
+        if (GameObject.Find("PersonaEffectDesc(Clone)") != null)
+        {
+            Destroy(GameObject.Find("PersonaEffectDesc(Clone)"));
+        }
         if (personaID.Count < 4 && mbtiID == 0)
         {
             GetPersona();
             GameObject.Find("NewGivePersonaPanel").GetComponent<NewGivePersona>().CloseThisPanel();
-            UIController.Instance.givePersonaButtonSelected.SetActive(false);           
+            UIController.Instance.givePersonaButtonSelected.GetComponent<GievePersonaButton>().personaKey = 0;
+            UIController.Instance.givePersonaButtonSelected.SetActive(false);
+            SaveSystem.Instance.SaveData(SaveSystem.Instance.saveName);
         }
         else
         {
@@ -133,6 +143,7 @@ public class GuestInfoWhenGivePersona : MonoBehaviour,IPointerClickHandler,IPoin
                     guest.GetComponent<GuestInApartment>().persona.Add(SkillController.Instance.temporPersonaKey);
                     guest.GetComponent<GuestInApartment>().ShowPersonaIcon(SkillController.Instance.temporPersonaKey);
                     guest.GetComponent<GuestInApartment>().GetPersonaSkill(SkillController.Instance.temporPersonaKey);
+                    guest.GetComponent<GuestInApartment>().guestBasicPrice += 1;
                 }
             }
             SkillController.Instance.temporPersonaKey = 0;
